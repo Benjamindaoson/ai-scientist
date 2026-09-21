@@ -31,15 +31,30 @@ class IntegrityReport:
 
 
 class IntegrityAuditor:
-    """Check traceability, execution validity, and claim support."""
+    """Check traceability, recovered execution validity, and claim support."""
+
+    @staticmethod
+    def _root_experiment_id(experiment_id: str) -> str:
+        return experiment_id.split("_retry", 1)[0]
 
     def audit(self, state: ResearchState, graph: EvidenceGraph | None = None) -> IntegrityReport:
         findings = []
         runs = state.experiment_runs
+
+        # Recovery-aware execution check: an experiment is valid when at least one
+        # attempt in its retry lineage succeeds.
+        status_by_root: dict[str, list[dict]] = {}
+        for run in runs:
+            root = self._root_experiment_id(str(run.get("experiment_id", "")))
+            status_by_root.setdefault(root, []).append(run)
+        unrecovered = [
+            root for root, attempts in status_by_root.items()
+            if not any(a.get("status") == "SUCCEEDED" for a in attempts)
+        ]
         findings.append(AuditFinding(
             "experiment_execution",
-            bool(runs) and all(r.get("status") == "SUCCEEDED" for r in runs),
-            "All recorded experiments must execute successfully.",
+            bool(status_by_root) and not unrecovered,
+            f"Unrecovered experiments: {unrecovered}" if unrecovered else "Every experiment lineage has a successful execution.",
         ))
 
         evidence_ids = {e.get("id") for e in state.evidence}
@@ -53,9 +68,10 @@ class IntegrityAuditor:
             "All hypothesis evidence references must resolve to stored evidence.",
         ))
 
+        successful_runs = [r for r in runs if r.get("status") == "SUCCEEDED"]
         findings.append(AuditFinding(
             "metrics_present",
-            bool(runs) and all(isinstance(r.get("metrics"), dict) and r.get("metrics") for r in runs),
+            bool(successful_runs) and all(isinstance(r.get("metrics"), dict) and bool(r.get("metrics")) for r in successful_runs),
             "Every successful experiment must record non-empty metrics.",
         ))
 
@@ -64,7 +80,7 @@ class IntegrityAuditor:
             unsupported = [n["id"] for n in claim_nodes if not graph.evidence_for_claim(n["id"])]
             findings.append(AuditFinding(
                 "claim_evidence_traceability",
-                not unsupported,
+                bool(claim_nodes) and not unsupported,
                 f"Unsupported claims: {unsupported}" if unsupported else "All graph claims have linked evidence.",
             ))
 
