@@ -60,6 +60,29 @@ from .literature.validator import (
     EvidenceQuality,
 )
 from .orchestrator import AIScientist, ResearchSession
+from .research_state import ResearchState
+from .hypothesis import Hypothesis, HypothesisEvolver
+from .experiment import (
+    ExperimentSpec,
+    ExperimentResult,
+    ExperimentRunner,
+    ExperimentEvaluator,
+    SandboxPolicy,
+    WorkspaceSandbox,
+    DockerSandbox,
+    FailureClassifier,
+    RecoveryPolicy,
+    ExperimentEngineer,
+    ExperimentImplementation,
+)
+from .autonomous_loop import AutonomousResearchLoop
+from .ablation import AblationPlan, AblationPlanner, AblationExecutor
+from .review_loop import ReviewIssue, ReviewActionRouter
+from .evidence_graph import EvidenceGraph
+from .manuscript import ManuscriptBuilder
+from .scientific_review import ScientificReviewer, PeerReview, RebuttalPlanner, MetaReviewer
+from .integrity import IntegrityAuditor, IntegrityReport, AuditCheck
+from .research_package import ResearchPackageWriter
 
 __version__ = "0.1.0"
 
@@ -115,4 +138,34 @@ __all__ = [
     # Orchestrator
     "AIScientist",
     "ResearchSession",
+    "ResearchState",
+    "Hypothesis",
+    "HypothesisEvolver",
+    "ExperimentSpec",
+    "ExperimentResult",
+    "ExperimentRunner",
+    "ExperimentEvaluator",
+    "SandboxPolicy",
+    "WorkspaceSandbox",
+    "DockerSandbox",
+    "FailureClassifier",
+    "RecoveryPolicy",
+    "ExperimentEngineer",
+    "ExperimentImplementation",
+    "AutonomousResearchLoop",
+    "AblationPlan",
+    "AblationPlanner",
+    "AblationExecutor",
+    "ReviewIssue",
+    "ReviewActionRouter",
+    "EvidenceGraph",
+    "ManuscriptBuilder",
+    "ScientificReviewer",
+    "PeerReview",
+    "RebuttalPlanner",
+    "MetaReviewer",
+    "IntegrityAuditor",
+    "IntegrityReport",
+    "AuditCheck",
+    "ResearchPackageWriter",
 ]

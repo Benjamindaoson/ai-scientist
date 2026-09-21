@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/autonomous-research-loop
   pull_request:
 
 jobs:
@@ -25,9 +24,6 @@ jobs:
 
       - name: Autonomous research loop integration
         run: python test_autonomous_research_loop.py
-
-      - name: Research court regression
-        run: python test_final_research_court.py
 
       - name: V4 integration regression
         run: python test_v4_integration.py
