@@ -20,7 +20,14 @@ class BenchmarkProblem(ABC):
 
     @abstractmethod
     def make_experiment_spec(self, workspace: str | Path, seed: int) -> ExperimentSpec:
+        """Create the locked candidate-evaluation spec."""
         raise NotImplementedError
+
+    def make_baseline_spec(self, workspace: str | Path, seed: int) -> ExperimentSpec:
+        return self.make_experiment_spec(workspace, seed)
+
+    def ablation_components(self) -> dict[str, object]:
+        return {}
 
     @abstractmethod
     def validate_constraints(
