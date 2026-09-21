@@ -1,5 +1,7 @@
 # AI Scientist
 
+CI gate: compile + autonomous research integration + scientific reasoning regressions.
+
 **Evidence-driven autonomous research system for scientific reasoning, executable experiments, hypothesis evolution, ablation, peer review, rebuttal, and integrity verification.**
 
 This repository keeps the original scientific reasoning layer and extends it with a ScientistTwo-inspired executable research loop. The goal is not to create many agents for their own sake. The system keeps a shared research state and requires claims to be connected to real experiment outputs.
