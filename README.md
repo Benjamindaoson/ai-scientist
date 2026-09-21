@@ -143,3 +143,8 @@ GitHub Actions runs these checks on pull requests and the main branch.
 ## Important boundary
 
 The built-in sandbox is intentionally described as a **policy-checked local process runner**, not a hardened security isolation boundary. For untrusted generated code, run the experiment workspace inside a container, VM, or other externally isolated environment.
+
+
+## Status
+
+The autonomous research loop is validated by the repository CI workflow on pull requests.
