@@ -12,14 +12,18 @@ class ResearchState:
     project_id: str
     problem: str
     literature: list[dict[str, Any]] = field(default_factory=list)
+    claims: list[dict[str, Any]] = field(default_factory=list)
     hypotheses: list[dict[str, Any]] = field(default_factory=list)
     objections: list[dict[str, Any]] = field(default_factory=list)
     experiment_specs: list[dict[str, Any]] = field(default_factory=list)
     experiment_runs: list[dict[str, Any]] = field(default_factory=list)
     ablations: list[dict[str, Any]] = field(default_factory=list)
     evidence: list[dict[str, Any]] = field(default_factory=list)
+    evidence_graph: dict[str, Any] = field(default_factory=dict)
     reviews: list[dict[str, Any]] = field(default_factory=list)
+    rebuttals: list[dict[str, Any]] = field(default_factory=list)
     decisions: list[dict[str, Any]] = field(default_factory=list)
+    integrity_audits: list[dict[str, Any]] = field(default_factory=list)
     manuscript: dict[str, Any] = field(default_factory=dict)
     metadata: dict[str, Any] = field(default_factory=dict)
     updated_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
