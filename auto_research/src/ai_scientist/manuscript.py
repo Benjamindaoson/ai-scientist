@@ -40,6 +40,10 @@ class ManuscriptBuilder:
             lines.append(
                 f"- {ev.get('id','')} -> hypothesis {ev.get('hypothesis_id','')}: {ev.get('evaluation', {})}"
             )
+        lines += ["", "## References"]
+        for paper in state.literature:
+            identifier = paper.get("arxiv_id") or paper.get("doi") or paper.get("url") or paper.get("id") or "unverified"
+            lines.append(f"- {paper.get('title', 'Untitled')} [{identifier}]")
         lines += [
             "",
             "## Limitations",
