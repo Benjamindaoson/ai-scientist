@@ -1,0 +1,32 @@
+name: Autonomous Research CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/autonomous-research-complete
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  autonomous-research-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile package
+        env:
+          PYTHONPATH: auto_research/src
+        run: python -m compileall -q auto_research/src
+      - name: Run autonomous research foundation tests
+        env:
+          PYTHONPATH: auto_research/src
+        run: python test_autonomous_research_loop.py
+      - name: Run complete autonomous research tests
+        env:
+          PYTHONPATH: auto_research/src
+        run: python test_autonomous_research_complete.py
