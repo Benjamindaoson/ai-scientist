@@ -1,0 +1,167 @@
+[
+  {
+    "round": 1,
+    "experiment_id": "exp_e27e04987f",
+    "result": {
+      "experiment_id": "exp_e27e04987f",
+      "hypothesis_id": "hyp_004",
+      "status": "SUCCEEDED",
+      "return_code": 0,
+      "metrics": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.5881356092728312,
+          "mae": 0.49926563762662857
+        },
+        "split": "test",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "model_config": {
+          "moving_avg": 37
+        }
+      },
+      "stdout": "",
+      "stderr": "",
+      "artifacts": [
+        "experiment_config.json",
+        "metrics.json",
+        "run_experiment.py"
+      ],
+      "duration_seconds": 1.3590000000040163,
+      "error_type": null,
+      "attempts": 1,
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "error_type": null,
+          "decision": "NONE"
+        }
+      ],
+      "started_at": "2026-09-21T23:47:50.643319",
+      "completed_at": "2026-09-21T23:47:51.991438"
+    },
+    "evaluation": {
+      "verdict": "REJECTED",
+      "baseline_mse": 0.5881356092728306,
+      "result_mse": 0.5881356092728312,
+      "improvement": -5.551115123125783e-16,
+      "relative_improvement": -9.438495196693101e-16,
+      "round": 1
+    }
+  },
+  {
+    "round": 2,
+    "experiment_id": "exp_d3b5e044e1",
+    "result": {
+      "experiment_id": "exp_d3b5e044e1",
+      "hypothesis_id": "hyp_001",
+      "status": "SUCCEEDED",
+      "return_code": 0,
+      "metrics": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.5881356092728306,
+          "mae": 0.49926563762662834
+        },
+        "split": "test",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "model_config": {
+          "moving_avg": 49
+        }
+      },
+      "stdout": "",
+      "stderr": "",
+      "artifacts": [
+        "experiment_config.json",
+        "metrics.json",
+        "run_experiment.py"
+      ],
+      "duration_seconds": 1.5939999999973224,
+      "error_type": null,
+      "attempts": 1,
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "error_type": null,
+          "decision": "NONE"
+        }
+      ],
+      "started_at": "2026-09-21T23:47:51.994441",
+      "completed_at": "2026-09-21T23:47:53.587989"
+    },
+    "evaluation": {
+      "verdict": "REJECTED",
+      "baseline_mse": 0.5881356092728306,
+      "result_mse": 0.5881356092728306,
+      "improvement": 0.0,
+      "relative_improvement": 0.0,
+      "round": 2
+    }
+  },
+  {
+    "round": 3,
+    "experiment_id": "exp_ecfd1adcb6",
+    "result": {
+      "experiment_id": "exp_ecfd1adcb6",
+      "hypothesis_id": "hyp_002",
+      "status": "SUCCEEDED",
+      "return_code": 0,
+      "metrics": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.5881356092728308,
+          "mae": 0.4992656376266284
+        },
+        "split": "test",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "model_config": {
+          "moving_avg": 13
+        }
+      },
+      "stdout": "",
+      "stderr": "",
+      "artifacts": [
+        "experiment_config.json",
+        "metrics.json",
+        "run_experiment.py"
+      ],
+      "duration_seconds": 1.5160000000032596,
+      "error_type": null,
+      "attempts": 1,
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "error_type": null,
+          "decision": "NONE"
+        }
+      ],
+      "started_at": "2026-09-21T23:47:53.592991",
+      "completed_at": "2026-09-21T23:47:55.101823"
+    },
+    "evaluation": {
+      "verdict": "REJECTED",
+      "baseline_mse": 0.5881356092728306,
+      "result_mse": 0.5881356092728308,
+      "improvement": -2.220446049250313e-16,
+      "relative_improvement": -3.775398078677241e-16,
+      "round": 3
+    }
+  }
+]

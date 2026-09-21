@@ -1,0 +1,15 @@
+{
+  "title": "Improve long horizon forecasting",
+  "description": "Find methods that improve ETTm1 forecasting under fixed compute budget.",
+  "benchmark": "ETTm1",
+  "baseline_models": [
+    "DLinear"
+  ],
+  "constraints": {
+    "training_budget": "fixed",
+    "no_test_leakage": true
+  },
+  "evaluation_metrics": {
+    "primary": "mse"
+  }
+}

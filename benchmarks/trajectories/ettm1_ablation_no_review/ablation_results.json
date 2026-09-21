@@ -1,0 +1,38 @@
+[
+  {
+    "round": 1,
+    "ablation_id": "ablation_001",
+    "status": "EXECUTED",
+    "variant": "unchanged_baseline_protocol",
+    "comparison": {
+      "metrics": {
+        "mse": 0.5881356092728306,
+        "mae": 0.4992656376266284
+      }
+    }
+  },
+  {
+    "round": 2,
+    "ablation_id": "ablation_002",
+    "status": "EXECUTED",
+    "variant": "unchanged_baseline_protocol",
+    "comparison": {
+      "metrics": {
+        "mse": 0.5881356092728306,
+        "mae": 0.4992656376266284
+      }
+    }
+  },
+  {
+    "round": 3,
+    "ablation_id": "ablation_003",
+    "status": "EXECUTED",
+    "variant": "unchanged_baseline_protocol",
+    "comparison": {
+      "metrics": {
+        "mse": 0.5881356092728306,
+        "mae": 0.4992656376266284
+      }
+    }
+  }
+]

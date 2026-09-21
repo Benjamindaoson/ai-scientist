@@ -1,0 +1,47 @@
+[
+  {
+    "id": "hyp_004",
+    "claim": "A wider smoothing window improves seasonal extrapolation",
+    "mechanism": "A wider trend window gives the linear head a more stable seasonal signal",
+    "expected_effect": "MSE decrease",
+    "falsification": "MSE is not lower with the wider window",
+    "mutation": {
+      "moving_avg": 37
+    },
+    "novelty": 0.72,
+    "feasibility": 0.95,
+    "expected_impact": 0.74,
+    "rank_score": 0.803333,
+    "round": 1
+  },
+  {
+    "id": "hyp_001",
+    "claim": "Adaptive moving-average window improves temporal stability",
+    "mechanism": "A longer decomposition window suppresses high-frequency noise",
+    "expected_effect": "MSE decrease",
+    "falsification": "No MSE decrease against the unchanged window",
+    "mutation": {
+      "moving_avg": 49
+    },
+    "novelty": 0.7,
+    "feasibility": 0.95,
+    "expected_impact": 0.7,
+    "rank_score": 0.783333,
+    "round": 2
+  },
+  {
+    "id": "hyp_002",
+    "claim": "Shorter moving-average window preserves local dynamics",
+    "mechanism": "A shorter trend window reduces lag at regime changes",
+    "expected_effect": "MAE decrease",
+    "falsification": "No MAE decrease against the unchanged window",
+    "mutation": {
+      "moving_avg": 13
+    },
+    "novelty": 0.65,
+    "feasibility": 0.98,
+    "expected_impact": 0.62,
+    "rank_score": 0.75,
+    "round": 3
+  }
+]

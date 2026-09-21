@@ -1,0 +1,72 @@
+[
+  {
+    "id": "hyp_004",
+    "claim": "A wider smoothing window improves seasonal extrapolation",
+    "mechanism": "A wider trend window gives the linear head a more stable seasonal signal",
+    "expected_effect": "MSE decrease",
+    "falsification": "MSE is not lower with the wider window",
+    "mutation": {
+      "moving_avg": 37
+    },
+    "novelty": 0.72,
+    "feasibility": 0.95,
+    "expected_impact": 0.74,
+    "rank_score": 0.803333
+  },
+  {
+    "id": "hyp_001",
+    "claim": "Adaptive moving-average window improves temporal stability",
+    "mechanism": "A longer decomposition window suppresses high-frequency noise",
+    "expected_effect": "MSE decrease",
+    "falsification": "No MSE decrease against the unchanged window",
+    "mutation": {
+      "moving_avg": 49
+    },
+    "novelty": 0.7,
+    "feasibility": 0.95,
+    "expected_impact": 0.7,
+    "rank_score": 0.783333
+  },
+  {
+    "id": "hyp_002",
+    "claim": "Shorter moving-average window preserves local dynamics",
+    "mechanism": "A shorter trend window reduces lag at regime changes",
+    "expected_effect": "MAE decrease",
+    "falsification": "No MAE decrease against the unchanged window",
+    "mutation": {
+      "moving_avg": 13
+    },
+    "novelty": 0.65,
+    "feasibility": 0.98,
+    "expected_impact": 0.62,
+    "rank_score": 0.75
+  },
+  {
+    "id": "hyp_005",
+    "claim": "Channel-wise decomposition is sufficient under fixed compute",
+    "mechanism": "Independent channel heads avoid cross-channel overfitting",
+    "expected_effect": "Stable metrics with no parameter increase",
+    "falsification": "Cross-channel coupling is required for improvement",
+    "mutation": {
+      "moving_avg": 31
+    },
+    "novelty": 0.55,
+    "feasibility": 0.92,
+    "expected_impact": 0.58,
+    "rank_score": 0.683333
+  },
+  {
+    "id": "hyp_003",
+    "claim": "Moderate smoothing is a Pareto compromise",
+    "mechanism": "An intermediate window balances noise removal and responsiveness",
+    "expected_effect": "MSE/MAE improve together",
+    "falsification": "Either metric worsens beyond tolerance",
+    "mutation": {
+      "moving_avg": 25
+    },
+    "novelty": 0.45,
+    "feasibility": 1.0,
+    "expected_impact": 0.55,
+    "rank_score": 0.666667
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "hyp_004",
+    "claim": "A wider smoothing window improves seasonal extrapolation",
+    "mechanism": "A wider trend window gives the linear head a more stable seasonal signal",
+    "expected_effect": "MSE decrease",
+    "falsification": "MSE is not lower with the wider window",
+    "mutation": {
+      "moving_avg": 37
+    },
+    "novelty": 0.72,
+    "feasibility": 0.95,
+    "expected_impact": 0.74,
+    "rank_score": 0.803333,
+    "round": 1
+  },
+  {
+    "id": "hyp_004",
+    "claim": "A wider smoothing window improves seasonal extrapolation",
+    "mechanism": "A wider trend window gives the linear head a more stable seasonal signal",
+    "expected_effect": "MSE decrease",
+    "falsification": "MSE is not lower with the wider window",
+    "mutation": {
+      "moving_avg": 37
+    },
+    "novelty": 0.72,
+    "feasibility": 0.95,
+    "expected_impact": 0.74,
+    "rank_score": 0.803333,
+    "round": 2
+  },
+  {
+    "id": "hyp_004",
+    "claim": "A wider smoothing window improves seasonal extrapolation",
+    "mechanism": "A wider trend window gives the linear head a more stable seasonal signal",
+    "expected_effect": "MSE decrease",
+    "falsification": "MSE is not lower with the wider window",
+    "mutation": {
+      "moving_avg": 37
+    },
+    "novelty": 0.72,
+    "feasibility": 0.95,
+    "expected_impact": 0.74,
+    "rank_score": 0.803333,
+    "round": 3
+  }
+]

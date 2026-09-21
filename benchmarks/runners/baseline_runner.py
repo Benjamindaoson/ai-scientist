@@ -30,6 +30,7 @@ def run_baseline(
     seed: int = 1,
     max_windows: int | None = None,
     persist: bool = True,
+    model_kwargs: dict | None = None,
     **dataset_kwargs,
 ) -> dict:
     if benchmark_name.lower() != "ettm1":
@@ -41,11 +42,16 @@ def run_baseline(
     test_x, test_y = _windows(dataset, "test", max_windows)
     config = {"seq_len": dataset.lookback, "pred_len": dataset.horizon, "channels": len(train_x[0][0])}
     model_key = model_name.lower()
+    model_kwargs = model_kwargs or {}
     if model_key == "dlinear":
-        model = DLinear(DLinearConfig(**config)).fit(train_x, train_y)
+        dlinear_config = dict(config)
+        dlinear_config.update(model_kwargs)
+        model = DLinear(DLinearConfig(**dlinear_config)).fit(train_x, train_y)
         display_name = "DLinear"
     elif model_key == "patchtst":
-        model = PatchTST(PatchTSTConfig(**config)).fit(train_x, train_y)
+        patch_config = dict(config)
+        patch_config.update(model_kwargs)
+        model = PatchTST(PatchTSTConfig(**patch_config)).fit(train_x, train_y)
         display_name = "PatchTST"
     else:
         raise ValueError(f"unsupported model: {model_name}")
@@ -62,6 +68,7 @@ def run_baseline(
     summary["horizon"] = dataset.horizon
     summary["train_windows"] = len(train_x)
     summary["test_windows"] = len(test_x)
+    summary["model_config"] = model_kwargs
     if persist:
         output_dir = Path(results_root) / "ettm1" / "baseline"
         output_dir.mkdir(parents=True, exist_ok=True)

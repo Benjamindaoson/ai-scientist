@@ -1,0 +1,17 @@
+{
+  "benchmark": "ETTm1",
+  "model": "DLinear",
+  "seed": 1,
+  "metrics": {
+    "mse": 0.5881356092728306,
+    "mae": 0.49926563762662834
+  },
+  "split": "test",
+  "lookback": 96,
+  "horizon": 96,
+  "train_windows": 1024,
+  "test_windows": 1024,
+  "model_config": {
+    "moving_avg": 49
+  }
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "round": 1,
+    "from_hypothesis": "hyp_004",
+    "observation": {
+      "verdict": "REJECTED",
+      "baseline_mse": 0.5881356092728306,
+      "result_mse": 0.5881356092728312,
+      "improvement": -5.551115123125783e-16,
+      "relative_improvement": -9.438495196693101e-16,
+      "round": 1
+    },
+    "next_action": "finalize"
+  }
+]

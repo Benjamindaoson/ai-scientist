@@ -1,0 +1,57 @@
+[
+  {
+    "round": 1,
+    "experiment_id": "exp_2a035da758",
+    "result": {
+      "experiment_id": "exp_2a035da758",
+      "hypothesis_id": "hyp_004",
+      "status": "SUCCEEDED",
+      "return_code": 0,
+      "metrics": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.5881356092728312,
+          "mae": 0.49926563762662857
+        },
+        "split": "test",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "model_config": {
+          "moving_avg": 37
+        }
+      },
+      "stdout": "",
+      "stderr": "",
+      "artifacts": [
+        "experiment_config.json",
+        "metrics.json",
+        "run_experiment.py"
+      ],
+      "duration_seconds": 1.5780000000013388,
+      "error_type": null,
+      "attempts": 1,
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "error_type": null,
+          "decision": "NONE"
+        }
+      ],
+      "started_at": "2026-09-21T23:47:55.122047",
+      "completed_at": "2026-09-21T23:47:56.703292"
+    },
+    "evaluation": {
+      "verdict": "REJECTED",
+      "baseline_mse": 0.5881356092728306,
+      "result_mse": 0.5881356092728312,
+      "improvement": -5.551115123125783e-16,
+      "relative_improvement": -9.438495196693101e-16,
+      "round": 1
+    }
+  }
+]

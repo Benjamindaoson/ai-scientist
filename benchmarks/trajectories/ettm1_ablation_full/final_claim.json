@@ -1,0 +1,11 @@
+{
+  "claim": "The selected configuration improves ETTm1 long-horizon forecasting under the executed bounded protocol",
+  "evidence": [
+    "exp_e27e04987f",
+    "exp_d3b5e044e1",
+    "exp_ecfd1adcb6"
+  ],
+  "confidence": 0.65,
+  "status": "REJECTED",
+  "reason": "Claims are downgraded when any executed round contradicts the proposed improvement."
+}

@@ -1,0 +1,75 @@
+{
+  "nodes": [
+    {
+      "id": "hyp_004",
+      "type": "HYPOTHESIS",
+      "round": 1
+    },
+    {
+      "id": "evidence_exp_f095f5a705",
+      "type": "EVIDENCE",
+      "round": 1,
+      "evaluation": {
+        "verdict": "REJECTED",
+        "baseline_mse": 0.5881356092728306,
+        "result_mse": 0.5881356092728312,
+        "improvement": -5.551115123125783e-16,
+        "relative_improvement": -9.438495196693101e-16,
+        "round": 1
+      }
+    },
+    {
+      "id": "hyp_001",
+      "type": "HYPOTHESIS",
+      "round": 2
+    },
+    {
+      "id": "evidence_exp_9086c51873",
+      "type": "EVIDENCE",
+      "round": 2,
+      "evaluation": {
+        "verdict": "REJECTED",
+        "baseline_mse": 0.5881356092728306,
+        "result_mse": 0.5881356092728306,
+        "improvement": 0.0,
+        "relative_improvement": 0.0,
+        "round": 2
+      }
+    },
+    {
+      "id": "hyp_002",
+      "type": "HYPOTHESIS",
+      "round": 3
+    },
+    {
+      "id": "evidence_exp_8088a90bd3",
+      "type": "EVIDENCE",
+      "round": 3,
+      "evaluation": {
+        "verdict": "REJECTED",
+        "baseline_mse": 0.5881356092728306,
+        "result_mse": 0.5881356092728308,
+        "improvement": -2.220446049250313e-16,
+        "relative_improvement": -3.775398078677241e-16,
+        "round": 3
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "hyp_004",
+      "target": "evidence_exp_f095f5a705",
+      "relation": "REJECTED"
+    },
+    {
+      "source": "hyp_001",
+      "target": "evidence_exp_9086c51873",
+      "relation": "REJECTED"
+    },
+    {
+      "source": "hyp_002",
+      "target": "evidence_exp_8088a90bd3",
+      "relation": "REJECTED"
+    }
+  ]
+}

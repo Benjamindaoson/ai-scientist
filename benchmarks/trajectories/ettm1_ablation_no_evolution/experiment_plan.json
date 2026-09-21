@@ -1,0 +1,179 @@
+[
+  {
+    "round": 1,
+    "spec": {
+      "hypothesis_id": "hyp_004",
+      "objective": "Test: A wider smoothing window improves seasonal extrapolation",
+      "command": [
+        "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
+        "run_experiment.py"
+      ],
+      "workspace": "benchmarks\\trajectories\\ettm1_ablation_no_evolution\\workspaces\\round_01",
+      "metrics_file": "metrics.json",
+      "baseline": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.5881356092728306,
+          "mae": 0.4992656376266284
+        },
+        "split": "test",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "model_config": {}
+      },
+      "controls": [],
+      "success_criteria": {
+        "mse": {
+          "op": "<",
+          "value": 0.5881356092728306
+        }
+      },
+      "env": {
+        "PYTHONPATH": "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist;C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\auto_research\\src"
+      },
+      "timeout_seconds": 1800,
+      "sandbox_backend": "local",
+      "max_attempts": 1,
+      "metadata": {
+        "benchmark": "ETTm1",
+        "mutation": {
+          "moving_avg": 37
+        }
+      },
+      "id": "exp_b6a552e430",
+      "created_at": "2026-09-21T23:47:56.722852"
+    },
+    "mutation": {
+      "changed_files": [
+        "experiment_config.json"
+      ],
+      "reason": "Test the mechanism proposed by hyp_004: A wider smoothing window improves seasonal extrapolation",
+      "hypothesis_id": "hyp_004",
+      "config": {
+        "moving_avg": 37
+      }
+    }
+  },
+  {
+    "round": 2,
+    "spec": {
+      "hypothesis_id": "hyp_004",
+      "objective": "Test: A wider smoothing window improves seasonal extrapolation",
+      "command": [
+        "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
+        "run_experiment.py"
+      ],
+      "workspace": "benchmarks\\trajectories\\ettm1_ablation_no_evolution\\workspaces\\round_02",
+      "metrics_file": "metrics.json",
+      "baseline": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.5881356092728306,
+          "mae": 0.4992656376266284
+        },
+        "split": "test",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "model_config": {}
+      },
+      "controls": [],
+      "success_criteria": {
+        "mse": {
+          "op": "<",
+          "value": 0.5881356092728306
+        }
+      },
+      "env": {
+        "PYTHONPATH": "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist;C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\auto_research\\src"
+      },
+      "timeout_seconds": 1800,
+      "sandbox_backend": "local",
+      "max_attempts": 1,
+      "metadata": {
+        "benchmark": "ETTm1",
+        "mutation": {
+          "moving_avg": 37
+        }
+      },
+      "id": "exp_25cd65b674",
+      "created_at": "2026-09-21T23:47:58.105000"
+    },
+    "mutation": {
+      "changed_files": [
+        "experiment_config.json"
+      ],
+      "reason": "Test the mechanism proposed by hyp_004: A wider smoothing window improves seasonal extrapolation",
+      "hypothesis_id": "hyp_004",
+      "config": {
+        "moving_avg": 37
+      }
+    }
+  },
+  {
+    "round": 3,
+    "spec": {
+      "hypothesis_id": "hyp_004",
+      "objective": "Test: A wider smoothing window improves seasonal extrapolation",
+      "command": [
+        "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
+        "run_experiment.py"
+      ],
+      "workspace": "benchmarks\\trajectories\\ettm1_ablation_no_evolution\\workspaces\\round_03",
+      "metrics_file": "metrics.json",
+      "baseline": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.5881356092728306,
+          "mae": 0.4992656376266284
+        },
+        "split": "test",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "model_config": {}
+      },
+      "controls": [],
+      "success_criteria": {
+        "mse": {
+          "op": "<",
+          "value": 0.5881356092728306
+        }
+      },
+      "env": {
+        "PYTHONPATH": "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist;C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\auto_research\\src"
+      },
+      "timeout_seconds": 1800,
+      "sandbox_backend": "local",
+      "max_attempts": 1,
+      "metadata": {
+        "benchmark": "ETTm1",
+        "mutation": {
+          "moving_avg": 37
+        }
+      },
+      "id": "exp_5ed63fdf97",
+      "created_at": "2026-09-21T23:47:59.583324"
+    },
+    "mutation": {
+      "changed_files": [
+        "experiment_config.json"
+      ],
+      "reason": "Test the mechanism proposed by hyp_004: A wider smoothing window improves seasonal extrapolation",
+      "hypothesis_id": "hyp_004",
+      "config": {
+        "moving_avg": 37
+      }
+    }
+  }
+]

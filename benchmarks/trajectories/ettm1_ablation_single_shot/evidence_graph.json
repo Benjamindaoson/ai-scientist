@@ -1,0 +1,29 @@
+{
+  "nodes": [
+    {
+      "id": "hyp_004",
+      "type": "HYPOTHESIS",
+      "round": 1
+    },
+    {
+      "id": "evidence_exp_2a035da758",
+      "type": "EVIDENCE",
+      "round": 1,
+      "evaluation": {
+        "verdict": "REJECTED",
+        "baseline_mse": 0.5881356092728306,
+        "result_mse": 0.5881356092728312,
+        "improvement": -5.551115123125783e-16,
+        "relative_improvement": -9.438495196693101e-16,
+        "round": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "hyp_004",
+      "target": "evidence_exp_2a035da758",
+      "relation": "REJECTED"
+    }
+  ]
+}
