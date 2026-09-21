@@ -1,4 +1,4 @@
-"""Local, reproducible experiment execution."""
+"""Local, policy-checked, reproducible experiment execution."""
 from __future__ import annotations
 
 import json
@@ -9,18 +9,24 @@ from datetime import datetime
 from pathlib import Path
 
 from .models import ExperimentResult, ExperimentSpec
+from .recovery import FailureRecoveryPolicy
+from .sandbox import SandboxPolicy
 
 
 class ExperimentRunner:
-    """Run an ExperimentSpec and capture metrics, logs, and artifacts."""
+    """Run ExperimentSpec objects with policy checks and bounded recovery."""
+
+    def __init__(
+        self,
+        sandbox_policy: SandboxPolicy | None = None,
+        recovery_policy: FailureRecoveryPolicy | None = None,
+    ):
+        self.sandbox_policy = sandbox_policy or SandboxPolicy()
+        self.recovery_policy = recovery_policy or FailureRecoveryPolicy()
 
     def run(self, spec: ExperimentSpec) -> ExperimentResult:
+        self.sandbox_policy.validate(spec)
         workspace = Path(spec.workspace).resolve()
-        if not workspace.exists() or not workspace.is_dir():
-            raise ValueError(f"Experiment workspace does not exist: {workspace}")
-        if not spec.command:
-            raise ValueError("Experiment command cannot be empty")
-
         started = datetime.utcnow().isoformat()
         t0 = time.monotonic()
         env = os.environ.copy()
@@ -67,3 +73,18 @@ class ExperimentRunner:
             started_at=started,
             completed_at=datetime.utcnow().isoformat(),
         )
+
+    def run_with_recovery(self, spec: ExperimentSpec, max_retries: int = 1) -> list[ExperimentResult]:
+        """Run an experiment with deterministic, bounded retry behavior."""
+        results = []
+        current = spec
+        for attempt in range(max_retries + 1):
+            result = self.run(current)
+            results.append(result)
+            if result.status == "SUCCEEDED" and result.error_type is None:
+                break
+            next_spec = self.recovery_policy.retry_spec(current, result, attempt)
+            if next_spec is None:
+                break
+            current = next_spec
+        return results
