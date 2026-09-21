@@ -12,8 +12,8 @@ class FailureClassifier:
             return "NONE"
         if result.error_type == "TIMEOUT":
             return "TIMEOUT"
-        if result.error_type == "INVALID_METRICS":
-            return "INVALID_METRICS"
+        if result.error_type in {"INVALID_METRICS", "MISSING_METRICS"}:
+            return result.error_type
         text = (result.stderr or "").lower()
         if "modulenotfounderror" in text or "importerror" in text:
             return "DEPENDENCY"
@@ -48,6 +48,6 @@ class RecoveryPolicy:
                 "retry_with_larger_timeout",
                 replace(spec, timeout_seconds=min(spec.timeout_seconds * 2, 7200)),
             )
-        if failure in {"NONZERO_EXIT", "CODE_ERROR", "DEPENDENCY", "INVALID_METRICS"}:
+        if failure in {"NONZERO_EXIT", "CODE_ERROR", "DEPENDENCY", "INVALID_METRICS", "MISSING_METRICS"}:
             return RecoveryDecision(True, f"retry_after_repair:{failure}", spec)
         return RecoveryDecision(False, failure)
