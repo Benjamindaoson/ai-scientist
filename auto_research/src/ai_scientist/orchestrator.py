@@ -27,6 +27,7 @@ from ai_scientist.experiment import ExperimentSpec
 from ai_scientist.hypothesis import Hypothesis
 from ai_scientist.research_state import ResearchState
 from ai_scientist.review_loop import ReviewIssue
+from ai_scientist.engineering import EngineeringPlan
 
 
 @dataclass
@@ -510,6 +511,65 @@ Format each as: [QUESTION] <question text>"""
 
         cycle["research_state"] = self.autonomous_loop.research_package(state)
         return cycle
+
+    def prepare_experiment_code(
+        self,
+        objective: str,
+        workspace: str,
+        context: dict | None = None,
+        plan: EngineeringPlan | None = None,
+    ) -> dict:
+        """Generate/apply a structured research-code plan inside the workspace."""
+        effective_plan = plan or self.autonomous_loop.engineer.plan(objective, context=context)
+        changed_files = self.autonomous_loop.apply_engineering_plan(workspace, effective_plan)
+        return {"plan": effective_plan.to_dict(), "changed_files": changed_files}
+
+    def run_complete_autonomous_cycle(
+        self,
+        hypothesis: Hypothesis,
+        experiment_spec: ExperimentSpec,
+        unresolved_objections: list[dict] | None = None,
+        ablation_components: dict[str, object] | None = None,
+        supplementary_specs: dict[str, ExperimentSpec] | None = None,
+        manuscript_title: str = "Autonomous Research Report",
+    ) -> dict:
+        """Run experiment, evidence, evolution, ablations, review, rebuttal, meta-review and audit."""
+        if not self.current_session:
+            raise RuntimeError("start_research() must be called before running an autonomous cycle")
+
+        state = ResearchState(
+            project_id=self.current_session.project_id,
+            problem=self.current_session.seed_question,
+            objections=unresolved_objections or [],
+        )
+        cycle = self.autonomous_loop.run_experiment_cycle(
+            state=state,
+            hypothesis=hypothesis,
+            spec=experiment_spec,
+            unresolved_objections=unresolved_objections or [],
+        )
+
+        ablation_plan = None
+        ablation_results = []
+        if ablation_components:
+            ablation_plan = self.autonomous_loop.plan_ablations(
+                state, hypothesis.id, ablation_components
+            )
+            ablation_results = self.autonomous_loop.execute_ablations(
+                state, experiment_spec, ablation_plan
+            )
+
+        final = self.autonomous_loop.finalize(
+            state,
+            title=manuscript_title,
+            supplementary_specs=supplementary_specs,
+        )
+        return {
+            "experiment_cycle": cycle,
+            "ablation_plan": ablation_plan,
+            "ablation_results": ablation_results,
+            **final,
+        }
 
     def get_session_status(self) -> dict | None:
         """Get current session status."""
