@@ -8,6 +8,7 @@ from ai_scientist.experiment import ExperimentSpec
 from ai_scientist.hypothesis import Hypothesis
 from benchmarks.core.schema import MetricSpec, ProblemSpec
 from benchmarks.problems.base import BenchmarkProblem
+from benchmarks.problems.protocol import materialize_locked_runner
 
 
 TABLESHIFT_PROBLEM = ProblemSpec(
@@ -17,10 +18,7 @@ TABLESHIFT_PROBLEM = ProblemSpec(
     primary_metric=MetricSpec("ood_accuracy", "higher"),
     secondary_metrics=(MetricSpec("id_accuracy", "higher"), MetricSpec("ood_gap", "lower")),
     constraints={"max_id_accuracy_drop_pp": 0.5, "dataset": "diabetes_readmission"},
-    upstream={
-        "repository": "https://github.com/mlfoundations/tableshift",
-        "dataset": "diabetes_readmission",
-    },
+    upstream={"repository": "https://github.com/mlfoundations/tableshift", "dataset": "diabetes_readmission"},
 )
 
 
@@ -30,25 +28,36 @@ class TableShiftProblem(BenchmarkProblem):
     def make_hypothesis(self) -> Hypothesis:
         return Hypothesis(
             claim="A tabular learning modification can improve diabetes-readmission OOD accuracy while preserving ID accuracy.",
-            rationale="The fixed TableShift domain split exposes whether improvements transfer across admission-source shift.",
+            rationale="The fixed TableShift domain split tests transfer across admission-source shift.",
             predicted_effect="OOD accuracy improves with <=0.5pp ID accuracy loss",
             falsification_conditions=["OOD accuracy does not improve", "ID accuracy drops >0.5pp"],
         )
 
     def make_experiment_spec(self, workspace: str | Path, seed: int) -> ExperimentSpec:
-        runner = Path(__file__).with_name("run_tableshift.py").resolve()
         root = Path(workspace).resolve()
+        runner_name, runner_hash = materialize_locked_runner(Path(__file__).with_name("run_tableshift.py"), root)
         return ExperimentSpec(
             hypothesis_id=self.make_hypothesis().id,
-            objective=self.spec.research_question,
-            command=[sys.executable, str(runner), "--cache-dir", str(root/"cache"), "--seed", str(seed)],
+            objective=(
+                self.spec.research_question
+                + " The evaluator and TableShift split are locked. Candidate model changes must not use ood_test labels for training."
+            ),
+            command=[sys.executable, runner_name, "--cache-dir", str(root / "cache"), "--seed", str(seed)],
             workspace=str(root),
             metrics_file="metrics.json",
             success_criteria={"ood_accuracy": {"op": ">=", "value": 0.0}},
             timeout_seconds=14400,
             max_attempts=1,
-            metadata={"benchmark_problem": self.spec.problem_id, "gpu_count": 0},
+            metadata={
+                "benchmark_problem": self.spec.problem_id,
+                "gpu_count": 0,
+                "locked_evaluator": runner_name,
+                "locked_evaluator_sha256": runner_hash,
+            },
         )
+
+    def ablation_components(self) -> dict[str, object]:
+        return {"standardization": True, "l2_regularization": True}
 
     def validate_constraints(self, baseline_metrics, final_metrics):
         violations = []
