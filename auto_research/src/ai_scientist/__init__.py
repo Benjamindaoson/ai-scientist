@@ -60,6 +60,12 @@ from .literature.validator import (
     EvidenceQuality,
 )
 from .orchestrator import AIScientist, ResearchSession
+from .research_state import ResearchState
+from .hypothesis import Hypothesis, HypothesisEvolver
+from .experiment import ExperimentSpec, ExperimentResult, ExperimentRunner, ExperimentEvaluator
+from .autonomous_loop import AutonomousResearchLoop
+from .ablation import AblationPlan, AblationPlanner
+from .review_loop import ReviewIssue, ReviewActionRouter
 
 __version__ = "0.1.0"
 
@@ -115,4 +121,16 @@ __all__ = [
     # Orchestrator
     "AIScientist",
     "ResearchSession",
+    "ResearchState",
+    "Hypothesis",
+    "HypothesisEvolver",
+    "ExperimentSpec",
+    "ExperimentResult",
+    "ExperimentRunner",
+    "ExperimentEvaluator",
+    "AutonomousResearchLoop",
+    "AblationPlan",
+    "AblationPlanner",
+    "ReviewIssue",
+    "ReviewActionRouter",
 ]
