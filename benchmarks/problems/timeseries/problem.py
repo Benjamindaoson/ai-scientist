@@ -77,7 +77,7 @@ class TimeSeriesProblem(BenchmarkProblem):
         return self._spec(workspace, seed, "PatchTST")
 
     def make_baseline_spec(self, workspace: str | Path, seed: int) -> ExperimentSpec:
-        return self._spec(workspace, seed, "DLinear")
+        return self._spec(workspace, seed, "PatchTST")
 
     def ablation_components(self) -> dict[str, object]:
         return {"patching": True, "revin": True}
