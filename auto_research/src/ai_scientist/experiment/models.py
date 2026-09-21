@@ -19,6 +19,9 @@ class ExperimentSpec:
     success_criteria: dict[str, dict[str, float | str]] = field(default_factory=dict)
     env: dict[str, str] = field(default_factory=dict)
     timeout_seconds: int = 1800
+    sandbox_backend: str = "local"
+    max_attempts: int = 2
+    metadata: dict[str, Any] = field(default_factory=dict)
     id: str = field(default_factory=lambda: f"exp_{uuid.uuid4().hex[:10]}")
     created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
 
@@ -38,6 +41,8 @@ class ExperimentResult:
     artifacts: list[str] = field(default_factory=list)
     duration_seconds: float = 0.0
     error_type: str | None = None
+    attempts: int = 1
+    recovery_history: list[dict[str, Any]] = field(default_factory=list)
     started_at: str = ""
     completed_at: str = ""
 
