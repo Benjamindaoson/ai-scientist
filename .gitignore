@@ -1,0 +1,34 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Research outputs (可选，不上传生成的数据)
+research_output/
+research_output_v2/
+research_output_v3/
+
+# Database
+*.db
+
+# Environment
+.env
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
