@@ -1,0 +1,42 @@
+{
+  "reviews": [
+    {
+      "issues": [
+        {
+          "category": "INSUFFICIENT_ABLATION",
+          "description": "No ablation isolates the claimed mechanism.",
+          "severity": "MAJOR",
+          "evidence_ids": []
+        }
+      ],
+      "summary": "Structured review from recorded research state.",
+      "round": 1
+    }
+  ],
+  "rebuttals": [
+    {
+      "round": 1,
+      "actions": [
+        {
+          "category": "INSUFFICIENT_ABLATION",
+          "action": "ABLATION",
+          "description": "No ablation isolates the claimed mechanism.",
+          "severity": "MAJOR",
+          "evidence_ids": []
+        }
+      ],
+      "results": [
+        {
+          "action": {
+            "category": "INSUFFICIENT_ABLATION",
+            "action": "ABLATION",
+            "description": "No ablation isolates the claimed mechanism.",
+            "severity": "MAJOR",
+            "evidence_ids": []
+          },
+          "status": "PENDING_EXTERNAL_HANDLER"
+        }
+      ]
+    }
+  ]
+}

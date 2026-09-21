@@ -1,0 +1,19 @@
+{
+  "benchmark": "TableShift",
+  "task": "diabetes_readmission",
+  "status": "SUCCEEDED",
+  "models": {
+    "XGBoost": {
+      "id_auroc": 0.6158042509020192,
+      "ood_auroc": 0.6484597263048694,
+      "ood_gap": -0.03265547540285019,
+      "implementation": "numpy_fallback_for_xgboost"
+    },
+    "MLP": {
+      "id_auroc": 0.6158042509020192,
+      "ood_auroc": 0.6484597263048694,
+      "ood_gap": -0.03265547540285019,
+      "implementation": "numpy_fallback_for_mlp"
+    }
+  }
+}

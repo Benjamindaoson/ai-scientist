@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {
+      "id": "hyp_8ef1d76ad9",
+      "type": "CLAIM"
+    },
+    {
+      "id": "evidence_exp_ddcac6cbbf",
+      "type": "EVIDENCE",
+      "metrics": {
+        "mse": 0.40161630988479347,
+        "mae": 0.40411138055787243
+      }
+    },
+    {
+      "id": "exp_ddcac6cbbf",
+      "type": "EXPERIMENT"
+    },
+    {
+      "id": "artifact:exp_ddcac6cbbf:metrics.json",
+      "type": "ARTIFACT",
+      "path": "metrics.json"
+    },
+    {
+      "id": "artifact:exp_ddcac6cbbf:run_benchmark.py",
+      "type": "ARTIFACT",
+      "path": "run_benchmark.py"
+    },
+    {
+      "id": "artifact:exp_ddcac6cbbf:benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json",
+      "type": "ARTIFACT",
+      "path": "benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json"
+    }
+  ],
+  "edges": [
+    {
+      "source": "evidence_exp_ddcac6cbbf",
+      "target": "hyp_8ef1d76ad9",
+      "relation": "SUPPORTS"
+    },
+    {
+      "source": "exp_ddcac6cbbf",
+      "target": "evidence_exp_ddcac6cbbf",
+      "relation": "PRODUCES"
+    },
+    {
+      "source": "artifact:exp_ddcac6cbbf:metrics.json",
+      "target": "exp_ddcac6cbbf",
+      "relation": "OUTPUT_OF"
+    },
+    {
+      "source": "artifact:exp_ddcac6cbbf:run_benchmark.py",
+      "target": "exp_ddcac6cbbf",
+      "relation": "OUTPUT_OF"
+    },
+    {
+      "source": "artifact:exp_ddcac6cbbf:benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json",
+      "target": "exp_ddcac6cbbf",
+      "relation": "OUTPUT_OF"
+    }
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "project_id": "proj_d8cb691b",
+  "problem": "Improve long horizon forecasting on ETTm1 under fixed compute budget.",
+  "literature": [],
+  "claims": [],
+  "hypotheses": [
+    {
+      "claim": "DLinear provides a reproducible long-horizon ETTm1 result under the benchmark protocol",
+      "rationale": "The baseline establishes a fixed compute and data reference for subsequent research.",
+      "predicted_effect": "mse <= 0.40161630988479347",
+      "falsification_conditions": [
+        "mse > 0.40161630988479347"
+      ],
+      "id": "hyp_8ef1d76ad9",
+      "parent_hypothesis_id": null,
+      "status": "PROPOSED",
+      "supporting_evidence_ids": [],
+      "contradicting_evidence_ids": [],
+      "experiment_ids": []
+    },
+    {
+      "claim": "Refined: DLinear provides a reproducible long-horizon ETTm1 result under the benchmark protocol",
+      "rationale": "Updated after experiment exp_ddcac6cbbf with metrics {'mse': 0.40161630988479347, 'mae': 0.40411138055787243}.",
+      "predicted_effect": "mse <= 0.40161630988479347",
+      "falsification_conditions": [
+        "mse > 0.40161630988479347"
+      ],
+      "id": "hyp_bde36c5656",
+      "parent_hypothesis_id": "hyp_8ef1d76ad9",
+      "status": "EVOLVED",
+      "supporting_evidence_ids": [],
+      "contradicting_evidence_ids": [],
+      "experiment_ids": []
+    }
+  ],
+  "objections": [],
+  "experiment_specs": [
+    {
+      "hypothesis_id": "hyp_8ef1d76ad9",
+      "objective": "Reproduce the ETTm1 DLinear baseline under the fixed benchmark protocol",
+      "command": [
+        "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
+        "run_benchmark.py"
+      ],
+      "workspace": "benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace",
+      "metrics_file": "metrics.json",
+      "baseline": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.40161630988479347,
+          "mae": 0.40411138055787243
+        },
+        "split": "test",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 34369,
+        "test_windows": 23409
+      },
+      "controls": [],
+      "success_criteria": {
+        "mse": {
+          "op": "<=",
+          "value": 0.40161630988479347
+        }
+      },
+      "env": {
+        "PYTHONPATH": "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist;C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\auto_research\\src"
+      },
+      "timeout_seconds": 1800,
+      "sandbox_backend": "local",
+      "max_attempts": 1,
+      "metadata": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "run_id": "ettm1_run_001"
+      },
+      "id": "exp_ddcac6cbbf",
+      "created_at": "2026-09-21T21:41:40.692586"
+    }
+  ],
+  "experiment_runs": [
+    {
+      "experiment_id": "exp_ddcac6cbbf",
+      "hypothesis_id": "hyp_8ef1d76ad9",
+      "status": "SUCCEEDED",
+      "return_code": 0,
+      "metrics": {
+        "mse": 0.40161630988479347,
+        "mae": 0.40411138055787243
+      },
+      "stdout": "",
+      "stderr": "",
+      "artifacts": [
+        "metrics.json",
+        "run_benchmark.py",
+        "benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json"
+      ],
+      "duration_seconds": 15.06300000000192,
+      "error_type": null,
+      "attempts": 1,
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "error_type": null,
+          "decision": "NONE"
+        }
+      ],
+      "started_at": "2026-09-21T21:41:40.710411",
+      "completed_at": "2026-09-21T21:41:55.787671"
+    }
+  ],
+  "ablations": [],
+  "evidence": [
+    {
+      "id": "evidence_exp_ddcac6cbbf",
+      "type": "EXPERIMENT",
+      "hypothesis_id": "hyp_8ef1d76ad9",
+      "experiment_id": "exp_ddcac6cbbf",
+      "evaluation": {
+        "experiment_id": "exp_ddcac6cbbf",
+        "execution_succeeded": true,
+        "criteria_passed": true,
+        "checks": [
+          {
+            "metric": "mse",
+            "actual": 0.40161630988479347,
+            "op": "<=",
+            "target": 0.40161630988479347,
+            "passed": true
+          }
+        ],
+        "verdict": "SUPPORTED"
+      },
+      "metrics": {
+        "mse": 0.40161630988479347,
+        "mae": 0.40411138055787243
+      },
+      "artifacts": [
+        "metrics.json",
+        "run_benchmark.py",
+        "benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json"
+      ]
+    }
+  ],
+  "evidence_graph": {
+    "nodes": [
+      {
+        "id": "hyp_8ef1d76ad9",
+        "type": "CLAIM"
+      },
+      {
+        "id": "evidence_exp_ddcac6cbbf",
+        "type": "EVIDENCE",
+        "metrics": {
+          "mse": 0.40161630988479347,
+          "mae": 0.40411138055787243
+        }
+      },
+      {
+        "id": "exp_ddcac6cbbf",
+        "type": "EXPERIMENT"
+      },
+      {
+        "id": "artifact:exp_ddcac6cbbf:metrics.json",
+        "type": "ARTIFACT",
+        "path": "metrics.json"
+      },
+      {
+        "id": "artifact:exp_ddcac6cbbf:run_benchmark.py",
+        "type": "ARTIFACT",
+        "path": "run_benchmark.py"
+      },
+      {
+        "id": "artifact:exp_ddcac6cbbf:benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json",
+        "type": "ARTIFACT",
+        "path": "benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json"
+      }
+    ],
+    "edges": [
+      {
+        "source": "evidence_exp_ddcac6cbbf",
+        "target": "hyp_8ef1d76ad9",
+        "relation": "SUPPORTS"
+      },
+      {
+        "source": "exp_ddcac6cbbf",
+        "target": "evidence_exp_ddcac6cbbf",
+        "relation": "PRODUCES"
+      },
+      {
+        "source": "artifact:exp_ddcac6cbbf:metrics.json",
+        "target": "exp_ddcac6cbbf",
+        "relation": "OUTPUT_OF"
+      },
+      {
+        "source": "artifact:exp_ddcac6cbbf:run_benchmark.py",
+        "target": "exp_ddcac6cbbf",
+        "relation": "OUTPUT_OF"
+      },
+      {
+        "source": "artifact:exp_ddcac6cbbf:benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json",
+        "target": "exp_ddcac6cbbf",
+        "relation": "OUTPUT_OF"
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "issues": [
+        {
+          "category": "INSUFFICIENT_ABLATION",
+          "description": "No ablation isolates the claimed mechanism.",
+          "severity": "MAJOR",
+          "evidence_ids": []
+        }
+      ],
+      "summary": "Structured review from recorded research state.",
+      "round": 1
+    }
+  ],
+  "rebuttals": [
+    {
+      "round": 1,
+      "actions": [
+        {
+          "category": "INSUFFICIENT_ABLATION",
+          "action": "ABLATION",
+          "description": "No ablation isolates the claimed mechanism.",
+          "severity": "MAJOR",
+          "evidence_ids": []
+        }
+      ],
+      "results": [
+        {
+          "action": {
+            "category": "INSUFFICIENT_ABLATION",
+            "action": "ABLATION",
+            "description": "No ablation isolates the claimed mechanism.",
+            "severity": "MAJOR",
+            "evidence_ids": []
+          },
+          "status": "PENDING_EXTERNAL_HANDLER"
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "type": "META_REVIEW",
+      "decision": "REVISE",
+      "major_issues": 1,
+      "integrity_passed": true,
+      "reason": "Blocking review or integrity issues remain."
+    }
+  ],
+  "integrity_audits": [
+    {
+      "passed": true,
+      "checks": [
+        {
+          "name": "claim_evidence_coverage",
+          "passed": true,
+          "details": "All claims have evidence."
+        },
+        {
+          "name": "experiment_result_alignment",
+          "passed": true,
+          "details": "Every experiment spec has a result."
+        },
+        {
+          "name": "specification_compliance",
+          "passed": true,
+          "details": "Experiment specifications obey workspace/command policy."
+        },
+        {
+          "name": "reference_metadata",
+          "passed": true,
+          "details": "References have traceable identifiers."
+        },
+        {
+          "name": "artifact_traceability",
+          "passed": true,
+          "details": "Recorded artifacts exist."
+        },
+        {
+          "name": "method_code_alignment",
+          "passed": true,
+          "details": "Experiment entrypoints exist inside the declared workspace."
+        },
+        {
+          "name": "result_metric_alignment",
+          "passed": true,
+          "details": "Declared evaluation metrics are present in experiment results."
+        }
+      ]
+    }
+  ],
+  "manuscript": {
+    "path": "benchmarks\\trajectories\\ettm1_run_001\\research_package\\manuscript.md",
+    "format": "markdown",
+    "content": "# Research Report: Improve long horizon forecasting on ETTm1 under fixed compute budget.\n\n## Research Problem\nImprove long horizon forecasting on ETTm1 under fixed compute budget.\n\n## Hypotheses\n- **hyp_8ef1d76ad9** — DLinear provides a reproducible long-horizon ETTm1 result under the benchmark protocol (PROPOSED)\n- **hyp_bde36c5656** — Refined: DLinear provides a reproducible long-horizon ETTm1 result under the benchmark protocol (EVOLVED)\n\n## Experiments\n### exp_ddcac6cbbf\n- Status: SUCCEEDED\n- Metrics: {'mse': 0.40161630988479347, 'mae': 0.40411138055787243}\n\n## Ablations\n\n## Evidence\n- evidence_exp_ddcac6cbbf -> hypothesis hyp_8ef1d76ad9: {'experiment_id': 'exp_ddcac6cbbf', 'execution_succeeded': True, 'criteria_passed': True, 'checks': [{'metric': 'mse', 'actual': 0.40161630988479347, 'op': '<=', 'target': 0.40161630988479347, 'passed': True}], 'verdict': 'SUPPORTED'}\n\n## References\n\n## Limitations\n- Conclusions are limited to the executed experiments and recorded evidence.\n- Unresolved objections and failed experiments remain visible in the research package.\n"
+  },
+  "metadata": {
+    "title": "Research Report: Improve long horizon forecasting on ETTm1 under fixed compute budget."
+  },
+  "updated_at": "2026-09-21T21:41:55.791562"
+}

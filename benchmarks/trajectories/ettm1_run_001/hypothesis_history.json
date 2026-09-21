@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "DLinear provides a reproducible long-horizon ETTm1 result under the benchmark protocol",
+    "rationale": "The baseline establishes a fixed compute and data reference for subsequent research.",
+    "predicted_effect": "mse <= 0.40161630988479347",
+    "falsification_conditions": [
+      "mse > 0.40161630988479347"
+    ],
+    "id": "hyp_8ef1d76ad9",
+    "parent_hypothesis_id": null,
+    "status": "PROPOSED",
+    "supporting_evidence_ids": [],
+    "contradicting_evidence_ids": [],
+    "experiment_ids": []
+  },
+  {
+    "claim": "Refined: DLinear provides a reproducible long-horizon ETTm1 result under the benchmark protocol",
+    "rationale": "Updated after experiment exp_ddcac6cbbf with metrics {'mse': 0.40161630988479347, 'mae': 0.40411138055787243}.",
+    "predicted_effect": "mse <= 0.40161630988479347",
+    "falsification_conditions": [
+      "mse > 0.40161630988479347"
+    ],
+    "id": "hyp_bde36c5656",
+    "parent_hypothesis_id": "hyp_8ef1d76ad9",
+    "status": "EVOLVED",
+    "supporting_evidence_ids": [],
+    "contradicting_evidence_ids": [],
+    "experiment_ids": []
+  }
+]

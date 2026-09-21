@@ -1,0 +1,5 @@
+{
+  "benchmark": "ETTm1",
+  "research_problem": "Improve long horizon forecasting on ETTm1 under fixed compute budget.",
+  "run_id": "ettm1_run_001"
+}

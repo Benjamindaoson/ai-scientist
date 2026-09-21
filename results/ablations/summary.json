@@ -1,0 +1,52 @@
+[
+  {
+    "mode": "full",
+    "status": "BLOCKED",
+    "final_score": null,
+    "experiment_count": null,
+    "cost": null,
+    "valid_discovery_rate": null,
+    "review_resolution_rate": null,
+    "BLOCKED_REASON": "Requires protocol-level variants of the existing core loop; core semantics were intentionally not changed."
+  },
+  {
+    "mode": "single_shot",
+    "status": "BLOCKED",
+    "final_score": null,
+    "experiment_count": null,
+    "cost": null,
+    "valid_discovery_rate": null,
+    "review_resolution_rate": null,
+    "BLOCKED_REASON": "Requires protocol-level variants of the existing core loop; core semantics were intentionally not changed."
+  },
+  {
+    "mode": "no_hypothesis_evolution",
+    "status": "BLOCKED",
+    "final_score": null,
+    "experiment_count": null,
+    "cost": null,
+    "valid_discovery_rate": null,
+    "review_resolution_rate": null,
+    "BLOCKED_REASON": "Requires protocol-level variants of the existing core loop; core semantics were intentionally not changed."
+  },
+  {
+    "mode": "no_review_loop",
+    "status": "BLOCKED",
+    "final_score": null,
+    "experiment_count": null,
+    "cost": null,
+    "valid_discovery_rate": null,
+    "review_resolution_rate": null,
+    "BLOCKED_REASON": "Requires protocol-level variants of the existing core loop; core semantics were intentionally not changed."
+  },
+  {
+    "mode": "no_integrity",
+    "status": "BLOCKED",
+    "final_score": null,
+    "experiment_count": null,
+    "cost": null,
+    "valid_discovery_rate": null,
+    "review_resolution_rate": null,
+    "BLOCKED_REASON": "Requires protocol-level variants of the existing core loop; core semantics were intentionally not changed."
+  }
+]

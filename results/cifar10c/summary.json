@@ -1,0 +1,6 @@
+{
+  "benchmark": "CIFAR-10-C",
+  "status": "BLOCKED",
+  "BLOCKED_REASON": "CIFAR-10-C is not downloaded: data\\cifar10c\\CIFAR-10-C.tar",
+  "implementation": "fallback"
+}

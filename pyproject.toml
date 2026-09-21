@@ -17,3 +17,6 @@ where = ["auto_research/src"]
 [project.optional-dependencies]
 anthropic = ["anthropic>=0.30"]
 relay = ["aiohttp>=3.9"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

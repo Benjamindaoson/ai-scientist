@@ -1,0 +1,10 @@
+name: ettm1
+url: https://raw.githubusercontent.com/zhouhaoyi/ETDataset/main/ETT-small/ETTm1.csv
+filename: ETTm1.csv
+frequency: 15min
+lookback: 96
+horizon: 96
+train_rows: 34560
+validation_rows: 11520
+test_rows: 11520
+target: OT

@@ -30,3 +30,7 @@ research_output/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local benchmark payloads and analysis indexes
+.codegraph/
+data/

@@ -1,0 +1,14 @@
+{
+  "benchmark": "ETTm1",
+  "model": "PatchTST",
+  "seed": 1,
+  "metrics": {
+    "mse": 0.40160792958302516,
+    "mae": 0.40410830395400743
+  },
+  "split": "test",
+  "lookback": 96,
+  "horizon": 96,
+  "train_windows": 34369,
+  "test_windows": 23409
+}

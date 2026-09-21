@@ -1,0 +1,112 @@
+{
+  "specs": [
+    {
+      "hypothesis_id": "hyp_8ef1d76ad9",
+      "objective": "Reproduce the ETTm1 DLinear baseline under the fixed benchmark protocol",
+      "command": [
+        "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
+        "run_benchmark.py"
+      ],
+      "workspace": "benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace",
+      "metrics_file": "metrics.json",
+      "baseline": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.40161630988479347,
+          "mae": 0.40411138055787243
+        },
+        "split": "test",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 34369,
+        "test_windows": 23409
+      },
+      "controls": [],
+      "success_criteria": {
+        "mse": {
+          "op": "<=",
+          "value": 0.40161630988479347
+        }
+      },
+      "env": {
+        "PYTHONPATH": "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist;C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\auto_research\\src"
+      },
+      "timeout_seconds": 1800,
+      "sandbox_backend": "local",
+      "max_attempts": 1,
+      "metadata": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "run_id": "ettm1_run_001"
+      },
+      "id": "exp_ddcac6cbbf",
+      "created_at": "2026-09-21T21:41:40.692586"
+    }
+  ],
+  "runs": [
+    {
+      "experiment_id": "exp_ddcac6cbbf",
+      "hypothesis_id": "hyp_8ef1d76ad9",
+      "status": "SUCCEEDED",
+      "return_code": 0,
+      "metrics": {
+        "mse": 0.40161630988479347,
+        "mae": 0.40411138055787243
+      },
+      "stdout": "",
+      "stderr": "",
+      "artifacts": [
+        "metrics.json",
+        "run_benchmark.py",
+        "benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json"
+      ],
+      "duration_seconds": 15.06300000000192,
+      "error_type": null,
+      "attempts": 1,
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "error_type": null,
+          "decision": "NONE"
+        }
+      ],
+      "started_at": "2026-09-21T21:41:40.710411",
+      "completed_at": "2026-09-21T21:41:55.787671"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence_exp_ddcac6cbbf",
+      "type": "EXPERIMENT",
+      "hypothesis_id": "hyp_8ef1d76ad9",
+      "experiment_id": "exp_ddcac6cbbf",
+      "evaluation": {
+        "experiment_id": "exp_ddcac6cbbf",
+        "execution_succeeded": true,
+        "criteria_passed": true,
+        "checks": [
+          {
+            "metric": "mse",
+            "actual": 0.40161630988479347,
+            "op": "<=",
+            "target": 0.40161630988479347,
+            "passed": true
+          }
+        ],
+        "verdict": "SUPPORTED"
+      },
+      "metrics": {
+        "mse": 0.40161630988479347,
+        "mae": 0.40411138055787243
+      },
+      "artifacts": [
+        "metrics.json",
+        "run_benchmark.py",
+        "benchmarks\\trajectories\\ettm1_run_001\\experiment_workspace\\ettm1\\baseline\\summary.json"
+      ]
+    }
+  ]
+}

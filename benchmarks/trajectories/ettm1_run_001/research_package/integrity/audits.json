@@ -1,0 +1,42 @@
+[
+  {
+    "passed": true,
+    "checks": [
+      {
+        "name": "claim_evidence_coverage",
+        "passed": true,
+        "details": "All claims have evidence."
+      },
+      {
+        "name": "experiment_result_alignment",
+        "passed": true,
+        "details": "Every experiment spec has a result."
+      },
+      {
+        "name": "specification_compliance",
+        "passed": true,
+        "details": "Experiment specifications obey workspace/command policy."
+      },
+      {
+        "name": "reference_metadata",
+        "passed": true,
+        "details": "References have traceable identifiers."
+      },
+      {
+        "name": "artifact_traceability",
+        "passed": true,
+        "details": "Recorded artifacts exist."
+      },
+      {
+        "name": "method_code_alignment",
+        "passed": true,
+        "details": "Experiment entrypoints exist inside the declared workspace."
+      },
+      {
+        "name": "result_metric_alignment",
+        "passed": true,
+        "details": "Declared evaluation metrics are present in experiment results."
+      }
+    ]
+  }
+]
