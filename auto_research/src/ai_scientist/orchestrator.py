@@ -280,6 +280,8 @@ class AIScientist:
         result = await self.debate_system.conduct_debate(
             direction=direction,
             project_id=self.current_session.project_id,
+            target_type="RESEARCH_DIRECTION",
+            target_id=direction.get("id"),
         )
 
         return result
@@ -400,17 +402,14 @@ Format each as: [QUESTION] <question text>"""
         seed_question: str,
         project_name: str = "Auto-Research Project",
         max_literature: int = 10,
+        hypothesis: Hypothesis | None = None,
+        experiment_spec: ExperimentSpec | None = None,
+        experiment_workspace: str | None = None,
+        ablation_components: dict[str, object] | None = None,
+        output_dir: str | None = None,
+        max_review_rounds: int = 2,
     ) -> dict:
-        """Run the full research pipeline end-to-end.
-
-        Args:
-            seed_question: Initial research question
-            project_name: Name of the project
-            max_literature: Max literature to search
-
-        Returns:
-            Complete research results
-        """
+        """Run scientific reasoning and, when executable inputs are available, the full experiment loop."""
         results = {
             "project_name": project_name,
             "seed_question": seed_question,
@@ -419,7 +418,6 @@ Format each as: [QUESTION] <question text>"""
         }
 
         try:
-            # Stage 1: Start research session
             self.current_stage = "initializing"
             session = await self.start_research(seed_question, project_name)
             results["stages"]["initialization"] = {
@@ -427,15 +425,22 @@ Format each as: [QUESTION] <question text>"""
                 "project_id": session.project_id,
             }
 
-            # Stage 2: Search literature
             self.current_stage = "literature_search"
             papers = await self.search_literature(seed_question, max_literature)
+            literature = [
+                {
+                    "id": p.paper_id,
+                    "arxiv_id": p.arxiv_id,
+                    "title": p.title,
+                    "authors": p.authors,
+                }
+                for p in papers
+            ]
             results["stages"]["literature_search"] = {
                 "papers_found": len(papers),
                 "sample_titles": [p.title for p in papers[:5]],
             }
 
-            # Stage 3: Identify phenomenon
             self.current_stage = "phenomenon_identification"
             phenomenon = await self.identify_phenomenon(seed_question)
             results["stages"]["phenomenon"] = {
@@ -443,7 +448,6 @@ Format each as: [QUESTION] <question text>"""
                 "description": phenomenon.raw_description,
             }
 
-            # Stage 4: Formulate puzzle
             self.current_stage = "puzzle_formulation"
             puzzle = await self.formulate_puzzle(phenomenon)
             results["stages"]["puzzle"] = {
@@ -451,14 +455,12 @@ Format each as: [QUESTION] <question text>"""
                 "statement": puzzle.puzzle_statement,
             }
 
-            # Stage 5: Generate research questions
             self.current_stage = "question_generation"
             questions = await self.generate_research_questions(phenomenon, puzzle)
             results["stages"]["questions"] = {
                 "questions": [q.question_text for q in questions],
             }
 
-            # Stage 6: Develop theory
             self.current_stage = "theory_development"
             theory = await self.develop_theory(
                 f"Theory of {project_name}",
@@ -469,12 +471,66 @@ Format each as: [QUESTION] <question text>"""
                 "theory_name": theory.theory_name,
             }
 
+            if hypothesis is None:
+                hypothesis = Hypothesis(
+                    claim=questions[0].question_text if questions else seed_question,
+                    rationale=f"Derived from the research puzzle: {puzzle.puzzle_statement}",
+                    predicted_effect="A measurable effect relative to an explicit baseline",
+                    falsification_conditions=["No measurable effect under the declared evaluation criteria"],
+                )
+
+            self.current_stage = "scientific_debate"
+            direction_record = self.repo.create_direction(
+                project_id=session.project_id,
+                title=f"Direction: {project_name}",
+                hypothesis=hypothesis.claim,
+            )
+            debate = await self.evaluate_direction(
+                {
+                    "id": direction_record["id"],
+                    "title": f"Direction: {project_name}",
+                    "hypothesis": hypothesis.claim,
+                }
+            )
+            results["stages"]["scientific_debate"] = debate.to_json_dict()
+
+            if experiment_spec is None and experiment_workspace and self.autonomous_loop.engineer:
+                experiment_spec = self.autonomous_loop.engineer.create_spec(
+                    hypothesis=hypothesis,
+                    objective=f"Empirically test: {hypothesis.claim}",
+                    workspace=experiment_workspace,
+                )
+
+            if experiment_spec is not None:
+                self.current_stage = "autonomous_experiment_loop"
+                program = self.run_autonomous_research_program(
+                    hypothesis=hypothesis,
+                    experiment_spec=experiment_spec,
+                    ablation_components=ablation_components,
+                    unresolved_objections=self.objection_ledger.get_open_objections(),
+                    max_review_rounds=max_review_rounds,
+                    literature=literature,
+                    output_dir=output_dir,
+                )
+                results["stages"]["autonomous_research"] = program
+            else:
+                results["stages"]["autonomous_research"] = {
+                    "status": "READY_FOR_EXPERIMENT",
+                    "reason": "Provide experiment_spec or a workspace with a real LLM gateway for code generation.",
+                    "hypothesis": hypothesis.to_dict(),
+                }
+
+            self.current_stage = "completed"
+            self.current_session.current_stage = "completed"
+            self.current_session.completed_at = datetime.utcnow()
             results["success"] = True
 
         except Exception as e:
             results["success"] = False
             results["errors"].append(str(e))
             self.current_stage = "failed"
+            if self.current_session:
+                self.current_session.current_stage = "failed"
 
         return results
 
