@@ -43,6 +43,14 @@ def setup_system():
     db = Database(":memory:")  # In-memory for testing
     db.init_schema()
     repo = Repository(db)
+    db.execute(
+        "INSERT INTO projects (id, name, seed_question, domain) VALUES (?, ?, ?, ?)",
+        (TEST_PROJECT_ID, "V4 Integration Test", SEED_QUESTION, "AI"),
+    )
+    db.execute(
+        "INSERT INTO directions (id, project_id, title, hypothesis) VALUES (?, ?, ?, ?)",
+        ("dir_001", TEST_PROJECT_ID, "Integration test direction", "Test hypothesis"),
+    )
 
     # Initialize Objection Ledger
     ledger = ObjectionLedger(repo)

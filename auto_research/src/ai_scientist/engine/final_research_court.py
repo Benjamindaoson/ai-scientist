@@ -349,6 +349,7 @@ class FinalResearchCourt:
             FinalDecision with structured decision and reasoning
         """
         decision = FinalDecision(
+            decision=ScientificDecision.CONTINUE,
             gates={},
             supporting_evidence_ids=supporting_evidence_ids or [],
             contradicting_evidence_ids=contradicting_evidence_ids or [],
@@ -511,7 +512,11 @@ class FinalResearchCourt:
         violations = []
 
         # Rule 1: OPEN FATAL cannot coexist with CONTINUE
-        objection_gate = decision.gates.get("objection_gate")
+        objection_gate = (
+            decision.gates
+            if isinstance(decision.gates, GateEvaluation)
+            else decision.gates.get("objection_gate")
+        )
         if objection_gate:
             if objection_gate.result == GateResult.BLOCKED:
                 if decision.decision == ScientificDecision.CONTINUE:

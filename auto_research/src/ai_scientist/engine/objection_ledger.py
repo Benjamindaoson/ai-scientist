@@ -162,6 +162,11 @@ class ObjectionLedger:
         """
         import uuid
 
+        # Accept the string values used by persisted/legacy callers as well as
+        # the typed enums used by the current package API.
+        category = ObjectionCategory(category)
+        severity = ObjectionSeverity(severity)
+
         objection_data = {
             "id": f"obj_{uuid.uuid4().hex[:8]}",
             "project_id": self.project_id,

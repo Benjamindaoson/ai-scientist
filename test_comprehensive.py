@@ -14,7 +14,7 @@ import sys
 import os
 
 # Add project to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "auto_research", "src"))
 
 from ai_scientist.core.models.domain import (
     ResearchPhenomenon, ResearchPuzzle, ResearchQuestion, ResearchMethod,

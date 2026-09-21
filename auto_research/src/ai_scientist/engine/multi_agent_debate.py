@@ -20,6 +20,8 @@ from datetime import datetime
 from enum import Enum
 from typing import TYPE_CHECKING, Any
 
+from ai_scientist.core.models.domain import ObjectionCategory
+
 if TYPE_CHECKING:
     from ..db.repository import Repository
     from .objection_ledger import ObjectionLedger
@@ -606,6 +608,7 @@ CONFIDENCE: 0.70"""
                         obj_data = {
                             "title": f"Objection from {role.value}",
                             "argument": obj_text,
+                            "category": ObjectionCategory.OTHER,
                             "severity": severity.value,
                             "target_type": target_type,
                             "target_id": target_id,
@@ -644,6 +647,7 @@ CONFIDENCE: 0.70"""
         kill_count = sum(1 for v in all_votes if v.kill_vote)
         total_count = len(all_votes)
         kill_ratio = kill_count / total_count if total_count > 0 else 0
+        status: DebateStatus | None = None
 
         # V4: Use FinalResearchCourt for evidence-based decision
         if self.court and self.ledger:
@@ -662,6 +666,7 @@ CONFIDENCE: 0.70"""
                 status = DebateStatus.NEEDS_REVISION
                 conclusion = f"Direction needs revision: {final_decision.value}"
             else:
+                status = DebateStatus.RESEARCHABLE
                 conclusion = court_result.to_dict().get("reasons", [{}])[0].get("text", "")
 
             # Store court decision in result metadata
