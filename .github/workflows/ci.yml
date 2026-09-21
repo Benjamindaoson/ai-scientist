@@ -25,6 +25,9 @@ jobs:
       - name: Autonomous research loop integration
         run: python test_autonomous_research_loop.py
 
+      - name: Benchmark v1 smoke regression
+        run: python test_benchmark_v1.py
+
       - name: V4 integration regression
         run: python test_v4_integration.py
 
