@@ -18,6 +18,8 @@ from ai_scientist.core.models.domain import (
 )
 from ai_scientist.db.repository import Database, Repository
 from ai_scientist.engine.multi_agent_debate import MultiAgentDebateSystem, AgentRole
+from ai_scientist.engine.objection_ledger import ObjectionLedger
+from ai_scientist.engine.final_research_court import FinalResearchCourt
 from ai_scientist.engine.theory_engine import TheoryEngine, TheoryComponentType
 from ai_scientist.literature.search import LiteratureSearch, SearchQuery, SearchSource
 from ai_scientist.literature.reader import PaperReader, PaperContent
@@ -79,9 +81,13 @@ class AIScientist:
         self.literature_search = LiteratureSearch(gateway=self.gateway)
         self.paper_reader = PaperReader(gateway=self.gateway)
         self.evidence_validator = EvidenceValidator()
+        self.objection_ledger = ObjectionLedger(self.repo)
+        self.research_court = FinalResearchCourt(self.objection_ledger)
         self.debate_system = MultiAgentDebateSystem(
             db=self.repo,
             gateway=self.gateway,
+            objection_ledger=self.objection_ledger,
+            research_court=self.research_court,
         )
         self.theory_engine = TheoryEngine(gateway=self.gateway)
         self.autonomous_loop = AutonomousResearchLoop(gateway=self.gateway)
@@ -480,12 +486,7 @@ Format each as: [QUESTION] <question text>"""
         ablation_components: dict[str, object] | None = None,
         review_issues: list[ReviewIssue] | None = None,
     ) -> dict:
-        """Run the executable half of the scientific loop.
-
-        This connects a hypothesis to a real experiment, captures evidence,
-        evolves the hypothesis, optionally plans ablations, and routes review
-        findings to follow-up research actions.
-        """
+        """Run one executable scientific cycle using the current research session."""
         if not self.current_session:
             raise RuntimeError("start_research() must be called before running an experiment cycle")
 
@@ -501,8 +502,8 @@ Format each as: [QUESTION] <question text>"""
         )
 
         if ablation_components:
-            cycle["ablation_plan"] = self.autonomous_loop.plan_ablations(
-                state, hypothesis.id, ablation_components
+            cycle["ablation_executions"] = self.autonomous_loop.execute_ablations(
+                state, hypothesis, experiment_spec, ablation_components
             )
 
         if review_issues:
@@ -510,6 +511,60 @@ Format each as: [QUESTION] <question text>"""
 
         cycle["research_state"] = self.autonomous_loop.research_package(state)
         return cycle
+
+    def run_autonomous_research_program(
+        self,
+        hypothesis: Hypothesis,
+        experiment_spec: ExperimentSpec,
+        ablation_components: dict[str, object] | None = None,
+        unresolved_objections: list[dict] | None = None,
+        max_review_rounds: int = 2,
+        literature: list[dict] | None = None,
+    ) -> dict:
+        """Run hypothesis -> experiment -> evidence -> ablation -> review -> rebuttal -> meta-review."""
+        if not self.current_session:
+            raise RuntimeError("start_research() must be called before running an autonomous program")
+
+        state = ResearchState(
+            project_id=self.current_session.project_id,
+            problem=self.current_session.seed_question,
+            literature=literature or [],
+            metadata={"title": f"Research Report: {self.current_session.seed_question[:80]}"},
+        )
+        return self.autonomous_loop.run_program(
+            state=state,
+            hypothesis=hypothesis,
+            spec=experiment_spec,
+            components=ablation_components,
+            unresolved_objections=unresolved_objections or [],
+            max_review_rounds=max_review_rounds,
+        )
+
+    def design_and_run_autonomous_research(
+        self,
+        hypothesis: Hypothesis,
+        objective: str,
+        workspace: str,
+        ablation_components: dict[str, object] | None = None,
+        max_review_rounds: int = 2,
+    ) -> dict:
+        """Let the experiment engineer generate code/config and run the complete research loop."""
+        if not self.current_session:
+            raise RuntimeError("start_research() must be called first")
+        if not self.autonomous_loop.engineer:
+            raise RuntimeError("A real LLM gateway is required for autonomous experiment code generation")
+
+        spec = self.autonomous_loop.engineer.create_spec(
+            hypothesis=hypothesis,
+            objective=objective,
+            workspace=workspace,
+        )
+        return self.run_autonomous_research_program(
+            hypothesis=hypothesis,
+            experiment_spec=spec,
+            ablation_components=ablation_components,
+            max_review_rounds=max_review_rounds,
+        )
 
     def get_session_status(self) -> dict | None:
         """Get current session status."""
