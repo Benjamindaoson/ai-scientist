@@ -13,6 +13,7 @@ from .hypothesis import Hypothesis, HypothesisEvolver
 from .integrity import IntegrityAuditor
 from .manuscript import ManuscriptBuilder
 from .research_state import ResearchState
+from .research_package import ResearchPackageWriter
 from .review_loop import ReviewActionRouter, ReviewIssue
 from .scientific_review import MetaReviewer, RebuttalPlanner, ScientificReviewer
 
@@ -305,6 +306,7 @@ class AutonomousResearchLoop:
         components: dict[str, object] | None = None,
         unresolved_objections: list[dict] | None = None,
         max_review_rounds: int = 2,
+        output_dir: str | None = None,
     ) -> dict:
         """Run a complete executable research program from hypothesis to meta-review."""
         initial = self.run_experiment_cycle(
@@ -320,11 +322,14 @@ class AutonomousResearchLoop:
             components=components,
             max_rounds=max_review_rounds,
         )
-        return {
+        output = {
             "initial_cycle": initial,
             "review_cycle": review,
             "research_package": state.to_dict(),
         }
+        if output_dir:
+            output["exported_files"] = ResearchPackageWriter().write(state, output_dir)
+        return output
 
     def research_package(self, state: ResearchState) -> dict:
         return state.to_dict()
