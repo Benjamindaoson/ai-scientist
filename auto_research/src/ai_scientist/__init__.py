@@ -82,6 +82,7 @@ from .evidence_graph import EvidenceGraph
 from .manuscript import ManuscriptBuilder
 from .scientific_review import ScientificReviewer, PeerReview, RebuttalPlanner, MetaReviewer
 from .integrity import IntegrityAuditor, IntegrityReport, AuditCheck
+from .research_package import ResearchPackageWriter
 
 __version__ = "0.1.0"
 
@@ -166,4 +167,5 @@ __all__ = [
     "IntegrityAuditor",
     "IntegrityReport",
     "AuditCheck",
+    "ResearchPackageWriter",
 ]
