@@ -40,7 +40,7 @@ def main():
     record,state=BenchmarkHarness(gateway=gateway).run_one(
         problem=problem, workspace=args.workspace, baseline_metrics=baseline,
         variant=args.variant, seed=args.seed,
-        ablation_components={"component_a":True,"component_b":True} if args.variant!="single_shot" else None,
+        ablation_components=None,
     )
     output=Path(args.output); output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps({"record":record.to_dict(),"state":state.to_dict()},indent=2,default=str),encoding="utf-8")
