@@ -66,6 +66,12 @@ from .experiment import ExperimentSpec, ExperimentResult, ExperimentRunner, Expe
 from .autonomous_loop import AutonomousResearchLoop
 from .ablation import AblationPlan, AblationPlanner
 from .review_loop import ReviewIssue, ReviewActionRouter
+from .engineering import CodeEngineeringAgent, EngineeringPlan, FileChange, WorkspaceEditor
+from .evidence_graph import EvidenceGraph
+from .manuscript import ManuscriptWriter
+from .scientific_review import PeerReview, PeerReviewer, RebuttalPlanner, MetaReview, MetaReviewer
+from .integrity import IntegrityAuditor, IntegrityReport
+from .ablation_executor import AblationExecutor
 
 __version__ = "0.1.0"
 
@@ -133,4 +139,18 @@ __all__ = [
     "AblationPlanner",
     "ReviewIssue",
     "ReviewActionRouter",
+    "CodeEngineeringAgent",
+    "EngineeringPlan",
+    "FileChange",
+    "WorkspaceEditor",
+    "EvidenceGraph",
+    "ManuscriptWriter",
+    "PeerReview",
+    "PeerReviewer",
+    "RebuttalPlanner",
+    "MetaReview",
+    "MetaReviewer",
+    "IntegrityAuditor",
+    "IntegrityReport",
+    "AblationExecutor",
 ]
