@@ -24,11 +24,12 @@ class EvidenceGraph:
         experiment_id: str,
         metrics: dict,
         artifact_paths: list[str] | None = None,
+        relation: str = "SUPPORTS",
     ) -> None:
         self.add_node(claim_id, "CLAIM")
         self.add_node(evidence_id, "EVIDENCE", metrics=metrics)
         self.add_node(experiment_id, "EXPERIMENT")
-        self.add_edge(evidence_id, claim_id, "SUPPORTS")
+        self.add_edge(evidence_id, claim_id, relation)
         self.add_edge(experiment_id, evidence_id, "PRODUCES")
         for path in artifact_paths or []:
             artifact_id = f"artifact:{experiment_id}:{path}"
