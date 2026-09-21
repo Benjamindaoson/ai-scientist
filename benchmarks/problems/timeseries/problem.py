@@ -87,5 +87,5 @@ class TimeSeriesProblem(BenchmarkProblem):
         if baseline_metrics.get("params") and final_metrics.get("params"):
             ratio = final_metrics["params"] / baseline_metrics["params"] - 1.0
             if ratio > self.spec.constraints["max_parameter_increase_ratio"]:
-                violations.append(f"parameter increase {ratio:.3f} exceeds 0.10")
+                violations.append(f"checkpoint-size proxy increase {ratio:.3f} exceeds 0.10")
         return violations
