@@ -520,6 +520,7 @@ Format each as: [QUESTION] <question text>"""
         unresolved_objections: list[dict] | None = None,
         max_review_rounds: int = 2,
         literature: list[dict] | None = None,
+        output_dir: str | None = None,
     ) -> dict:
         """Run hypothesis -> experiment -> evidence -> ablation -> review -> rebuttal -> meta-review."""
         if not self.current_session:
@@ -538,6 +539,7 @@ Format each as: [QUESTION] <question text>"""
             components=ablation_components,
             unresolved_objections=unresolved_objections or [],
             max_review_rounds=max_review_rounds,
+            output_dir=output_dir,
         )
 
     def design_and_run_autonomous_research(
@@ -547,6 +549,7 @@ Format each as: [QUESTION] <question text>"""
         workspace: str,
         ablation_components: dict[str, object] | None = None,
         max_review_rounds: int = 2,
+        output_dir: str | None = None,
     ) -> dict:
         """Let the experiment engineer generate code/config and run the complete research loop."""
         if not self.current_session:
@@ -564,6 +567,7 @@ Format each as: [QUESTION] <question text>"""
             experiment_spec=spec,
             ablation_components=ablation_components,
             max_review_rounds=max_review_rounds,
+            output_dir=output_dir,
         )
 
     def get_session_status(self) -> dict | None:
