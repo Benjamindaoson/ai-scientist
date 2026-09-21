@@ -278,6 +278,16 @@ The autonomous-loop integration test covers:
 - research package export
 - result reproduction
 
+## Benchmark v1: does the research loop actually help?
+
+The architecture is now frozen for evaluation. The repository includes a real-ML benchmark under `benchmarks/` with a predeclared **3 problems × 4 system variants × 3 seeds = 36-run** matrix:
+
+- long-horizon forecasting: ETTm1 + Weather with PatchTST;
+- corruption robustness: CIFAR-10 → CIFAR-10-C;
+- real tabular distribution shift: TableShift `diabetes_readmission`.
+
+System ablations are `full`, `no_hypothesis_evolution`, `no_review_experiment`, and `single_shot`. Final task scores come only from a SHA-256-locked evaluator re-run; exploratory self-reported metrics cannot become the benchmark score. See [benchmarks/README.md](benchmarks/README.md) for setup and execution.
+
 ## Relationship to ScientistTwo
 
 The architecture borrows the idea of an experiment-driven research cycle:
