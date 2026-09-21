@@ -28,6 +28,7 @@ class ExperimentRunner:
 
     def _run_once(self, spec: ExperimentSpec) -> ExperimentResult:
         workspace = self.local_sandbox.resolve_workspace(spec.workspace)
+        self.local_sandbox.validate_command(spec.command)
         self.local_sandbox.safe_path(workspace, spec.metrics_file)
         started = datetime.utcnow().isoformat()
         t0 = time.monotonic()
@@ -80,11 +81,12 @@ class ExperimentRunner:
         )
 
     def run(self, spec: ExperimentSpec, repair_callback=None) -> ExperimentResult:
-        policy = RecoveryPolicy(max_attempts=spec.max_attempts)
+        max_attempts = max(1, spec.max_attempts)
+        policy = RecoveryPolicy(max_attempts=max_attempts)
         current = spec
         history = []
 
-        for attempt in range(1, spec.max_attempts + 1):
+        for attempt in range(1, max_attempts + 1):
             result = self._run_once(current)
             result.attempts = attempt
             decision = policy.decide(current, result, attempt)
