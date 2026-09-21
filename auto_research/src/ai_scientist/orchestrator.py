@@ -22,6 +22,11 @@ from ai_scientist.engine.theory_engine import TheoryEngine, TheoryComponentType
 from ai_scientist.literature.search import LiteratureSearch, SearchQuery, SearchSource
 from ai_scientist.literature.reader import PaperReader, PaperContent
 from ai_scientist.literature.validator import EvidenceValidator, EvidenceItem, EvidenceType
+from ai_scientist.autonomous_loop import AutonomousResearchLoop
+from ai_scientist.experiment import ExperimentSpec
+from ai_scientist.hypothesis import Hypothesis
+from ai_scientist.research_state import ResearchState
+from ai_scientist.review_loop import ReviewIssue
 
 
 @dataclass
@@ -79,6 +84,7 @@ class AIScientist:
             gateway=self.gateway,
         )
         self.theory_engine = TheoryEngine(gateway=self.gateway)
+        self.autonomous_loop = AutonomousResearchLoop(gateway=self.gateway)
 
         self.max_literature_results = max_literature_results
         self.current_session: ResearchSession | None = None
@@ -465,6 +471,45 @@ Format each as: [QUESTION] <question text>"""
             self.current_stage = "failed"
 
         return results
+
+    def run_experiment_research_cycle(
+        self,
+        hypothesis: Hypothesis,
+        experiment_spec: ExperimentSpec,
+        unresolved_objections: list[dict] | None = None,
+        ablation_components: dict[str, object] | None = None,
+        review_issues: list[ReviewIssue] | None = None,
+    ) -> dict:
+        """Run the executable half of the scientific loop.
+
+        This connects a hypothesis to a real experiment, captures evidence,
+        evolves the hypothesis, optionally plans ablations, and routes review
+        findings to follow-up research actions.
+        """
+        if not self.current_session:
+            raise RuntimeError("start_research() must be called before running an experiment cycle")
+
+        state = ResearchState(
+            project_id=self.current_session.project_id,
+            problem=self.current_session.seed_question,
+        )
+        cycle = self.autonomous_loop.run_experiment_cycle(
+            state=state,
+            hypothesis=hypothesis,
+            spec=experiment_spec,
+            unresolved_objections=unresolved_objections or [],
+        )
+
+        if ablation_components:
+            cycle["ablation_plan"] = self.autonomous_loop.plan_ablations(
+                state, hypothesis.id, ablation_components
+            )
+
+        if review_issues:
+            cycle["review_actions"] = self.autonomous_loop.process_review(state, review_issues)
+
+        cycle["research_state"] = self.autonomous_loop.research_package(state)
+        return cycle
 
     def get_session_status(self) -> dict | None:
         """Get current session status."""
