@@ -31,6 +31,8 @@ class ExperimentRunner:
         t0 = time.monotonic()
         env = os.environ.copy()
         env.update(spec.env)
+        env["AI_SCIENTIST_METRICS_FILE"] = spec.metrics_file
+        env["AI_SCIENTIST_EXPERIMENT_ID"] = spec.id
 
         try:
             proc = subprocess.run(
