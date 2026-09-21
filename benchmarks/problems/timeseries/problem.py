@@ -8,6 +8,7 @@ from ai_scientist.experiment import ExperimentSpec
 from ai_scientist.hypothesis import Hypothesis
 from benchmarks.core.schema import MetricSpec, ProblemSpec
 from benchmarks.problems.base import BenchmarkProblem
+from benchmarks.problems.protocol import materialize_locked_runner
 
 
 TIME_SERIES_PROBLEM = ProblemSpec(
@@ -38,32 +39,48 @@ class TimeSeriesProblem(BenchmarkProblem):
     def make_hypothesis(self) -> Hypothesis:
         return Hypothesis(
             claim="A targeted modification can reduce average long-horizon MSE without increasing parameters by more than 10%.",
-            rationale="The benchmark exposes eight dataset-horizon conditions, discouraging one-horizon overfitting.",
+            rationale="Eight dataset-horizon conditions discourage one-horizon overfitting.",
             predicted_effect="average MSE decreases across ETTm1 and Weather",
-            falsification_conditions=[
-                "average MSE does not improve",
-                "parameter count rises by more than 10%",
-            ],
+            falsification_conditions=["average MSE does not improve", "parameter count rises by more than 10%"],
         )
 
-    def make_experiment_spec(self, workspace: str | Path, seed: int) -> ExperimentSpec:
-        runner = Path(__file__).with_name("run_patchtst.py").resolve()
+    def _spec(self, workspace: str | Path, seed: int, model: str) -> ExperimentSpec:
+        root = Path(workspace).resolve()
+        runner_name, runner_hash = materialize_locked_runner(Path(__file__).with_name("run_patchtst.py"), root)
         return ExperimentSpec(
             hypothesis_id=self.make_hypothesis().id,
-            objective=self.spec.research_question,
+            objective=(
+                self.spec.research_question
+                + " The locked evaluator must not be edited. Research changes may modify the upstream model implementation only."
+            ),
             command=[
-                sys.executable, str(runner),
-                "--upstream", str(Path(workspace).resolve()),
+                sys.executable, runner_name,
+                "--upstream", str(root),
                 "--seed", str(seed),
                 "--epochs", str(self.spec.constraints["fixed_train_epochs"]),
+                "--model", model,
             ],
-            workspace=str(Path(workspace).resolve()),
+            workspace=str(root),
             metrics_file="metrics.json",
             success_criteria={"mse": {"op": "<", "value": 1e9}},
             timeout_seconds=21600,
             max_attempts=1,
-            metadata={"benchmark_problem": self.spec.problem_id, "gpu_count": 1},
+            metadata={
+                "benchmark_problem": self.spec.problem_id,
+                "gpu_count": 1,
+                "locked_evaluator": runner_name,
+                "locked_evaluator_sha256": runner_hash,
+            },
         )
+
+    def make_experiment_spec(self, workspace: str | Path, seed: int) -> ExperimentSpec:
+        return self._spec(workspace, seed, "PatchTST")
+
+    def make_baseline_spec(self, workspace: str | Path, seed: int) -> ExperimentSpec:
+        return self._spec(workspace, seed, "DLinear")
+
+    def ablation_components(self) -> dict[str, object]:
+        return {"patching": True, "revin": True}
 
     def validate_constraints(self, baseline_metrics, final_metrics):
         violations = []
