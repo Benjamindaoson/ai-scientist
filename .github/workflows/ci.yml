@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/autonomous-research-loop
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile source
+        run: python -m compileall -q auto_research/src
+
+      - name: Autonomous research loop integration
+        run: python test_autonomous_research_loop.py
+
+      - name: Research court regression
+        run: python test_final_research_court.py
+
+      - name: V4 integration regression
+        run: python test_v4_integration.py
+
+      - name: V1 to V4 regression
+        run: python test_v1_v4_regression.py
