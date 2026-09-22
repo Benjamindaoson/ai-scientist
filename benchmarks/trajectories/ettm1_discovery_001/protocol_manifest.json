@@ -1,0 +1,23 @@
+{
+  "benchmark": "ETTm1",
+  "dataset": "ETTm1",
+  "split_policy": {
+    "search": "train->val",
+    "final": "frozen candidate->test once"
+  },
+  "backend": "numpy_fallback",
+  "seeds": [
+    1
+  ],
+  "model": "DLinear",
+  "training_budget": {
+    "max_windows": 1024
+  },
+  "effect_threshold": 0.005,
+  "max_rounds": 3,
+  "test_access_policy": {
+    "test_accessed_after_freeze": true,
+    "evolution_after_test": false
+  },
+  "status": "FINALIZED"
+}

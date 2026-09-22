@@ -15,5 +15,5 @@
     "secondary": "mae",
     "direction": "lower_is_better"
   },
-  "hypothesis_source": "deterministic_fallback_after_llm_error"
+  "hypothesis_source": "llm"
 }

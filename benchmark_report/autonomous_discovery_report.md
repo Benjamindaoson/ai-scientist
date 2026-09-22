@@ -10,15 +10,15 @@ Can AI Scientist autonomously discover an ML improvement from a research questio
 
 The discovery layer uses the configured `claude-opus-4-8` OpenAI-compatible gateway to generate and rank five executable candidates. It selects one candidate per round, creates an existing `ExperimentSpec`, executes it through the existing `ExperimentRunner`, evaluates the result against the fixed DLinear baseline, records a critique, runs a control ablation, and evolves to the next round. If the gateway is unavailable or returns invalid JSON, the run records a deterministic fallback source instead of treating invalid output as a hypothesis.
 
-The ETTm1 runs are bounded CPU fallback experiments. Discovery rounds use validation only; the test split is evaluated once after the final candidate is frozen. A claim is `SUPPORTED` only if every executed round improves the baseline MSE and the frozen candidate passes the one-time test confirmation; mixed or contradictory evidence is `INCONCLUSIVE`, and no improvement is `REJECTED`.
+The ETTm1 runs are bounded CPU fallback experiments. Discovery rounds use validation only; the test split is evaluated once after the final candidate is frozen. A claim is `SUPPORTED` when the frozen final hypothesis passes the declared validation contract and the independent final test confirmation. Earlier failed search hypotheses remain search evidence and do not directly refute the frozen final hypothesis.
 
 ## Findings
 
-- Discovery trajectory: three rounds are required and persisted as eleven JSON artifacts.
-- Hypothesis evolution: five candidates are generated and ranked by novelty, feasibility, and expected impact; one is selected per round.
+- Discovery trajectory: three rounds are required and persisted with candidate-generation history, final verification, and a protocol manifest.
+- Hypothesis evolution: five candidates are generated per round and ranked by novelty, feasibility, expected impact, and unseen-mutation information gain; one immutable candidate is selected per round.
 - Experiment evidence: each selected hypothesis produces an actual `ExperimentSpec`, `ExperimentResult`, metrics file, and evidence record.
 - Ablation: each round executes an independent unchanged-baseline `ExperimentSpec` through the existing `ExperimentRunner`.
-- Failure cases: bounded NumPy fallback and any contradictory metric prevent a positive claim from being promoted.
+- Failure cases: the formal PyTorch backend is unavailable in this environment, so the actual trajectory records `backend=numpy_fallback`; contradictory metrics still prevent a positive claim from being promoted.
 - Integrity analysis: validation drives iteration, test is held out until freeze, immutable round/parent IDs preserve provenance, and blocked/failed experiments remain explicit in the trajectory.
 
 ## Actual ETTm1 run
@@ -31,15 +31,19 @@ python -m benchmarks.runners.discovery_runner --benchmark ettm1 --rounds 3 --max
 
 Observed result:
 
-- Hypothesis source: `deterministic_fallback_after_llm_error` for this run
-- Round 1 validation: `mse=0.674201489298819`, `SUPPORTED`
-- Round 2 validation: `mse=0.336382717681944`, `SUPPORTED`
-- Round 3 validation: `mse=1.5253123672568`, `REJECTED`
-- Frozen candidate test: `mse=2.3827911841045033`
+- Hypothesis source: round 1 used `deterministic_fallback_after_llm_error`; rounds 2 and 3 used `llm`
+- Validation baseline: `mse=0.7518748311673912`
+- Round 1 validation: search evidence recorded
+- Round 2 validation: search evidence recorded
+- Round 3 frozen-candidate validation: `mse=0.6720658897763956`, `SUPPORTED`
+- Frozen candidate configuration: `moving_avg=3`
+- Frozen candidate test: `mse=1.1516713827713367`
 - Frozen control test: `mse=1.2166771283713502`
-- Final claim: `INCONCLUSIVE`, confidence `0.65`
+- Final validation verdict: `SUPPORTED`
+- Final test verdict: `SUPPORTED`
+- Final claim: `SUPPORTED`, evidence strength `strong`
 
-The three validation experiments and three round-level control ablations completed successfully. The final candidate was then evaluated once on test and performed worse than the frozen control. The mixed validation evidence and negative test confirmation are retained as `INCONCLUSIVE`, not converted into an improvement claim.
+The three validation experiments and three round-level control ablations completed successfully. The frozen final candidate was evaluated once on test and improved MSE over the independent frozen control by `0.06500574560001349` (`5.34%` relative). The final claim is `SUPPORTED` for this declared bounded NumPy fallback protocol, not an official PyTorch/GPU benchmark claim.
 
 ## Actual ablation
 

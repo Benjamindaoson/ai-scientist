@@ -1,64 +1,6 @@
 [
   {
-    "id": "hyp_r01_0f4abe74",
-    "claim": "A moving average window of 13 (~3.25 hours) will provide an optimal balance for capturing ETTm1's sub-daily variations while filtering measurement noise, reducing MSE by 6-10% and MAE by 5-8%.",
-    "mechanism": "Window of 13 points captures 3.25-hour patterns, aligning with typical electricity consumption micro-cycles (morning ramp, lunch dip, etc.). This granularity preserves essential seasonal features while smoothing sensor noise and transient spikes, improving both trend and seasonal component quality.",
-    "expected_effect": "MSE: 1.09-1.14 (target <1.14), MAE: 0.68-0.71 (target <0.71)",
-    "falsification": "If MSE remains above 1.14 or MAE remains above 0.71, the hypothesis that this window size optimally balances noise reduction and pattern preservation is falsified.",
-    "mutation": {
-      "moving_avg": 13
-    },
-    "novelty": 0.75,
-    "feasibility": 0.95,
-    "expected_impact": 0.8,
-    "rank_score": 0.833333,
-    "selection_score": 1.083333,
-    "original_candidate_id": "hyp_005",
-    "parent_id": null,
-    "generation": 1,
-    "selection_reason": {
-      "utility": 1.083333,
-      "formula": "rank_score + 0.25 information_gain for an untried mutation",
-      "alternatives_considered": [
-        "hyp_002",
-        "hyp_001",
-        "hyp_004",
-        "hyp_003"
-      ]
-    },
-    "round": 1
-  },
-  {
-    "id": "hyp_r02_b05b4780",
-    "claim": "Setting moving_avg to 1 (no smoothing) will improve forecasting by allowing DLinear's linear layers to learn optimal decomposition directly from raw data",
-    "mechanism": "The moving average preprocessing may impose suboptimal inductive bias. With moving_avg=1, no smoothing occurs, making trend and seasonal components identical to the input. This forces the linear projections to learn the full decomposition task end-to-end, potentially discovering data-specific patterns that fixed smoothing misses.",
-    "expected_effect": "MSE will decrease by 5-12% as the model learns task-specific feature extraction without preprocessing constraints",
-    "falsification": "If MSE does not decrease below 0.640 or increases by any amount, the hypothesis is falsified",
-    "mutation": {
-      "moving_avg": 1
-    },
-    "novelty": 0.85,
-    "feasibility": 0.9,
-    "expected_impact": 0.75,
-    "rank_score": 0.833333,
-    "selection_score": 1.083333,
-    "original_candidate_id": "hyp_004",
-    "parent_id": "hyp_r01_0f4abe74",
-    "generation": 2,
-    "selection_reason": {
-      "utility": 1.083333,
-      "formula": "rank_score + 0.25 information_gain for an untried mutation",
-      "alternatives_considered": [
-        "hyp_003",
-        "hyp_005",
-        "hyp_001",
-        "hyp_002"
-      ]
-    },
-    "round": 2
-  },
-  {
-    "id": "hyp_r03_e8e2d7b9",
+    "id": "hyp_r01_001_dd62f4",
     "claim": "A wider smoothing window improves seasonal extrapolation",
     "mechanism": "A wider trend window gives the linear head a more stable seasonal signal",
     "expected_effect": "MSE decrease",
@@ -70,20 +12,126 @@
     "feasibility": 0.95,
     "expected_impact": 0.74,
     "rank_score": 0.803333,
+    "evaluation_contract": {
+      "primary_metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005
+    },
     "selection_score": 1.053333,
-    "original_candidate_id": "hyp_004",
-    "parent_id": "hyp_r02_b05b4780",
-    "generation": 3,
+    "round": 1,
+    "generation": 1,
+    "parent_hypothesis_id": null,
+    "mutation_fingerprint": "b9085b20c8aa",
+    "source": "deterministic_fallback_after_llm_error",
+    "model": "claude-opus-4-8",
+    "prompt_hash": "7050b695c0976a3b91d0c231e41069af220c208304edeb2d4bc39490304ef3d8",
     "selection_reason": {
       "utility": 1.053333,
       "formula": "rank_score + 0.25 information_gain for an untried mutation",
       "alternatives_considered": [
-        "hyp_001",
-        "hyp_002",
-        "hyp_005",
-        "hyp_003"
+        "hyp_r01_002_bf6135",
+        "hyp_r01_003_a866a2",
+        "hyp_r01_004_798df7",
+        "hyp_r01_005_8a701d"
+      ],
+      "rejected_duplicate_candidates": [],
+      "eligible_candidates": [
+        "hyp_r01_001_dd62f4",
+        "hyp_r01_002_bf6135",
+        "hyp_r01_003_a866a2",
+        "hyp_r01_004_798df7",
+        "hyp_r01_005_8a701d"
       ]
+    }
+  },
+  {
+    "id": "hyp_r02_001_29c847",
+    "claim": "A narrow moving average window (7) better captures short-term patterns in ETTm1 15-minute electricity data",
+    "mechanism": "ETTm1 has 15-minute granularity; a 7-window (1.75 hours) aligns with sub-daily cycles and reduces over-smoothing of rapid load changes",
+    "expected_effect": "MSE decrease below 0.7518748311673912",
+    "falsification": "Validation MSE does not decrease by at least 0.005 compared to baseline",
+    "mutation": {
+      "moving_avg": 7
     },
-    "round": 3
+    "novelty": 0.88,
+    "feasibility": 0.98,
+    "expected_impact": 0.81,
+    "rank_score": 0.89,
+    "evaluation_contract": {
+      "primary_metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005
+    },
+    "selection_score": 1.14,
+    "round": 2,
+    "generation": 2,
+    "parent_hypothesis_id": "hyp_r01_001_dd62f4",
+    "mutation_fingerprint": "f166761b1356",
+    "source": "llm",
+    "model": "claude-opus-4-8",
+    "prompt_hash": "82b19f0de0f44cabd6271574a280e5a3e84589183ff9b8dff4368998dff7f1f1",
+    "selection_reason": {
+      "utility": 1.14,
+      "formula": "rank_score + 0.25 information_gain for an untried mutation",
+      "alternatives_considered": [
+        "hyp_r02_002_4f1e01",
+        "hyp_r02_003_35e8ea",
+        "hyp_r02_004_e916a7",
+        "hyp_r02_005_84c61e"
+      ],
+      "rejected_duplicate_candidates": [],
+      "eligible_candidates": [
+        "hyp_r02_001_29c847",
+        "hyp_r02_002_4f1e01",
+        "hyp_r02_003_35e8ea",
+        "hyp_r02_004_e916a7",
+        "hyp_r02_005_84c61e"
+      ]
+    }
+  },
+  {
+    "id": "hyp_r03_001_444370",
+    "claim": "A minimal moving average window (3) preserves high-frequency electricity load fluctuations in 15-minute ETTm1 data",
+    "mechanism": "Window of 3 (45 minutes) captures immediate short-term dependencies while minimizing signal smoothing, critical for volatile electricity consumption patterns with sub-hourly variability",
+    "expected_effect": "MSE decrease below 0.6696114468484018",
+    "falsification": "Validation MSE does not decrease by at least 0.005 compared to current best result",
+    "mutation": {
+      "moving_avg": 3
+    },
+    "novelty": 0.92,
+    "feasibility": 0.99,
+    "expected_impact": 0.78,
+    "rank_score": 0.896667,
+    "evaluation_contract": {
+      "primary_metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005
+    },
+    "selection_score": 1.146667,
+    "round": 3,
+    "generation": 3,
+    "parent_hypothesis_id": "hyp_r02_001_29c847",
+    "mutation_fingerprint": "ca8df5e9170f",
+    "source": "llm",
+    "model": "claude-opus-4-8",
+    "prompt_hash": "249404e08f068700595c9c18545ddada3e9a90e236eb5c20aefff060660cd56f",
+    "selection_reason": {
+      "utility": 1.146667,
+      "formula": "rank_score + 0.25 information_gain for an untried mutation",
+      "alternatives_considered": [
+        "hyp_r03_002_320e7b",
+        "hyp_r03_003_d5265e",
+        "hyp_r03_004_0125ab",
+        "hyp_r03_005_e5288d"
+      ],
+      "rejected_duplicate_candidates": [],
+      "eligible_candidates": [
+        "hyp_r03_001_444370",
+        "hyp_r03_002_320e7b",
+        "hyp_r03_003_d5265e",
+        "hyp_r03_004_0125ab",
+        "hyp_r03_005_e5288d"
+      ]
+    }
   }
 ]

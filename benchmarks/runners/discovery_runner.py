@@ -32,7 +32,7 @@ def run_discovery(
     # Recompute the control with the same bounded window budget as every
     # discovery candidate; comparing against a different run would leak a
     # protocol change into the claim.
-    baseline = run_baseline("ettm1", "dlinear", data_root=data_root, results_root=results_root, max_windows=max_windows, persist=False)
+    baseline = run_baseline("ettm1", "dlinear", data_root=data_root, results_root=results_root, max_windows=max_windows, persist=False, evaluation_split="val")
     baseline_path = Path(results_root) / "ettm1" / "baseline" / "summary_discovery_control.json"
     baseline_path.parent.mkdir(parents=True, exist_ok=True)
     baseline_path.write_text(json.dumps(baseline, indent=2) + "\n", encoding="utf-8")

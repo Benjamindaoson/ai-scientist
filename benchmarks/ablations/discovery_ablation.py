@@ -14,7 +14,7 @@ def run_discovery_ablations(
     trajectory_root: str | Path = "benchmarks/trajectories",
     max_windows: int = 1024,
 ) -> list[dict]:
-    baseline = run_baseline("ettm1", "dlinear", data_root=data_root, max_windows=max_windows, persist=False)
+    baseline = run_baseline("ettm1", "dlinear", data_root=data_root, max_windows=max_windows, persist=False, evaluation_split="val")
     problem = ResearchProblem(
         "Improve long horizon forecasting", "Find methods that improve ETTm1 forecasting under fixed compute budget.",
         "ETTm1", ["DLinear"], {"training_budget": "fixed", "no_test_leakage": True}, {"primary": "mse"},

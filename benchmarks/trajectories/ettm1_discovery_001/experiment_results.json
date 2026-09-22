@@ -1,122 +1,10 @@
 [
   {
     "round": 1,
-    "experiment_id": "exp_8defb0db8c",
+    "experiment_id": "exp_23d447071c",
     "result": {
-      "experiment_id": "exp_8defb0db8c",
-      "hypothesis_id": "hyp_r01_0f4abe74",
-      "status": "SUCCEEDED",
-      "return_code": 0,
-      "metrics": {
-        "benchmark": "ETTm1",
-        "model": "DLinear",
-        "seed": 1,
-        "metrics": {
-          "mse": 0.6742014892988191,
-          "mae": 0.5926243225685601
-        },
-        "split": "val",
-        "lookback": 96,
-        "horizon": 96,
-        "train_windows": 1024,
-        "test_windows": 1024,
-        "evaluation_windows": 1024,
-        "model_config": {
-          "moving_avg": 13
-        }
-      },
-      "stdout": "",
-      "stderr": "",
-      "artifacts": [
-        "experiment_config.json",
-        "metrics.json",
-        "run_experiment.py"
-      ],
-      "duration_seconds": 1.6409999999959837,
-      "error_type": null,
-      "attempts": 1,
-      "recovery_history": [
-        {
-          "attempt": 1,
-          "status": "SUCCEEDED",
-          "error_type": null,
-          "decision": "NONE"
-        }
-      ],
-      "started_at": "2026-09-22T01:43:02.958507",
-      "completed_at": "2026-09-22T01:43:04.585552"
-    },
-    "evaluation": {
-      "verdict": "SUPPORTED",
-      "baseline_mse": 1.2166771283713502,
-      "result_mse": 0.6742014892988191,
-      "improvement": 0.5424756390725312,
-      "relative_improvement": 0.4458665544232689,
-      "round": 1
-    }
-  },
-  {
-    "round": 2,
-    "experiment_id": "exp_30a8888202",
-    "result": {
-      "experiment_id": "exp_30a8888202",
-      "hypothesis_id": "hyp_r02_b05b4780",
-      "status": "SUCCEEDED",
-      "return_code": 0,
-      "metrics": {
-        "benchmark": "ETTm1",
-        "model": "DLinear",
-        "seed": 1,
-        "metrics": {
-          "mse": 0.33638271768194405,
-          "mae": 0.40891481948446057
-        },
-        "split": "val",
-        "lookback": 96,
-        "horizon": 96,
-        "train_windows": 1024,
-        "test_windows": 1024,
-        "evaluation_windows": 1024,
-        "model_config": {
-          "moving_avg": 1
-        }
-      },
-      "stdout": "",
-      "stderr": "",
-      "artifacts": [
-        "experiment_config.json",
-        "metrics.json",
-        "run_experiment.py"
-      ],
-      "duration_seconds": 1.5,
-      "error_type": null,
-      "attempts": 1,
-      "recovery_history": [
-        {
-          "attempt": 1,
-          "status": "SUCCEEDED",
-          "error_type": null,
-          "decision": "NONE"
-        }
-      ],
-      "started_at": "2026-09-22T01:43:28.164551",
-      "completed_at": "2026-09-22T01:43:29.673039"
-    },
-    "evaluation": {
-      "verdict": "SUPPORTED",
-      "baseline_mse": 1.2166771283713502,
-      "result_mse": 0.33638271768194405,
-      "improvement": 0.8802944106894062,
-      "relative_improvement": 0.7235234312884409,
-      "round": 2
-    }
-  },
-  {
-    "round": 3,
-    "experiment_id": "exp_2725055d58",
-    "result": {
-      "experiment_id": "exp_2725055d58",
-      "hypothesis_id": "hyp_r03_e8e2d7b9",
+      "experiment_id": "exp_23d447071c",
+      "hypothesis_id": "hyp_r01_001_dd62f4",
       "status": "SUCCEEDED",
       "return_code": 0,
       "metrics": {
@@ -135,7 +23,8 @@
         "evaluation_windows": 1024,
         "model_config": {
           "moving_avg": 37
-        }
+        },
+        "backend": "numpy_fallback"
       },
       "stdout": "",
       "stderr": "",
@@ -144,7 +33,7 @@
         "metrics.json",
         "run_experiment.py"
       ],
-      "duration_seconds": 1.5469999999986612,
+      "duration_seconds": 2.4840000000040163,
       "error_type": null,
       "attempts": 1,
       "recovery_history": [
@@ -155,15 +44,144 @@
           "decision": "NONE"
         }
       ],
-      "started_at": "2026-09-22T01:43:59.237198",
-      "completed_at": "2026-09-22T01:44:00.783298"
+      "started_at": "2026-09-22T01:59:12.516939",
+      "completed_at": "2026-09-22T01:59:14.995308"
     },
     "evaluation": {
       "verdict": "REJECTED",
-      "baseline_mse": 1.2166771283713502,
+      "metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005,
+      "baseline_value": 0.7518748311673912,
+      "result_value": 1.5253123672567952,
+      "baseline_mse": 0.7518748311673912,
       "result_mse": 1.5253123672567952,
-      "improvement": -0.308635238885445,
-      "relative_improvement": -0.25367061785618145,
+      "improvement": -0.773437536089404,
+      "relative_improvement": -1.0286785832271226,
+      "round": 1
+    }
+  },
+  {
+    "round": 2,
+    "experiment_id": "exp_442afae12e",
+    "result": {
+      "experiment_id": "exp_442afae12e",
+      "hypothesis_id": "hyp_r02_001_29c847",
+      "status": "SUCCEEDED",
+      "return_code": 0,
+      "metrics": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.6696114468484018,
+          "mae": 0.5840909142266076
+        },
+        "split": "val",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "evaluation_windows": 1024,
+        "model_config": {
+          "moving_avg": 7
+        },
+        "backend": "numpy_fallback"
+      },
+      "stdout": "",
+      "stderr": "",
+      "artifacts": [
+        "experiment_config.json",
+        "metrics.json",
+        "run_experiment.py"
+      ],
+      "duration_seconds": 2.4839999999967404,
+      "error_type": null,
+      "attempts": 1,
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "error_type": null,
+          "decision": "NONE"
+        }
+      ],
+      "started_at": "2026-09-22T01:59:36.059453",
+      "completed_at": "2026-09-22T01:59:38.550337"
+    },
+    "evaluation": {
+      "verdict": "SUPPORTED",
+      "metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005,
+      "baseline_value": 0.7518748311673912,
+      "result_value": 0.6696114468484018,
+      "baseline_mse": 0.7518748311673912,
+      "result_mse": 0.6696114468484018,
+      "improvement": 0.08226338431898939,
+      "relative_improvement": 0.10941100953101986,
+      "round": 2
+    }
+  },
+  {
+    "round": 3,
+    "experiment_id": "exp_a9c6cc6365",
+    "result": {
+      "experiment_id": "exp_a9c6cc6365",
+      "hypothesis_id": "hyp_r03_001_444370",
+      "status": "SUCCEEDED",
+      "return_code": 0,
+      "metrics": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.6720658897763956,
+          "mae": 0.5880836652195937
+        },
+        "split": "val",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "evaluation_windows": 1024,
+        "model_config": {
+          "moving_avg": 3
+        },
+        "backend": "numpy_fallback"
+      },
+      "stdout": "",
+      "stderr": "",
+      "artifacts": [
+        "experiment_config.json",
+        "metrics.json",
+        "run_experiment.py"
+      ],
+      "duration_seconds": 2.5309999999954016,
+      "error_type": null,
+      "attempts": 1,
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "error_type": null,
+          "decision": "NONE"
+        }
+      ],
+      "started_at": "2026-09-22T01:59:59.181118",
+      "completed_at": "2026-09-22T02:00:01.714001"
+    },
+    "evaluation": {
+      "verdict": "SUPPORTED",
+      "metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005,
+      "baseline_value": 0.7518748311673912,
+      "result_value": 0.6720658897763956,
+      "baseline_mse": 0.7518748311673912,
+      "result_mse": 0.6720658897763956,
+      "improvement": 0.07980894139099559,
+      "relative_improvement": 0.10614657930107996,
       "round": 3
     }
   }

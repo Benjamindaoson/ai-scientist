@@ -1,39 +1,54 @@
 [
   {
     "round": 1,
-    "from_hypothesis": "hyp_r01_0f4abe74",
+    "from_hypothesis": "hyp_r01_001_dd62f4",
     "observation": {
-      "verdict": "SUPPORTED",
-      "baseline_mse": 1.2166771283713502,
-      "result_mse": 0.6742014892988191,
-      "improvement": 0.5424756390725312,
-      "relative_improvement": 0.4458665544232689,
+      "verdict": "REJECTED",
+      "metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005,
+      "baseline_value": 0.7518748311673912,
+      "result_value": 1.5253123672567952,
+      "baseline_mse": 0.7518748311673912,
+      "result_mse": 1.5253123672567952,
+      "improvement": -0.773437536089404,
+      "relative_improvement": -1.0286785832271226,
       "round": 1
     },
     "next_action": "continue"
   },
   {
     "round": 2,
-    "from_hypothesis": "hyp_r02_b05b4780",
+    "from_hypothesis": "hyp_r02_001_29c847",
     "observation": {
       "verdict": "SUPPORTED",
-      "baseline_mse": 1.2166771283713502,
-      "result_mse": 0.33638271768194405,
-      "improvement": 0.8802944106894062,
-      "relative_improvement": 0.7235234312884409,
+      "metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005,
+      "baseline_value": 0.7518748311673912,
+      "result_value": 0.6696114468484018,
+      "baseline_mse": 0.7518748311673912,
+      "result_mse": 0.6696114468484018,
+      "improvement": 0.08226338431898939,
+      "relative_improvement": 0.10941100953101986,
       "round": 2
     },
     "next_action": "continue"
   },
   {
     "round": 3,
-    "from_hypothesis": "hyp_r03_e8e2d7b9",
+    "from_hypothesis": "hyp_r03_001_444370",
     "observation": {
-      "verdict": "REJECTED",
-      "baseline_mse": 1.2166771283713502,
-      "result_mse": 1.5253123672567952,
-      "improvement": -0.308635238885445,
-      "relative_improvement": -0.25367061785618145,
+      "verdict": "SUPPORTED",
+      "metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005,
+      "baseline_value": 0.7518748311673912,
+      "result_value": 0.6720658897763956,
+      "baseline_mse": 0.7518748311673912,
+      "result_mse": 0.6720658897763956,
+      "improvement": 0.07980894139099559,
+      "relative_improvement": 0.10614657930107996,
       "round": 3
     },
     "next_action": "finalize"

@@ -2,8 +2,8 @@
   {
     "round": 1,
     "spec": {
-      "hypothesis_id": "hyp_r01_0f4abe74",
-      "objective": "Test: A moving average window of 13 (~3.25 hours) will provide an optimal balance for capturing ETTm1's sub-daily variations while filtering measurement noise, reducing MSE by 6-10% and MAE by 5-8%.",
+      "hypothesis_id": "hyp_r01_001_dd62f4",
+      "objective": "Test: A wider smoothing window improves seasonal extrapolation",
       "command": [
         "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
         "run_experiment.py"
@@ -15,144 +15,23 @@
         "model": "DLinear",
         "seed": 1,
         "metrics": {
-          "mse": 1.2166771283713502,
-          "mae": 0.7452236947306167
+          "mse": 0.7518748311673912,
+          "mae": 0.6201669907784005
         },
-        "split": "test",
+        "split": "val",
         "lookback": 96,
         "horizon": 96,
         "train_windows": 1024,
         "test_windows": 1024,
         "evaluation_windows": 1024,
-        "model_config": {}
+        "model_config": {},
+        "backend": "numpy_fallback"
       },
       "controls": [],
       "success_criteria": {
         "mse": {
           "op": "<",
-          "value": 1.2166771283713502
-        }
-      },
-      "env": {
-        "PYTHONPATH": "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist;C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\auto_research\\src"
-      },
-      "timeout_seconds": 1800,
-      "sandbox_backend": "local",
-      "max_attempts": 1,
-      "metadata": {
-        "benchmark": "ETTm1",
-        "mutation": {
-          "moving_avg": 13
-        },
-        "evaluation_split": "val"
-      },
-      "id": "exp_8defb0db8c",
-      "created_at": "2026-09-22T01:43:02.957507"
-    },
-    "mutation": {
-      "changed_files": [
-        "experiment_config.json"
-      ],
-      "reason": "Test the mechanism proposed by hyp_r01_0f4abe74: A moving average window of 13 (~3.25 hours) will provide an optimal balance for capturing ETTm1's sub-daily variations while filtering measurement noise, reducing MSE by 6-10% and MAE by 5-8%.",
-      "hypothesis_id": "hyp_r01_0f4abe74",
-      "config": {
-        "moving_avg": 13
-      }
-    }
-  },
-  {
-    "round": 2,
-    "spec": {
-      "hypothesis_id": "hyp_r02_b05b4780",
-      "objective": "Test: Setting moving_avg to 1 (no smoothing) will improve forecasting by allowing DLinear's linear layers to learn optimal decomposition directly from raw data",
-      "command": [
-        "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
-        "run_experiment.py"
-      ],
-      "workspace": "benchmarks\\trajectories\\ettm1_discovery_001\\workspaces\\round_02",
-      "metrics_file": "metrics.json",
-      "baseline": {
-        "benchmark": "ETTm1",
-        "model": "DLinear",
-        "seed": 1,
-        "metrics": {
-          "mse": 1.2166771283713502,
-          "mae": 0.7452236947306167
-        },
-        "split": "test",
-        "lookback": 96,
-        "horizon": 96,
-        "train_windows": 1024,
-        "test_windows": 1024,
-        "evaluation_windows": 1024,
-        "model_config": {}
-      },
-      "controls": [],
-      "success_criteria": {
-        "mse": {
-          "op": "<",
-          "value": 1.2166771283713502
-        }
-      },
-      "env": {
-        "PYTHONPATH": "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist;C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\auto_research\\src"
-      },
-      "timeout_seconds": 1800,
-      "sandbox_backend": "local",
-      "max_attempts": 1,
-      "metadata": {
-        "benchmark": "ETTm1",
-        "mutation": {
-          "moving_avg": 1
-        },
-        "evaluation_split": "val"
-      },
-      "id": "exp_30a8888202",
-      "created_at": "2026-09-22T01:43:28.163187"
-    },
-    "mutation": {
-      "changed_files": [
-        "experiment_config.json"
-      ],
-      "reason": "Test the mechanism proposed by hyp_r02_b05b4780: Setting moving_avg to 1 (no smoothing) will improve forecasting by allowing DLinear's linear layers to learn optimal decomposition directly from raw data",
-      "hypothesis_id": "hyp_r02_b05b4780",
-      "config": {
-        "moving_avg": 1
-      }
-    }
-  },
-  {
-    "round": 3,
-    "spec": {
-      "hypothesis_id": "hyp_r03_e8e2d7b9",
-      "objective": "Test: A wider smoothing window improves seasonal extrapolation",
-      "command": [
-        "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
-        "run_experiment.py"
-      ],
-      "workspace": "benchmarks\\trajectories\\ettm1_discovery_001\\workspaces\\round_03",
-      "metrics_file": "metrics.json",
-      "baseline": {
-        "benchmark": "ETTm1",
-        "model": "DLinear",
-        "seed": 1,
-        "metrics": {
-          "mse": 1.2166771283713502,
-          "mae": 0.7452236947306167
-        },
-        "split": "test",
-        "lookback": 96,
-        "horizon": 96,
-        "train_windows": 1024,
-        "test_windows": 1024,
-        "evaluation_windows": 1024,
-        "model_config": {}
-      },
-      "controls": [],
-      "success_criteria": {
-        "mse": {
-          "op": "<",
-          "value": 1.2166771283713502
+          "value": 0.7518748311673912
         }
       },
       "env": {
@@ -168,17 +47,141 @@
         },
         "evaluation_split": "val"
       },
-      "id": "exp_2725055d58",
-      "created_at": "2026-09-22T01:43:59.235357"
+      "id": "exp_23d447071c",
+      "created_at": "2026-09-22T01:59:12.514784"
     },
     "mutation": {
       "changed_files": [
         "experiment_config.json"
       ],
-      "reason": "Test the mechanism proposed by hyp_r03_e8e2d7b9: A wider smoothing window improves seasonal extrapolation",
-      "hypothesis_id": "hyp_r03_e8e2d7b9",
+      "reason": "Test the mechanism proposed by hyp_r01_001_dd62f4: A wider smoothing window improves seasonal extrapolation",
+      "hypothesis_id": "hyp_r01_001_dd62f4",
       "config": {
         "moving_avg": 37
+      }
+    }
+  },
+  {
+    "round": 2,
+    "spec": {
+      "hypothesis_id": "hyp_r02_001_29c847",
+      "objective": "Test: A narrow moving average window (7) better captures short-term patterns in ETTm1 15-minute electricity data",
+      "command": [
+        "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
+        "run_experiment.py"
+      ],
+      "workspace": "benchmarks\\trajectories\\ettm1_discovery_001\\workspaces\\round_02",
+      "metrics_file": "metrics.json",
+      "baseline": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.7518748311673912,
+          "mae": 0.6201669907784005
+        },
+        "split": "val",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "evaluation_windows": 1024,
+        "model_config": {},
+        "backend": "numpy_fallback"
+      },
+      "controls": [],
+      "success_criteria": {
+        "mse": {
+          "op": "<",
+          "value": 0.7518748311673912
+        }
+      },
+      "env": {
+        "PYTHONPATH": "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist;C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\auto_research\\src"
+      },
+      "timeout_seconds": 1800,
+      "sandbox_backend": "local",
+      "max_attempts": 1,
+      "metadata": {
+        "benchmark": "ETTm1",
+        "mutation": {
+          "moving_avg": 7
+        },
+        "evaluation_split": "val"
+      },
+      "id": "exp_442afae12e",
+      "created_at": "2026-09-22T01:59:36.058457"
+    },
+    "mutation": {
+      "changed_files": [
+        "experiment_config.json"
+      ],
+      "reason": "Test the mechanism proposed by hyp_r02_001_29c847: A narrow moving average window (7) better captures short-term patterns in ETTm1 15-minute electricity data",
+      "hypothesis_id": "hyp_r02_001_29c847",
+      "config": {
+        "moving_avg": 7
+      }
+    }
+  },
+  {
+    "round": 3,
+    "spec": {
+      "hypothesis_id": "hyp_r03_001_444370",
+      "objective": "Test: A minimal moving average window (3) preserves high-frequency electricity load fluctuations in 15-minute ETTm1 data",
+      "command": [
+        "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
+        "run_experiment.py"
+      ],
+      "workspace": "benchmarks\\trajectories\\ettm1_discovery_001\\workspaces\\round_03",
+      "metrics_file": "metrics.json",
+      "baseline": {
+        "benchmark": "ETTm1",
+        "model": "DLinear",
+        "seed": 1,
+        "metrics": {
+          "mse": 0.7518748311673912,
+          "mae": 0.6201669907784005
+        },
+        "split": "val",
+        "lookback": 96,
+        "horizon": 96,
+        "train_windows": 1024,
+        "test_windows": 1024,
+        "evaluation_windows": 1024,
+        "model_config": {},
+        "backend": "numpy_fallback"
+      },
+      "controls": [],
+      "success_criteria": {
+        "mse": {
+          "op": "<",
+          "value": 0.7518748311673912
+        }
+      },
+      "env": {
+        "PYTHONPATH": "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist;C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\auto_research\\src"
+      },
+      "timeout_seconds": 1800,
+      "sandbox_backend": "local",
+      "max_attempts": 1,
+      "metadata": {
+        "benchmark": "ETTm1",
+        "mutation": {
+          "moving_avg": 3
+        },
+        "evaluation_split": "val"
+      },
+      "id": "exp_a9c6cc6365",
+      "created_at": "2026-09-22T01:59:59.179601"
+    },
+    "mutation": {
+      "changed_files": [
+        "experiment_config.json"
+      ],
+      "reason": "Test the mechanism proposed by hyp_r03_001_444370: A minimal moving average window (3) preserves high-frequency electricity load fluctuations in 15-minute ETTm1 data",
+      "hypothesis_id": "hyp_r03_001_444370",
+      "config": {
+        "moving_avg": 3
       }
     }
   }

@@ -20,6 +20,7 @@ class CandidateHypothesis:
     feasibility: float
     expected_impact: float
     rank_score: float = 0.0
+    evaluation_contract: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -37,14 +38,16 @@ class HypothesisGenerator:
         self.gateway = gateway
         self.last_source = "deterministic_fallback"
 
-    def _llm_candidates(self, problem: ResearchProblem, baseline_result: dict[str, Any]) -> list[dict[str, Any]]:
+    def _llm_candidates(self, problem: ResearchProblem, baseline_result: dict[str, Any], prior_context: dict[str, Any] | None = None, tested_mutations: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
         prompt = f"""You are an ML research scientist. Generate exactly five distinct, executable hypotheses for this benchmark.
 Research problem: {problem.description}
 Benchmark: {problem.benchmark}
 Baseline metrics: {json.dumps(baseline_result.get('metrics', {}))}
 Constraints: {json.dumps(problem.constraints)}
+Prior evidence and critique: {json.dumps(prior_context or {})}
+Already tested mutations: {json.dumps(tested_mutations or [])}
 Only propose configuration mutations supported by the current DLinear ETTm1 adapter. Use an odd integer moving_avg between 1 and 95 as the mutation.
-Return JSON only: a list of objects with keys id, claim, mechanism, expected_effect, falsification, mutation, novelty, feasibility, expected_impact.
+Return JSON only: a list of objects with keys id, claim, mechanism, expected_effect, falsification, mutation, novelty, feasibility, expected_impact, evaluation_contract. evaluation_contract must contain primary_metric=mse, direction=decrease, minimum_effect=0.005.
 Do not claim success; make each hypothesis falsifiable."""
         raw = self.gateway.generate(prompt, model=getattr(self.gateway, "model", None), max_tokens=1400, temperature=0)
         match = re.search(r"\[.*\]", raw, flags=re.DOTALL)
@@ -67,6 +70,7 @@ Do not claim success; make each hypothesis falsifiable."""
                 expected_effect=str(item["expected_effect"]), falsification=str(item["falsification"]),
                 mutation={"moving_avg": moving_avg}, novelty=novelty, feasibility=feasibility,
                 expected_impact=impact, rank_score=round((novelty + feasibility + impact) / 3, 6),
+                evaluation_contract=item.get("evaluation_contract", {"primary_metric": "mse", "direction": "decrease", "minimum_effect": 0.005}),
             ).to_dict())
         self.last_source = "llm"
         return sorted(output, key=lambda item: item["rank_score"], reverse=True)
@@ -76,11 +80,13 @@ Do not claim success; make each hypothesis falsifiable."""
         problem: ResearchProblem,
         baseline_result: dict[str, Any],
         literature_context: list[dict[str, Any]] | None = None,
+        prior_context: dict[str, Any] | None = None,
+        tested_mutations: list[dict[str, Any]] | None = None,
     ) -> list[dict[str, Any]]:
         del literature_context
         if self.gateway is not None:
             try:
-                return self._llm_candidates(problem, baseline_result)
+                return self._llm_candidates(problem, baseline_result, prior_context, tested_mutations)
             except Exception:
                 self.last_source = "deterministic_fallback_after_llm_error"
         candidates = [
@@ -99,5 +105,6 @@ Do not claim success; make each hypothesis falsifiable."""
                 expected_effect=effect, falsification=falsification,
                 mutation=mutation, novelty=novelty, feasibility=feasibility,
                 expected_impact=impact, rank_score=score,
+                evaluation_contract={"primary_metric": "mse", "direction": "decrease", "minimum_effect": 0.005},
             ).to_dict())
         return sorted(output, key=lambda item: item["rank_score"], reverse=True)

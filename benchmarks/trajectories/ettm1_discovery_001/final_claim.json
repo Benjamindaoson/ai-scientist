@@ -1,36 +1,58 @@
 {
-  "claim": "The selected configuration improves ETTm1 long-horizon forecasting under the executed bounded protocol",
+  "claim": "The frozen final hypothesis improves ETTm1 long-horizon forecasting under the declared protocol",
+  "final_hypothesis_id": "hyp_r03_001_444370",
+  "final_configuration": {
+    "moving_avg": 3
+  },
+  "validation_metrics": {
+    "benchmark": "ETTm1",
+    "model": "DLinear",
+    "seed": 1,
+    "metrics": {
+      "mse": 0.6720658897763956,
+      "mae": 0.5880836652195937
+    },
+    "split": "val",
+    "lookback": 96,
+    "horizon": 96,
+    "train_windows": 1024,
+    "test_windows": 1024,
+    "evaluation_windows": 1024,
+    "model_config": {
+      "moving_avg": 3
+    },
+    "backend": "numpy_fallback"
+  },
+  "test_metrics": {
+    "mse": 1.1516713827713367,
+    "mae": 0.7195079273090483
+  },
+  "baseline_validation_metrics": {
+    "mse": 0.7518748311673912,
+    "mae": 0.6201669907784005
+  },
+  "baseline_test_metrics": {
+    "mse": 1.2166771283713502,
+    "mae": 0.7452236947306167
+  },
+  "validation_verdict": "SUPPORTED",
+  "final_test_verdict": "SUPPORTED",
   "evidence": [
-    "exp_8defb0db8c",
-    "exp_30a8888202",
-    "exp_2725055d58"
+    "exp_a9c6cc6365",
+    "exp_d5bf9d4463"
   ],
-  "confidence": 0.65,
-  "status": "INCONCLUSIVE",
-  "reason": "Claims are downgraded when any executed round contradicts the proposed improvement.",
+  "evidence_strength": "strong",
+  "status": "SUPPORTED",
+  "reason": "The final claim is about the frozen hypothesis only; earlier search failures remain trajectory evidence, not direct refutation.",
   "test_confirmation": {
     "candidate": {
-      "experiment_id": "exp_65035ef666",
-      "hypothesis_id": "hyp_r03_e8e2d7b9",
+      "experiment_id": "exp_d5bf9d4463",
+      "hypothesis_id": "hyp_r03_001_444370",
       "status": "SUCCEEDED",
       "return_code": 0,
       "metrics": {
-        "benchmark": "ETTm1",
-        "model": "DLinear",
-        "seed": 1,
-        "metrics": {
-          "mse": 2.3827911841045033,
-          "mae": 1.045824013500839
-        },
-        "split": "test",
-        "lookback": 96,
-        "horizon": 96,
-        "train_windows": 1024,
-        "test_windows": 1024,
-        "evaluation_windows": 1024,
-        "model_config": {
-          "moving_avg": 37
-        }
+        "mse": 1.1516713827713367,
+        "mae": 0.7195079273090483
       },
       "stdout": "",
       "stderr": "",
@@ -39,7 +61,7 @@
         "metrics.json",
         "run_experiment.py"
       ],
-      "duration_seconds": 1.8280000000013388,
+      "duration_seconds": 2.625,
       "error_type": null,
       "attempts": 1,
       "recovery_history": [
@@ -50,29 +72,17 @@
           "decision": "NONE"
         }
       ],
-      "started_at": "2026-09-22T01:44:02.633316",
-      "completed_at": "2026-09-22T01:44:04.464033"
+      "started_at": "2026-09-22T02:00:04.358070",
+      "completed_at": "2026-09-22T02:00:06.984648"
     },
     "control": {
-      "experiment_id": "exp_7be6e88903",
+      "experiment_id": "exp_8c60613e53",
       "hypothesis_id": "final_test_control",
       "status": "SUCCEEDED",
       "return_code": 0,
       "metrics": {
-        "benchmark": "ETTm1",
-        "model": "DLinear",
-        "seed": 1,
-        "metrics": {
-          "mse": 1.2166771283713502,
-          "mae": 0.7452236947306167
-        },
-        "split": "test",
-        "lookback": 96,
-        "horizon": 96,
-        "train_windows": 1024,
-        "test_windows": 1024,
-        "evaluation_windows": 1024,
-        "model_config": {}
+        "mse": 1.2166771283713502,
+        "mae": 0.7452236947306167
       },
       "stdout": "",
       "stderr": "",
@@ -81,7 +91,7 @@
         "metrics.json",
         "run_experiment.py"
       ],
-      "duration_seconds": 1.6410000000032596,
+      "duration_seconds": 2.561999999998079,
       "error_type": null,
       "attempts": 1,
       "recovery_history": [
@@ -92,16 +102,23 @@
           "decision": "NONE"
         }
       ],
-      "started_at": "2026-09-22T01:44:04.469451",
-      "completed_at": "2026-09-22T01:44:06.113969"
+      "started_at": "2026-09-22T02:00:06.987658",
+      "completed_at": "2026-09-22T02:00:09.540504"
     },
     "evaluation": {
-      "verdict": "REJECTED",
+      "verdict": "SUPPORTED",
+      "metric": "mse",
+      "direction": "decrease",
+      "minimum_effect": 0.005,
+      "baseline_value": 1.2166771283713502,
+      "result_value": 1.1516713827713367,
       "baseline_mse": 1.2166771283713502,
-      "result_mse": 2.3827911841045033,
-      "improvement": -1.166114055733153,
-      "relative_improvement": -0.9584416675064147
+      "result_mse": 1.1516713827713367,
+      "improvement": 0.06500574560001349,
+      "relative_improvement": 0.05342892052802085,
+      "candidate_experiment_id": "exp_d5bf9d4463"
     },
-    "protocol": "test evaluated once after candidate freeze"
+    "protocol": "test evaluated once after candidate freeze",
+    "test_accessed_after_freeze": true
   }
 }

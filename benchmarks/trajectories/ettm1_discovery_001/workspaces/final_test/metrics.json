@@ -3,8 +3,8 @@
   "model": "DLinear",
   "seed": 1,
   "metrics": {
-    "mse": 2.3827911841045033,
-    "mae": 1.045824013500839
+    "mse": 1.1516713827713367,
+    "mae": 0.7195079273090483
   },
   "split": "test",
   "lookback": 96,
@@ -13,6 +13,7 @@
   "test_windows": 1024,
   "evaluation_windows": 1024,
   "model_config": {
-    "moving_avg": 37
-  }
+    "moving_avg": 3
+  },
+  "backend": "numpy_fallback"
 }

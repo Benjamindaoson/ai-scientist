@@ -1,0 +1,45 @@
+{
+  "id": "hyp_r03_001_444370",
+  "claim": "A minimal moving average window (3) preserves high-frequency electricity load fluctuations in 15-minute ETTm1 data",
+  "mechanism": "Window of 3 (45 minutes) captures immediate short-term dependencies while minimizing signal smoothing, critical for volatile electricity consumption patterns with sub-hourly variability",
+  "expected_effect": "MSE decrease below 0.6696114468484018",
+  "falsification": "Validation MSE does not decrease by at least 0.005 compared to current best result",
+  "mutation": {
+    "moving_avg": 3
+  },
+  "novelty": 0.92,
+  "feasibility": 0.99,
+  "expected_impact": 0.78,
+  "rank_score": 0.896667,
+  "evaluation_contract": {
+    "primary_metric": "mse",
+    "direction": "decrease",
+    "minimum_effect": 0.005
+  },
+  "selection_score": 1.146667,
+  "round": 3,
+  "generation": 3,
+  "parent_hypothesis_id": "hyp_r02_001_29c847",
+  "mutation_fingerprint": "ca8df5e9170f",
+  "source": "llm",
+  "model": "claude-opus-4-8",
+  "prompt_hash": "249404e08f068700595c9c18545ddada3e9a90e236eb5c20aefff060660cd56f",
+  "selection_reason": {
+    "utility": 1.146667,
+    "formula": "rank_score + 0.25 information_gain for an untried mutation",
+    "alternatives_considered": [
+      "hyp_r03_002_320e7b",
+      "hyp_r03_003_d5265e",
+      "hyp_r03_004_0125ab",
+      "hyp_r03_005_e5288d"
+    ],
+    "rejected_duplicate_candidates": [],
+    "eligible_candidates": [
+      "hyp_r03_001_444370",
+      "hyp_r03_002_320e7b",
+      "hyp_r03_003_d5265e",
+      "hyp_r03_004_0125ab",
+      "hyp_r03_005_e5288d"
+    ]
+  }
+}

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import numpy as np
 
-from benchmarks.baselines.timeseries.dlinear import DLinear, DLinearConfig
+from benchmarks.baselines.timeseries.dlinear import DLinear, DLinearConfig, TorchDLinear
 from benchmarks.baselines.timeseries.patchtst import PatchTST, PatchTSTConfig
 from benchmarks.core.result import BenchmarkResult
 from benchmarks.problems.timeseries.ettm1.dataset import ETTm1Dataset
@@ -44,10 +44,15 @@ def run_baseline(
     config = {"seq_len": dataset.lookback, "pred_len": dataset.horizon, "channels": len(train_x[0][0])}
     model_key = model_name.lower()
     model_kwargs = model_kwargs or {}
+    backend = "numpy_fallback"
     if model_key == "dlinear":
         dlinear_config = dict(config)
         dlinear_config.update(model_kwargs)
-        model = DLinear(DLinearConfig(**dlinear_config)).fit(train_x, train_y)
+        try:
+            model = TorchDLinear(DLinearConfig(**dlinear_config), seed=seed).fit(train_x, train_y)
+            backend = "pytorch_cuda" if str(model.device) == "cuda" else "pytorch_cpu"
+        except Exception:
+            model = DLinear(DLinearConfig(**dlinear_config)).fit(train_x, train_y)
         display_name = "DLinear"
     elif model_key == "patchtst":
         patch_config = dict(config)
@@ -71,6 +76,7 @@ def run_baseline(
     summary["test_windows"] = len(eval_x)
     summary["evaluation_windows"] = len(eval_x)
     summary["model_config"] = model_kwargs
+    summary["backend"] = backend
     if persist:
         output_dir = Path(results_root) / "ettm1" / "baseline"
         output_dir.mkdir(parents=True, exist_ok=True)

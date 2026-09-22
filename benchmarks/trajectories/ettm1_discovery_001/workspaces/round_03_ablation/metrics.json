@@ -12,5 +12,6 @@
   "train_windows": 1024,
   "test_windows": 1024,
   "evaluation_windows": 1024,
-  "model_config": {}
+  "model_config": {},
+  "backend": "numpy_fallback"
 }

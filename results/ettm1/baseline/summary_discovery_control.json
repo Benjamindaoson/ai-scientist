@@ -3,14 +3,15 @@
   "model": "DLinear",
   "seed": 1,
   "metrics": {
-    "mse": 1.2166771283713502,
-    "mae": 0.7452236947306167
+    "mse": 0.7518748311673912,
+    "mae": 0.6201669907784005
   },
-  "split": "test",
+  "split": "val",
   "lookback": 96,
   "horizon": 96,
   "train_windows": 1024,
   "test_windows": 1024,
   "evaluation_windows": 1024,
-  "model_config": {}
+  "model_config": {},
+  "backend": "numpy_fallback"
 }

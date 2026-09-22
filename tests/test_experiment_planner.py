@@ -12,3 +12,4 @@ def test_planner_creates_existing_experiment_spec(tmp_path):
     assert spec.command[0] == sys.executable
     assert (tmp_path / "workspace" / "experiment_config.json").exists()
     assert json.loads((tmp_path / "workspace" / "experiment_config.json").read_text())["moving_avg"] == 49
+    assert "evaluation_split='val'" in (tmp_path / "workspace" / "run_experiment.py").read_text()
