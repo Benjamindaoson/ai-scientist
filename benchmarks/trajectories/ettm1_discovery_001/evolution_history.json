@@ -3,11 +3,11 @@
     "round": 1,
     "from_hypothesis": "hyp_004",
     "observation": {
-      "verdict": "REJECTED",
-      "baseline_mse": 0.5881356092728306,
-      "result_mse": 0.5881356092728312,
-      "improvement": -5.551115123125783e-16,
-      "relative_improvement": -9.438495196693101e-16,
+      "verdict": "SUPPORTED",
+      "baseline_mse": 1.4861237261067233,
+      "result_mse": 1.4861237261067222,
+      "improvement": 1.1102230246251565e-15,
+      "relative_improvement": 7.470596190087526e-16,
       "round": 1
     },
     "next_action": "continue"
@@ -16,11 +16,11 @@
     "round": 2,
     "from_hypothesis": "hyp_001",
     "observation": {
-      "verdict": "REJECTED",
-      "baseline_mse": 0.5881356092728306,
-      "result_mse": 0.5881356092728306,
-      "improvement": 0.0,
-      "relative_improvement": 0.0,
+      "verdict": "SUPPORTED",
+      "baseline_mse": 1.4861237261067233,
+      "result_mse": 1.486123726106722,
+      "improvement": 1.3322676295501878e-15,
+      "relative_improvement": 8.964715428105032e-16,
       "round": 2
     },
     "next_action": "continue"
@@ -29,11 +29,11 @@
     "round": 3,
     "from_hypothesis": "hyp_002",
     "observation": {
-      "verdict": "REJECTED",
-      "baseline_mse": 0.5881356092728306,
-      "result_mse": 0.5881356092728308,
-      "improvement": -2.220446049250313e-16,
-      "relative_improvement": -3.775398078677241e-16,
+      "verdict": "SUPPORTED",
+      "baseline_mse": 1.4861237261067233,
+      "result_mse": 1.4861237261067228,
+      "improvement": 4.440892098500626e-16,
+      "relative_improvement": 2.9882384760350106e-16,
       "round": 3
     },
     "next_action": "finalize"

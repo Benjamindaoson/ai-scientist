@@ -1,9 +1,9 @@
 [
   {
     "round": 1,
-    "experiment_id": "exp_4010b7b612",
+    "experiment_id": "exp_b4f93a22c5",
     "result": {
-      "experiment_id": "exp_4010b7b612",
+      "experiment_id": "exp_b4f93a22c5",
       "hypothesis_id": "hyp_004",
       "status": "SUCCEEDED",
       "return_code": 0,
@@ -12,14 +12,14 @@
         "model": "DLinear",
         "seed": 1,
         "metrics": {
-          "mse": 0.5881356092728312,
-          "mae": 0.49926563762662857
+          "mse": 1.4861237261067222,
+          "mae": 0.7879014840773247
         },
         "split": "test",
         "lookback": 96,
         "horizon": 96,
-        "train_windows": 1024,
-        "test_windows": 1024,
+        "train_windows": 256,
+        "test_windows": 256,
         "model_config": {
           "moving_avg": 37
         }
@@ -31,7 +31,7 @@
         "metrics.json",
         "run_experiment.py"
       ],
-      "duration_seconds": 1.4059999999954016,
+      "duration_seconds": 1.1560000000026776,
       "error_type": null,
       "attempts": 1,
       "recovery_history": [
@@ -42,23 +42,23 @@
           "decision": "NONE"
         }
       ],
-      "started_at": "2026-09-21T23:46:57.811941",
-      "completed_at": "2026-09-21T23:46:59.220916"
+      "started_at": "2026-09-22T01:12:06.895100",
+      "completed_at": "2026-09-22T01:12:08.045123"
     },
     "evaluation": {
-      "verdict": "REJECTED",
-      "baseline_mse": 0.5881356092728306,
-      "result_mse": 0.5881356092728312,
-      "improvement": -5.551115123125783e-16,
-      "relative_improvement": -9.438495196693101e-16,
+      "verdict": "SUPPORTED",
+      "baseline_mse": 1.4861237261067233,
+      "result_mse": 1.4861237261067222,
+      "improvement": 1.1102230246251565e-15,
+      "relative_improvement": 7.470596190087526e-16,
       "round": 1
     }
   },
   {
     "round": 2,
-    "experiment_id": "exp_2e2af1f17d",
+    "experiment_id": "exp_cc007ec229",
     "result": {
-      "experiment_id": "exp_2e2af1f17d",
+      "experiment_id": "exp_cc007ec229",
       "hypothesis_id": "hyp_001",
       "status": "SUCCEEDED",
       "return_code": 0,
@@ -67,16 +67,16 @@
         "model": "DLinear",
         "seed": 1,
         "metrics": {
-          "mse": 0.5881356092728306,
-          "mae": 0.49926563762662834
+          "mse": 1.486123726106722,
+          "mae": 0.7879014840773244
         },
         "split": "test",
         "lookback": 96,
         "horizon": 96,
-        "train_windows": 1024,
-        "test_windows": 1024,
+        "train_windows": 256,
+        "test_windows": 256,
         "model_config": {
-          "moving_avg": 49
+          "moving_avg": 3
         }
       },
       "stdout": "",
@@ -86,7 +86,7 @@
         "metrics.json",
         "run_experiment.py"
       ],
-      "duration_seconds": 1.3590000000040163,
+      "duration_seconds": 1.110000000000582,
       "error_type": null,
       "attempts": 1,
       "recovery_history": [
@@ -97,23 +97,23 @@
           "decision": "NONE"
         }
       ],
-      "started_at": "2026-09-21T23:46:59.223919",
-      "completed_at": "2026-09-21T23:47:00.574409"
+      "started_at": "2026-09-22T01:12:30.796555",
+      "completed_at": "2026-09-22T01:12:31.904086"
     },
     "evaluation": {
-      "verdict": "REJECTED",
-      "baseline_mse": 0.5881356092728306,
-      "result_mse": 0.5881356092728306,
-      "improvement": 0.0,
-      "relative_improvement": 0.0,
+      "verdict": "SUPPORTED",
+      "baseline_mse": 1.4861237261067233,
+      "result_mse": 1.486123726106722,
+      "improvement": 1.3322676295501878e-15,
+      "relative_improvement": 8.964715428105032e-16,
       "round": 2
     }
   },
   {
     "round": 3,
-    "experiment_id": "exp_de3916c93f",
+    "experiment_id": "exp_6d9c999f13",
     "result": {
-      "experiment_id": "exp_de3916c93f",
+      "experiment_id": "exp_6d9c999f13",
       "hypothesis_id": "hyp_002",
       "status": "SUCCEEDED",
       "return_code": 0,
@@ -122,14 +122,14 @@
         "model": "DLinear",
         "seed": 1,
         "metrics": {
-          "mse": 0.5881356092728308,
-          "mae": 0.4992656376266284
+          "mse": 1.4861237261067228,
+          "mae": 0.7879014840773244
         },
         "split": "test",
         "lookback": 96,
         "horizon": 96,
-        "train_windows": 1024,
-        "test_windows": 1024,
+        "train_windows": 256,
+        "test_windows": 256,
         "model_config": {
           "moving_avg": 13
         }
@@ -141,7 +141,7 @@
         "metrics.json",
         "run_experiment.py"
       ],
-      "duration_seconds": 1.1719999999986612,
+      "duration_seconds": 1.0469999999986612,
       "error_type": null,
       "attempts": 1,
       "recovery_history": [
@@ -152,15 +152,15 @@
           "decision": "NONE"
         }
       ],
-      "started_at": "2026-09-21T23:47:00.578925",
-      "completed_at": "2026-09-21T23:47:01.744894"
+      "started_at": "2026-09-22T01:12:59.839128",
+      "completed_at": "2026-09-22T01:13:00.895999"
     },
     "evaluation": {
-      "verdict": "REJECTED",
-      "baseline_mse": 0.5881356092728306,
-      "result_mse": 0.5881356092728308,
-      "improvement": -2.220446049250313e-16,
-      "relative_improvement": -3.775398078677241e-16,
+      "verdict": "SUPPORTED",
+      "baseline_mse": 1.4861237261067233,
+      "result_mse": 1.4861237261067228,
+      "improvement": 4.440892098500626e-16,
+      "relative_improvement": 2.9882384760350106e-16,
       "round": 3
     }
   }

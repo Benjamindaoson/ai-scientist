@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import os
 from pathlib import Path
 
 
@@ -24,6 +25,7 @@ def run_discovery(
     from benchmarks.discovery.discovery_loop import AutonomousDiscoveryLoop
     from benchmarks.discovery.problem import ResearchProblem
     from benchmarks.runners.baseline_runner import run_baseline
+    from ai_scientist.core.gateway import ClaudeRelayGateway
 
     if benchmark.lower() != "ettm1":
         raise ValueError("discovery runner currently supports only ettm1")
@@ -42,7 +44,11 @@ def run_discovery(
         constraints={"parameter_increase": "<10%", "training_budget": "fixed", "no_test_leakage": True},
         evaluation_metrics={"primary": "mse", "secondary": "mae", "direction": "lower_is_better"},
     )
-    output = AutonomousDiscoveryLoop().run(
+    credential = os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN", "")
+    base_url = os.environ.get("DEEPSEEK_BASE_URL", "")
+    model = os.environ.get("DEEPSEEK_MODEL", "claude-opus-4-8")
+    gateway = ClaudeRelayGateway(relay_url=base_url, api_key=credential, model=model) if credential and base_url else None
+    output = AutonomousDiscoveryLoop(gateway=gateway).run(
         problem=problem,
         baseline=baseline,
         data_root=data_root,
@@ -50,7 +56,7 @@ def run_discovery(
         max_rounds=rounds,
         max_windows=max_windows,
     )
-    return {"benchmark": "ETTm1", "rounds": rounds, "trajectory": output["trajectory"], "claim": output["claim"]}
+    return {"benchmark": "ETTm1", "rounds": rounds, "trajectory": output["trajectory"], "claim": output["claim"], "hypothesis_source": output["state"].problem.get("hypothesis_source")}
 
 
 def main() -> None:

@@ -16,17 +16,17 @@
   },
   {
     "id": "hyp_001",
-    "claim": "Adaptive moving-average window improves temporal stability",
-    "mechanism": "A longer decomposition window suppresses high-frequency noise",
-    "expected_effect": "MSE decrease",
-    "falsification": "No MSE decrease against the unchanged window",
+    "claim": "Reducing moving_avg to 3 will improve forecasting by minimizing excessive smoothing that obscures short-term patterns in 15-minute ETT data",
+    "mechanism": "ETTm1 contains 15-minute electricity transformer data with potential high-frequency fluctuations. A moving average window of 37 (9.25 hours) may over-smooth critical short-term dependencies. A window of 3 (45 minutes) preserves more granular temporal structure while still providing noise reduction, allowing the linear layer to learn sharper seasonal patterns.",
+    "expected_effect": "MSE reduction of 3-8% and MAE reduction of 2-6% due to better capture of short-term dynamics",
+    "falsification": "If test MSE >= 1.486 or MAE >= 0.788, the hypothesis is false",
     "mutation": {
-      "moving_avg": 49
+      "moving_avg": 3
     },
     "novelty": 0.7,
     "feasibility": 0.95,
-    "expected_impact": 0.7,
-    "rank_score": 0.783333,
+    "expected_impact": 0.65,
+    "rank_score": 0.766667,
     "round": 2
   },
   {

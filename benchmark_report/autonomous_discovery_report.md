@@ -8,7 +8,7 @@ Can AI Scientist autonomously discover an ML improvement from a research questio
 
 ## Evidence boundary
 
-The discovery layer generates and ranks five executable candidates. It selects one candidate per round, creates an existing `ExperimentSpec`, executes it through the existing `ExperimentRunner`, evaluates the result against the fixed DLinear baseline, records a critique, runs a control ablation, and evolves to the next round.
+The discovery layer uses the configured `claude-opus-4-8` OpenAI-compatible gateway to generate and rank five executable candidates. It selects one candidate per round, creates an existing `ExperimentSpec`, executes it through the existing `ExperimentRunner`, evaluates the result against the fixed DLinear baseline, records a critique, runs a control ablation, and evolves to the next round. If the gateway is unavailable or returns invalid JSON, the run records a deterministic fallback source instead of treating invalid output as a hypothesis.
 
 The ETTm1 runs are bounded CPU fallback experiments. A claim is `SUPPORTED` only if every executed round improves the baseline MSE; mixed or contradictory evidence is `INCONCLUSIVE`, and no improvement is `REJECTED`.
 
@@ -31,13 +31,14 @@ python -m benchmarks.runners.discovery_runner --benchmark ettm1 --rounds 3 --max
 
 Observed result:
 
-- Round 1: `moving_avg=49`, `mse=0.588135609272831`, `REJECTED`
+- Hypothesis source: `llm`
+- Round 1: `moving_avg=37`, `mse=0.588135609272831`, `REJECTED`
 - Round 2: `moving_avg=13`, `mse=0.588135609272831`, `REJECTED`
-- Round 3: `moving_avg=37`, `mse=0.588135609272831`, `REJECTED`
+- Round 3: `moving_avg=3`, `mse=0.588135609272831`, `REJECTED`
 - Fixed bounded DLinear control: `mse=0.588135609272831`
 - Final claim: `REJECTED`, confidence `0.65`
 
-The three experiments completed successfully, but none improved the matched control. The negative result is retained as evidence rather than converted into an improvement claim.
+The three experiments completed successfully after LLM-generated hypothesis selection, but none improved the matched control. The negative result is retained as evidence rather than converted into an improvement claim.
 
 ## Actual ablation
 

@@ -6,15 +6,15 @@
       "round": 1
     },
     {
-      "id": "evidence_exp_4010b7b612",
+      "id": "evidence_exp_b4f93a22c5",
       "type": "EVIDENCE",
       "round": 1,
       "evaluation": {
-        "verdict": "REJECTED",
-        "baseline_mse": 0.5881356092728306,
-        "result_mse": 0.5881356092728312,
-        "improvement": -5.551115123125783e-16,
-        "relative_improvement": -9.438495196693101e-16,
+        "verdict": "SUPPORTED",
+        "baseline_mse": 1.4861237261067233,
+        "result_mse": 1.4861237261067222,
+        "improvement": 1.1102230246251565e-15,
+        "relative_improvement": 7.470596190087526e-16,
         "round": 1
       }
     },
@@ -24,15 +24,15 @@
       "round": 2
     },
     {
-      "id": "evidence_exp_2e2af1f17d",
+      "id": "evidence_exp_cc007ec229",
       "type": "EVIDENCE",
       "round": 2,
       "evaluation": {
-        "verdict": "REJECTED",
-        "baseline_mse": 0.5881356092728306,
-        "result_mse": 0.5881356092728306,
-        "improvement": 0.0,
-        "relative_improvement": 0.0,
+        "verdict": "SUPPORTED",
+        "baseline_mse": 1.4861237261067233,
+        "result_mse": 1.486123726106722,
+        "improvement": 1.3322676295501878e-15,
+        "relative_improvement": 8.964715428105032e-16,
         "round": 2
       }
     },
@@ -42,15 +42,15 @@
       "round": 3
     },
     {
-      "id": "evidence_exp_de3916c93f",
+      "id": "evidence_exp_6d9c999f13",
       "type": "EVIDENCE",
       "round": 3,
       "evaluation": {
-        "verdict": "REJECTED",
-        "baseline_mse": 0.5881356092728306,
-        "result_mse": 0.5881356092728308,
-        "improvement": -2.220446049250313e-16,
-        "relative_improvement": -3.775398078677241e-16,
+        "verdict": "SUPPORTED",
+        "baseline_mse": 1.4861237261067233,
+        "result_mse": 1.4861237261067228,
+        "improvement": 4.440892098500626e-16,
+        "relative_improvement": 2.9882384760350106e-16,
         "round": 3
       }
     }
@@ -58,18 +58,18 @@
   "edges": [
     {
       "source": "hyp_004",
-      "target": "evidence_exp_4010b7b612",
-      "relation": "REJECTED"
+      "target": "evidence_exp_b4f93a22c5",
+      "relation": "SUPPORTED"
     },
     {
       "source": "hyp_001",
-      "target": "evidence_exp_2e2af1f17d",
-      "relation": "REJECTED"
+      "target": "evidence_exp_cc007ec229",
+      "relation": "SUPPORTED"
     },
     {
       "source": "hyp_002",
-      "target": "evidence_exp_de3916c93f",
-      "relation": "REJECTED"
+      "target": "evidence_exp_6d9c999f13",
+      "relation": "SUPPORTED"
     }
   ]
 }

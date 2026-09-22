@@ -15,7 +15,7 @@ from .problem import ResearchProblem
 
 
 class AutonomousDiscoveryLoop:
-    def __init__(self, runner: ExperimentRunner | None = None):
+    def __init__(self, runner: ExperimentRunner | None = None, gateway=None):
         if runner is None:
             import sys
             source = Path(__file__).parents[2] / "auto_research" / "src"
@@ -24,7 +24,7 @@ class AutonomousDiscoveryLoop:
             from ai_scientist.experiment.runner import ExperimentRunner
             runner = ExperimentRunner()
         self.runner = runner
-        self.generator = HypothesisGenerator()
+        self.generator = HypothesisGenerator(gateway=gateway)
         self.planner = ExperimentPlanner()
         self.mutator = ExperimentMutator()
 
@@ -41,10 +41,12 @@ class AutonomousDiscoveryLoop:
         root = Path(trajectory_root)
         state = DiscoveryState(problem=problem.to_dict(), baseline=baseline)
         state.hypothesis_candidates = self.generator.generate(problem, baseline)
+        state.problem["hypothesis_source"] = self.generator.last_source
         previous = baseline
 
         for round_index in range(1, max_rounds + 1):
             ranked = self.generator.generate(problem, previous)
+            state.problem["hypothesis_source"] = self.generator.last_source
             # Ensure later rounds evolve from the prior observation rather than
             # silently repeating the same candidate.
             selected = ranked[0 if mode == "no_evolution" else (round_index - 1) % len(ranked)]
