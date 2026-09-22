@@ -16,10 +16,10 @@
   },
   {
     "id": "hyp_001",
-    "claim": "Reducing moving_avg to 3 will improve forecasting by minimizing excessive smoothing that obscures short-term patterns in 15-minute ETT data",
-    "mechanism": "ETTm1 contains 15-minute electricity transformer data with potential high-frequency fluctuations. A moving average window of 37 (9.25 hours) may over-smooth critical short-term dependencies. A window of 3 (45 minutes) preserves more granular temporal structure while still providing noise reduction, allowing the linear layer to learn sharper seasonal patterns.",
-    "expected_effect": "MSE reduction of 3-8% and MAE reduction of 2-6% due to better capture of short-term dynamics",
-    "falsification": "If test MSE >= 1.486 or MAE >= 0.788, the hypothesis is false",
+    "claim": "Reducing moving_avg to 3 will improve forecasting by minimizing over-smoothing of high-frequency patterns in ETTm1 data",
+    "mechanism": "ETTm1 contains electricity transformer temperature data with rapid fluctuations. A moving average window of 37 may over-smooth critical high-frequency signals. A window of 3 preserves short-term variations while still providing minimal noise reduction, allowing the model to capture sharper transitions.",
+    "expected_effect": "MSE will decrease by 3-8% (target: 0.540-0.570) and MAE will decrease by 2-6% (target: 0.470-0.489) compared to baseline",
+    "falsification": "If test MSE >= 0.588 or MAE >= 0.499 after training with moving_avg=3, the hypothesis is falsified",
     "mutation": {
       "moving_avg": 3
     },
@@ -31,17 +31,17 @@
   },
   {
     "id": "hyp_002",
-    "claim": "Shorter moving-average window preserves local dynamics",
-    "mechanism": "A shorter trend window reduces lag at regime changes",
-    "expected_effect": "MAE decrease",
-    "falsification": "No MAE decrease against the unchanged window",
+    "claim": "Minimal moving average (moving_avg=1) will improve forecast accuracy by preserving high-frequency signals critical to electricity load prediction",
+    "mechanism": "ETTm1's 15-minute granularity contains rapid load fluctuations. The baseline moving_avg=3 may over-smooth these critical signals. Setting moving_avg=1 (no smoothing) allows DLinear's seasonal component to capture raw variations while the trend component learns direct patterns.",
+    "expected_effect": "MSE reduction of 4-8% (target: 0.565-0.540), MAE reduction of 3-6%",
+    "falsification": "If MSE >= 0.565, the hypothesis that high-frequency preservation improves accuracy is rejected",
     "mutation": {
-      "moving_avg": 13
+      "moving_avg": 1
     },
-    "novelty": 0.65,
+    "novelty": 0.7,
     "feasibility": 0.98,
-    "expected_impact": 0.62,
-    "rank_score": 0.75,
+    "expected_impact": 0.7,
+    "rank_score": 0.793333,
     "round": 3
   }
 ]

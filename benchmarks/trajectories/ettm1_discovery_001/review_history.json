@@ -2,19 +2,19 @@
   {
     "round": 1,
     "critique": "Evidence supports the candidate only when test MSE is strictly below the fixed baseline.",
-    "decision": "SUPPORTED",
+    "decision": "REJECTED",
     "integrity": true
   },
   {
     "round": 2,
     "critique": "Evidence supports the candidate only when test MSE is strictly below the fixed baseline.",
-    "decision": "SUPPORTED",
+    "decision": "REJECTED",
     "integrity": true
   },
   {
     "round": 3,
     "critique": "Evidence supports the candidate only when test MSE is strictly below the fixed baseline.",
-    "decision": "SUPPORTED",
+    "decision": "REJECTED",
     "integrity": true
   }
 ]

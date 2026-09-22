@@ -15,21 +15,21 @@
         "model": "DLinear",
         "seed": 1,
         "metrics": {
-          "mse": 1.4861237261067233,
-          "mae": 0.7879014840773246
+          "mse": 0.5881356092728306,
+          "mae": 0.4992656376266284
         },
         "split": "test",
         "lookback": 96,
         "horizon": 96,
-        "train_windows": 256,
-        "test_windows": 256,
+        "train_windows": 1024,
+        "test_windows": 1024,
         "model_config": {}
       },
       "controls": [],
       "success_criteria": {
         "mse": {
           "op": "<",
-          "value": 1.4861237261067233
+          "value": 0.5881356092728306
         }
       },
       "env": {
@@ -44,8 +44,8 @@
           "moving_avg": 37
         }
       },
-      "id": "exp_b4f93a22c5",
-      "created_at": "2026-09-22T01:12:06.894093"
+      "id": "exp_821dcdd6f1",
+      "created_at": "2026-09-22T01:17:23.382785"
     },
     "mutation": {
       "changed_files": [
@@ -62,7 +62,7 @@
     "round": 2,
     "spec": {
       "hypothesis_id": "hyp_001",
-      "objective": "Test: Reducing moving_avg to 3 will improve forecasting by minimizing excessive smoothing that obscures short-term patterns in 15-minute ETT data",
+      "objective": "Test: Reducing moving_avg to 3 will improve forecasting by minimizing over-smoothing of high-frequency patterns in ETTm1 data",
       "command": [
         "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
         "run_experiment.py"
@@ -74,21 +74,21 @@
         "model": "DLinear",
         "seed": 1,
         "metrics": {
-          "mse": 1.4861237261067233,
-          "mae": 0.7879014840773246
+          "mse": 0.5881356092728306,
+          "mae": 0.4992656376266284
         },
         "split": "test",
         "lookback": 96,
         "horizon": 96,
-        "train_windows": 256,
-        "test_windows": 256,
+        "train_windows": 1024,
+        "test_windows": 1024,
         "model_config": {}
       },
       "controls": [],
       "success_criteria": {
         "mse": {
           "op": "<",
-          "value": 1.4861237261067233
+          "value": 0.5881356092728306
         }
       },
       "env": {
@@ -103,14 +103,14 @@
           "moving_avg": 3
         }
       },
-      "id": "exp_cc007ec229",
-      "created_at": "2026-09-22T01:12:30.794042"
+      "id": "exp_5ee72c1bb0",
+      "created_at": "2026-09-22T01:17:46.772245"
     },
     "mutation": {
       "changed_files": [
         "experiment_config.json"
       ],
-      "reason": "Test the mechanism proposed by hyp_001: Reducing moving_avg to 3 will improve forecasting by minimizing excessive smoothing that obscures short-term patterns in 15-minute ETT data",
+      "reason": "Test the mechanism proposed by hyp_001: Reducing moving_avg to 3 will improve forecasting by minimizing over-smoothing of high-frequency patterns in ETTm1 data",
       "hypothesis_id": "hyp_001",
       "config": {
         "moving_avg": 3
@@ -121,7 +121,7 @@
     "round": 3,
     "spec": {
       "hypothesis_id": "hyp_002",
-      "objective": "Test: Shorter moving-average window preserves local dynamics",
+      "objective": "Test: Minimal moving average (moving_avg=1) will improve forecast accuracy by preserving high-frequency signals critical to electricity load prediction",
       "command": [
         "C:\\Users\\Admin（无密码）\\Documents\\Codex\\2026-09-22\\github-https-github-com-benjamindaoson-ai\\work\\ai-scientist\\.venv\\Scripts\\python.exe",
         "run_experiment.py"
@@ -133,21 +133,21 @@
         "model": "DLinear",
         "seed": 1,
         "metrics": {
-          "mse": 1.4861237261067233,
-          "mae": 0.7879014840773246
+          "mse": 0.5881356092728306,
+          "mae": 0.4992656376266284
         },
         "split": "test",
         "lookback": 96,
         "horizon": 96,
-        "train_windows": 256,
-        "test_windows": 256,
+        "train_windows": 1024,
+        "test_windows": 1024,
         "model_config": {}
       },
       "controls": [],
       "success_criteria": {
         "mse": {
           "op": "<",
-          "value": 1.4861237261067233
+          "value": 0.5881356092728306
         }
       },
       "env": {
@@ -159,20 +159,20 @@
       "metadata": {
         "benchmark": "ETTm1",
         "mutation": {
-          "moving_avg": 13
+          "moving_avg": 1
         }
       },
-      "id": "exp_6d9c999f13",
-      "created_at": "2026-09-22T01:12:59.839128"
+      "id": "exp_d2d7eb48f8",
+      "created_at": "2026-09-22T01:18:10.196239"
     },
     "mutation": {
       "changed_files": [
         "experiment_config.json"
       ],
-      "reason": "Test the mechanism proposed by hyp_002: Shorter moving-average window preserves local dynamics",
+      "reason": "Test the mechanism proposed by hyp_002: Minimal moving average (moving_avg=1) will improve forecast accuracy by preserving high-frequency signals critical to electricity load prediction",
       "hypothesis_id": "hyp_002",
       "config": {
-        "moving_avg": 13
+        "moving_avg": 1
       }
     }
   }

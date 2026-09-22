@@ -11,7 +11,10 @@ def evaluate_experiment(baseline: dict[str, Any], result: dict[str, Any]) -> dic
     baseline_mse = float(baseline["metrics"]["mse"])
     result_mse = float(metrics["mse"])
     improvement = baseline_mse - result_mse
-    verdict = "SUPPORTED" if improvement > 0 else "REJECTED"
+    # Treat numerical noise as no effect; a scientific claim needs a
+    # measurable margin, not a signed least-bit difference.
+    tolerance = max(1e-9, abs(baseline_mse) * 1e-6)
+    verdict = "SUPPORTED" if improvement > tolerance else "REJECTED"
     return {
         "verdict": verdict,
         "baseline_mse": baseline_mse,

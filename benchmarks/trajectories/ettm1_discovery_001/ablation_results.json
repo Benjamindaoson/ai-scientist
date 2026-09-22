@@ -6,8 +6,8 @@
     "variant": "unchanged_baseline_protocol",
     "comparison": {
       "metrics": {
-        "mse": 1.4861237261067233,
-        "mae": 0.7879014840773246
+        "mse": 0.5881356092728306,
+        "mae": 0.4992656376266284
       }
     }
   },
@@ -18,8 +18,8 @@
     "variant": "unchanged_baseline_protocol",
     "comparison": {
       "metrics": {
-        "mse": 1.4861237261067233,
-        "mae": 0.7879014840773246
+        "mse": 0.5881356092728306,
+        "mae": 0.4992656376266284
       }
     }
   },
@@ -30,8 +30,8 @@
     "variant": "unchanged_baseline_protocol",
     "comparison": {
       "metrics": {
-        "mse": 1.4861237261067233,
-        "mae": 0.7879014840773246
+        "mse": 0.5881356092728306,
+        "mae": 0.4992656376266284
       }
     }
   }

@@ -33,8 +33,8 @@ Observed result:
 
 - Hypothesis source: `llm`
 - Round 1: `moving_avg=37`, `mse=0.588135609272831`, `REJECTED`
-- Round 2: `moving_avg=13`, `mse=0.588135609272831`, `REJECTED`
-- Round 3: `moving_avg=3`, `mse=0.588135609272831`, `REJECTED`
+- Round 2: `moving_avg=3`, `mse=0.588135609272831`, `REJECTED`
+- Round 3: `moving_avg=1`, `mse=0.588135609272831`, `REJECTED`
 - Fixed bounded DLinear control: `mse=0.588135609272831`
 - Final claim: `REJECTED`, confidence `0.65`
 

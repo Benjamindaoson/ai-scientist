@@ -3,13 +3,13 @@
   "model": "DLinear",
   "seed": 1,
   "metrics": {
-    "mse": 1.4861237261067233,
-    "mae": 0.7879014840773246
+    "mse": 0.5881356092728306,
+    "mae": 0.4992656376266284
   },
   "split": "test",
   "lookback": 96,
   "horizon": 96,
-  "train_windows": 256,
-  "test_windows": 256,
+  "train_windows": 1024,
+  "test_windows": 1024,
   "model_config": {}
 }
