@@ -31,6 +31,7 @@ def run_baseline(
     max_windows: int | None = None,
     persist: bool = True,
     model_kwargs: dict | None = None,
+    evaluation_split: str = "test",
     **dataset_kwargs,
 ) -> dict:
     if benchmark_name.lower() != "ettm1":
@@ -39,7 +40,7 @@ def run_baseline(
     np.random.seed(seed)
     dataset = ETTm1Dataset(root=data_root, **dataset_kwargs)
     train_x, train_y = _windows(dataset, "train", max_windows)
-    test_x, test_y = _windows(dataset, "test", max_windows)
+    eval_x, eval_y = _windows(dataset, evaluation_split, max_windows)
     config = {"seq_len": dataset.lookback, "pred_len": dataset.horizon, "channels": len(train_x[0][0])}
     model_key = model_name.lower()
     model_kwargs = model_kwargs or {}
@@ -55,19 +56,20 @@ def run_baseline(
         display_name = "PatchTST"
     else:
         raise ValueError(f"unsupported model: {model_name}")
-    predictions = model.predict(test_x)
-    errors = predictions - test_y
+    predictions = model.predict(eval_x)
+    errors = predictions - eval_y
     summary = BenchmarkResult(
         benchmark="ETTm1",
         model=display_name,
         seed=seed,
         metrics={"mse": float(np.mean(errors**2)), "mae": float(np.mean(np.abs(errors)))},
     ).to_dict()
-    summary["split"] = "test"
+    summary["split"] = evaluation_split
     summary["lookback"] = dataset.lookback
     summary["horizon"] = dataset.horizon
     summary["train_windows"] = len(train_x)
-    summary["test_windows"] = len(test_x)
+    summary["test_windows"] = len(eval_x)
+    summary["evaluation_windows"] = len(eval_x)
     summary["model_config"] = model_kwargs
     if persist:
         output_dir = Path(results_root) / "ettm1" / "baseline"
@@ -86,6 +88,7 @@ def main() -> None:
     parser.add_argument("--results-root", default="results")
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--max-windows", type=int)
+    parser.add_argument("--evaluation-split", choices=("val", "test"), default="test")
     args = parser.parse_args()
     print(json.dumps(run_baseline(
         benchmark_name=args.benchmark,
@@ -94,6 +97,7 @@ def main() -> None:
         results_root=args.results_root,
         seed=args.seed,
         max_windows=args.max_windows,
+        evaluation_split=args.evaluation_split,
     ), indent=2))
 
 

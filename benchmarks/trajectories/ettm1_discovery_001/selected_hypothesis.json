@@ -1,6 +1,64 @@
 [
   {
-    "id": "hyp_004",
+    "id": "hyp_r01_0f4abe74",
+    "claim": "A moving average window of 13 (~3.25 hours) will provide an optimal balance for capturing ETTm1's sub-daily variations while filtering measurement noise, reducing MSE by 6-10% and MAE by 5-8%.",
+    "mechanism": "Window of 13 points captures 3.25-hour patterns, aligning with typical electricity consumption micro-cycles (morning ramp, lunch dip, etc.). This granularity preserves essential seasonal features while smoothing sensor noise and transient spikes, improving both trend and seasonal component quality.",
+    "expected_effect": "MSE: 1.09-1.14 (target <1.14), MAE: 0.68-0.71 (target <0.71)",
+    "falsification": "If MSE remains above 1.14 or MAE remains above 0.71, the hypothesis that this window size optimally balances noise reduction and pattern preservation is falsified.",
+    "mutation": {
+      "moving_avg": 13
+    },
+    "novelty": 0.75,
+    "feasibility": 0.95,
+    "expected_impact": 0.8,
+    "rank_score": 0.833333,
+    "selection_score": 1.083333,
+    "original_candidate_id": "hyp_005",
+    "parent_id": null,
+    "generation": 1,
+    "selection_reason": {
+      "utility": 1.083333,
+      "formula": "rank_score + 0.25 information_gain for an untried mutation",
+      "alternatives_considered": [
+        "hyp_002",
+        "hyp_001",
+        "hyp_004",
+        "hyp_003"
+      ]
+    },
+    "round": 1
+  },
+  {
+    "id": "hyp_r02_b05b4780",
+    "claim": "Setting moving_avg to 1 (no smoothing) will improve forecasting by allowing DLinear's linear layers to learn optimal decomposition directly from raw data",
+    "mechanism": "The moving average preprocessing may impose suboptimal inductive bias. With moving_avg=1, no smoothing occurs, making trend and seasonal components identical to the input. This forces the linear projections to learn the full decomposition task end-to-end, potentially discovering data-specific patterns that fixed smoothing misses.",
+    "expected_effect": "MSE will decrease by 5-12% as the model learns task-specific feature extraction without preprocessing constraints",
+    "falsification": "If MSE does not decrease below 0.640 or increases by any amount, the hypothesis is falsified",
+    "mutation": {
+      "moving_avg": 1
+    },
+    "novelty": 0.85,
+    "feasibility": 0.9,
+    "expected_impact": 0.75,
+    "rank_score": 0.833333,
+    "selection_score": 1.083333,
+    "original_candidate_id": "hyp_004",
+    "parent_id": "hyp_r01_0f4abe74",
+    "generation": 2,
+    "selection_reason": {
+      "utility": 1.083333,
+      "formula": "rank_score + 0.25 information_gain for an untried mutation",
+      "alternatives_considered": [
+        "hyp_003",
+        "hyp_005",
+        "hyp_001",
+        "hyp_002"
+      ]
+    },
+    "round": 2
+  },
+  {
+    "id": "hyp_r03_e8e2d7b9",
     "claim": "A wider smoothing window improves seasonal extrapolation",
     "mechanism": "A wider trend window gives the linear head a more stable seasonal signal",
     "expected_effect": "MSE decrease",
@@ -12,36 +70,20 @@
     "feasibility": 0.95,
     "expected_impact": 0.74,
     "rank_score": 0.803333,
-    "round": 1
-  },
-  {
-    "id": "hyp_001",
-    "claim": "Reducing moving_avg to 3 will improve forecasting by minimizing over-smoothing of high-frequency patterns in ETTm1 data",
-    "mechanism": "ETTm1 contains electricity transformer temperature data with rapid fluctuations. A moving average window of 37 may over-smooth critical high-frequency signals. A window of 3 preserves short-term variations while still providing minimal noise reduction, allowing the model to capture sharper transitions.",
-    "expected_effect": "MSE will decrease by 3-8% (target: 0.540-0.570) and MAE will decrease by 2-6% (target: 0.470-0.489) compared to baseline",
-    "falsification": "If test MSE >= 0.588 or MAE >= 0.499 after training with moving_avg=3, the hypothesis is falsified",
-    "mutation": {
-      "moving_avg": 3
+    "selection_score": 1.053333,
+    "original_candidate_id": "hyp_004",
+    "parent_id": "hyp_r02_b05b4780",
+    "generation": 3,
+    "selection_reason": {
+      "utility": 1.053333,
+      "formula": "rank_score + 0.25 information_gain for an untried mutation",
+      "alternatives_considered": [
+        "hyp_001",
+        "hyp_002",
+        "hyp_005",
+        "hyp_003"
+      ]
     },
-    "novelty": 0.7,
-    "feasibility": 0.95,
-    "expected_impact": 0.65,
-    "rank_score": 0.766667,
-    "round": 2
-  },
-  {
-    "id": "hyp_002",
-    "claim": "Minimal moving average (moving_avg=1) will improve forecast accuracy by preserving high-frequency signals critical to electricity load prediction",
-    "mechanism": "ETTm1's 15-minute granularity contains rapid load fluctuations. The baseline moving_avg=3 may over-smooth these critical signals. Setting moving_avg=1 (no smoothing) allows DLinear's seasonal component to capture raw variations while the trend component learns direct patterns.",
-    "expected_effect": "MSE reduction of 4-8% (target: 0.565-0.540), MAE reduction of 3-6%",
-    "falsification": "If MSE >= 0.565, the hypothesis that high-frequency preservation improves accuracy is rejected",
-    "mutation": {
-      "moving_avg": 1
-    },
-    "novelty": 0.7,
-    "feasibility": 0.98,
-    "expected_impact": 0.7,
-    "rank_score": 0.793333,
     "round": 3
   }
 ]

@@ -1,39 +1,39 @@
 [
   {
     "round": 1,
-    "from_hypothesis": "hyp_004",
+    "from_hypothesis": "hyp_r01_0f4abe74",
     "observation": {
-      "verdict": "REJECTED",
-      "baseline_mse": 0.5881356092728306,
-      "result_mse": 0.5881356092728312,
-      "improvement": -5.551115123125783e-16,
-      "relative_improvement": -9.438495196693101e-16,
+      "verdict": "SUPPORTED",
+      "baseline_mse": 1.2166771283713502,
+      "result_mse": 0.6742014892988191,
+      "improvement": 0.5424756390725312,
+      "relative_improvement": 0.4458665544232689,
       "round": 1
     },
     "next_action": "continue"
   },
   {
     "round": 2,
-    "from_hypothesis": "hyp_001",
+    "from_hypothesis": "hyp_r02_b05b4780",
     "observation": {
-      "verdict": "REJECTED",
-      "baseline_mse": 0.5881356092728306,
-      "result_mse": 0.5881356092728307,
-      "improvement": -1.1102230246251565e-16,
-      "relative_improvement": -1.8876990393386206e-16,
+      "verdict": "SUPPORTED",
+      "baseline_mse": 1.2166771283713502,
+      "result_mse": 0.33638271768194405,
+      "improvement": 0.8802944106894062,
+      "relative_improvement": 0.7235234312884409,
       "round": 2
     },
     "next_action": "continue"
   },
   {
     "round": 3,
-    "from_hypothesis": "hyp_002",
+    "from_hypothesis": "hyp_r03_e8e2d7b9",
     "observation": {
       "verdict": "REJECTED",
-      "baseline_mse": 0.5881356092728306,
-      "result_mse": 0.5881356092728313,
-      "improvement": -6.661338147750939e-16,
-      "relative_improvement": -1.1326194236031722e-15,
+      "baseline_mse": 1.2166771283713502,
+      "result_mse": 1.5253123672567952,
+      "improvement": -0.308635238885445,
+      "relative_improvement": -0.25367061785618145,
       "round": 3
     },
     "next_action": "finalize"

@@ -14,6 +14,7 @@ class ExperimentPlanner:
         workspace: str | Path,
         data_root: str | Path,
         max_windows: int,
+        evaluation_split: str = "val",
     ) -> ExperimentSpec:
         workspace = Path(workspace)
         config_path = workspace / "experiment_config.json"
@@ -25,7 +26,7 @@ class ExperimentPlanner:
             "from benchmarks.runners.baseline_runner import run_baseline\n"
             f"config = json.load(open('experiment_config.json'))\n"
             f"summary = run_baseline('ettm1', 'dlinear', data_root={str(Path(data_root).resolve())!r}, "
-            f"max_windows={max_windows}, persist=False, model_kwargs=config)\n"
+            f"max_windows={max_windows}, evaluation_split={evaluation_split!r}, persist=False, model_kwargs=config)\n"
             "json.dump(summary, open('metrics.json', 'w'), indent=2)\n",
             encoding="utf-8",
         )
@@ -47,5 +48,5 @@ class ExperimentPlanner:
             success_criteria={"mse": {"op": "<", "value": baseline["metrics"]["mse"]}},
             env=env,
             max_attempts=1,
-            metadata={"benchmark": "ETTm1", "mutation": hypothesis.get("mutation", {})},
+            metadata={"benchmark": "ETTm1", "mutation": hypothesis.get("mutation", {}), "evaluation_split": evaluation_split},
         )

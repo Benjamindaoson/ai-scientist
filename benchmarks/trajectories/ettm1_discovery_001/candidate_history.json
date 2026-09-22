@@ -1,0 +1,242 @@
+[
+  {
+    "round": 1,
+    "candidates": [
+      {
+        "id": "hyp_005",
+        "claim": "A moving average window of 13 (~3.25 hours) will provide an optimal balance for capturing ETTm1's sub-daily variations while filtering measurement noise, reducing MSE by 6-10% and MAE by 5-8%.",
+        "mechanism": "Window of 13 points captures 3.25-hour patterns, aligning with typical electricity consumption micro-cycles (morning ramp, lunch dip, etc.). This granularity preserves essential seasonal features while smoothing sensor noise and transient spikes, improving both trend and seasonal component quality.",
+        "expected_effect": "MSE: 1.09-1.14 (target <1.14), MAE: 0.68-0.71 (target <0.71)",
+        "falsification": "If MSE remains above 1.14 or MAE remains above 0.71, the hypothesis that this window size optimally balances noise reduction and pattern preservation is falsified.",
+        "mutation": {
+          "moving_avg": 13
+        },
+        "novelty": 0.75,
+        "feasibility": 0.95,
+        "expected_impact": 0.8,
+        "rank_score": 0.833333,
+        "selection_score": 1.083333
+      },
+      {
+        "id": "hyp_002",
+        "claim": "A moving average window of 49 (~12 hours) will optimally balance trend extraction and noise reduction for the daily cycles in ETTm1, improving MSE by 5-10% over baseline.",
+        "mechanism": "Half-day window (49 points ≈ 12.25 hours) captures strong diurnal patterns in electricity transformer data while the decomposition isolates residual high-frequency components for the seasonal branch, leading to better separation of trend and seasonal components.",
+        "expected_effect": "MSE: 1.09-1.16 (target <1.16), MAE: 0.68-0.73",
+        "falsification": "If MSE does not fall below 1.16, the claim that this window size optimally balances trend-seasonality decomposition is falsified.",
+        "mutation": {
+          "moving_avg": 49
+        },
+        "novelty": 0.7,
+        "feasibility": 0.95,
+        "expected_impact": 0.75,
+        "rank_score": 0.8,
+        "selection_score": 1.05
+      },
+      {
+        "id": "hyp_001",
+        "claim": "A moving average window of 25 will better capture the 15-minute interval seasonality patterns in ETTm1 (96 points per day) compared to the baseline, reducing both MSE and MAE by 3-8%.",
+        "mechanism": "ETTm1 has 15-minute granularity (96 points/day). A window of 25 (~6.25 hours) captures intra-day patterns while providing sufficient smoothing to reduce noise in the trend-seasonality decomposition without over-smoothing critical variations.",
+        "expected_effect": "MSE: 1.12-1.18 (target <1.18), MAE: 0.69-0.72 (target <0.72)",
+        "falsification": "If MSE remains above 1.18 or MAE remains above 0.72 after training, the hypothesis is falsified.",
+        "mutation": {
+          "moving_avg": 25
+        },
+        "novelty": 0.6,
+        "feasibility": 0.95,
+        "expected_impact": 0.65,
+        "rank_score": 0.733333,
+        "selection_score": 0.983333
+      },
+      {
+        "id": "hyp_004",
+        "claim": "A moving average window of 73 (~18 hours) will over-smooth seasonal variations, degrading forecasting performance by 5-12% in MSE compared to baseline, demonstrating the importance of preserving sub-daily patterns.",
+        "mechanism": "Window of 73 points spans 18.25 hours, excessively smoothing the trend component and removing important intra-day variations. The seasonal decomposition receives insufficient high-frequency signal, reducing the model's ability to capture rapid changes in electricity load patterns.",
+        "expected_effect": "MSE: 1.28-1.36 (target >1.28), MAE: 0.77-0.82 (target >0.77)",
+        "falsification": "If MSE remains below 1.28 and MAE below 0.77, the hypothesis that this window size over-smooths and degrades performance is falsified.",
+        "mutation": {
+          "moving_avg": 73
+        },
+        "novelty": 0.5,
+        "feasibility": 0.95,
+        "expected_impact": 0.7,
+        "rank_score": 0.716667,
+        "selection_score": 0.966667
+      },
+      {
+        "id": "hyp_003",
+        "claim": "A minimal moving average window of 7 will preserve high-frequency variations critical for short-term forecasting, reducing MAE by 4-7% while potentially increasing MSE due to higher sensitivity to outliers.",
+        "mechanism": "Small window (7 points ≈ 1.75 hours) minimally smooths the input, allowing the seasonal component to retain rapid fluctuations. This may improve mean absolute error on typical predictions but increase mean squared error on outlier events due to reduced robustness.",
+        "expected_effect": "MSE: 1.20-1.28, MAE: 0.69-0.71 (target <0.71)",
+        "falsification": "If MAE does not fall below 0.71, the hypothesis that minimal smoothing improves typical-case accuracy is falsified.",
+        "mutation": {
+          "moving_avg": 7
+        },
+        "novelty": 0.65,
+        "feasibility": 0.95,
+        "expected_impact": 0.5,
+        "rank_score": 0.7,
+        "selection_score": 0.95
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "candidates": [
+      {
+        "id": "hyp_004",
+        "claim": "Setting moving_avg to 1 (no smoothing) will improve forecasting by allowing DLinear's linear layers to learn optimal decomposition directly from raw data",
+        "mechanism": "The moving average preprocessing may impose suboptimal inductive bias. With moving_avg=1, no smoothing occurs, making trend and seasonal components identical to the input. This forces the linear projections to learn the full decomposition task end-to-end, potentially discovering data-specific patterns that fixed smoothing misses.",
+        "expected_effect": "MSE will decrease by 5-12% as the model learns task-specific feature extraction without preprocessing constraints",
+        "falsification": "If MSE does not decrease below 0.640 or increases by any amount, the hypothesis is falsified",
+        "mutation": {
+          "moving_avg": 1
+        },
+        "novelty": 0.85,
+        "feasibility": 0.9,
+        "expected_impact": 0.75,
+        "rank_score": 0.833333,
+        "selection_score": 1.083333
+      },
+      {
+        "id": "hyp_003",
+        "claim": "Setting moving_avg to 49 (approximately half the lookback window) will improve forecasting by aligning trend extraction with the forecast horizon structure",
+        "mechanism": "With lookback=96 and horizon=96, using moving_avg=49 creates a trend component that spans roughly half the input window, matching the scale at which seasonal patterns repeat. This alignment allows the decomposition to separate trend and seasonal components at the optimal temporal scale for 96-step-ahead prediction.",
+        "expected_effect": "MSE will decrease by 4-10% as the decomposition captures patterns at the appropriate temporal resolution for the forecast horizon",
+        "falsification": "If MSE does not decrease below 0.645 or if both MSE and MAE fail to improve, the hypothesis is falsified",
+        "mutation": {
+          "moving_avg": 49
+        },
+        "novelty": 0.75,
+        "feasibility": 0.9,
+        "expected_impact": 0.7,
+        "rank_score": 0.783333,
+        "selection_score": 1.033333
+      },
+      {
+        "id": "hyp_005",
+        "claim": "Setting moving_avg to 7 will improve forecasting by matching the weekly periodicity likely present in electrical transformer operational patterns",
+        "mechanism": "Electrical transformer temperature data typically exhibits weekly cycles due to human activity patterns (weekday vs weekend load). A 7-period moving average aligns with this domain-specific periodicity (assuming 15-minute intervals in ETTm1 means 7 periods ≈ 1.75 hours of smoothing), allowing trend-seasonal decomposition to separate weekly patterns from shorter fluctuations.",
+        "expected_effect": "MSE will decrease by 3-7% as decomposition aligns with the natural periodicity structure of the data",
+        "falsification": "If MSE does not decrease below 0.652 or if MAE increases beyond 0.600, the hypothesis is falsified",
+        "mutation": {
+          "moving_avg": 7
+        },
+        "novelty": 0.7,
+        "feasibility": 0.95,
+        "expected_impact": 0.6,
+        "rank_score": 0.75,
+        "selection_score": 1.0
+      },
+      {
+        "id": "hyp_001",
+        "claim": "Reducing moving_avg to 3 will improve forecasting by minimizing over-smoothing of high-frequency patterns in ETTm1 data",
+        "mechanism": "ETTm1 contains electrical transformer temperature data with short-term fluctuations. A smaller moving average window (3 vs 13) preserves more local variation, allowing the trend-seasonal decomposition to capture rapid changes that are predictive of future values rather than averaging them out.",
+        "expected_effect": "MSE will decrease by 3-8% compared to baseline (0.674) as the model better captures short-term dynamics without excessive smoothing",
+        "falsification": "If MSE does not decrease below 0.650 or if MAE increases beyond 0.605, the hypothesis is falsified",
+        "mutation": {
+          "moving_avg": 3
+        },
+        "novelty": 0.6,
+        "feasibility": 0.95,
+        "expected_impact": 0.65,
+        "rank_score": 0.733333,
+        "selection_score": 0.983333
+      },
+      {
+        "id": "hyp_002",
+        "claim": "Increasing moving_avg to 25 will improve forecasting by better isolating long-term trends from noise in ETTm1 temporal patterns",
+        "mechanism": "ETTm1 data may contain measurement noise and short-term irregularities that obscure underlying trends. A larger moving average window (25 vs 13) provides stronger smoothing of the trend component, enabling the seasonal component to focus on cleaner residual patterns, improving decomposition quality.",
+        "expected_effect": "MSE will decrease by 2-6% compared to baseline as noise is more effectively filtered from the trend component",
+        "falsification": "If MSE does not decrease below 0.655 or increases above baseline by more than 2%, the hypothesis is falsified",
+        "mutation": {
+          "moving_avg": 25
+        },
+        "novelty": 0.5,
+        "feasibility": 0.95,
+        "expected_impact": 0.55,
+        "rank_score": 0.666667,
+        "selection_score": 0.916667
+      }
+    ]
+  },
+  {
+    "round": 3,
+    "candidates": [
+      {
+        "id": "hyp_004",
+        "claim": "A wider smoothing window improves seasonal extrapolation",
+        "mechanism": "A wider trend window gives the linear head a more stable seasonal signal",
+        "expected_effect": "MSE decrease",
+        "falsification": "MSE is not lower with the wider window",
+        "mutation": {
+          "moving_avg": 37
+        },
+        "novelty": 0.72,
+        "feasibility": 0.95,
+        "expected_impact": 0.74,
+        "rank_score": 0.803333,
+        "selection_score": 1.053333
+      },
+      {
+        "id": "hyp_001",
+        "claim": "Adaptive moving-average window improves temporal stability",
+        "mechanism": "A longer decomposition window suppresses high-frequency noise",
+        "expected_effect": "MSE decrease",
+        "falsification": "No MSE decrease against the unchanged window",
+        "mutation": {
+          "moving_avg": 49
+        },
+        "novelty": 0.7,
+        "feasibility": 0.95,
+        "expected_impact": 0.7,
+        "rank_score": 0.783333,
+        "selection_score": 1.033333
+      },
+      {
+        "id": "hyp_002",
+        "claim": "Shorter moving-average window preserves local dynamics",
+        "mechanism": "A shorter trend window reduces lag at regime changes",
+        "expected_effect": "MAE decrease",
+        "falsification": "No MAE decrease against the unchanged window",
+        "mutation": {
+          "moving_avg": 13
+        },
+        "novelty": 0.65,
+        "feasibility": 0.98,
+        "expected_impact": 0.62,
+        "rank_score": 0.75,
+        "selection_score": 0.75
+      },
+      {
+        "id": "hyp_005",
+        "claim": "Channel-wise decomposition is sufficient under fixed compute",
+        "mechanism": "Independent channel heads avoid cross-channel overfitting",
+        "expected_effect": "Stable metrics with no parameter increase",
+        "falsification": "Cross-channel coupling is required for improvement",
+        "mutation": {
+          "moving_avg": 31
+        },
+        "novelty": 0.55,
+        "feasibility": 0.92,
+        "expected_impact": 0.58,
+        "rank_score": 0.683333,
+        "selection_score": 0.933333
+      },
+      {
+        "id": "hyp_003",
+        "claim": "Moderate smoothing is a Pareto compromise",
+        "mechanism": "An intermediate window balances noise removal and responsiveness",
+        "expected_effect": "MSE/MAE improve together",
+        "falsification": "Either metric worsens beyond tolerance",
+        "mutation": {
+          "moving_avg": 25
+        },
+        "novelty": 0.45,
+        "feasibility": 1.0,
+        "expected_impact": 0.55,
+        "rank_score": 0.666667,
+        "selection_score": 0.916667
+      }
+    ]
+  }
+]

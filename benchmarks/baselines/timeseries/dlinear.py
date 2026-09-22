@@ -25,7 +25,8 @@ class DLinear:
         if config.moving_avg < 1 or config.moving_avg % 2 == 0:
             raise ValueError("moving_avg must be a positive odd integer")
         self.config = config
-        self.weights = np.zeros((config.channels, config.seq_len, config.pred_len), dtype=float)
+        self.seasonal_weights = np.zeros((config.channels, config.seq_len, config.pred_len), dtype=float)
+        self.trend_weights = np.zeros((config.channels, config.seq_len, config.pred_len), dtype=float)
 
     def _moving_average(self, values: np.ndarray) -> np.ndarray:
         radius = self.config.moving_avg // 2
@@ -41,9 +42,9 @@ class DLinear:
 
     def fit(self, inputs: np.ndarray, targets: np.ndarray) -> "DLinear":
         seasonal, trend = self._decompose(inputs)
-        features = seasonal + trend
         for channel in range(self.config.channels):
-            self.weights[channel] = np.linalg.pinv(features[:, :, channel]) @ targets[:, :, channel]
+            self.seasonal_weights[channel] = np.linalg.pinv(seasonal[:, :, channel]) @ targets[:, :, channel]
+            self.trend_weights[channel] = np.linalg.pinv(trend[:, :, channel]) @ targets[:, :, channel]
         return self
 
     def predict(self, inputs: np.ndarray) -> np.ndarray:
@@ -51,8 +52,11 @@ class DLinear:
         if values.ndim != 3 or values.shape[1:] != (self.config.seq_len, self.config.channels):
             raise ValueError("inputs must have shape [batch, seq_len, channels]")
         seasonal, trend = self._decompose(values)
-        features = seasonal + trend
         return np.stack(
-            [features[:, :, channel] @ self.weights[channel] for channel in range(self.config.channels)],
+            [
+                seasonal[:, :, channel] @ self.seasonal_weights[channel]
+                + trend[:, :, channel] @ self.trend_weights[channel]
+                for channel in range(self.config.channels)
+            ],
             axis=-1,
         )

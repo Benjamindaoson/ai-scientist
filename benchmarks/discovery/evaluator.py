@@ -36,10 +36,16 @@ def final_claim(state: dict[str, Any]) -> dict[str, Any]:
     else:
         status = "REJECTED"
     confidence = min(0.95, 0.35 + 0.1 * len(evaluations) + (0.15 if status == "SUPPORTED" else 0.0))
+    test_confirmation = state.get("final_test", {})
+    if status == "SUPPORTED" and test_confirmation:
+        test_eval = test_confirmation.get("evaluation", {})
+        if test_eval.get("verdict") != "SUPPORTED":
+            status = "INCONCLUSIVE"
     return {
         "claim": "The selected configuration improves ETTm1 long-horizon forecasting under the executed bounded protocol",
         "evidence": [item.get("experiment_id") for item in state["experiment_results"]],
         "confidence": round(confidence, 4),
         "status": status,
         "reason": "Claims are downgraded when any executed round contradicts the proposed improvement.",
+        "test_confirmation": test_confirmation,
     }

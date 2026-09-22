@@ -9,6 +9,7 @@ class DiscoveryState:
     problem: dict[str, Any]
     baseline: dict[str, Any]
     hypothesis_candidates: list[dict[str, Any]] = field(default_factory=list)
+    candidate_history: list[dict[str, Any]] = field(default_factory=list)
     selected_hypotheses: list[dict[str, Any]] = field(default_factory=list)
     experiment_plans: list[dict[str, Any]] = field(default_factory=list)
     experiment_results: list[dict[str, Any]] = field(default_factory=list)
@@ -16,3 +17,4 @@ class DiscoveryState:
     evolution_history: list[dict[str, Any]] = field(default_factory=list)
     evidence_graph: dict[str, Any] = field(default_factory=lambda: {"nodes": [], "edges": []})
     review_history: list[dict[str, Any]] = field(default_factory=list)
+    final_test: dict[str, Any] = field(default_factory=dict)

@@ -1,0 +1,96 @@
+{
+  "candidate": {
+    "experiment_id": "exp_65035ef666",
+    "hypothesis_id": "hyp_r03_e8e2d7b9",
+    "status": "SUCCEEDED",
+    "return_code": 0,
+    "metrics": {
+      "benchmark": "ETTm1",
+      "model": "DLinear",
+      "seed": 1,
+      "metrics": {
+        "mse": 2.3827911841045033,
+        "mae": 1.045824013500839
+      },
+      "split": "test",
+      "lookback": 96,
+      "horizon": 96,
+      "train_windows": 1024,
+      "test_windows": 1024,
+      "evaluation_windows": 1024,
+      "model_config": {
+        "moving_avg": 37
+      }
+    },
+    "stdout": "",
+    "stderr": "",
+    "artifacts": [
+      "experiment_config.json",
+      "metrics.json",
+      "run_experiment.py"
+    ],
+    "duration_seconds": 1.8280000000013388,
+    "error_type": null,
+    "attempts": 1,
+    "recovery_history": [
+      {
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "error_type": null,
+        "decision": "NONE"
+      }
+    ],
+    "started_at": "2026-09-22T01:44:02.633316",
+    "completed_at": "2026-09-22T01:44:04.464033"
+  },
+  "control": {
+    "experiment_id": "exp_7be6e88903",
+    "hypothesis_id": "final_test_control",
+    "status": "SUCCEEDED",
+    "return_code": 0,
+    "metrics": {
+      "benchmark": "ETTm1",
+      "model": "DLinear",
+      "seed": 1,
+      "metrics": {
+        "mse": 1.2166771283713502,
+        "mae": 0.7452236947306167
+      },
+      "split": "test",
+      "lookback": 96,
+      "horizon": 96,
+      "train_windows": 1024,
+      "test_windows": 1024,
+      "evaluation_windows": 1024,
+      "model_config": {}
+    },
+    "stdout": "",
+    "stderr": "",
+    "artifacts": [
+      "experiment_config.json",
+      "metrics.json",
+      "run_experiment.py"
+    ],
+    "duration_seconds": 1.6410000000032596,
+    "error_type": null,
+    "attempts": 1,
+    "recovery_history": [
+      {
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "error_type": null,
+        "decision": "NONE"
+      }
+    ],
+    "started_at": "2026-09-22T01:44:04.469451",
+    "completed_at": "2026-09-22T01:44:06.113969"
+  },
+  "evaluation": {
+    "verdict": "REJECTED",
+    "baseline_mse": 1.2166771283713502,
+    "result_mse": 2.3827911841045033,
+    "improvement": -1.166114055733153,
+    "relative_improvement": -0.9584416675064147
+  },
+  "protocol": "test evaluated once after candidate freeze"
+}

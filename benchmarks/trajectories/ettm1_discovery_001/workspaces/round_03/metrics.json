@@ -3,15 +3,16 @@
   "model": "DLinear",
   "seed": 1,
   "metrics": {
-    "mse": 0.5881356092728313,
-    "mae": 0.49926563762662857
+    "mse": 1.5253123672567952,
+    "mae": 0.8640450662224334
   },
-  "split": "test",
+  "split": "val",
   "lookback": 96,
   "horizon": 96,
   "train_windows": 1024,
   "test_windows": 1024,
+  "evaluation_windows": 1024,
   "model_config": {
-    "moving_avg": 1
+    "moving_avg": 37
   }
 }
