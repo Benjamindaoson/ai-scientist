@@ -34,3 +34,4 @@ Thumbs.db
 # Local benchmark payloads and analysis indexes
 .codegraph/
 data/
+.superpowers/

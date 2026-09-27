@@ -1,0 +1,14 @@
+FROM pgvector/pgvector:pg17
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3 python3-pip python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+COPY pyproject.toml README.md ./
+COPY auto_research ./auto_research
+RUN python3 -m venv /opt/test-venv \
+    && /opt/test-venv/bin/pip install --no-cache-dir -e . pytest pytest-asyncio numpy
+
+ENV PATH="/opt/test-venv/bin:${PATH}"
+CMD ["python", "-m", "pytest", "-q"]

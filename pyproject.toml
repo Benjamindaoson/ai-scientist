@@ -7,6 +7,16 @@ name = "ai-scientist"
 version = "0.1.0"
 description = "Evidence-oriented autonomous research orchestration system"
 requires-python = ">=3.10"
+dependencies = [
+    "alembic>=1.16",
+    "pgvector>=0.4",
+    "psycopg[binary]>=3.2",
+    "pydantic>=2.11",
+    "sqlalchemy>=2.0",
+]
+
+[project.scripts]
+ai-scientist = "ai_scientist.research_store.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "auto_research/src"}
