@@ -494,14 +494,34 @@ Format each as: [QUESTION] <question text>"""
             )
             results["stages"]["scientific_debate"] = debate.to_json_dict()
 
-            if experiment_spec is None and experiment_workspace and self.autonomous_loop.engineer:
+            debate_status = debate.status.value
+            court_decision = (debate.metadata.get("court_decision") or {}).get("decision")
+            experiment_allowed = (
+                debate_status == "RESEARCHABLE"
+                and court_decision in {None, "CONTINUE"}
+            )
+
+            if (
+                experiment_allowed
+                and experiment_spec is None
+                and experiment_workspace
+                and self.autonomous_loop.engineer
+            ):
                 experiment_spec = self.autonomous_loop.engineer.create_spec(
                     hypothesis=hypothesis,
                     objective=f"Empirically test: {hypothesis.claim}",
                     workspace=experiment_workspace,
                 )
 
-            if experiment_spec is not None:
+            if not experiment_allowed:
+                results["stages"]["autonomous_research"] = {
+                    "status": "BLOCKED_BY_SCIENTIFIC_GATE",
+                    "decision": court_decision or debate_status,
+                    "debate_status": debate_status,
+                    "reason": "The scientific gate did not authorize experiment execution.",
+                    "hypothesis": hypothesis.to_dict(),
+                }
+            elif experiment_spec is not None:
                 self.current_stage = "autonomous_experiment_loop"
                 program = self.run_autonomous_research_program(
                     hypothesis=hypothesis,

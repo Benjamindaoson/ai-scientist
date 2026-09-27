@@ -117,7 +117,7 @@ class PaperReader:
             abstract = entry.find("atom:summary", ns)
             authors = entry.findall("atom:author/atom:name", ns)
             published = entry.find("atom:published", ns)
-            categories = entry.findall("arxiv:category", ns)
+            categories = entry.findall("atom:category", ns) + entry.findall("arxiv:category", ns)
             links = entry.findall("atom:link", ns)
 
             title_text = title.text.strip().replace("\n", " ") if title is not None else ""
@@ -141,6 +141,8 @@ class PaperReader:
                 arxiv_id=arxiv_id,
                 title=title_text,
                 abstract=abstract_text,
+                authors=author_names,
+                categories=categories_list,
                 full_text="",  # Would need PDF parsing for full text
                 sections={"abstract": abstract_text},
                 references=[],

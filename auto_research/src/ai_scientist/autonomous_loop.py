@@ -18,6 +18,14 @@ from .review_loop import ReviewActionRouter, ReviewIssue
 from .scientific_review import MetaReviewer, RebuttalPlanner, ScientificReviewer
 
 
+EVIDENCE_RELATIONS = {
+    "SUPPORTED": "SUPPORTS",
+    "CONTRADICTED": "CONTRADICTS",
+    "INCONCLUSIVE": "INCONCLUSIVE",
+    "INVALID": "INVALID",
+}
+
+
 class AutonomousResearchLoop:
     """Connect reasoning, experiments, evidence, review, rebuttal, and revision."""
 
@@ -83,7 +91,7 @@ class AutonomousResearchLoop:
         }
         state.append("evidence", evidence)
 
-        relation = "SUPPORTS" if evaluation["verdict"] == "SUPPORTED" else "CONTRADICTS"
+        relation = EVIDENCE_RELATIONS[evaluation["verdict"]]
         graph = self._graph(state)
         graph.link_experiment_evidence(
             claim_id=hypothesis.id,
@@ -102,9 +110,11 @@ class AutonomousResearchLoop:
         if evaluation["verdict"] == "SUPPORTED":
             hypothesis.status = "SUPPORTED"
             hypothesis.supporting_evidence_ids.append(evidence["id"])
-        else:
-            hypothesis.status = "INCONCLUSIVE"
+        elif evaluation["verdict"] == "CONTRADICTED":
+            hypothesis.status = "CONTRADICTED"
             hypothesis.contradicting_evidence_ids.append(evidence["id"])
+        elif evaluation["verdict"] == "INCONCLUSIVE":
+            hypothesis.status = "INCONCLUSIVE"
 
         evolved = None
         if evolve:
@@ -176,7 +186,7 @@ class AutonomousResearchLoop:
                 experiment_id=result.experiment_id,
                 metrics=result.metrics,
                 artifact_paths=result.artifacts,
-                relation="SUPPORTS" if evaluation["verdict"] == "SUPPORTED" else "CONTRADICTS",
+                relation=EVIDENCE_RELATIONS[evaluation["verdict"]],
             )
         self._save_graph(state, graph)
         return outputs

@@ -24,9 +24,21 @@ class SandboxPolicy:
     max_output_chars: int = 200_000
 
     def executable_allowed(self, executable: str) -> bool:
-        name = Path(executable).name.lower()
+        candidate = Path(executable)
+        name = candidate.name.lower()
         current = Path(sys.executable).name.lower()
-        return name in {x.lower() for x in self.allowed_executables} or name == current
+        allowed_names = {x.lower() for x in self.allowed_executables} | {current}
+        trusted_paths = {Path(sys.executable).resolve()}
+        for allowed in allowed_names:
+            resolved = shutil.which(allowed)
+            if resolved:
+                trusted_paths.add(Path(resolved).resolve())
+
+        if candidate.is_absolute() or candidate.parent != Path("."):
+            return candidate.resolve() in trusted_paths
+
+        resolved = shutil.which(executable)
+        return name in allowed_names and resolved is not None and Path(resolved).resolve() in trusted_paths
 
 
 class WorkspaceSandbox:

@@ -22,6 +22,7 @@ class ExperimentSpec:
     sandbox_backend: str = "local"
     max_attempts: int = 2
     metadata: dict[str, Any] = field(default_factory=dict)
+    contradiction_criteria: dict[str, dict[str, float | str]] = field(default_factory=dict)
     id: str = field(default_factory=lambda: f"exp_{uuid.uuid4().hex[:10]}")
     created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
 

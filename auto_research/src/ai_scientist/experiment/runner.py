@@ -56,6 +56,9 @@ class ExperimentRunner:
         if metrics_path.exists():
             try:
                 metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+                if not isinstance(metrics, dict):
+                    metrics = {}
+                    error_type = error_type or "INVALID_METRICS"
             except Exception:
                 error_type = error_type or "INVALID_METRICS"
         elif status == "SUCCEEDED":

@@ -393,7 +393,8 @@ class FinalResearchCourt:
                 if human_objs:
                     decision.requires_human_review = True
                     decision.human_review_reason = f"{len(human_objs)} objections require human review"
-                    decision.decision = ScientificDecision.REVISE
+                    if decision.decision != ScientificDecision.KILL:
+                        decision.decision = ScientificDecision.REVISE
                     decision.reasons.append(DecisionReason(
                         type="BLOCKING",
                         category="OBJECTION",
