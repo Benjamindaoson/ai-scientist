@@ -11,10 +11,12 @@ dependencies = [
     "alembic>=1.16",
     "langgraph>=1.2",
     "langgraph-checkpoint-postgres>=3.1",
+    "httpx>=0.28",
     "pgvector>=0.4",
     "psycopg[binary]>=3.2",
     "pydantic>=2.11",
     "sqlalchemy>=2.0",
+    "tenacity>=9.0",
 ]
 
 [project.scripts]
@@ -29,6 +31,7 @@ where = ["auto_research/src"]
 [project.optional-dependencies]
 anthropic = ["anthropic>=0.30"]
 relay = ["aiohttp>=3.9"]
+literature = ["sentence-transformers>=5.0"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

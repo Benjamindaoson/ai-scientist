@@ -1,0 +1,38 @@
+[
+  {
+    "paper": {
+      "source": "openreview",
+      "source_record_id": "nZeVKeeFYf9",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "abstract": "LoRA adapts large language models with trainable low-rank matrices while freezing pretrained weights.",
+      "publication_year": 2022,
+      "identifiers": {"openreview": "nZeVKeeFYf9", "arxiv": "2106.09685"},
+      "authors": [{"name": "Edward Hu", "position": 1}],
+      "version": {"version_label": "ICLR-2022", "source_url": "https://openreview.net/forum?id=nZeVKeeFYf9"}
+    },
+    "official_appearance": {
+      "venue_code": "ICLR",
+      "event_year": 2022,
+      "track": "main",
+      "official_source_url": "https://openreview.net/forum?id=nZeVKeeFYf9"
+    }
+  },
+  {
+    "paper": {
+      "source": "neurips",
+      "source_record_id": "67d57c32e20fd0a7a302cb81d36e40d5",
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "abstract": "FlashAttention computes exact attention with an IO-aware tiling algorithm.",
+      "publication_year": 2022,
+      "identifiers": {"proceedings": "neurips-2022-67d57c32e20fd0a7a302cb81d36e40d5", "arxiv": "2205.14135"},
+      "authors": [{"name": "Tri Dao", "position": 1}],
+      "version": {"version_label": "NeurIPS-2022", "source_url": "https://proceedings.neurips.cc/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract-Conference.html"}
+    },
+    "official_appearance": {
+      "venue_code": "NeurIPS",
+      "event_year": 2022,
+      "track": "main",
+      "official_source_url": "https://proceedings.neurips.cc/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract-Conference.html"
+    }
+  }
+]
