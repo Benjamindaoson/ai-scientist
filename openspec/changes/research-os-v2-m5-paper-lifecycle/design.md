@@ -1,0 +1,3 @@
+# Design
+
+Scientific history remains immutable: analysis correction creates a new AnalysisRun and marks the old run superseded; dependent claims and manuscripts become stale rather than being rewritten. Claim provenance is resolved through claim-evidence links, evidence source references, analysis inputs, experiment runs/specs, and frozen protocols. Manuscript numeric bindings name an AnalysisRun and metric and are rendered from PostgreSQL. Review routing is category-based and independent novelty findings invoke a fresh retrieval callback. Preflight is deterministic. Release requires an APPROVED record matching the manuscript ID and content hash. Export snapshots canonical database rows and verifies every artifact hash during reconstruction.

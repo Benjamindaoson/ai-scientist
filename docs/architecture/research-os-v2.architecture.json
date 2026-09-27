@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Research OS v2 运行时架构",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [1270, 610],
+    "views": [
+      {"id": "governance", "label": "治理与路由", "focus": ["lab_director", "human_approval", "policy_engine", "langgraph", "role_agents"], "note": "人工目标、策略门禁和最终审批共同约束 LangGraph 的可达路径。"},
+      {"id": "execution", "label": "研究执行", "focus": ["role_agents", "codex", "action_broker", "experiment_runtime"], "note": "六个职责角色通过受控执行器、RPA 和实验运行时完成有界任务。"},
+      {"id": "truth", "label": "事实与溯源", "focus": ["literature", "research_store", "artifact_store", "git"], "note": "PostgreSQL 保存正式科学事实，大文件与代码版本分别由 Artifact Store 和 Git 保存。"}
+    ]
+  },
+  "components": [
+    {"id": "lab_director", "type": "external", "label": "Human Lab Director", "sublabel": "目标、预算与关键决策", "pos": [40, 55], "size": [200, 78]},
+    {"id": "human_approval", "type": "security", "label": "Human Approval", "sublabel": "哈希绑定的启动与发布审批", "pos": [270, 55], "size": [200, 78]},
+    {"id": "policy_engine", "type": "security", "label": "Policy Engine", "sublabel": "门禁、权限、预算与风险", "pos": [510, 55], "size": [180, 78]},
+    {"id": "langgraph", "type": "backend", "label": "LangGraph Research OS", "sublabel": "唯一主编排、检查点与恢复", "pos": [730, 55], "size": [210, 78]},
+    {"id": "role_agents", "type": "backend", "label": "6 Role Agents", "sublabel": "Scout · PI · Engineer · Analyst · Editor · Reviewer", "pos": [970, 55], "size": [260, 78]},
+    {"id": "literature", "type": "database", "label": "Literature Intelligence", "sublabel": "FTS + pgvector + Citation Graph", "pos": [40, 260], "size": [220, 78]},
+    {"id": "research_store", "type": "database", "label": "PostgreSQL Research Store", "sublabel": "唯一 scientific source of truth", "brand": "postgresql", "pos": [320, 260], "size": [230, 78]},
+    {"id": "artifact_store", "type": "database", "label": "Artifact Store", "sublabel": "不可变大文件与 SHA-256", "pos": [580, 260], "size": [210, 78]},
+    {"id": "codex", "type": "external", "label": "Codex Executor", "sublabel": "默认智能执行后端", "pos": [810, 260], "size": [180, 78]},
+    {"id": "action_broker", "type": "security", "label": "Action Broker / RPA", "sublabel": "CLI > HTTP > Playwright > UI > Vision", "pos": [1030, 260], "size": [220, 78]},
+    {"id": "git", "type": "messagebus", "label": "Git", "sublabel": "代码、配置、提示词与论文版本", "pos": [810, 470], "size": [180, 78]},
+    {"id": "experiment_runtime", "type": "backend", "label": "Experiment Runtime", "sublabel": "沙箱、运行、指标与恢复", "pos": [1030, 470], "size": [210, 78]}
+  ],
+  "boundaries": [
+    {"kind": "security-group", "label": "受策略约束的 Research OS 控制平面", "wraps": ["policy_engine", "langgraph", "role_agents"], "pad": 20},
+    {"kind": "region", "label": "持久科学事实与可重建溯源", "wraps": ["literature", "research_store", "artifact_store", "git"], "pad": 20}
+  ],
+  "connections": [
+    {"id": "director_approval", "from": "lab_director", "to": "human_approval", "variant": "security"},
+    {"id": "approval_policy", "from": "human_approval", "to": "policy_engine", "variant": "security"},
+    {"id": "policy_graph", "from": "policy_engine", "to": "langgraph", "variant": "emphasis"},
+    {"id": "graph_agents", "from": "langgraph", "to": "role_agents", "variant": "emphasis"},
+    {"id": "graph_store", "from": "langgraph", "to": "research_store", "fromSide": "bottom", "toSide": "top"},
+    {"id": "agents_codex", "from": "role_agents", "to": "codex", "fromSide": "bottom", "toSide": "top"},
+    {"id": "agents_broker", "from": "role_agents", "to": "action_broker", "fromSide": "bottom", "toSide": "top", "variant": "security"},
+    {"id": "broker_experiment", "from": "action_broker", "to": "experiment_runtime", "fromSide": "bottom", "toSide": "top"},
+    {"id": "codex_git", "from": "codex", "to": "git", "fromSide": "bottom", "toSide": "top"},
+    {"id": "literature_store", "from": "literature", "to": "research_store"},
+    {"id": "store_artifacts", "from": "research_store", "to": "artifact_store"}
+  ]
+}

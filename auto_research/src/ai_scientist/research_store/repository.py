@@ -216,11 +216,33 @@ class ResearchRepository:
             "content_summary": content_summary, "validity_status": validity_status, "content_hash": content_hash,
         })
 
-    def create_claim(self, project_id: str, claim_type: str, claim_text: str, *, scope: dict, created_by_role: str, status: str = "DRAFT", version: int = 1) -> dict[str, Any]:
+    def get_analysis_run(self, analysis_run_id: str) -> dict[str, Any] | None:
+        return self._get(models.analysis_runs, models.analysis_runs.c.analysis_run_id, analysis_run_id)
+
+    def update_analysis_run(self, analysis_run_id: str, **changes: Any) -> dict[str, Any]:
+        values = {key: value for key, value in changes.items() if key in {"status"}}
+        with self.engine.begin() as connection:
+            row = connection.execute(update(models.analysis_runs).where(models.analysis_runs.c.analysis_run_id == analysis_run_id).values(**values).returning(models.analysis_runs)).one()
+        return _row(row)  # type: ignore[return-value]
+
+    def get_evidence_item(self, evidence_id: str) -> dict[str, Any] | None:
+        return self._get(models.evidence_items, models.evidence_items.c.evidence_id, evidence_id)
+
+    def create_claim(self, project_id: str, claim_type: str, claim_text: str, *, scope: dict, created_by_role: str, status: str = "DRAFT", version: int = 1, parent_claim_id: str | None = None, content_hash: str | None = None) -> dict[str, Any]:
         return self._insert(models.claims, {
             "claim_id": _uuid(), "project_id": project_id, "claim_type": claim_type, "claim_text": claim_text,
             "scope": scope, "created_by_role": created_by_role, "status": status, "version": version,
+            "parent_claim_id": parent_claim_id, "content_hash": content_hash,
         })
+
+    def get_claim(self, claim_id: str) -> dict[str, Any] | None:
+        return self._get(models.claims, models.claims.c.claim_id, claim_id)
+
+    def update_claim(self, claim_id: str, **changes: Any) -> dict[str, Any]:
+        values = {key: value for key, value in changes.items() if key in {"status", "invalidated_at", "invalidation_reason"}}
+        with self.engine.begin() as connection:
+            row = connection.execute(update(models.claims).where(models.claims.c.claim_id == claim_id).values(**values).returning(models.claims)).one()
+        return _row(row)  # type: ignore[return-value]
 
     def link_claim_evidence(self, claim_id: str, evidence_id: str, relation: str, rationale: str, created_by_role: str, review_status: str = "UNVERIFIED") -> dict[str, Any]:
         return self._insert(models.claim_evidence_links, {
@@ -244,6 +266,47 @@ class ResearchRepository:
             protocol_ids = list({analysis["protocol_version_id"] for analysis in analyses} | {spec["protocol_version_id"] for spec in specs})
             protocols = [dict(row._mapping) for row in connection.execute(select(models.protocol_versions).where(models.protocol_versions.c.protocol_version_id.in_(protocol_ids)))] if protocol_ids else []
         return {"claim": claim, "links": links, "evidence": evidence, "analyses": analyses, "experiment_runs": runs, "experiment_specs": specs, "protocols": protocols}
+
+    def create_review_finding(self, project_id: str, *, review_stage: str, category: str, severity: str, target_type: str, target_id: str, finding: str, evidence_refs: list[str], impact: str, required_resolution: str, assigned_roles: list[str]) -> dict[str, Any]:
+        return self._insert(models.review_findings, {
+            "review_finding_id": _uuid(), "project_id": project_id, "review_stage": review_stage,
+            "category": category, "severity": severity, "target_type": target_type, "target_id": target_id,
+            "finding": finding, "evidence_refs": evidence_refs, "impact": impact,
+            "required_resolution": required_resolution, "assigned_roles": assigned_roles,
+        })
+
+    def list_review_findings(self, project_id: str, status: str | None = None) -> list[dict[str, Any]]:
+        statement = select(models.review_findings).where(models.review_findings.c.project_id == project_id)
+        if status:
+            statement = statement.where(models.review_findings.c.status == status)
+        with self.engine.connect() as connection:
+            return [dict(row._mapping) for row in connection.execute(statement.order_by(models.review_findings.c.created_at))]
+
+    def create_manuscript_version(self, project_id: str, *, source_artifact_id: str, pdf_artifact_id: str | None, claim_ids: list[str], status: str, content_hash: str, numeric_trace: dict, literature_trace: list, validation: dict) -> dict[str, Any]:
+        with self.engine.connect() as connection:
+            version = int(connection.execute(select(func.coalesce(func.max(models.manuscript_versions.c.version), 0)).where(models.manuscript_versions.c.project_id == project_id)).scalar_one()) + 1
+        return self._insert(models.manuscript_versions, {
+            "manuscript_version_id": _uuid(), "project_id": project_id, "version": version,
+            "source_artifact_id": source_artifact_id, "pdf_artifact_id": pdf_artifact_id,
+            "claim_ids": claim_ids, "status": status, "content_hash": content_hash,
+            "numeric_trace": numeric_trace, "literature_trace": literature_trace, "validation": validation,
+        })
+
+    def get_manuscript_version(self, manuscript_version_id: str) -> dict[str, Any] | None:
+        return self._get(models.manuscript_versions, models.manuscript_versions.c.manuscript_version_id, manuscript_version_id)
+
+    def update_manuscript_version(self, manuscript_version_id: str, **changes: Any) -> dict[str, Any]:
+        values = {key: value for key, value in changes.items() if key in {"status", "validation", "invalidated_at", "invalidation_reason", "pdf_artifact_id"}}
+        with self.engine.begin() as connection:
+            row = connection.execute(update(models.manuscript_versions).where(models.manuscript_versions.c.manuscript_version_id == manuscript_version_id).values(**values).returning(models.manuscript_versions)).one()
+        return _row(row)  # type: ignore[return-value]
+
+    def list_project_rows(self, table_name: str, project_id: str) -> list[dict[str, Any]]:
+        table = models.TABLES[table_name]
+        if "project_id" not in table.c:
+            raise ValueError(f"table has no project_id: {table_name}")
+        with self.engine.connect() as connection:
+            return [dict(row._mapping) for row in connection.execute(select(table).where(table.c.project_id == project_id))]
 
     def create_objection(self, project_id: str, target_type: str, target_id: str, category: str, severity: str, title: str, argument: str, *, raised_by_role: str, supporting_evidence_ids: list[str] | None = None, status: str = "OPEN") -> dict[str, Any]:
         return self._insert(models.objections, {
@@ -286,6 +349,11 @@ class ResearchRepository:
     def approval_authorizes(self, approval_id: str, target_id: str, target_hash: str) -> bool:
         approval = self._get(models.approvals, models.approvals.c.approval_id, approval_id)
         return bool(approval and approval["status"] == "APPROVED" and approval["target_id"] == target_id and approval["target_hash"] == target_hash)
+
+    def update_approval(self, approval_id: str, *, status: str, approved_by: str | None = None) -> dict[str, Any]:
+        with self.engine.begin() as connection:
+            row = connection.execute(update(models.approvals).where(models.approvals.c.approval_id == approval_id).values(status=status, approved_by=approved_by).returning(models.approvals)).one()
+        return _row(row)  # type: ignore[return-value]
 
     def create_decision(self, project_id: str, decision_type: str, decision: str, *, policy_version: str, gate_results: dict | None = None, reason_refs: list | None = None) -> dict[str, Any]:
         return self._insert(models.decisions, {

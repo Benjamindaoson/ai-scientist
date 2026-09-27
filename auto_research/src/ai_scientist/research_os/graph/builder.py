@@ -24,7 +24,7 @@ NODE_NAMES = (
 def _stage(runtime: ResearchOSRuntime, name: str, role: str | None = None, capability: str | None = None) -> Callable[[ResearchExecutionState], dict[str, Any]]:
     def node(state: ResearchExecutionState) -> dict[str, Any]:
         update = runtime.dispatch_task(name, role, capability, state) if role and capability else {}
-        return {"current_stage": name.upper(), "active_role": role, **update}
+        return {"current_stage": name.upper(), "active_role": role, **update, **runtime.run_stage(name, state)}
     return node
 
 
@@ -93,8 +93,10 @@ def build_research_graph(runtime: ResearchOSRuntime, checkpointer):
     def release(state: ResearchExecutionState) -> dict[str, Any]:
         response = interrupt({"kind": "FINAL_RELEASE", "project_id": state["project_id"], "approval_id": state.get("pending_approval_id")})
         approval_id = response.get("approval_id") if isinstance(response, dict) else None
-        if not approval_id:
-            return {"current_stage": "WAIT_FOR_HUMAN", "error_code": "RELEASE_APPROVAL_REQUIRED"}
+        manuscript_id = state.get("manuscript_version_id")
+        if not approval_id or not manuscript_id or not runtime.release_authorized(approval_id, manuscript_id):
+            raise PermissionError("explicit hash-bound human release approval is required")
+        runtime.repository.update_manuscript_version(manuscript_id, status="RELEASE_READY")
         return {"current_stage": "RELEASE_APPROVED", "pending_approval_id": approval_id}
 
     graph.add_node("evaluate_10_10_gate", evaluate)

@@ -168,9 +168,11 @@ analysis_runs = Table(
 claims = Table(
     "claims", metadata,
     _id("claim_id"), Column("project_id", UUID(as_uuid=False), ForeignKey("research.projects.project_id"), nullable=False),
+    Column("parent_claim_id", UUID(as_uuid=False), ForeignKey("research.claims.claim_id")),
     Column("claim_type", Text, nullable=False), Column("claim_text", Text, nullable=False), Column("scope", JSONB, nullable=False, server_default="{}"),
     Column("status", Text, nullable=False, server_default="DRAFT"), Column("version", Integer, nullable=False, server_default="1"),
-    Column("created_by_role", Text, nullable=False), *_timestamps(), schema=SCHEMA,
+    Column("created_by_role", Text, nullable=False), Column("content_hash", Text),
+    Column("invalidated_at", DateTime(timezone=True)), Column("invalidation_reason", Text), *_timestamps(), schema=SCHEMA,
 )
 
 evidence_items = Table(
@@ -206,7 +208,7 @@ review_findings = Table(
     Column("review_stage", Text, nullable=False), Column("category", Text, nullable=False), Column("severity", Text, nullable=False),
     Column("target_type", Text, nullable=False), Column("target_id", UUID(as_uuid=False), nullable=False), Column("finding", Text, nullable=False),
     Column("evidence_refs", JSONB, nullable=False), Column("impact", Text), Column("required_resolution", Text, nullable=False),
-    Column("status", Text, nullable=False, server_default="OPEN"), *_timestamps(), schema=SCHEMA,
+    Column("status", Text, nullable=False, server_default="OPEN"), Column("assigned_roles", JSONB, nullable=False, server_default="[]"), *_timestamps(), schema=SCHEMA,
 )
 
 decisions = Table(
@@ -231,7 +233,9 @@ manuscript_versions = Table(
     Column("version", Integer, nullable=False), Column("source_artifact_id", UUID(as_uuid=False), ForeignKey("research.artifacts.artifact_id"), nullable=False),
     Column("pdf_artifact_id", UUID(as_uuid=False), ForeignKey("research.artifacts.artifact_id")),
     Column("claim_ids", ARRAY(UUID(as_uuid=False)), nullable=False, server_default="{}"), Column("status", Text, nullable=False),
-    Column("content_hash", Text, nullable=False), *_timestamps(),
+    Column("content_hash", Text, nullable=False), Column("numeric_trace", JSONB, nullable=False, server_default="{}"),
+    Column("literature_trace", JSONB, nullable=False, server_default="[]"), Column("validation", JSONB, nullable=False, server_default="{}"),
+    Column("invalidated_at", DateTime(timezone=True)), Column("invalidation_reason", Text), *_timestamps(),
     UniqueConstraint("project_id", "version", name="uq_manuscript_project_version"), schema=SCHEMA,
 )
 

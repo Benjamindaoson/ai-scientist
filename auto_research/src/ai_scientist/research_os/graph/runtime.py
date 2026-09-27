@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Callable
 
 from ai_scientist.research_store import ResearchRepository
 
@@ -15,6 +15,11 @@ class ResearchOSRuntime:
     max_reframes: int = 2
     agent_lab: Any | None = None
     task_workspace: str = "."
+    stage_handlers: dict[str, Callable[[dict[str, Any]], dict[str, Any]]] | None = None
+
+    def run_stage(self, stage: str, state: dict[str, Any]) -> dict[str, Any]:
+        handler = (self.stage_handlers or {}).get(stage)
+        return handler(state) if handler else {}
 
     def dispatch_task(self, stage: str, role: str, capability: str, state: dict[str, Any]) -> dict[str, Any]:
         if self.agent_lab is None:
@@ -54,7 +59,19 @@ class ResearchOSRuntime:
         spec = self.repository.get_experiment_spec(experiment_spec_id)
         if not spec:
             raise KeyError(experiment_spec_id)
-        result = self.experiment_runner.run(spec)
+        runner_spec: Any = spec
+        from ai_scientist.experiment.runner import ExperimentRunner
+        if isinstance(self.experiment_runner, ExperimentRunner):
+            from ai_scientist.experiment.models import ExperimentSpec
+            runner_spec = ExperimentSpec(
+                id=spec["experiment_spec_id"], hypothesis_id=spec["hypothesis_id"], objective=spec["objective"],
+                command=list(spec["command"]), workspace=spec["workspace"], success_criteria=spec["metrics_contract"],
+                controls=list(spec["controls"]) if isinstance(spec["controls"], list) else [],
+                timeout_seconds=int(spec["resource_limits"].get("timeout_seconds", 1800)),
+                sandbox_backend=spec["execution_profile"] if spec["execution_profile"] in {"local", "docker"} else "local",
+                metadata={"protocol_version_id": spec["protocol_version_id"], "spec_hash": spec["spec_hash"]},
+            )
+        result = self.experiment_runner.run(runner_spec)
         if isinstance(result, dict):
             status = result.get("status", "SUCCEEDED")
             return_code = result.get("return_code")
@@ -73,3 +90,7 @@ class ResearchOSRuntime:
 
     def complete_run(self, experiment_run_id: str, **result: Any) -> dict[str, Any]:
         return self.repository.update_experiment_run(experiment_run_id, completed_at=datetime.now(timezone.utc), **result)
+
+    def release_authorized(self, approval_id: str, manuscript_version_id: str) -> bool:
+        manuscript = self.repository.get_manuscript_version(manuscript_version_id)
+        return bool(manuscript and manuscript["status"] == "PREFLIGHT_PASSED" and self.repository.approval_authorizes(approval_id, manuscript_version_id, manuscript["content_hash"]))
