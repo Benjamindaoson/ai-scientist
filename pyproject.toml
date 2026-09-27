@@ -32,6 +32,7 @@ where = ["auto_research/src"]
 anthropic = ["anthropic>=0.30"]
 relay = ["aiohttp>=3.9"]
 literature = ["sentence-transformers>=5.0"]
+browser = ["playwright>=1.55"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

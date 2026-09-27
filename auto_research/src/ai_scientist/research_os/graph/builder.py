@@ -21,9 +21,10 @@ NODE_NAMES = (
 )
 
 
-def _stage(name: str, role: str | None = None) -> Callable[[ResearchExecutionState], dict[str, Any]]:
-    def node(_: ResearchExecutionState) -> dict[str, Any]:
-        return {"current_stage": name.upper(), "active_role": role}
+def _stage(runtime: ResearchOSRuntime, name: str, role: str | None = None, capability: str | None = None) -> Callable[[ResearchExecutionState], dict[str, Any]]:
+    def node(state: ResearchExecutionState) -> dict[str, Any]:
+        update = runtime.dispatch_task(name, role, capability, state) if role and capability else {}
+        return {"current_stage": name.upper(), "active_role": role, **update}
     return node
 
 
@@ -38,6 +39,15 @@ def build_research_graph(runtime: ResearchOSRuntime, checkpointer):
         "formal_analysis": "analyst", "independent_result_audit": "reviewer", "draft_manuscript": "editor",
         "independent_paper_review": "reviewer", "submission_preflight": "editor", "seed_followup_candidates": "scout",
     }
+    capabilities = {
+        "discover_candidates": "discover_candidates", "scout_prior_search": "prior_search", "reviewer_novelty_search": "independent_novelty_audit",
+        "formalize_question": "formalize_question", "design_study": "study_design", "design_measurement": "design_measurement", "review_protocol": "protocol_audit",
+        "engineering_preflight": "test_code", "implement_killer_experiment": "implement_experiment", "analyze_killer_experiment": "formal_analysis",
+        "interpret_killer_result": "interpretation", "plan_next_research_action": "next_research_action", "implement_experiment": "implement_experiment",
+        "analyze_experiment": "formal_analysis", "update_scientific_model": "interpretation", "run_confirmation": "implement_experiment",
+        "formal_analysis": "formal_analysis", "independent_result_audit": "independent_result_audit", "draft_manuscript": "draft_paper",
+        "independent_paper_review": "paper_review", "submission_preflight": "submission_package", "seed_followup_candidates": "discover_candidates",
+    }
     special = {
         "evaluate_10_10_gate", "human_start_approval", "protocol_gate", "submit_killer_experiment",
         "submit_experiment", "wait_for_experiment", "wait_for_experiment_result", "killer_gate",
@@ -46,7 +56,7 @@ def build_research_graph(runtime: ResearchOSRuntime, checkpointer):
     }
     for name in NODE_NAMES:
         if name not in special:
-            graph.add_node(name, _stage(name, roles.get(name)))
+            graph.add_node(name, _stage(runtime, name, roles.get(name), capabilities.get(name)))
 
     def evaluate(state: ResearchExecutionState) -> dict[str, Any]:
         decision = runtime.decision(state["project_id"], "IDEA_GATE", state.get("last_decision_id"))
@@ -96,10 +106,13 @@ def build_research_graph(runtime: ResearchOSRuntime, checkpointer):
     graph.add_node("wait_for_experiment_result", wait_for_run)
     graph.add_node("killer_gate", lambda state: gate(state, "KILLER_GATE", "KILLER_GATE"))
     graph.add_node("research_progress_gate", lambda state: gate(state, "PROGRESS_GATE", "PROGRESS_GATE"))
-    graph.add_node("independent_result_audit", lambda state: gate(state, "AUDIT_GATE", "RESULT_AUDIT"))
+    def independent_audit(state: ResearchExecutionState) -> dict[str, Any]:
+        return {**gate(state, "AUDIT_GATE", "RESULT_AUDIT"), **runtime.dispatch_task("independent_result_audit", "reviewer", "independent_result_audit", state)}
+
+    graph.add_node("independent_result_audit", independent_audit)
     graph.add_node("human_release_approval", release)
     graph.add_node("archive_project", lambda _: {"current_stage": "ARCHIVED", "active_role": None})
-    graph.add_node("seed_followup_candidates", lambda _: {"current_stage": "ARCHIVED", "active_role": "scout"})
+    graph.add_node("seed_followup_candidates", lambda state: {"current_stage": "ARCHIVED", "active_role": "scout", **runtime.dispatch_task("seed_followup_candidates", "scout", "discover_candidates", state)})
 
     graph.add_edge(START, "bootstrap_project")
     for left, right in zip(("bootstrap_project", "discover_candidates", "scout_prior_search", "reviewer_novelty_search"), ("discover_candidates", "scout_prior_search", "reviewer_novelty_search", "evaluate_10_10_gate")):

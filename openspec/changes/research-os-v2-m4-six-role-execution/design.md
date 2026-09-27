@@ -1,0 +1,3 @@
+# Design
+
+Pydantic contracts reject unknown fields. A capability matrix is checked before any executor receives a task. Executors produce validated TaskResult records and never mutate PostgreSQL scientific facts directly. Codex uses the installed non-interactive CLI with an explicit workspace, ephemeral task, output schema, and captured execution record. Human work uses a durable package and LangGraph interrupt. The Action Broker selects the first permitted available channel in the frozen priority order and records idempotent execution evidence. Architecture ablation is evaluation-only and cannot alter production role configuration.

@@ -1,0 +1,7 @@
+[
+  {"task_id":"protocol-drift","has_error":true,"requires_independent_review":false,"protocol_mutation_risk":true,"repair_minutes":12},
+  {"task_id":"statistics-sign","has_error":true,"requires_independent_review":true,"protocol_mutation_risk":false,"repair_minutes":18},
+  {"task_id":"unsupported-claim","has_error":true,"requires_independent_review":true,"protocol_mutation_risk":false,"repair_minutes":15},
+  {"task_id":"valid-negative-result","has_error":false,"requires_independent_review":true,"protocol_mutation_risk":false,"repair_minutes":0},
+  {"task_id":"clean-reproduction","has_error":false,"requires_independent_review":false,"protocol_mutation_risk":true,"repair_minutes":0}
+]
