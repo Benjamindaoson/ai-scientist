@@ -61,6 +61,7 @@ class AIScientist:
         db_path: str | Path = "ai_scientist.db",
         gateway: BaseGateway | None = None,
         max_literature_results: int = 20,
+        research_database_url: str | None = None,
     ):
         """Initialize AI Scientist.
 
@@ -94,6 +95,22 @@ class AIScientist:
 
         self.max_literature_results = max_literature_results
         self.current_session: ResearchSession | None = None
+        self.research_database_url = research_database_url
+
+    def run_research_os(self, state: dict, experiment_runner, *, thread_id: str) -> dict:
+        """Compatibility facade for the canonical Research OS LangGraph runtime."""
+        if not self.research_database_url:
+            raise RuntimeError("research_database_url is required for Research OS execution")
+        from ai_scientist.research_os import ResearchOSRuntime, build_research_graph, postgres_checkpointer
+        from ai_scientist.research_store import ResearchRepository, create_research_engine, initialize_database
+
+        engine = create_research_engine(self.research_database_url)
+        initialize_database(engine)
+        runtime = ResearchOSRuntime(ResearchRepository(engine), experiment_runner)
+        with postgres_checkpointer(self.research_database_url) as checkpointer:
+            return build_research_graph(runtime, checkpointer).invoke(
+                state, {"configurable": {"thread_id": thread_id}}
+            )
 
     async def start_research(
         self,

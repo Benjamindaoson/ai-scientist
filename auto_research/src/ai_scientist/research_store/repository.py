@@ -171,6 +171,9 @@ class ResearchRepository:
     def get_experiment_spec_by_idempotency_key(self, key: str) -> dict[str, Any] | None:
         return self._get(models.experiment_specs, models.experiment_specs.c.idempotency_key, key)
 
+    def get_experiment_spec(self, experiment_spec_id: str) -> dict[str, Any] | None:
+        return self._get(models.experiment_specs, models.experiment_specs.c.experiment_spec_id, experiment_spec_id)
+
     def create_experiment_run(self, experiment_spec_id: str, *, attempt: int, status: str, metrics: dict | None = None, return_code: int | None = None, error_type: str | None = None, external_run_id: str | None = None, runtime_metadata: dict | None = None) -> dict[str, Any]:
         with self.engine.connect() as connection:
             existing = connection.execute(select(models.experiment_runs).where(models.experiment_runs.c.experiment_spec_id == experiment_spec_id, models.experiment_runs.c.attempt == attempt)).first()
@@ -184,6 +187,19 @@ class ResearchRepository:
 
     def get_experiment_run(self, experiment_run_id: str) -> dict[str, Any] | None:
         return self._get(models.experiment_runs, models.experiment_runs.c.experiment_run_id, experiment_run_id)
+
+    def list_experiment_runs(self, experiment_spec_id: str) -> list[dict[str, Any]]:
+        with self.engine.connect() as connection:
+            return [dict(row._mapping) for row in connection.execute(
+                select(models.experiment_runs).where(models.experiment_runs.c.experiment_spec_id == experiment_spec_id).order_by(models.experiment_runs.c.attempt)
+            )]
+
+    def update_experiment_run(self, experiment_run_id: str, **changes: Any) -> dict[str, Any]:
+        allowed = {"status", "return_code", "metrics", "error_type", "external_run_id", "runtime_metadata", "completed_at"}
+        values = {key: value for key, value in changes.items() if key in allowed}
+        with self.engine.begin() as connection:
+            row = connection.execute(update(models.experiment_runs).where(models.experiment_runs.c.experiment_run_id == experiment_run_id).values(**values).returning(models.experiment_runs)).one()
+        return _row(row)  # type: ignore[return-value]
 
     def create_analysis_run(self, project_id: str, protocol_version_id: str, input_experiment_run_ids: list[str], *, analysis_code_revision: str, analysis_plan_hash: str, status: str, results: dict, uncertainty: dict | None = None, limitations: dict | None = None, artifact_refs: list | None = None) -> dict[str, Any]:
         return self._insert(models.analysis_runs, {
@@ -270,6 +286,22 @@ class ResearchRepository:
     def approval_authorizes(self, approval_id: str, target_id: str, target_hash: str) -> bool:
         approval = self._get(models.approvals, models.approvals.c.approval_id, approval_id)
         return bool(approval and approval["status"] == "APPROVED" and approval["target_id"] == target_id and approval["target_hash"] == target_hash)
+
+    def create_decision(self, project_id: str, decision_type: str, decision: str, *, policy_version: str, gate_results: dict | None = None, reason_refs: list | None = None) -> dict[str, Any]:
+        return self._insert(models.decisions, {
+            "decision_id": _uuid(), "project_id": project_id, "decision_type": decision_type,
+            "decision": decision, "gate_results": gate_results or {}, "reason_refs": reason_refs or [],
+            "policy_version": policy_version,
+        })
+
+    def get_decision(self, decision_id: str) -> dict[str, Any] | None:
+        return self._get(models.decisions, models.decisions.c.decision_id, decision_id)
+
+    def get_latest_decision(self, project_id: str, decision_type: str) -> dict[str, Any] | None:
+        with self.engine.connect() as connection:
+            return _row(connection.execute(
+                select(models.decisions).where(models.decisions.c.project_id == project_id, models.decisions.c.decision_type == decision_type).order_by(models.decisions.c.created_at.desc()).limit(1)
+            ).first())
 
     def register_artifact(self, *, artifact_type: str, uri: str, sha256: str, size_bytes: int, project_id: str | None = None, mime_type: str | None = None, metadata: dict | None = None, created_by_task_id: str | None = None) -> dict[str, Any]:
         with self.engine.connect() as connection:
