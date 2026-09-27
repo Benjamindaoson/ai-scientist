@@ -16,4 +16,4 @@
 ## 4. Acceptance
 
 - [x] 4.1 Run all 20 end-to-end acceptance checks and required failure injections.
-- [ ] 4.2 Run complete regression, validate all OpenSpec changes, write M5/final reports, commit, push, and verify remote SHA.
+- [x] 4.2 Run complete regression, validate all OpenSpec changes, write M5/final reports, commit, push, and verify remote SHA.
