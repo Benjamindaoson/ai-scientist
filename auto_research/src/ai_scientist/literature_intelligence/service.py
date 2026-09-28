@@ -192,6 +192,14 @@ class LiteratureService:
             edition = connection.execute(select(models.venue_editions).join(models.venues).where(models.venues.c.code == venue_code, models.venue_editions.c.event_year == event_year)).first()
         if not edition:
             raise KeyError((venue_code, event_year))
+        with self.repository.engine.connect() as connection:
+            existing = connection.execute(select(models.paper_appearances).where(
+                models.paper_appearances.c.paper_id == paper_id,
+                models.paper_appearances.c.venue_edition_id == edition._mapping["venue_edition_id"],
+                models.paper_appearances.c.track == track,
+            )).first()
+        if existing:
+            return dict(existing._mapping)
         return self.repository.insert(models.paper_appearances, paper_appearance_id=_uuid(), paper_id=paper_id, venue_edition_id=edition._mapping["venue_edition_id"], track=track, acceptance_status="ACCEPTED", is_core_accepted=track in {"main", "research"}, official_source_url=official_source_url)
 
     def ingest_full_text(self, paper_version_id: str, content: str, *, source_url: str, license_name: str) -> dict[str, Any]:
@@ -341,9 +349,10 @@ class LiteratureService:
         return json.loads(Path(path).read_text(encoding="utf-8"))
 
     def run_known_prior_benchmark(self, benchmark: list[dict[str, Any]], search) -> dict[str, Any]:
-        top20 = top50 = inspectable = fabricated = 0
+        top10 = top20 = top50 = inspectable = fabricated = external_total = external_found = false_friend_hits = false_friend_total = 0
+        reciprocal_ranks = 0.0
         for item in benchmark:
-            paper = self.repository.find_paper_by_identifiers({"arxiv": item["designated_identifier"].split(":", 1)[1]})
+            paper = self.repository.get_paper(item["designated_paper_id"]) if item.get("designated_paper_id") else self.repository.find_paper_by_identifiers({"arxiv": item["designated_identifier"].split(":", 1)[1]})
             if not paper:
                 continue
             with self.repository.engine.connect() as connection:
@@ -358,9 +367,26 @@ class LiteratureService:
                 top50 += 1
             if paper["paper_id"] in ids[:20]:
                 top20 += 1
+            if paper["paper_id"] in ids[:10]:
+                top10 += 1
+            if paper["paper_id"] in ids:
+                reciprocal_ranks += 1 / (ids.index(paper["paper_id"]) + 1)
+            if item.get("source_scope") == "EXTERNAL":
+                external_total += 1
+                external_found += int(paper["paper_id"] in ids[:50])
+            false_friends = set(item.get("false_friend_paper_ids", []))
+            false_friend_total += len(false_friends)
+            false_friend_hits += len(false_friends & set(ids[:10]))
             designated = next((row for row in result["results"] if row["paper_id"] == paper["paper_id"]), None)
             if designated and designated["source_chunk_ids"]:
                 inspectable += 1
             fabricated += sum(1 for paper_id in ids if self.repository.get_paper(paper_id) is None)
         total = len(benchmark)
-        return {"queries": total, "top_50_recall": top50 / total, "top_20_recall": top20 / total, "inspectable_source_rate": inspectable / total, "fabricated_ids": fabricated}
+        return {
+            "queries": total, "recall_at_10": top10 / total, "top_20_recall": top20 / total,
+            "top_50_recall": top50 / total, "mrr": reciprocal_ranks / total,
+            "dangerous_prior_recall": top50 / total,
+            "external_prior_recall": external_found / external_total if external_total else None,
+            "false_positive_rate": false_friend_hits / false_friend_total if false_friend_total else 0.0,
+            "inspectable_source_rate": inspectable / total, "fabricated_ids": fabricated,
+        }

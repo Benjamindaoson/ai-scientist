@@ -1,0 +1,12 @@
+{
+  "dangerous_prior_recall": 1.0,
+  "external_prior_recall": 1.0,
+  "fabricated_ids": 0,
+  "false_positive_rate": 0.015,
+  "inspectable_source_rate": 1.0,
+  "mrr": 0.8476666666666668,
+  "queries": 100,
+  "recall_at_10": 1.0,
+  "top_20_recall": 1.0,
+  "top_50_recall": 1.0
+}

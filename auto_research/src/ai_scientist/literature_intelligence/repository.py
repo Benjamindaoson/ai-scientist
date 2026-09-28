@@ -124,7 +124,7 @@ class LiteratureRepository:
     def retrieval_results(self, retrieval_run_id: str) -> list[dict[str, Any]]:
         with self.engine.connect() as connection:
             rows = connection.execute(
-                select(models.retrieval_results, models.papers.c.title).join(models.papers, models.papers.c.paper_id == models.retrieval_results.c.paper_id)
+                select(models.retrieval_results, models.papers.c.title, models.papers.c.abstract, models.papers.c.publication_year).join(models.papers, models.papers.c.paper_id == models.retrieval_results.c.paper_id)
                 .where(models.retrieval_results.c.retrieval_run_id == retrieval_run_id).order_by(models.retrieval_results.c.rank)
             )
             return [dict(row._mapping) for row in rows]

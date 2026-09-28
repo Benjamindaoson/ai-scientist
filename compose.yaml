@@ -27,7 +27,9 @@ services:
       PYTHONIOENCODING: utf-8
     volumes:
       - .:/workspace
+      - research-hf-cache:/root/.cache/huggingface
     working_dir: /workspace
 
 volumes:
   research-postgres:
+  research-hf-cache:

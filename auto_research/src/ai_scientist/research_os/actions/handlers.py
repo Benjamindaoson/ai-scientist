@@ -56,6 +56,7 @@ class PlaywrightActionHandler:
                 "status_code": response.status if response else None,
                 "url": page.url,
                 "title": page.title(),
+                "content": page.content(),
                 "artifact_refs": [session["trace"], session["screenshot"], session["metadata"]],
             }
             Path(session["metadata"]).write_text(json.dumps({"action_id": request.action_id, "url": page.url, "isolated_profile": True}, indent=2), encoding="utf-8")

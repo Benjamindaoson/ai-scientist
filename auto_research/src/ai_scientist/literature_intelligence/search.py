@@ -19,34 +19,40 @@ class HybridSearch:
         self.embedding_provider = embedding_provider
 
     def search(self, query: str, *, actor_role: str, idea_ref: str | None = None, query_variants: list[str] | None = None, filters: dict | None = None, limit: int = 50) -> dict[str, Any]:
+        variants = list(dict.fromkeys(query_variants or [query]))
         run = self.repository.insert(
             models.retrieval_runs, retrieval_run_id=_uuid(), idea_ref=idea_ref, actor_role=actor_role, query=query,
-            query_variants=query_variants or [query], filters=filters or {},
+            query_variants=variants, filters=filters or {},
             retrieval_config={"keyword": "postgresql_fts+pg_trgm", "dense": "pgvector_cosine", "fusion": "rrf", "rrf_k": 60},
             embedding_model=self.embedding_provider.model_name, candidate_count=0, deep_read_set=[],
         )
-        vector = self.embedding_provider.embed(query)
         document = func.to_tsvector("english", models.papers.c.title + " " + models.papers.c.abstract)
-        query_expr = func.plainto_tsquery("english", query)
+        keyword_rank: dict[str, int] = {}
+        dense_rank: dict[str, int] = {}
         with self.repository.engine.connect() as connection:
-            keyword_rows = connection.execute(
-                select(models.papers.c.paper_id, func.ts_rank_cd(document, query_expr).label("rank_score"), func.similarity(models.papers.c.normalized_title, query.lower()).label("trgm"))
-                .where(or_(document.op("@@")(query_expr), func.similarity(models.papers.c.normalized_title, query.lower()) > 0.1))
-                .order_by((func.ts_rank_cd(document, query_expr) + func.similarity(models.papers.c.normalized_title, query.lower())).desc()).limit(limit)
-            ).all()
             model = connection.execute(select(models.embedding_models).where(models.embedding_models.c.model_name == self.embedding_provider.model_name).order_by(models.embedding_models.c.created_at.desc()).limit(1)).first()
-            dense_rows = []
-            if model:
-                distance = models.embeddings.c.embedding.cosine_distance(vector)
-                dense_rows = connection.execute(
-                    select(models.paper_versions.c.paper_id, func.min(distance).label("distance"))
-                    .join(models.chunks, models.chunks.c.paper_version_id == models.paper_versions.c.paper_version_id)
-                    .join(models.embeddings, models.embeddings.c.chunk_id == models.chunks.c.chunk_id)
-                    .where(models.embeddings.c.embedding_model_id == model._mapping["embedding_model_id"])
-                    .group_by(models.paper_versions.c.paper_id).order_by(func.min(distance)).limit(limit)
+            vectors = self.embedding_provider.embed_many(variants) if model and hasattr(self.embedding_provider, "embed_many") else None
+            for variant_index, variant in enumerate(variants):
+                query_expr = func.plainto_tsquery("english", variant)
+                keyword_rows = connection.execute(
+                    select(models.papers.c.paper_id, func.ts_rank_cd(document, query_expr).label("rank_score"), func.similarity(models.papers.c.normalized_title, variant.lower()).label("trgm"))
+                    .where(or_(document.op("@@")(query_expr), func.similarity(models.papers.c.normalized_title, variant.lower()) > 0.1))
+                    .order_by((func.ts_rank_cd(document, query_expr) + func.similarity(models.papers.c.normalized_title, variant.lower())).desc()).limit(limit)
                 ).all()
-        keyword_rank = {row.paper_id: index + 1 for index, row in enumerate(keyword_rows)}
-        dense_rank = {row.paper_id: index + 1 for index, row in enumerate(dense_rows)}
+                for index, row in enumerate(keyword_rows, 1):
+                    keyword_rank[row.paper_id] = min(index, keyword_rank.get(row.paper_id, index))
+                if model:
+                    vector = vectors[variant_index] if vectors is not None else self.embedding_provider.embed(variant)
+                    distance = models.embeddings.c.embedding.cosine_distance(vector)
+                    dense_rows = connection.execute(
+                        select(models.paper_versions.c.paper_id, func.min(distance).label("distance"))
+                        .join(models.chunks, models.chunks.c.paper_version_id == models.paper_versions.c.paper_version_id)
+                        .join(models.embeddings, models.embeddings.c.chunk_id == models.chunks.c.chunk_id)
+                        .where(models.embeddings.c.embedding_model_id == model._mapping["embedding_model_id"])
+                        .group_by(models.paper_versions.c.paper_id).order_by(func.min(distance)).limit(limit)
+                    ).all()
+                    for index, row in enumerate(dense_rows, 1):
+                        dense_rank[row.paper_id] = min(index, dense_rank.get(row.paper_id, index))
         paper_ids = set(keyword_rank) | set(dense_rank)
         scores = {paper_id: (1 / (60 + keyword_rank[paper_id]) if paper_id in keyword_rank else 0) + (1 / (60 + dense_rank[paper_id]) if paper_id in dense_rank else 0) for paper_id in paper_ids}
         ordered = sorted(scores, key=scores.get, reverse=True)[:limit]

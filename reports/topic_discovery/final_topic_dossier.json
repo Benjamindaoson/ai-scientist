@@ -1,0 +1,1246 @@
+{
+  "data": {
+    "split": "pre-declared robot/site split",
+    "source": "https://droid-dataset.github.io/",
+    "status": "DATA_READY",
+    "license": "dataset terms require confirmation before full download",
+    "preflight": "HTTP metadata fetch 200; 45213 bytes",
+    "modalities": [
+      "video",
+      "proprioception",
+      "actions",
+      "language"
+    ],
+    "dataset_name": "DROID",
+    "sample_count": "76k trajectories",
+    "access_verified": true,
+    "download_size_gb": 150
+  },
+  "time": {
+    "p90_days": 27,
+    "best_days": 12,
+    "analysis_days": 3,
+    "expected_days": 19,
+    "engineering_days": 3,
+    "full_experiment_days": 7,
+    "data_preparation_days": 2,
+    "pilot_experiment_days": 2,
+    "literature_validation_days": 2
+  },
+  "method": {
+    "metrics": [
+      "AUROC",
+      "AUPRC",
+      "calibration error"
+    ],
+    "analysis": "paired bootstrap with task-family stratification",
+    "controls": [
+      "task success",
+      "task family",
+      "trajectory length",
+      "seed"
+    ],
+    "baselines": [
+      "open-loop likelihood",
+      "calibration error",
+      "ensemble disagreement"
+    ],
+    "confounds": [
+      "dataset policy bias",
+      "action discretization"
+    ],
+    "research_type": "MEASUREMENT",
+    "primary_method": "paired retrospective trajectory analysis"
+  },
+  "compute": {
+    "ram_gb": 64,
+    "vram_gb": 24,
+    "expected": {
+      "cpu_hours": 24,
+      "gpu_hours": 8
+    },
+    "gpu_type": "RTX 4090/A5000",
+    "best_case": {
+      "cpu_hours": 8,
+      "gpu_hours": 0
+    },
+    "storage_gb": 250,
+    "download_gb": 150,
+    "worst_reasonable": {
+      "cpu_hours": 72,
+      "gpu_hours": 24
+    },
+    "estimated_cost_usd": 40
+  },
+  "why_now": {
+    "statement": "The current signal 'AISTATS 2026 Call for Papers' and public robot datasets make a cheap falsifier possible; the signal is not novelty evidence.",
+    "origin_signal_ids": [
+      "2b65d696-5853-4b1f-af83-614f74938309"
+    ]
+  },
+  "identity": {
+    "title": "Measurement audit for Embodied AI",
+    "research_type": "MEASUREMENT",
+    "falsifiable_claim": "Action-conditioned uncertainty improves intervention-failure identification over open-loop likelihood under matched task success.",
+    "scientific_question": "In Embodied AI, is it true that offline prediction error identifies closed-loop intervention failure?"
+  },
+  "target_venue": {
+    "primary": "ICLR",
+    "workshop": "robot learning reliability",
+    "secondary": "CoRL",
+    "deadline_fit": "FUTURE_CYCLE: no currently open recorded deadline has p90 completion plus safety-buffer slack.",
+    "research_fit": "Embodied learning, planning, reliability, and uncertainty match the recorded official CFP scope.",
+    "scope_evidence": "Official opportunity snapshots in research.opportunities",
+    "evaluated_current_opportunities": []
+  },
+  "gap_statement": "No inspected source-backed work jointly tests the declared relation, matched controls, and closed-loop outcome under the documented search matrix.",
+  "gate_evidence": {
+    "data": {
+      "split": "pre-declared robot/site split",
+      "source": "https://droid-dataset.github.io/",
+      "status": "DATA_READY",
+      "license": "dataset terms require confirmation before full download",
+      "preflight": "HTTP metadata fetch 200; 45213 bytes",
+      "modalities": [
+        "video",
+        "proprioception",
+        "actions",
+        "language"
+      ],
+      "dataset_name": "DROID",
+      "sample_count": "76k trajectories",
+      "access_verified": true,
+      "download_size_gb": 150
+    },
+    "method": {
+      "metrics": [
+        "AUROC",
+        "AUPRC",
+        "calibration error"
+      ],
+      "analysis": "paired bootstrap with task-family stratification",
+      "controls": [
+        "task success",
+        "task family",
+        "trajectory length",
+        "seed"
+      ],
+      "baselines": [
+        "open-loop likelihood",
+        "calibration error",
+        "ensemble disagreement"
+      ],
+      "confounds": [
+        "dataset policy bias",
+        "action discretization"
+      ],
+      "research_type": "MEASUREMENT",
+      "primary_method": "paired retrospective trajectory analysis"
+    },
+    "compute": {
+      "ram_gb": 64,
+      "vram_gb": 24,
+      "expected": {
+        "cpu_hours": 24,
+        "gpu_hours": 8
+      },
+      "gpu_type": "RTX 4090/A5000",
+      "best_case": {
+        "cpu_hours": 8,
+        "gpu_hours": 0
+      },
+      "storage_gb": 250,
+      "download_gb": 150,
+      "worst_reasonable": {
+        "cpu_hours": 72,
+        "gpu_hours": 24
+      },
+      "estimated_cost_usd": 40
+    },
+    "deadline": null,
+    "venue_fit": {
+      "primary": "ICLR",
+      "workshop": "robot learning reliability",
+      "secondary": "CoRL",
+      "deadline_fit": "FUTURE_CYCLE: no currently open recorded deadline has p90 completion plus safety-buffer slack.",
+      "research_fit": "Embodied learning, planning, reliability, and uncertainty match the recorded official CFP scope.",
+      "scope_evidence": "Official opportunity snapshots in research.opportunities",
+      "evaluated_current_opportunities": []
+    },
+    "engineering": {
+      "status": "READY",
+      "preflight": "HTTP metadata fetch 200; 45213 bytes",
+      "baseline_code": "standard sklearn metrics",
+      "evaluation_harness": "existing Experiment Runtime"
+    },
+    "significance": {
+      "broad": {
+        "pass": true,
+        "reason": "The identification question applies across world models, VLAs, and robot-policy evaluation."
+      },
+      "actionable": {
+        "pass": true,
+        "reason": "A positive or negative result changes which reliability metric should gate deployment."
+      },
+      "surprising": {
+        "pass": true,
+        "reason": "Matched task success allows the two measurements to disagree rather than making the result tautological."
+      },
+      "fundamental": {
+        "pass": true,
+        "reason": "Tests whether a widely used offline measurement identifies a closed-loop capability."
+      }
+    },
+    "gap_statement": "No inspected source-backed work jointly tests the declared relation, matched controls, and closed-loop outcome under the documented search matrix.",
+    "time_estimate": {
+      "p90_days": 27,
+      "best_days": 12,
+      "analysis_days": 3,
+      "expected_days": 19,
+      "engineering_days": 3,
+      "full_experiment_days": 7,
+      "data_preparation_days": 2,
+      "pilot_experiment_days": 2,
+      "literature_validation_days": 2
+    },
+    "reviewer_attacks": [
+      "The relation is a calibration restatement",
+      "Dataset policy bias creates the effect",
+      "Matched success does not match difficulty",
+      "The metric does not identify intervention utility",
+      "The result may not transfer across embodiments"
+    ],
+    "falsifiable_claim": "Action-conditioned uncertainty improves intervention-failure identification over open-loop likelihood under matched task success.",
+    "killer_experiment": {
+      "data": "DROID",
+      "metric": "paired AUROC difference",
+      "control": "matched task success and task family",
+      "baseline": "open-loop likelihood",
+      "sample_size": 200,
+      "runtime_hours": 24,
+      "kill_condition": "upper 95% CI of AUROC improvement <= 0.02",
+      "statistical_test": "paired bootstrap 95% CI",
+      "advance_condition": "lower 95% CI of improvement > 0.02",
+      "estimated_cost_usd": 5
+    },
+    "no_covering_prior": true,
+    "citation_expansion": true,
+    "closest_prior_work": [
+      {
+        "rank": 1,
+        "score": 0.029411764705882353,
+        "title": "Using AI Uncertainty Quantification to Improve Human Decision-Making",
+        "abstract": "Using AI Uncertainty Quantification to Improve Human Decision-MakingLaura Marusich,\u00a0Jonathan Bakdash,\u00a0Yan Zhou,\u00a0Murat KantarciogluAI Uncertain...",
+        "paper_id": "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+        "dense_rank": 8,
+        "keyword_rank": 8,
+        "publication_year": 2024,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "d6b6e88c-1e62-4137-9434-914fea8799ee"
+        ],
+        "retrieval_result_id": "e9c16b3f-e12a-4cc4-97e7-25308b2717f7"
+      },
+      {
+        "rank": 2,
+        "score": 0.028021349599695006,
+        "title": "Text-Based Interactive Recommendation via Offline Reinforcement Learning",
+        "abstract": "Interactive recommendation with natural-language feedback can provide richer user feedback and has demonstrated advantages over traditional recommender systems. However, the classical online paradigm involves iteratively collecting experience via interaction with users, which is expensive and risky. We consider an offline interactive recommendation to exploit arbitrary experience collected by multiple unknown policies. A direct application of policy learning with such fixed experience suffers from the distribution shift. To tackle this issue, we develop a behavior-agnostic off-policy correction framework to make offline interactive recommendation possible. Specifically, we leverage the conservative Q-function to perform off-policy evaluation, which enables learning effective policies from fixed datasets without further interactions. Empirical results on the simulator derived from real-world datasets demonstrate the effectiveness of our proposed offline training framework.",
+        "paper_id": "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+        "dense_rank": 1,
+        "keyword_rank": 26,
+        "publication_year": 2022,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "2693ea53-a4da-49e2-bd58-a6865aeb7a2b"
+        ],
+        "retrieval_result_id": "11cec650-5780-45bd-8162-1bc75791d69b"
+      },
+      {
+        "rank": 3,
+        "score": 0.02548701298701299,
+        "title": "World Model Implanting for Test-time Adaptation of Embodied Agents",
+        "abstract": "World Model Implanting for Test-time Adaptation of Embodied AgentsMinjong Yoo,\u00a0Jinwoo Jang,\u00a0Sihyung Yoon,\u00a0Honguk WooIn embodied AI, a persiste...",
+        "paper_id": "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+        "dense_rank": 17,
+        "keyword_rank": 20,
+        "publication_year": 2025,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "052c8167-b4b2-4055-b458-09bb87c8da7e"
+        ],
+        "retrieval_result_id": "a0df6315-ebcf-4c57-ae86-8a23ccab870c"
+      },
+      {
+        "rank": 4,
+        "score": 0.024922600619195046,
+        "title": "Interventional Multi-Instance Learning with Deconfounded Instance-Level Prediction",
+        "abstract": "When applying multi-instance learning (MIL) to make predictions for bags of instances, the prediction accuracy of an instance often depends on not only the instance itself but also its context in the corresponding bag. From the viewpoint of causal inference, such bag contextual prior works as a confounder and may result in model robustness and interpretability issues. Focusing on this problem, we propose a novel interventional multi-instance learning (IMIL) framework to achieve deconfounded instance-level prediction. Unlike traditional likelihood-based strategies, we design an Expectation-Maximization (EM) algorithm based on causal intervention, providing a robust instance selection in the training phase and suppressing the bias caused by the bag contextual prior. Experiments on pathological image analysis demonstrate that our IMIL method substantially reduces false positives and outperforms state-of-the-art MIL methods.",
+        "paper_id": "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+        "dense_rank": 16,
+        "keyword_rank": 25,
+        "publication_year": 2022,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "318eecbe-51a3-4166-b8bb-8aa6b933019f"
+        ],
+        "retrieval_result_id": "1eefbb29-09c4-4f6d-a07b-351104f83ab6"
+      },
+      {
+        "rank": 5,
+        "score": 0.0231841329402305,
+        "title": "EmbodiedBench: Comprehensive Benchmarking Multi-modal Large Language Models for Vision-Driven Embodied Agents",
+        "abstract": "EmbodiedBench: Comprehensive Benchmarking Multi-modal Large Language Models for Vision-Driven Embodied AgentsRui Yang,\u00a0Hanyang Chen,\u00a0Junyu Zhang,&n...",
+        "paper_id": "ff90a168-2e2c-4919-85e1-a0737291006a",
+        "dense_rank": 31,
+        "keyword_rank": 22,
+        "publication_year": 2025,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "a3198b1f-3583-4274-8c6d-ab7e6c0f21b8"
+        ],
+        "retrieval_result_id": "b2a1829c-ab6c-4548-addb-ac4256729f05"
+      },
+      {
+        "rank": 6,
+        "score": 0.022001934235976787,
+        "title": "Fixed-Confidence Multiple Change Point Identification under Bandit Feedback",
+        "abstract": "Fixed-Confidence Multiple Change Point Identification under Bandit FeedbackJoseph Lazzaro,\u00a0Ciara Pike-BurkePiecewise constant functions describe a varie...",
+        "paper_id": "b6da0898-a45e-4ff7-b4c7-58c9b3c5cd97",
+        "dense_rank": 28,
+        "keyword_rank": 34,
+        "publication_year": 2025,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "4ffee4d1-2c91-482d-9c4c-0a5d94d46d67"
+        ],
+        "retrieval_result_id": "3cc860fa-436b-4eec-8acc-b084cb4e8d7e"
+      },
+      {
+        "rank": 7,
+        "score": 0.020513359983168524,
+        "title": "Incremental Uncertainty-aware Performance Monitoring with Active Labeling Intervention",
+        "abstract": "Incremental Uncertainty-aware Performance Monitoring with Active Labeling InterventionAlexander Koebler,\u00a0Thomas Decker,\u00a0Ingo Thon,\u00a0Volker Tres...",
+        "paper_id": "7ba647c5-c522-4898-9244-f0628cd54dc8",
+        "dense_rank": 37,
+        "keyword_rank": 38,
+        "publication_year": 2025,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "5eb621ac-8ea8-47bb-aa10-c6d10cc142f6"
+        ],
+        "retrieval_result_id": "a56d563f-bd39-4b43-a98f-e716e150c4e7"
+      },
+      {
+        "rank": 8,
+        "score": 0.019345794392523364,
+        "title": "Tight Partial Identification of Causal Effects with Marginal Distribution of Unmeasured Confounders",
+        "abstract": "Tight Partial Identification of Causal Effects with Marginal Distribution of Unmeasured ConfoundersZhiheng ZhangPartial identification (PI) presents a signif...",
+        "paper_id": "eb9783fa-51b0-4219-bf0e-13f6bb2d21d3",
+        "dense_rank": 40,
+        "keyword_rank": 47,
+        "publication_year": 2024,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "a589c888-5947-4580-bbc8-713a273bc685"
+        ],
+        "retrieval_result_id": "e0c5b404-4856-493a-a47a-ba38e07329f7"
+      },
+      {
+        "rank": 9,
+        "score": 0.01639344262295082,
+        "title": "A Closer Look at the Intervention Procedure of Concept Bottleneck Models",
+        "abstract": "A Closer Look at the Intervention Procedure of Concept Bottleneck ModelsSungbin Shin,\u00a0Yohan Jo,\u00a0Sungsoo Ahn,\u00a0Namhoon LeeConcept bottleneck mod...",
+        "paper_id": "4e0ee1b4-e44c-49b3-abf1-c26319dd2269",
+        "dense_rank": null,
+        "keyword_rank": 1,
+        "publication_year": 2023,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "939d8291-14bd-4672-bc6e-d3a81bc66934"
+        ],
+        "retrieval_result_id": "cb425387-fd65-4f83-8b34-ae23f7a985f6"
+      },
+      {
+        "rank": 10,
+        "score": 0.01639344262295082,
+        "title": "The Price of Linear Time: Error Analysis of Structured Kernel Interpolation",
+        "abstract": "The Price of Linear Time: Error Analysis of Structured Kernel InterpolationAlexander Moreno,\u00a0Justin Xiao,\u00a0Jonathan MeiStructured Kernel Interpolati...",
+        "paper_id": "66ec230d-0c58-45fb-b31a-13d64c6c8ace",
+        "dense_rank": null,
+        "keyword_rank": 1,
+        "publication_year": 2025,
+        "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+        "source_chunk_ids": [
+          "47286287-88f5-47a8-b7fe-9abd505e84a2"
+        ],
+        "retrieval_result_id": "0f4df84a-7d17-4d70-b8e2-c29327992162"
+      }
+    ],
+    "critical_questions": [
+      {
+        "answer": "Current Embodied AI evaluations treat aggregate task performance as sufficient evidence.",
+        "question": "current belief",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "The retrieved priors study uncertainty, intervention, or trajectory failure separately; the audit found no source-backed work covering their declared joint relation and matched controls.",
+        "question": "closest prior scope",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "The minimum difference is an identification test: intervention-failure ordering conditional on matched task success, not another uncertainty estimator.",
+        "question": "irreducible difference",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "The question asks whether one observable identifies a deployment-relevant outcome, independent of DROID, a named robot, or a backbone.",
+        "question": "benchmark-free meaning",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "No new module is required; competing measurements are tested against a falsifiable relation.",
+        "question": "scientific-not-feature",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "Open-loop accuracy and action-conditioned uncertainty may agree, reverse, or become conditionally independent after controls.",
+        "question": "non-obvious outcome",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "Task difficulty can cause both uncertainty and failure; matching task family, success, and trajectory length addresses this confound.",
+        "question": "alternative explanation",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "A reviewer can attribute gains to generic calibration, so calibration error and ensemble disagreement are mandatory baselines.",
+        "question": "reviewer explanation",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "Replay 200 public trajectories with matched controls in 24\u201348 hours.",
+        "question": "fastest falsifier",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "Researchers would gate intervention and dataset collection using action-conditioned risk rather than open-loop likelihood alone.",
+        "question": "positive-result action",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "A null result rules out the proposed metric as an independent reliability signal and prevents an unnecessary system component.",
+        "question": "negative-result value",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "Measurement and identification gap, not a benchmark-only gap.",
+        "question": "gap type",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "Generic calibration is the simpler mechanism and is included as a baseline; failure to beat it kills the idea.",
+        "question": "simpler mechanism",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "Selective prediction and control-risk work are searched explicitly; transfer is not assumed because their outcome and intervention units differ.",
+        "question": "adjacent-field solution",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      },
+      {
+        "answer": "The claim requires a pre-declared paired AUROC improvement whose lower 95% bootstrap bound exceeds 0.02 on held-out task families.",
+        "question": "claim evidence threshold",
+        "unresolved": [],
+        "evidence_refs": [
+          "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+          "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+          "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "ff90a168-2e2c-4919-85e1-a0737291006a"
+        ]
+      }
+    ],
+    "safety_buffer_days": 14,
+    "future_cycle_target": true,
+    "p90_completion_days": 27,
+    "scientific_question": "In Embodied AI, is it true that offline prediction error identifies closed-loop intervention failure?",
+    "adjacent_field_search": true,
+    "scout_retrieval_run_id": "9706c693-c184-43ad-8c85-b461e15ef66b",
+    "reviewer_retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+    "unresolved_fatal_objections": []
+  },
+  "current_belief": "Current Embodied AI evaluations treat aggregate task performance as sufficient evidence.",
+  "final_decision": "TOPIC_READY",
+  "reviewer_risks": [
+    "The relation is a calibration restatement",
+    "Dataset policy bias creates the effect",
+    "Matched success does not match difficulty",
+    "The metric does not identify intervention utility",
+    "The result may not transfer across embodiments"
+  ],
+  "kill_conditions": [
+    "upper 95% CI of AUROC improvement <= 0.02",
+    "A newly found prior fully covers the claim",
+    "Data license blocks the declared analysis"
+  ],
+  "novelty_boundary": "NOVELTY_SURVIVES_AUDIT is protocol-bounded; it does not claim that no related work exists.",
+  "scientific_value": {
+    "broad": {
+      "pass": true,
+      "reason": "The identification question applies across world models, VLAs, and robot-policy evaluation."
+    },
+    "actionable": {
+      "pass": true,
+      "reason": "A positive or negative result changes which reliability metric should gate deployment."
+    },
+    "surprising": {
+      "pass": true,
+      "reason": "Matched task success allows the two measurements to disagree rather than making the result tautological."
+    },
+    "fundamental": {
+      "pass": true,
+      "reason": "Tests whether a widely used offline measurement identifies a closed-loop capability."
+    }
+  },
+  "killer_experiment": {
+    "data": "DROID",
+    "metric": "paired AUROC difference",
+    "control": "matched task success and task family",
+    "baseline": "open-loop likelihood",
+    "sample_size": 200,
+    "runtime_hours": 24,
+    "kill_condition": "upper 95% CI of AUROC improvement <= 0.02",
+    "statistical_test": "paired bootstrap 95% CI",
+    "advance_condition": "lower 95% CI of improvement > 0.02",
+    "estimated_cost_usd": 5
+  },
+  "closest_prior_work": [
+    {
+      "rank": 1,
+      "score": 0.029411764705882353,
+      "title": "Using AI Uncertainty Quantification to Improve Human Decision-Making",
+      "abstract": "Using AI Uncertainty Quantification to Improve Human Decision-MakingLaura Marusich,\u00a0Jonathan Bakdash,\u00a0Yan Zhou,\u00a0Murat KantarciogluAI Uncertain...",
+      "paper_id": "d7ae3c5a-f3ee-42aa-b161-576fc2dc295b",
+      "dense_rank": 8,
+      "keyword_rank": 8,
+      "publication_year": 2024,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "d6b6e88c-1e62-4137-9434-914fea8799ee"
+      ],
+      "retrieval_result_id": "e9c16b3f-e12a-4cc4-97e7-25308b2717f7"
+    },
+    {
+      "rank": 2,
+      "score": 0.028021349599695006,
+      "title": "Text-Based Interactive Recommendation via Offline Reinforcement Learning",
+      "abstract": "Interactive recommendation with natural-language feedback can provide richer user feedback and has demonstrated advantages over traditional recommender systems. However, the classical online paradigm involves iteratively collecting experience via interaction with users, which is expensive and risky. We consider an offline interactive recommendation to exploit arbitrary experience collected by multiple unknown policies. A direct application of policy learning with such fixed experience suffers from the distribution shift. To tackle this issue, we develop a behavior-agnostic off-policy correction framework to make offline interactive recommendation possible. Specifically, we leverage the conservative Q-function to perform off-policy evaluation, which enables learning effective policies from fixed datasets without further interactions. Empirical results on the simulator derived from real-world datasets demonstrate the effectiveness of our proposed offline training framework.",
+      "paper_id": "20e30ea0-cd86-4831-b5a8-fa4ccbf570ce",
+      "dense_rank": 1,
+      "keyword_rank": 26,
+      "publication_year": 2022,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "2693ea53-a4da-49e2-bd58-a6865aeb7a2b"
+      ],
+      "retrieval_result_id": "11cec650-5780-45bd-8162-1bc75791d69b"
+    },
+    {
+      "rank": 3,
+      "score": 0.02548701298701299,
+      "title": "World Model Implanting for Test-time Adaptation of Embodied Agents",
+      "abstract": "World Model Implanting for Test-time Adaptation of Embodied AgentsMinjong Yoo,\u00a0Jinwoo Jang,\u00a0Sihyung Yoon,\u00a0Honguk WooIn embodied AI, a persiste...",
+      "paper_id": "47774c7d-7a94-4bd8-8b6c-0a632e3beb2d",
+      "dense_rank": 17,
+      "keyword_rank": 20,
+      "publication_year": 2025,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "052c8167-b4b2-4055-b458-09bb87c8da7e"
+      ],
+      "retrieval_result_id": "a0df6315-ebcf-4c57-ae86-8a23ccab870c"
+    },
+    {
+      "rank": 4,
+      "score": 0.024922600619195046,
+      "title": "Interventional Multi-Instance Learning with Deconfounded Instance-Level Prediction",
+      "abstract": "When applying multi-instance learning (MIL) to make predictions for bags of instances, the prediction accuracy of an instance often depends on not only the instance itself but also its context in the corresponding bag. From the viewpoint of causal inference, such bag contextual prior works as a confounder and may result in model robustness and interpretability issues. Focusing on this problem, we propose a novel interventional multi-instance learning (IMIL) framework to achieve deconfounded instance-level prediction. Unlike traditional likelihood-based strategies, we design an Expectation-Maximization (EM) algorithm based on causal intervention, providing a robust instance selection in the training phase and suppressing the bias caused by the bag contextual prior. Experiments on pathological image analysis demonstrate that our IMIL method substantially reduces false positives and outperforms state-of-the-art MIL methods.",
+      "paper_id": "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+      "dense_rank": 16,
+      "keyword_rank": 25,
+      "publication_year": 2022,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "318eecbe-51a3-4166-b8bb-8aa6b933019f"
+      ],
+      "retrieval_result_id": "1eefbb29-09c4-4f6d-a07b-351104f83ab6"
+    },
+    {
+      "rank": 5,
+      "score": 0.0231841329402305,
+      "title": "EmbodiedBench: Comprehensive Benchmarking Multi-modal Large Language Models for Vision-Driven Embodied Agents",
+      "abstract": "EmbodiedBench: Comprehensive Benchmarking Multi-modal Large Language Models for Vision-Driven Embodied AgentsRui Yang,\u00a0Hanyang Chen,\u00a0Junyu Zhang,&n...",
+      "paper_id": "ff90a168-2e2c-4919-85e1-a0737291006a",
+      "dense_rank": 31,
+      "keyword_rank": 22,
+      "publication_year": 2025,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "a3198b1f-3583-4274-8c6d-ab7e6c0f21b8"
+      ],
+      "retrieval_result_id": "b2a1829c-ab6c-4548-addb-ac4256729f05"
+    },
+    {
+      "rank": 6,
+      "score": 0.022001934235976787,
+      "title": "Fixed-Confidence Multiple Change Point Identification under Bandit Feedback",
+      "abstract": "Fixed-Confidence Multiple Change Point Identification under Bandit FeedbackJoseph Lazzaro,\u00a0Ciara Pike-BurkePiecewise constant functions describe a varie...",
+      "paper_id": "b6da0898-a45e-4ff7-b4c7-58c9b3c5cd97",
+      "dense_rank": 28,
+      "keyword_rank": 34,
+      "publication_year": 2025,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "4ffee4d1-2c91-482d-9c4c-0a5d94d46d67"
+      ],
+      "retrieval_result_id": "3cc860fa-436b-4eec-8acc-b084cb4e8d7e"
+    },
+    {
+      "rank": 7,
+      "score": 0.020513359983168524,
+      "title": "Incremental Uncertainty-aware Performance Monitoring with Active Labeling Intervention",
+      "abstract": "Incremental Uncertainty-aware Performance Monitoring with Active Labeling InterventionAlexander Koebler,\u00a0Thomas Decker,\u00a0Ingo Thon,\u00a0Volker Tres...",
+      "paper_id": "7ba647c5-c522-4898-9244-f0628cd54dc8",
+      "dense_rank": 37,
+      "keyword_rank": 38,
+      "publication_year": 2025,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "5eb621ac-8ea8-47bb-aa10-c6d10cc142f6"
+      ],
+      "retrieval_result_id": "a56d563f-bd39-4b43-a98f-e716e150c4e7"
+    },
+    {
+      "rank": 8,
+      "score": 0.019345794392523364,
+      "title": "Tight Partial Identification of Causal Effects with Marginal Distribution of Unmeasured Confounders",
+      "abstract": "Tight Partial Identification of Causal Effects with Marginal Distribution of Unmeasured ConfoundersZhiheng ZhangPartial identification (PI) presents a signif...",
+      "paper_id": "eb9783fa-51b0-4219-bf0e-13f6bb2d21d3",
+      "dense_rank": 40,
+      "keyword_rank": 47,
+      "publication_year": 2024,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "a589c888-5947-4580-bbc8-713a273bc685"
+      ],
+      "retrieval_result_id": "e0c5b404-4856-493a-a47a-ba38e07329f7"
+    },
+    {
+      "rank": 9,
+      "score": 0.01639344262295082,
+      "title": "A Closer Look at the Intervention Procedure of Concept Bottleneck Models",
+      "abstract": "A Closer Look at the Intervention Procedure of Concept Bottleneck ModelsSungbin Shin,\u00a0Yohan Jo,\u00a0Sungsoo Ahn,\u00a0Namhoon LeeConcept bottleneck mod...",
+      "paper_id": "4e0ee1b4-e44c-49b3-abf1-c26319dd2269",
+      "dense_rank": null,
+      "keyword_rank": 1,
+      "publication_year": 2023,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "939d8291-14bd-4672-bc6e-d3a81bc66934"
+      ],
+      "retrieval_result_id": "cb425387-fd65-4f83-8b34-ae23f7a985f6"
+    },
+    {
+      "rank": 10,
+      "score": 0.01639344262295082,
+      "title": "The Price of Linear Time: Error Analysis of Structured Kernel Interpolation",
+      "abstract": "The Price of Linear Time: Error Analysis of Structured Kernel InterpolationAlexander Moreno,\u00a0Justin Xiao,\u00a0Jonathan MeiStructured Kernel Interpolati...",
+      "paper_id": "66ec230d-0c58-45fb-b31a-13d64c6c8ace",
+      "dense_rank": null,
+      "keyword_rank": 1,
+      "publication_year": 2025,
+      "retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc",
+      "source_chunk_ids": [
+        "47286287-88f5-47a8-b7fe-9abd505e84a2"
+      ],
+      "retrieval_result_id": "0f4df84a-7d17-4d70-b8e2-c29327992162"
+    }
+  ],
+  "proposed_challenge": "Test whether offline prediction error identifies closed-loop intervention failure.",
+  "independent_novelty_audit": {
+    "coverage": {
+      "years": "2022-2026",
+      "external": true,
+      "adjacent_fields": true,
+      "scout_graph_expansion": {
+        "performed": true,
+        "seed_papers": 10,
+        "expanded_paper_ids": [
+          "022568b0-0e6e-4ebe-a997-f5aa4b0db15a",
+          "030a7c5a-dd9b-4794-88a5-7202aae2a5ad",
+          "038e34c3-3b1a-4f1b-8679-6e19f946a557",
+          "03d52922-dd80-4090-ab5a-b8bec5c04186",
+          "0414c36c-ba61-4690-860f-86e78b06d667",
+          "0496bc9b-e520-4c02-a9e2-cab66c5cbfa4",
+          "04d1de5c-88c8-4c32-a0bb-8de6867d66e9",
+          "051d33b8-f588-4c4b-982b-6df1c03fa918",
+          "065c54eb-7b67-44d2-8ea4-104d68e8ada5",
+          "07b4255a-0466-4131-bbb4-a7198702f2b8",
+          "07d5293d-96bf-4b03-9719-be7dc3c89fc2",
+          "088bd713-c5a7-4841-a08d-6ad4d88fa03a",
+          "0a42b95d-2d54-429c-853b-5a525217c983",
+          "0a5b8106-ba68-4b8a-8be5-cbef4ea1fd2f",
+          "0a660641-4cd1-4aad-ae23-f861814c0903",
+          "0abe2b52-c7e4-459d-abc9-2688b03e5cfa",
+          "0cf0cea5-4a51-4c10-80ca-35d49da67804",
+          "0cffaeb9-fca8-4978-aa71-da83b6fe7679",
+          "0d8d3fa3-ac19-4409-a791-5f617598e66a",
+          "0ff9595e-6dce-4c7c-b136-62e31af9d4f4",
+          "101509af-821c-4e81-af02-3b7719a668a2",
+          "102d8f01-cf07-4fa5-b1c5-0a3b1cef7c5e",
+          "104bfe3a-7386-4529-80a3-291bd932b020",
+          "10503691-0c03-463e-80cb-21b5e1e36d78",
+          "119eb090-400d-4c2f-88b4-935fa1d75a72",
+          "122e49be-9ae6-4848-b162-620e069b8831",
+          "12a81856-5dbf-4897-b821-c3b8952d7bea",
+          "12bd2da9-f0f0-41c7-b777-c801b2820a3a",
+          "12ca11a6-dc3a-445e-ba69-83c2fc7713f3",
+          "12db470b-b5d6-4d29-9995-08e33a3e15bf",
+          "14511cc7-e89b-4348-b133-fabb8858a8c2",
+          "148b954e-a9b6-42c4-9994-797343b2846e",
+          "14e25c50-95dd-48a9-b279-6a14af34872f",
+          "151496b0-274f-4258-aa5b-3c90d0574b81",
+          "16d0a94a-1938-4bc7-a3ef-a3b478c8e465",
+          "16d472be-3cad-44e0-8749-5ba77632f7a2",
+          "17431270-1d37-4e09-a512-140ba81fc38b",
+          "18dbf7f8-f36a-4426-8cc4-864b68f57670",
+          "19b2827a-6c74-49fb-9df9-0abb2d12286d",
+          "1b8f2db8-4263-4f2c-9909-4aa110c96f35",
+          "1cd3bc77-81af-46bc-97dc-267fca9b633c",
+          "1d70289d-c59c-4e54-80c0-56e5e2ec091d",
+          "1d91af72-1ca8-479e-a318-e7e64f9b0224",
+          "1d98b620-22c7-4de0-ad11-f3b73753ed5e",
+          "1f6ae5ba-f022-462e-9d06-c480bc90a4bd",
+          "1f88b1a7-c441-4302-b060-42c33a02c6c6",
+          "20d6e7a5-a985-43ef-acc4-bb285c5af251",
+          "21056a9e-536f-4d30-ade2-8c8ea2886111",
+          "218cab52-36db-4509-813d-a0f129ca2b51",
+          "21c8c79f-139f-4726-8b56-6d97272b7534",
+          "2288b5ea-ea47-4459-94e0-30d3a4168f8a",
+          "244efe5d-2a36-4316-8bf3-77254005983d",
+          "2535d1ad-5b5d-4591-8963-7a74293484b0",
+          "253c033e-b208-47ee-b6c7-5f28eac10628",
+          "26ed7a96-ec04-4997-a4d6-7e1c99eedb20",
+          "2710b4d6-bb72-47cf-9b1b-a3f8321184ef",
+          "273959dd-9e8f-413c-a299-25b36100f19c",
+          "28148fa4-b25f-4687-b55d-5addf498f248",
+          "297b5af9-0e97-4d8a-bc9c-2a6dfb064002",
+          "2adea06a-da76-419d-b244-aab554e3e28c",
+          "2c6ab684-be73-4291-921a-72aacadde7bb",
+          "2ca21eab-7e4c-478e-8bda-05ec3d96d047",
+          "2d0619e8-e50b-449b-8680-dd6bfc04ca89",
+          "2da23302-99c1-4160-860e-595a96edbef3",
+          "2e262d3c-e5c2-4392-8a0f-771c19d7a1ee",
+          "2fe10cf4-7b70-49da-a2ed-23248d5d0e29",
+          "3011ad90-f5d4-4c56-b8cf-736f4e915064",
+          "308c450c-6324-4db4-923f-01a4e9c314d8",
+          "30d36006-c1d1-4089-921f-8c8b771c46be",
+          "3131dd3f-47e1-4445-aeb4-916cc9554b7e",
+          "33a9c7b2-4e6b-4201-be81-513e3cb766d7",
+          "3404d7f9-f937-4156-8c44-538add742104",
+          "34cb195b-fc9b-41c6-9b75-78ec37590302",
+          "35000004-6f6d-4cb2-8545-4080569ff366",
+          "35e8115b-d102-43de-8c5b-3454b91fed13",
+          "36d5a707-af57-4ba6-af45-bbf26b2f9835",
+          "379c4e00-d51a-4f0d-bd34-f6833e8bff73",
+          "37e6f8fa-be70-47db-92a9-c98b7a916bae",
+          "39da91d3-b8d0-4d65-a650-31ea5817ea8b",
+          "3b8ba8e7-165a-44cb-9fa0-98456dedb7b1",
+          "3b8e402a-5808-4083-8ee9-e5cdbc65bf4e",
+          "3bf6a633-c32e-44a0-b118-74fb483d6eb6",
+          "3c216dc5-2fcd-4fb6-b3c7-5a4de697fd24",
+          "3df366bd-676f-4af2-bb32-88b87c889b26",
+          "3f1270ad-ed0f-43dc-b59f-99169bc38e37",
+          "405287be-f69d-4ff4-816b-d963f020be93",
+          "40a72c74-8e7d-48ce-aaf7-f27739be7676",
+          "411c7b43-9641-4f53-93cc-dfafaa8013d2",
+          "42133564-0e8e-4778-b362-97ae7e54b0cd",
+          "4231e449-b9ca-4883-8527-efdc8030f609",
+          "435e950d-93d1-48e9-9a66-5b742b845ca4",
+          "43e2d0bb-c571-4c62-b3e8-113231a07acc",
+          "43ec000c-5298-4d4a-af59-85f423eb9cd1",
+          "447db283-7cc3-4699-8325-d84d47033ed7",
+          "44c4ba53-3d47-4b17-bc7d-6418320fda3f",
+          "46486e4a-526f-4590-a185-490142a2ddc4",
+          "4860ec2b-2ec7-47cb-ad17-a1dfad4f7988",
+          "489515c5-0993-484d-96dd-66a64ec04925",
+          "48ded84f-c86c-4487-8f64-40ce14a79f15",
+          "49772707-c062-4cf0-9b3c-8e59f6c64bbf",
+          "498bc9e8-a5ac-48bc-9cfe-3250b15f138b",
+          "49a1113a-ee80-48dd-bb39-cdccfe450f8c",
+          "4b8ca229-9005-4565-8b20-43c227e0ad4e",
+          "4c32f7a2-77b5-4af0-9dcc-9ca7ff9298f5",
+          "4c5336a1-cf0f-4913-aca3-9e0ed3adafc0",
+          "4ccf4902-c52a-4022-a6e9-1a7bd0298492",
+          "4e1e1795-5b1b-4667-9e71-c41ee6e7021b",
+          "4f6dafdb-a98c-483c-931c-73317ffbb5ad",
+          "50a78779-2ca3-4a91-92df-5202cbd38cf2",
+          "5242e294-e946-4133-8ef2-a51330822a6d",
+          "529b6747-c792-41a5-a1e3-94839e97739f",
+          "57d541f0-04cc-4bcd-a6d3-5b7af20c06d8",
+          "5b6fc498-8f60-4a99-abc5-603eae306187",
+          "5c05f60f-daf8-4723-bcf9-d0c7ef2e1323",
+          "5c370b56-2f8b-47ef-af34-7e52b651039c",
+          "5c3d7785-2462-41d3-b829-460f5bc32152",
+          "5ddb4687-1a37-4950-9f10-d9c8566b7be2",
+          "5edb3a89-52da-4f7c-91d2-69f94b7f2059",
+          "5fff440a-c9f5-4e45-a5ea-5ecf37cad789",
+          "607115ef-933f-4ecf-9b6c-92aeeb0d25dd",
+          "61da5542-cacf-4f78-a6ea-00ea8e78ba59",
+          "62e4306f-9f0f-42f2-b2dd-3818be526c4e",
+          "64d13e95-a21c-4adf-b35b-4c63307b526e",
+          "65a68662-360a-4528-b258-c975d0fa8875",
+          "667e688f-2a97-4adc-9831-a35c645b388e",
+          "67320740-3366-4454-a9eb-64c23211e009",
+          "6778ca8b-f18a-495e-9e07-09ac8b1acf8b",
+          "67d7a8f1-1885-4c4b-8cba-fdd2b0260a69",
+          "67e26c8a-0674-46fc-b593-bfc9d8844fe0",
+          "6801537c-ce16-4a96-97e7-ac7b6bcfdce6",
+          "683376dc-936a-46cc-9af0-27b0dd3aea1b",
+          "699d0924-5b3b-4506-8d00-f17408a1b8b4",
+          "6d0e06d2-dd57-4cb1-a337-0bcfd93345ee",
+          "6d11c659-9fdf-4881-96a4-95387fd75505",
+          "6f10c0e8-b663-487f-a04b-9b9997d58f34",
+          "6fc73282-b2fc-48c7-b92c-c694ae2cf522",
+          "733ca202-add9-4259-b791-bc581cab5888",
+          "743208b9-d198-4273-9ad6-a39912f2ff24",
+          "763a8612-9fcd-4a2c-a1b4-0024ab5da4cf",
+          "768dff8d-a4e1-432d-b3a3-cad870abf1da",
+          "76dc6c6c-4171-405c-b979-0b01f9f487e8",
+          "785ca047-19a3-416f-a231-cc17328a25c3",
+          "786149d4-fdc8-4bbb-af3c-7acbc0bbd347",
+          "7a84f4b4-db48-4104-99b8-fdd5ed86287b",
+          "7c208604-3e9b-43cd-a819-6ae0fd6dc6b7",
+          "7c710472-03c6-4489-acdc-adfc61cd8379",
+          "7c7be91e-a766-475e-94be-534abc78b231",
+          "7de07e0f-9cbb-40fa-a8a6-3bd8f78ad449",
+          "7fec9932-2295-4456-8a35-1bd1c6b9937a",
+          "8142aaac-a4d8-40a2-b1f1-2d36ba2227e9",
+          "827c5032-2284-48d4-b790-07fa22329623",
+          "82de2455-6378-4f05-92f7-5134952681f5",
+          "842acfca-3e02-4d46-b40f-7152d09febdb",
+          "859357c2-2ed1-44f9-ad55-b652a9aa12f4",
+          "85ec55bd-861e-46cc-a9ab-174028379f18",
+          "861ac0eb-e864-4fd6-a5f6-32932b63e0ff",
+          "8716a412-3ec7-4132-8f74-9021f94110a1",
+          "876943f1-c6ba-4c9b-98ed-6bf3df233f4a",
+          "87d525f0-9222-4fba-b063-0b48e2dff36b",
+          "89105c25-1800-46fa-b130-55e85286866b",
+          "89b9e435-b5d9-4dab-843f-efc8d539edac",
+          "8a2c546e-9207-4af2-ab56-837b5bc8756b",
+          "8a7f26a5-3792-44cc-8a98-2c2ab1d20606",
+          "8c66d87e-1898-4dda-a72d-509e27e459b5",
+          "8da5cfc5-c596-4caf-bba4-b57880284ddf",
+          "8e06ec70-5eef-4314-9865-fb6d358c365b",
+          "8e3fcf93-b5be-4f30-8a58-ca7c43d82624",
+          "8f773697-5aef-4dec-b618-e9e4133e478e",
+          "8fdfe876-989f-498b-acd5-683c62c084b0",
+          "90701d7f-0f9c-404c-9623-d4c25c48d6bd",
+          "921c8a8e-1e17-4486-b886-6bbb65396f9d",
+          "932ae32c-5337-4ae5-a9bb-d3b650759421",
+          "93425c54-4781-4afc-8851-be81e391e21a",
+          "940bd45d-0483-4ae6-930f-e2f965b772ee",
+          "959537dd-ef5b-40b9-b1eb-f2262f84f1e0",
+          "959c8dfa-ec67-4e3f-afca-c38b517da45c",
+          "99b839f5-cbcb-4323-8255-f7837f2e7890",
+          "9a605d89-14c4-40f0-8bdd-d1ee14c63071",
+          "9b29ee77-f754-4411-b808-7c364dadb9f8",
+          "9cdebb07-de24-4b69-a59a-5de6fefed315",
+          "9d9ef10f-ccac-407b-b95d-ac0ade9a33e8",
+          "9da3f489-74e7-4673-a7fa-3ffacca554c0",
+          "9e543949-2539-448c-8306-187925d8778c",
+          "9e986399-4011-459f-8afd-5380beabf4d3",
+          "9e9e3a40-7943-4246-b46f-c0d91d3125e4",
+          "9f9a6a2c-8d00-4fdb-a994-f3c7266a9a12",
+          "a04168ba-0509-4038-bc32-0cecd4147871",
+          "a483de32-1c1d-49c8-846e-03255fd9ec07",
+          "a764a7de-3a71-4ab1-8ee5-06d8b42db762",
+          "a7ee12ff-2c66-4ab6-86fa-b65e1468856e",
+          "a7f1880f-7d2a-4563-a3c8-2502ccce9083",
+          "a8c310cb-320a-409d-abc7-93d6082dd313",
+          "aaf99efc-5e01-4151-a6e3-a98205a04494",
+          "ab22973a-52ba-473d-8e8a-69a9215d6fcd",
+          "ac8d2b22-8129-47e0-96c0-a9ef736c9b04",
+          "af212768-4b0c-4fca-a9e7-b0dc8ae2b1b6",
+          "b0f931cd-cde3-4ff9-bf25-be8e1b46cdc4",
+          "b1239146-be20-444f-8129-2289d601ac6a",
+          "b24516d2-efbc-450b-a2e3-6d3e0c72a3df",
+          "b27000fd-25c4-4a7d-a871-10729bdbc50c",
+          "b366f45d-8142-4402-b075-656f1f178cb7",
+          "b4376e04-6818-49fe-a34e-68fb6fa440a3",
+          "b4c085df-ff61-4dc2-b8fe-e0f5c725e99d",
+          "b50cceb4-186c-4337-88db-79721d3337a2",
+          "b78ff0a3-8c42-4da7-bf61-56ce5826fb93",
+          "b7c077b5-5f30-456b-b74b-a1a7a2d9b567",
+          "b9145faf-9634-481f-ac25-821febe6e07e",
+          "b9c6d40d-1141-4095-80d2-9503159a5d36",
+          "bab4e321-a904-415d-879b-25a0f53575ee",
+          "baf6a5d9-5d5a-46f0-be7f-c5cec855f2fe",
+          "bbe6af2c-4835-4078-87b3-c2b6811ad90a",
+          "bc45f67c-c070-4fad-9079-7b114def89f5",
+          "bd86aeae-c69c-4c3f-8569-7a5b8d143117",
+          "be0f398f-36db-4f75-b271-d66039922bce",
+          "be796b11-c7af-4d72-9dfc-cde30a6fdea0",
+          "bf7eaeb7-8757-4a66-9367-ff2a5af8be72",
+          "bfaf980b-8ca5-4167-bea7-4ebd04ecb792",
+          "bfe78dc4-6546-4bc2-ab8c-6b03d1282af4",
+          "c10106fc-fcb7-47d6-8746-ec41cb84bd0c",
+          "c1c62f75-7784-4d32-a1e5-58f0285541f3",
+          "c21f6d30-ec7e-485b-9817-c077abd37eac",
+          "c343afac-b269-494f-8c27-cc4f60b62a1d",
+          "c3bd52e0-70ef-4127-b799-91ae1af98a72",
+          "c3fc3e43-7183-404b-a87c-e8beb95a5d66",
+          "c46cfad2-cbfc-4474-a016-c6e244964f0d",
+          "c46f02d1-76a7-45e4-9751-b0921e623110",
+          "c4f55a9d-d35e-4c9b-aec2-e4140c98b217",
+          "c764ceb9-1350-4198-98b9-59a187dab9c7",
+          "c780b489-763f-469e-89e2-6082e7f03776",
+          "c818cc7b-75b5-48e0-a9d6-640647c20aa8",
+          "c9a8c57b-2561-4953-9531-815ec219a402",
+          "cccc5fbd-4763-4efd-8047-197f16e77ac6",
+          "d083e946-32d4-407b-9618-7487d95eb676",
+          "d0b255ee-3ae3-41dc-af6f-7b012103fdc6",
+          "d1670d2a-c453-4b71-900c-211f1f8c6bc4",
+          "d1bafedd-3acd-48dc-9a5a-6f9d7b0bb381",
+          "d1bdef06-c35a-4b43-b64e-eaa8d3461ef8",
+          "d216562f-dbfa-4173-bfec-f333bfc08ee9",
+          "d32b8135-bd82-429b-b2a3-ac4e0223b8e0",
+          "d43b51bf-57ab-435e-8cfc-33f52586e028",
+          "d519a1be-60de-445f-bb38-6cae4b98837d",
+          "d56f3372-739e-4d9e-98cd-fc99e819de77",
+          "d5be5278-2fd3-4b59-b1a0-c2e51271a96b",
+          "d63f2d80-a05a-421e-9a95-a5a9007377d3",
+          "d840bf85-242b-4c03-b0d3-a1c06bd10eb1",
+          "d8a214e2-e2be-41c8-bb2a-e6a1063fea5a",
+          "d8f93ada-f080-4919-9dbd-06424644b832",
+          "d905fe07-eaa7-4969-935d-a8b7e55ac27f",
+          "da1408fa-1373-4e68-9ae6-ff0bcd3c10bc",
+          "da9a3f9b-5dce-4083-ad6c-8be69ca25ae7",
+          "db2d99b7-4e2c-40f1-a439-da760f46fd55",
+          "db4ec542-5829-45c0-8291-4d7c030dcf4e",
+          "db921b4a-8409-4c96-82c6-fabe483df9f2",
+          "dc5f3076-cbb7-4f62-b649-8c963d5dc3fc",
+          "de5e0791-9304-46cb-b6ac-51be52b0e248",
+          "dfa4307b-24c4-4578-9c1a-87fcac327bb8",
+          "e156e892-d2e3-4a55-8f2e-80a266fe3bdf",
+          "e1d4f36a-199d-492e-b031-d36932973e0f",
+          "e20e6833-6820-47b0-bbc2-e54cb63987b7",
+          "e257a264-cb3f-4cca-823b-cba4fe9411ff",
+          "e2be2c34-3609-493c-9dbb-b7f5ff04a992",
+          "e2e8313d-94be-4839-8b29-6626dbf3b8e5",
+          "e38983de-7931-455e-a4d6-f23e54c4d7aa",
+          "e4ebd7f9-3671-45da-8d48-da57fe776de4",
+          "e66064a1-fcc9-4720-b927-f46667d06846",
+          "e70eb26b-72b1-4e25-9cf4-8bec993aaf0e",
+          "e71cd652-c8db-4d9f-b34b-17b374b13747",
+          "e803c233-81b0-4653-8e81-fd3bcbc98c7f",
+          "e80ffca3-325c-4256-b2aa-75da5c8fc4b5",
+          "e812258e-9b9b-41ef-86a0-45d93e8c360a",
+          "e9caaaf8-7926-4305-ab8b-216416392516",
+          "ea20c96c-77f9-4eed-b87c-d9ab2cf2827b",
+          "ea4bb171-4c72-46aa-8dbe-f712108f999f",
+          "eb01a033-5759-451d-9fb1-09139ba47f95",
+          "ebe31c73-dd98-455c-9821-06c34f69d914",
+          "ec209244-bc4e-4960-8127-0ad4d5b3a48e",
+          "ee305d80-fd3f-4970-808c-9e166885c5a0",
+          "f1a904af-f57e-485b-a4d1-76b10b6f80e5",
+          "f2b2f149-e36d-4a32-9c53-45cbfdd0cc86",
+          "f381ad08-a50f-4219-8260-170fd055f80e",
+          "f48012fa-59dc-4f26-a54b-7f7b0131face",
+          "f5734cf4-6fbc-4b3d-9867-ab56af6c51c1",
+          "f57679c4-30eb-403d-a767-655ca52f5c77",
+          "f57fcc5b-36b7-4c32-9bc6-bcc0614a5799",
+          "f6029213-b496-4875-9254-c5ed7d3d9b26",
+          "f60b37cc-174a-4a7d-ad9d-43872a2b2ca1",
+          "f63e3f94-6949-411b-878a-4b6def840f5e",
+          "f659b821-a205-4093-96d8-bfa445511109",
+          "f6b404ac-826d-4bf3-9d88-70bb15987d3d",
+          "f81f328b-3ac2-4d32-9d87-43f339702e7b",
+          "f84329d5-8c02-4099-b3d2-f83458f9a4ed",
+          "f8793712-8f14-4235-8bcd-3d3b6c216d70",
+          "fa012eac-a06a-47f4-b060-09e9481d3ab0",
+          "fa622f69-729b-496a-9bf9-46e5479919a5",
+          "faf1e179-1294-4173-ac6b-2d8da810f79a",
+          "fb996be1-6388-44d7-8356-c6bf13528bf1",
+          "fbcdd9e4-7f26-479d-9f2b-09dbc59dcf40",
+          "fc0f9228-427c-4697-a627-a73624848231",
+          "fc7228d0-309a-4d32-9401-643c50303854",
+          "fd066771-9d0b-4721-a44d-9a43c01a59eb",
+          "feed4a73-468d-46b7-874f-f4a06aab3e28"
+        ]
+      },
+      "reviewer_graph_expansion": {
+        "performed": true,
+        "seed_papers": 10,
+        "expanded_paper_ids": [
+          "014a6e06-4fc9-49d0-802d-48af5e748dc7",
+          "032defda-94aa-49f3-ae7d-c30ec5f5d4a5",
+          "094263cb-05d5-46eb-8fcd-49d8a3753b00",
+          "09fa608c-7200-40c5-88ce-c777af3862e3",
+          "0aa647f2-7af1-4425-b237-1abd7f92b8d0",
+          "0d07d5b0-26ae-4e62-9521-20eaafeacf52",
+          "0ea92a41-e8a6-4763-a5ee-84fe0b5dca26",
+          "119eb090-400d-4c2f-88b4-935fa1d75a72",
+          "1267961b-6edc-4320-8892-98941355a36a",
+          "12ca11a6-dc3a-445e-ba69-83c2fc7713f3",
+          "1373ffef-ac70-496f-add8-047328e0ec05",
+          "1411fa56-0368-47a9-ad84-ae6618742086",
+          "16d0a94a-1938-4bc7-a3ef-a3b478c8e465",
+          "17a80313-b934-42b4-b72f-e096903c2e4d",
+          "17e9be10-e5f9-4b69-b30b-3a5683cfde58",
+          "1bd8fe09-17c1-4d53-b121-136e7d633d44",
+          "1d98b620-22c7-4de0-ad11-f3b73753ed5e",
+          "1f47e735-459f-46f1-8011-eb9e9d53e76f",
+          "218cab52-36db-4509-813d-a0f129ca2b51",
+          "2499a268-3f63-4b13-8263-d3df6d75c586",
+          "26ba2b96-d3ab-464d-9f42-d6294b9a558b",
+          "27cd78c8-7087-4014-8fde-20bdff5c368a",
+          "2978d811-9fcf-46e5-b90c-ec81a83bfd7e",
+          "2c46b453-4121-40fd-94d5-77cf33c3fb2b",
+          "2f53ef17-70d8-4c88-84bb-1f4c36c680b6",
+          "3404d7f9-f937-4156-8c44-538add742104",
+          "34cb195b-fc9b-41c6-9b75-78ec37590302",
+          "37542b90-5d60-420e-831e-ce95243cbca5",
+          "38814ca0-518d-440d-be68-4005068d4d9b",
+          "38a9144d-cfa8-4b6c-b71e-d38c8a158a4a",
+          "3a55e264-35e9-4a38-bf2d-ab9bb53b59ee",
+          "3b8e402a-5808-4083-8ee9-e5cdbc65bf4e",
+          "41624cf7-7316-4725-bf16-7ed48f1c493b",
+          "4224299d-1524-428f-ad08-92177819e21e",
+          "426a7414-c0a2-40de-bc45-4db54d88d2f5",
+          "42b8044b-4a6f-417a-aa21-131d75933a6f",
+          "4347d449-97b0-4b5e-b958-9a8fbf116762",
+          "43ec000c-5298-4d4a-af59-85f423eb9cd1",
+          "4614603b-2936-4912-adc8-ac22535dd636",
+          "46c332b2-f80f-4e62-8f54-37a201615cc1",
+          "4711fc12-e934-44ca-acd2-8bf58d08ee97",
+          "4ac3957d-4f17-4f1d-98e0-fe936666e9e3",
+          "4b713ddf-2444-46de-b8de-8f1182647b12",
+          "4be95398-3014-4592-99a0-22ac96b65bdf",
+          "4c333b40-cff2-4c7b-893e-fbc3329b9ee4",
+          "4f1f1888-573a-480e-b59f-882a444740b0",
+          "50617b18-76cb-47c0-9f43-fb26d23f1020",
+          "50718935-0e7b-4452-baee-3e53d15b71c8",
+          "524debc1-0587-449d-b9a7-925d680e6e29",
+          "526df3e5-982a-4338-b7cf-c56f94f2a878",
+          "56d0b13c-81ef-4243-9a1c-c8f715c85524",
+          "5802bc60-8ca7-4553-8967-42271fe5622a",
+          "580e88cc-dee9-4182-9a8d-4f49cdc0438c",
+          "591c7808-1792-48fa-944b-6480d49684db",
+          "5a9b53f4-d75a-43d3-b97a-514e0e88c3da",
+          "5b5da1f1-8b18-423b-b6d4-0e098aac56c1",
+          "5c035945-ce49-4278-819f-4f63a815b390",
+          "5d0ef645-af99-4f0c-894d-c3867c9a0268",
+          "5d19e461-7d2e-4fb9-980e-8280335d0f40",
+          "5edb3a89-52da-4f7c-91d2-69f94b7f2059",
+          "5f762467-0e78-404e-8b82-115143c072ec",
+          "600dc460-59fc-483b-8e1a-2fae6ba8e89f",
+          "607b362f-227d-4815-be8e-9db34ad1dfdf",
+          "61e42db2-af66-4d34-8e1c-3f90b6a03e25",
+          "6235f462-cae7-4520-85df-943013d9a69c",
+          "666000a8-4e0b-4492-8d1d-8ad68bc2b984",
+          "66694e8a-d487-4dc9-b7ea-a97484b742b2",
+          "67320740-3366-4454-a9eb-64c23211e009",
+          "6778ca8b-f18a-495e-9e07-09ac8b1acf8b",
+          "689f8f7f-5613-435a-96d1-d5fcb16ba612",
+          "69268d03-6194-4b4a-8bfe-051ebc173b14",
+          "6927c63c-7a25-45a2-8505-13f460e794c3",
+          "6dcd48b3-1040-4f7b-9939-d221cda429bd",
+          "70d572d9-db9a-4e6e-9272-84fde54f7560",
+          "74e6de93-32b1-47d0-863c-b5754cf5c632",
+          "79fce494-088d-423c-ab31-443d693141b6",
+          "7a84f4b4-db48-4104-99b8-fdd5ed86287b",
+          "7ac3fa3a-7f74-4002-a184-a98b59740822",
+          "815ba381-14d2-4930-a4fa-b1d41e624dfa",
+          "82613430-e7aa-402f-8fbd-53ebc157941c",
+          "82de2455-6378-4f05-92f7-5134952681f5",
+          "855df29a-75ce-4cc6-bc37-dc292a4cae69",
+          "85ec55bd-861e-46cc-a9ab-174028379f18",
+          "89105c25-1800-46fa-b130-55e85286866b",
+          "8b062c2b-5915-4124-ab9f-e0e4c56f9715",
+          "8b8a87f1-d514-4fd3-a2e0-c30f646a9577",
+          "8d4fb9af-9944-4ee1-98d6-a151a4b488d5",
+          "8da5cfc5-c596-4caf-bba4-b57880284ddf",
+          "8e682dc4-b891-4320-b4ef-09a2812602ee",
+          "8f03d97d-a8d7-4345-9f07-beee86fdc92f",
+          "940bd45d-0483-4ae6-930f-e2f965b772ee",
+          "96d4df13-2ada-4905-bc69-6cd5650a7415",
+          "98554c5c-bf88-4013-8170-1d12284dabad",
+          "989f3fdd-cbcf-4262-afbd-87539f462332",
+          "98c21a33-333e-4af0-8555-7761185c3581",
+          "998317c7-246c-4019-9153-4238e7188d26",
+          "99c656c5-90c4-4300-b41e-2bf119eed795",
+          "9aedb48c-8321-4fec-ae81-52cb31723798",
+          "9b5d4be8-f194-4262-a44d-5c1d3f696d56",
+          "9cdebb07-de24-4b69-a59a-5de6fefed315",
+          "9ce181b0-14f3-4550-ace2-255ef55a1882",
+          "9d4cfcd8-642f-4c52-bc57-6b03c31c5b93",
+          "9d8227d6-2e73-470c-b189-47165bebe82f",
+          "9ef5d340-0484-4d93-ba57-3e6bf4de3c2d",
+          "9f9a6a2c-8d00-4fdb-a994-f3c7266a9a12",
+          "a3593b5c-13ef-4d84-93e7-68a01394e787",
+          "a406f8ec-7615-4ed2-8242-b7c415c32534",
+          "ae99e567-3234-4c53-8e0a-d6024a62f8f9",
+          "af1dd8bb-fbf9-4c3f-b78a-d9b18a92fa60",
+          "af212768-4b0c-4fca-a9e7-b0dc8ae2b1b6",
+          "b24516d2-efbc-450b-a2e3-6d3e0c72a3df",
+          "b265c3d6-6d83-4015-b96d-ae8af896f4e0",
+          "b52e2b90-1daa-4241-8b99-13df35761fa7",
+          "bbbf6068-bfee-4cbc-b4e6-f4853693d7ca",
+          "bdd5f4f6-eff3-4bbc-9416-416189fb860f",
+          "bec32029-1d03-469b-967e-80d47b0804d5",
+          "bfaf980b-8ca5-4167-bea7-4ebd04ecb792",
+          "c2037504-8322-492d-984a-ce7b3580e965",
+          "c30f4e01-a591-493c-9082-86f37804a941",
+          "c3bd52e0-70ef-4127-b799-91ae1af98a72",
+          "c5185e74-c9f0-4172-b1d4-2969c0ca3651",
+          "c85052a6-d689-4a84-aa41-694672bb8700",
+          "c9b380a6-48e3-4e01-bc9d-cad19466fc7c",
+          "cbb602d6-2ddb-495b-9bb4-961f2b2cf912",
+          "d01d8932-8b1f-417a-88fd-45e6ad5e05bf",
+          "d0fa11da-8a69-4d50-8968-a52e6e67c0d7",
+          "d19e90bd-1b0a-4036-8b20-65c548fe53e9",
+          "d5411316-3f72-4ea6-b7ce-96557817a4c7",
+          "db44d451-8d93-4b8a-b1f7-e82bbc5e37a7",
+          "dc033de2-e0b7-4059-9b6e-85bc362e871a",
+          "dc9e5d04-dae8-4c0e-b65c-043f1989d0c1",
+          "dd2d91be-8880-4b49-ae90-ef2c792d3f0f",
+          "e001ec40-8039-4d02-a8b1-39e0de23503d",
+          "e43070c2-23d0-4f56-b1e1-b0204ca8e1dc",
+          "e44d1e5b-e30e-4017-b709-f7ca85588fca",
+          "e5ceb97f-8019-4df4-97da-1d16837fdb9b",
+          "e5e5a163-f10b-4479-a0ab-fdd230b79c20",
+          "e812258e-9b9b-41ef-86a0-45d93e8c360a",
+          "e8afdc6c-7f10-47f3-9606-95de528f80a4",
+          "ea4a64f3-d4f6-4265-9670-82283c1cd1b2",
+          "ead66289-1cf3-450e-9384-658a9a351b7d",
+          "ebe31c73-dd98-455c-9821-06c34f69d914",
+          "ee8a61f1-6306-4cb2-9980-5750f3166bac",
+          "ef33b00f-1104-4c8a-b915-083095e13dc0",
+          "f2250051-c338-41dd-97f5-09638472b5dd",
+          "f26ec325-d220-4571-b602-8cbafd73e233",
+          "f5d76acf-6c99-458f-963c-2d62b57bfea0",
+          "f60b37cc-174a-4a7d-ad9d-43872a2b2ca1",
+          "f6b404ac-826d-4bf3-9d88-70bb15987d3d",
+          "f81f328b-3ac2-4d32-9d87-43f339702e7b",
+          "f8db7873-28ad-4072-a39e-872404ffd191",
+          "f97de123-fbb2-4824-9ada-8407714626be",
+          "f99ea708-4b1e-4e2e-8c6f-4441935710d3",
+          "faeb6a36-e2a9-4f04-93c5-84ea4c2a7f0d",
+          "fb996be1-6388-44d7-8356-c6bf13528bf1"
+        ]
+      }
+    },
+    "scout_retrieval_run_id": "9706c693-c184-43ad-8c85-b461e15ef66b",
+    "reviewer_retrieval_run_id": "f20504f1-70b8-4aa2-ba6f-7599ab1494dc"
+  }
+}

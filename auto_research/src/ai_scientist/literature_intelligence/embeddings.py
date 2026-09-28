@@ -37,3 +37,6 @@ class BGEEmbeddingProvider:
 
     def embed(self, text: str) -> list[float]:
         return self._model.encode([text], normalize_embeddings=True)[0].tolist()
+
+    def embed_many(self, texts: list[str]) -> list[list[float]]:
+        return self._model.encode(texts, normalize_embeddings=True, batch_size=min(128, len(texts))).tolist()

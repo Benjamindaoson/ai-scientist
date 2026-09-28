@@ -1,0 +1,1602 @@
+[
+  {
+    "question_id": "real-prior-001",
+    "question": "Which source-backed work investigates this relation: jats This paper examines the informational superiority of Dynamic Implied Probability DIP realtime risk-neutral distribution extraction framework developed by Shimko and Babaei over conventional statistical parametric models during periods of acute geopolitical?",
+    "designated_identifier": "doi:10.2139/ssrn.6803478",
+    "designated_paper_id": "011895a5-e460-48df-9c7b-bfa7f0178f1c",
+    "dangerous_prior_paper_id": "011895a5-e460-48df-9c7b-bfa7f0178f1c",
+    "closest_prior_paper_id": "011895a5-e460-48df-9c7b-bfa7f0178f1c",
+    "false_friend_paper_ids": [
+      "6c81526f-22af-47f2-8e34-69ef99a35aa5",
+      "389346f7-d949-436e-b115-f74893d57a5c"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "2e4e85e1-436d-40ff-b64c-7bc1769ea43f",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-002",
+    "question": "Which source-backed work investigates this relation: title Abstract title Training machine learning models for city-wide mobility predictions typically requires extensive local trajectory data for training or transfer learning techniques to adapt from data-rich to data-scarce cities The resulting?",
+    "designated_identifier": "doi:10.21203/rs.3.rs-8728806/v1",
+    "designated_paper_id": "05f8cdd3-f65b-486a-bc94-c93b4e2067d9",
+    "dangerous_prior_paper_id": "05f8cdd3-f65b-486a-bc94-c93b4e2067d9",
+    "closest_prior_paper_id": "05f8cdd3-f65b-486a-bc94-c93b4e2067d9",
+    "false_friend_paper_ids": [
+      "cca6635d-8eb3-4b3f-abb6-fb4dc9a35de8",
+      "6c81526f-22af-47f2-8e34-69ef99a35aa5"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "0cc1810d-8b91-41ea-89e4-e60620bae7f2",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-003",
+    "question": "Which source-backed work investigates this relation: Planning-oriented end-to-end driving models show great promise yet they fundamentally learn statistical correlations instead of true causal relationships This vulnerability leads to causal confusion where models exploit dataset biases as shortcuts critically?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/tang_causalvad_de-confounding_end-to-end_autonomous_driving_via_causal_intervention_cvpr_2026_paper.html",
+    "designated_paper_id": "05fbec53-39f3-4ed0-89d0-0d80a1298be6",
+    "dangerous_prior_paper_id": "05fbec53-39f3-4ed0-89d0-0d80a1298be6",
+    "closest_prior_paper_id": "05fbec53-39f3-4ed0-89d0-0d80a1298be6",
+    "false_friend_paper_ids": [
+      "fc1d103d-5d8a-44bd-9ad0-536b23697908",
+      "389346f7-d949-436e-b115-f74893d57a5c"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0f0df07b-dcfa-47ef-85bd-f49386fd1cb5",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-004",
+    "question": "Which source-backed work investigates this relation: Catatonia recovers through capacities returning in fixed dependency order and benzodiazepines and electroconvulsive therapy work without known target On an evidence-coupled bistable cascade over that order we take three quantities to be?",
+    "designated_identifier": "doi:10.31234/osf.io/d6knq_v1",
+    "designated_paper_id": "09e47504-10c9-49f6-bfaf-323adc6305ab",
+    "dangerous_prior_paper_id": "09e47504-10c9-49f6-bfaf-323adc6305ab",
+    "closest_prior_paper_id": "09e47504-10c9-49f6-bfaf-323adc6305ab",
+    "false_friend_paper_ids": [
+      "cca6635d-8eb3-4b3f-abb6-fb4dc9a35de8",
+      "011895a5-e460-48df-9c7b-bfa7f0178f1c"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "2c39d3d5-4e12-478a-ab85-c601c9fea03e",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-005",
+    "question": "Which source-backed work investigates this relation: jats Character prompts are the primary mechanism through which designers and practitioners exercise agency over the behavior of creative-AI assistants Sudowrite and NovelCrafter ship writing personas by default TavernAI and SillyTavern host?",
+    "designated_identifier": "doi:10.2139/ssrn.7264360",
+    "designated_paper_id": "0c72a837-f74f-4326-b3de-7c35ff5219aa",
+    "dangerous_prior_paper_id": "0c72a837-f74f-4326-b3de-7c35ff5219aa",
+    "closest_prior_paper_id": "0c72a837-f74f-4326-b3de-7c35ff5219aa",
+    "false_friend_paper_ids": [
+      "bdfdea70-3ef5-4c0c-ad96-96697ce577ce",
+      "70eae3a0-fa2f-4b58-8fdd-60aa25f47149"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "1cb4ed70-a037-4429-91bc-505ffac6fe70",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-006",
+    "question": "Which source-backed work investigates this relation: Immersive virtual reality VR is increasingly used in cognitive assessment yet it remains unclear whether established attention paradigmsretain their interpretability when translated from desktop presentation to head-mounted delivery The present study examined?",
+    "designated_identifier": "doi:10.31234/osf.io/sr95c_v2",
+    "designated_paper_id": "11603ecb-34cf-479e-886f-cb56bb37230d",
+    "dangerous_prior_paper_id": "11603ecb-34cf-479e-886f-cb56bb37230d",
+    "closest_prior_paper_id": "11603ecb-34cf-479e-886f-cb56bb37230d",
+    "false_friend_paper_ids": [
+      "e47fa96c-da57-4473-a695-c3469f5d0fce",
+      "bdfdea70-3ef5-4c0c-ad96-96697ce577ce"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "231c3663-445b-4bca-99ef-9cf76656db3a",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-007",
+    "question": "Which source-backed work investigates this relation: jats Multimodal large language models MLLMs have moved from tightly coupled vision-language systems toward general-purpose models that ingest and reason over mixtures of images video audio documents and text Fine-tuning is the?",
+    "designated_identifier": "doi:10.2139/ssrn.7419558",
+    "designated_paper_id": "16af92af-672d-4718-b24e-ffab9e5e0263",
+    "dangerous_prior_paper_id": "16af92af-672d-4718-b24e-ffab9e5e0263",
+    "closest_prior_paper_id": "16af92af-672d-4718-b24e-ffab9e5e0263",
+    "false_friend_paper_ids": [
+      "bdfdea70-3ef5-4c0c-ad96-96697ce577ce",
+      "bdb46415-84e5-4d15-b0d6-c67e4e29e729"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "01b66e03-f090-40f6-af6f-43c4af3d2e83",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-008",
+    "question": "Which source-backed work investigates this relation: Reflective imaging enables the mirror imagings and physical entities to possess identical attributes color and shape Current mirror detection MD methods primarily rely on designing functional components to establish the correlation and?",
+    "designated_identifier": "doi:10.1609/aaai.v40i15.38225",
+    "designated_paper_id": "199f763e-79a5-4b04-8772-44b35189efa3",
+    "dangerous_prior_paper_id": "199f763e-79a5-4b04-8772-44b35189efa3",
+    "closest_prior_paper_id": "199f763e-79a5-4b04-8772-44b35189efa3",
+    "false_friend_paper_ids": [
+      "c95a3ce3-5392-4127-b844-a4fa901255e7",
+      "e4877592-e38f-4220-835e-68dd99b41900"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "255bc693-1051-4b68-ba85-b1cd9ea12779",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-009",
+    "question": "Which source-backed work investigates this relation: jats Drug-target affinity DTA models achieve high accuracy within benchmark yet collapse under distribution shift We introduce anchor transfer learning which reformulates DTA as comparison problem instead of scoring protein-drug pair in?",
+    "designated_identifier": "doi:10.2139/ssrn.6541799",
+    "designated_paper_id": "29cd575a-e4cc-4bf8-98c9-02f9677f0c48",
+    "dangerous_prior_paper_id": "29cd575a-e4cc-4bf8-98c9-02f9677f0c48",
+    "closest_prior_paper_id": "29cd575a-e4cc-4bf8-98c9-02f9677f0c48",
+    "false_friend_paper_ids": [
+      "fc1d103d-5d8a-44bd-9ad0-536b23697908",
+      "6c81526f-22af-47f2-8e34-69ef99a35aa5"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "044c90ba-3aed-4445-a3a0-f70b92de860c",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-010",
+    "question": "Which source-backed work investigates this relation: jats lt gt lt span gt The inference theory for the Switching Degree established by Tang ag assumes independent and identically distributed noise In this paper we extend the Switching Degree inference?",
+    "designated_identifier": "doi:10.2139/ssrn.7392319",
+    "designated_paper_id": "2f8c9163-e5f2-442d-a75b-9cf292dcc3b7",
+    "dangerous_prior_paper_id": "2f8c9163-e5f2-442d-a75b-9cf292dcc3b7",
+    "closest_prior_paper_id": "2f8c9163-e5f2-442d-a75b-9cf292dcc3b7",
+    "false_friend_paper_ids": [
+      "db79cf0b-5e52-49a4-ab0c-74b44539d897",
+      "29cd575a-e4cc-4bf8-98c9-02f9677f0c48"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "2eafb806-bf8a-4bc1-a1fb-29ca3b2c31f7",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-011",
+    "question": "Which source-backed work investigates this relation: Dexterous grasping remains fundamental yet challenging problem in robotics general-purpose robot must be capable of grasping diverse objects in arbitrary scenarios However existing research typically relies on restrictive assumptions such as single-object?",
+    "designated_identifier": "doi:10.1609/aaai.v40i22.38953",
+    "designated_paper_id": "30474b0e-6365-4b4a-abdb-7f7fd87b7ead",
+    "dangerous_prior_paper_id": "30474b0e-6365-4b4a-abdb-7f7fd87b7ead",
+    "closest_prior_paper_id": "30474b0e-6365-4b4a-abdb-7f7fd87b7ead",
+    "false_friend_paper_ids": [
+      "4732b20c-e596-4d16-bd51-46bdf77bb732",
+      "05f8cdd3-f65b-486a-bc94-c93b4e2067d9"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "267feaa3-b2db-4bd8-9e17-3713b69ebd38",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-012",
+    "question": "Which source-backed work investigates this relation: We introduce the single-life learning paradigm where we train distinct vision model exclusively on egocentric videos captured by one individual We leverage the multiple viewpoints naturally captured within single life to learn?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/han_unique_lives_shared_world_learning_from_single-life_videos_cvpr_2026_paper.html",
+    "designated_paper_id": "389346f7-d949-436e-b115-f74893d57a5c",
+    "dangerous_prior_paper_id": "389346f7-d949-436e-b115-f74893d57a5c",
+    "closest_prior_paper_id": "389346f7-d949-436e-b115-f74893d57a5c",
+    "false_friend_paper_ids": [
+      "05fbec53-39f3-4ed0-89d0-0d80a1298be6",
+      "ef33b00f-1104-4c8a-b915-083095e13dc0"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "2934e847-05b9-47e3-993c-055f9903dd31",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-013",
+    "question": "Which source-backed work investigates this relation: Style generation has made significant progress through diffusion models Recent efforts have explored reinforcement learning with human-preference reward models to enhance diffusion models for general downstream applications However we identify critical limitation?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/he_styledoctor_towards_specialist_reward_model_for_style-centric_generation_tasks_cvpr_2026_paper.html",
+    "designated_paper_id": "3df8621c-9b77-4815-8cea-4638654c7900",
+    "dangerous_prior_paper_id": "3df8621c-9b77-4815-8cea-4638654c7900",
+    "closest_prior_paper_id": "3df8621c-9b77-4815-8cea-4638654c7900",
+    "false_friend_paper_ids": [
+      "bdb46415-84e5-4d15-b0d6-c67e4e29e729",
+      "ef33b00f-1104-4c8a-b915-083095e13dc0"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "062a4b9f-ace7-4b5a-8c00-3c6a91ab2c17",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-014",
+    "question": "Which source-backed work investigates this relation: Text-to-motion generation aims to synthesize realistic and semantically aligned human motions from natural language descriptions Existing diffusion-based methods often rely on isotropic latent priors and shallow cross-modal supervision which lead to semantic?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/lv_hierarchical_enhancement_of_semantic_priors_for_disentangled_text-driven_motion_generation_cvpr_2026_paper.html",
+    "designated_paper_id": "3e3a98dd-ddc7-47e9-89e9-0f78af2e94f0",
+    "dangerous_prior_paper_id": "3e3a98dd-ddc7-47e9-89e9-0f78af2e94f0",
+    "closest_prior_paper_id": "3e3a98dd-ddc7-47e9-89e9-0f78af2e94f0",
+    "false_friend_paper_ids": [
+      "db7619e8-35eb-4e0b-ab48-51bdecfba56a",
+      "c95a3ce3-5392-4127-b844-a4fa901255e7"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "04282727-47b6-4237-b47d-27cfd065c925",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-015",
+    "question": "Which source-backed work investigates this relation: Reconstructing objects from single image is long-standing challenge particularly under real-world occlusions While recent diffusion-based view synthesis models can generate consistent novel views from single RGB image they generally assume fully visible?",
+    "designated_identifier": "doi:10.1609/aaai.v40i11.37820",
+    "designated_paper_id": "4064642d-13f3-49ad-b7e6-fd25218a3a2b",
+    "dangerous_prior_paper_id": "4064642d-13f3-49ad-b7e6-fd25218a3a2b",
+    "closest_prior_paper_id": "4064642d-13f3-49ad-b7e6-fd25218a3a2b",
+    "false_friend_paper_ids": [
+      "3df8621c-9b77-4815-8cea-4638654c7900",
+      "e40ca191-2c2e-4f2f-92eb-e346f1e88e7b"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "2009aeea-f4a5-4386-9cda-257780b5d38f",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-016",
+    "question": "Which source-backed work investigates this relation: Multimodal Action Quality Assessment AQA has recently emerged as promising paradigm By leveraging complementary information across shared contextual cues it enhances the discriminative evaluation of subtle intra-class variations in highly similar action?",
+    "designated_identifier": "doi:10.1609/aaai.v40i13.38104",
+    "designated_paper_id": "428b654f-ced9-4b8c-938f-afed0b42b4fc",
+    "dangerous_prior_paper_id": "428b654f-ced9-4b8c-938f-afed0b42b4fc",
+    "closest_prior_paper_id": "428b654f-ced9-4b8c-938f-afed0b42b4fc",
+    "false_friend_paper_ids": [
+      "98ff0cc9-b63b-45b3-bfa2-93893f782314",
+      "c95a3ce3-5392-4127-b844-a4fa901255e7"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "2c839a0e-372f-4085-a34c-2fee5b806a05",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-017",
+    "question": "Which source-backed work investigates this relation: Millimeter-wave radar offers privacy-preserving and environment-robust alternative to vision-based sensing enabling human motion analysis in challenging conditions such as low light occlusions rain or smoke However its sparse point clouds pose significant?",
+    "designated_identifier": "doi:10.1609/aaai.v40i7.37500",
+    "designated_paper_id": "4732b20c-e596-4d16-bd51-46bdf77bb732",
+    "dangerous_prior_paper_id": "4732b20c-e596-4d16-bd51-46bdf77bb732",
+    "closest_prior_paper_id": "4732b20c-e596-4d16-bd51-46bdf77bb732",
+    "false_friend_paper_ids": [
+      "8596ed8b-6acf-44f9-adf2-a41ddfb6ba97",
+      "d62604fc-3c30-4f14-ba77-1efcb0be41d0"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0349ee38-151c-48c8-b305-780a5ac11940",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-018",
+    "question": "Which source-backed work investigates this relation: Methods using inertial measurement units IMUs provide wearable alternative to camera-based motion capture To mitigate drift from inertial signals recent sparse inertial pose estimators integrate inter-sensor distances measured by ultra-wideband UWB ranging?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/hollidt_ultra_diffusion_poser_diffusion-based_human_motion_tracking_from_sparse_inertial_cvpr_2026_paper.html",
+    "designated_paper_id": "4733a881-57a5-4d0d-9a3d-7c2f5cbaed4b",
+    "dangerous_prior_paper_id": "4733a881-57a5-4d0d-9a3d-7c2f5cbaed4b",
+    "closest_prior_paper_id": "4733a881-57a5-4d0d-9a3d-7c2f5cbaed4b",
+    "false_friend_paper_ids": [
+      "fc1d103d-5d8a-44bd-9ad0-536b23697908",
+      "fc053066-8e68-4e2c-b98b-bf0b446812cf"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "2389331c-eb0f-4cea-ab9b-96c396a1c776",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-019",
+    "question": "Which source-backed work investigates this relation: jats This data note examines whether ESG narrative disclosures that are machine-consumable at single point in time remain longitudinally identifiable-that is whether year-over-year changes in narrative scoring can be reliably computed and?",
+    "designated_identifier": "doi:10.2139/ssrn.6993619",
+    "designated_paper_id": "4b275957-727b-4f0c-988e-353339bfaa98",
+    "dangerous_prior_paper_id": "4b275957-727b-4f0c-988e-353339bfaa98",
+    "closest_prior_paper_id": "4b275957-727b-4f0c-988e-353339bfaa98",
+    "false_friend_paper_ids": [
+      "29cd575a-e4cc-4bf8-98c9-02f9677f0c48",
+      "bdfdea70-3ef5-4c0c-ad96-96697ce577ce"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "0f4484ed-29fb-45ae-a1ce-0269696c4044",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-020",
+    "question": "Which source-backed work investigates this relation: Multi-modality image fusion enhances scene perception by combining complementary information Unified models aim to share parameters across modalities for multi-modality image fusion but large modality differences often cause gradient conflicts limiting performance?",
+    "designated_identifier": "doi:10.1609/aaai.v40i8.37581",
+    "designated_paper_id": "57550be0-cbf6-4054-a633-f1e969d2fbd1",
+    "dangerous_prior_paper_id": "57550be0-cbf6-4054-a633-f1e969d2fbd1",
+    "closest_prior_paper_id": "57550be0-cbf6-4054-a633-f1e969d2fbd1",
+    "false_friend_paper_ids": [
+      "c95a3ce3-5392-4127-b844-a4fa901255e7",
+      "6c81526f-22af-47f2-8e34-69ef99a35aa5"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "21ebca18-d645-4a4c-adfb-8ee228c6986f",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-021",
+    "question": "Which source-backed work investigates this relation: Image generative models have become indispensable tools to yield exquisite high-resolution HR images for everyone ranging from general users to professional designers However desired outcome often requires generating large number of HR?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/jeong_training-free_perceptually_consistent_low-resolution_previews_with_high-resolution_image_for_efficient_cvpr_2026_paper.html",
+    "designated_paper_id": "5d0eebc5-6e10-4d15-86c6-466da164ef00",
+    "dangerous_prior_paper_id": "5d0eebc5-6e10-4d15-86c6-466da164ef00",
+    "closest_prior_paper_id": "5d0eebc5-6e10-4d15-86c6-466da164ef00",
+    "false_friend_paper_ids": [
+      "e4877592-e38f-4220-835e-68dd99b41900",
+      "3df8621c-9b77-4815-8cea-4638654c7900"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "11f98dfc-4483-431d-8eb3-daf78346d9ac",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-022",
+    "question": "Which source-backed work investigates this relation: With the rapid growth of video data Composed Video Retrieval CVR has emerged as novel paradigm in video retrieval and is receiving increasing attention from researchers Unlike unimodal video retrieval methods the?",
+    "designated_identifier": "doi:10.1609/aaai.v40i28.39507",
+    "designated_paper_id": "5e12c2a7-e48a-4dd7-9027-a7b532f76922",
+    "dangerous_prior_paper_id": "5e12c2a7-e48a-4dd7-9027-a7b532f76922",
+    "closest_prior_paper_id": "5e12c2a7-e48a-4dd7-9027-a7b532f76922",
+    "false_friend_paper_ids": [
+      "6ceaf9ce-9516-4fcf-b01a-0caa883a7d97",
+      "e81f98da-0bdd-41a8-bda5-f9b8f43a5ffc"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "07bece4d-d566-48f9-9809-aae19fdc72e6",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-023",
+    "question": "Which source-backed work investigates this relation: The detection of online sexism remains an open problem Sexism detection is inherently subjective yet most existing systems reduce multi-annotator labels to single majority decision and treat all instances uniformly This ignores?",
+    "designated_identifier": "doi:10.31235/osf.io/fnz4j_v1",
+    "designated_paper_id": "606ff021-4cf4-4629-9a51-68a42e259394",
+    "dangerous_prior_paper_id": "606ff021-4cf4-4629-9a51-68a42e259394",
+    "closest_prior_paper_id": "606ff021-4cf4-4629-9a51-68a42e259394",
+    "false_friend_paper_ids": [
+      "8596ed8b-6acf-44f9-adf2-a41ddfb6ba97",
+      "bdfdea70-3ef5-4c0c-ad96-96697ce577ce"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "0e9a3b32-e4c2-4867-9a96-2402f321efad",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-024",
+    "question": "Which source-backed work investigates this relation: Enabling humanoid robots to physically interact with humans is critical frontier but progress is hindered by the scarcity of high-quality Human-Humanoid Interaction HHoI data While leveraging abundant Human-Human Interaction HHI data presents?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/huang_beyond_mimicry_learning_whole-body_human-humanoid_interaction_from_human-human_demonstrations_cvpr_2026_paper.html",
+    "designated_paper_id": "63c87f83-a14a-489b-8de6-2d2466ba1f5d",
+    "dangerous_prior_paper_id": "63c87f83-a14a-489b-8de6-2d2466ba1f5d",
+    "closest_prior_paper_id": "63c87f83-a14a-489b-8de6-2d2466ba1f5d",
+    "false_friend_paper_ids": [
+      "3df8621c-9b77-4815-8cea-4638654c7900",
+      "81c2e15b-428e-4b18-bc16-8242e057c14f"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "15def46c-8428-4e3a-88aa-89657fceba36",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-025",
+    "question": "Which source-backed work investigates this relation: Time series forecasting is fundamental to diverse applications with recent approaches leverage large vision models LVMs to capture temporal patterns through visual representations We reveal that while vision models enhance forecasting performance?",
+    "designated_identifier": "doi:10.1609/aaai.v40i29.39601",
+    "designated_paper_id": "6c81526f-22af-47f2-8e34-69ef99a35aa5",
+    "dangerous_prior_paper_id": "6c81526f-22af-47f2-8e34-69ef99a35aa5",
+    "closest_prior_paper_id": "6c81526f-22af-47f2-8e34-69ef99a35aa5",
+    "false_friend_paper_ids": [
+      "c95a3ce3-5392-4127-b844-a4fa901255e7",
+      "57550be0-cbf6-4054-a633-f1e969d2fbd1"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "1b1f0d6d-438b-4922-a7af-0f5a26e3c1c0",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-026",
+    "question": "Which source-backed work investigates this relation: Composed Image Retrieval CIR is challenging image retrieval paradigm that enables to retrieve target images based on multimodal queries consisting of reference images and modification texts Although substantial progress has been made?",
+    "designated_identifier": "doi:10.1609/aaai.v40i25.39181",
+    "designated_paper_id": "6ceaf9ce-9516-4fcf-b01a-0caa883a7d97",
+    "dangerous_prior_paper_id": "6ceaf9ce-9516-4fcf-b01a-0caa883a7d97",
+    "closest_prior_paper_id": "6ceaf9ce-9516-4fcf-b01a-0caa883a7d97",
+    "false_friend_paper_ids": [
+      "5e12c2a7-e48a-4dd7-9027-a7b532f76922",
+      "e81f98da-0bdd-41a8-bda5-f9b8f43a5ffc"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "096bd565-566f-41ce-8a91-8c13d748f823",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-027",
+    "question": "Which source-backed work investigates this relation: jats Financial fraud detection is simultaneously an extremeimbalance problem non-stationary streaming problem and high-stakes probability-estimation problem These properties interact detector that ranks transactions well on an historical split may become stale after?",
+    "designated_identifier": "doi:10.2139/ssrn.7345545",
+    "designated_paper_id": "70eae3a0-fa2f-4b58-8fdd-60aa25f47149",
+    "dangerous_prior_paper_id": "70eae3a0-fa2f-4b58-8fdd-60aa25f47149",
+    "closest_prior_paper_id": "70eae3a0-fa2f-4b58-8fdd-60aa25f47149",
+    "false_friend_paper_ids": [
+      "bdfdea70-3ef5-4c0c-ad96-96697ce577ce",
+      "011895a5-e460-48df-9c7b-bfa7f0178f1c"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "0e1c9c26-04c8-47f5-b9c0-ace7c864aa4e",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-028",
+    "question": "Which source-backed work investigates this relation: jats Introduction English learning impact prediction enhances personalized education by analyzing student behavior and performance Existing research employs machine learning ML and Deep learning DL models for prediction but many overlook dynamic?",
+    "designated_identifier": "doi:10.56294/dm2026779",
+    "designated_paper_id": "732c1529-681f-4244-b47f-1d2d255a41e7",
+    "dangerous_prior_paper_id": "732c1529-681f-4244-b47f-1d2d255a41e7",
+    "closest_prior_paper_id": "732c1529-681f-4244-b47f-1d2d255a41e7",
+    "false_friend_paper_ids": [
+      "98ff0cc9-b63b-45b3-bfa2-93893f782314",
+      "6c81526f-22af-47f2-8e34-69ef99a35aa5"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "2f73adbb-ab0c-4ef8-8dee-56d75d6bdcd9",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-029",
+    "question": "Which source-backed work investigates this relation: Few-shot Class-Incremental Learning FSCIL requires learning new classes from very limited data while preventing catastrophic forgetting Existing methods rely mainly on visual features and are prone to overfitting while recent vision-language models?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/sinha_quantized_residuals_to_continuous_prompts_for_few-shot_class_incremental_learning_cvpr_2026_paper.html",
+    "designated_paper_id": "76d2aa7e-1dc9-41f6-ba60-78cd1227e73d",
+    "dangerous_prior_paper_id": "76d2aa7e-1dc9-41f6-ba60-78cd1227e73d",
+    "closest_prior_paper_id": "76d2aa7e-1dc9-41f6-ba60-78cd1227e73d",
+    "false_friend_paper_ids": [
+      "bdb46415-84e5-4d15-b0d6-c67e4e29e729",
+      "c95a3ce3-5392-4127-b844-a4fa901255e7"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "10eeb05f-1250-483e-a2d1-e78af033a31b",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-030",
+    "question": "Which source-backed work investigates this relation: How should we quantify the value of each training example when datasets are large heterogeneous and geometrically structured Classical Data-Shapley answers in principle but its complexity and point-wise perspective are ill-suited to?",
+    "designated_identifier": "doi:10.1609/aaai.v40i19.38633",
+    "designated_paper_id": "814606e7-659a-420e-9549-a5c463bc28c1",
+    "dangerous_prior_paper_id": "814606e7-659a-420e-9549-a5c463bc28c1",
+    "closest_prior_paper_id": "814606e7-659a-420e-9549-a5c463bc28c1",
+    "false_friend_paper_ids": [
+      "6c81526f-22af-47f2-8e34-69ef99a35aa5",
+      "c95a3ce3-5392-4127-b844-a4fa901255e7"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "2a84f18e-6a0a-4d1d-ba17-4fa2fcb89bb0",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-031",
+    "question": "Which source-backed work investigates this relation: Floor plans encapsulate compact spatial priors enabling agents to navigate unseen scenes more efficiently While prior work has explored floor plan-guided navigation it has focused mainly on PointNav and limited set of?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/huang_floverse_floor_plan-guided_multi-modal_navigation_cvpr_2026_paper.html",
+    "designated_paper_id": "81c2e15b-428e-4b18-bc16-8242e057c14f",
+    "dangerous_prior_paper_id": "81c2e15b-428e-4b18-bc16-8242e057c14f",
+    "closest_prior_paper_id": "81c2e15b-428e-4b18-bc16-8242e057c14f",
+    "false_friend_paper_ids": [
+      "05f8cdd3-f65b-486a-bc94-c93b4e2067d9",
+      "428b654f-ced9-4b8c-938f-afed0b42b4fc"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "1880af16-c3bd-495c-ac63-43bbab7d7b1a",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-032",
+    "question": "Which source-backed work investigates this relation: jats criminal conviction restricts occupational access through several thousand provisions spread across federal law state codes administrative rules and licensing board practice None of it is indexed to an occupational classification system?",
+    "designated_identifier": "doi:10.2139/ssrn.7508898",
+    "designated_paper_id": "822a9244-7a87-4f77-9cd0-3aa49df7758a",
+    "dangerous_prior_paper_id": "822a9244-7a87-4f77-9cd0-3aa49df7758a",
+    "closest_prior_paper_id": "822a9244-7a87-4f77-9cd0-3aa49df7758a",
+    "false_friend_paper_ids": [
+      "db79cf0b-5e52-49a4-ab0c-74b44539d897",
+      "0c72a837-f74f-4326-b3de-7c35ff5219aa"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "08b6e276-b911-4631-975e-2809cbe696b6",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-033",
+    "question": "Which source-backed work investigates this relation: Object pose estimation is fundamental task in computer vision and robotics yet most methods require extensive dataset-specific training Concurrently large-scale vision language models show remarkable zero-shot capabilities In this work we bridge?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/kuang_conceptpose_training-free_zero-shot_object_pose_estimation_using_concept_vectors_cvpr_2026_paper.html",
+    "designated_paper_id": "8596ed8b-6acf-44f9-adf2-a41ddfb6ba97",
+    "dangerous_prior_paper_id": "8596ed8b-6acf-44f9-adf2-a41ddfb6ba97",
+    "closest_prior_paper_id": "8596ed8b-6acf-44f9-adf2-a41ddfb6ba97",
+    "false_friend_paper_ids": [
+      "4732b20c-e596-4d16-bd51-46bdf77bb732",
+      "e9ae8f73-1952-40cc-b8b3-e680745aeb9b"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "22dca31c-7778-47d5-93c0-bbed42d9dac5",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-034",
+    "question": "Which source-backed work investigates this relation: Articulated objects are pervasive in daily environments such as drawers and refrigerators Towards their part-level surface reconstruction and joint parameter estimation REArtGS introduces category-agnostic approach using multi-view RGB images at two different?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/wu_reartgs_generalizable_articulation_reconstruction_with_temporal_geometry_constraint_via_planar_cvpr_2026_paper.html",
+    "designated_paper_id": "864cf5e0-4021-4215-9299-bfb7437b80da",
+    "dangerous_prior_paper_id": "864cf5e0-4021-4215-9299-bfb7437b80da",
+    "closest_prior_paper_id": "864cf5e0-4021-4215-9299-bfb7437b80da",
+    "false_friend_paper_ids": [
+      "3df8621c-9b77-4815-8cea-4638654c7900",
+      "4732b20c-e596-4d16-bd51-46bdf77bb732"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0e66c454-2f64-4ac1-ab28-c5a9f03399c9",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-035",
+    "question": "Which source-backed work investigates this relation: Precise Event Spotting aims to localize fast-paced actions or events in videos with high temporal precision key task for applications in sports analytics robotics and autonomous systems Existing methods typically process all?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/xarles_adaspot_spend_resolution_where_it_matters_for_precise_event_spotting_cvpr_2026_paper.html",
+    "designated_paper_id": "8e34ea8a-3c0f-47d0-b3a0-b2fc970a8c85",
+    "dangerous_prior_paper_id": "8e34ea8a-3c0f-47d0-b3a0-b2fc970a8c85",
+    "closest_prior_paper_id": "8e34ea8a-3c0f-47d0-b3a0-b2fc970a8c85",
+    "false_friend_paper_ids": [
+      "428b654f-ced9-4b8c-938f-afed0b42b4fc",
+      "98ff0cc9-b63b-45b3-bfa2-93893f782314"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "26a441e7-facd-4c32-af60-626836471e74",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-036",
+    "question": "Which source-backed work investigates this relation: Training-free video object editing aims to achieve precise object-level manipulation including object insertion swapping and deletion However it faces significant challenges in maintaining fidelity and temporal consistency Existing methods often designed for?",
+    "designated_identifier": "doi:10.1609/aaai.v40i4.37306",
+    "designated_paper_id": "9334ccc0-c4e1-41e8-b1e2-245d4579fa0c",
+    "dangerous_prior_paper_id": "9334ccc0-c4e1-41e8-b1e2-245d4579fa0c",
+    "closest_prior_paper_id": "9334ccc0-c4e1-41e8-b1e2-245d4579fa0c",
+    "false_friend_paper_ids": [
+      "c95a3ce3-5392-4127-b844-a4fa901255e7",
+      "bdb46415-84e5-4d15-b0d6-c67e4e29e729"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "15ce85a1-3970-40ca-8c2a-ea82affac233",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-037",
+    "question": "Which source-backed work investigates this relation: Multimodal sequential recommender systems leverage diverse modal inputs to enhance the accuracy and relevance of personalized recommendations However existing fusion strategies often struggle to capture intricate cross-modal interactions especially under the evolving?",
+    "designated_identifier": "doi:10.1609/aaai.v40i18.38544",
+    "designated_paper_id": "98ff0cc9-b63b-45b3-bfa2-93893f782314",
+    "dangerous_prior_paper_id": "98ff0cc9-b63b-45b3-bfa2-93893f782314",
+    "closest_prior_paper_id": "98ff0cc9-b63b-45b3-bfa2-93893f782314",
+    "false_friend_paper_ids": [
+      "c95a3ce3-5392-4127-b844-a4fa901255e7",
+      "428b654f-ced9-4b8c-938f-afed0b42b4fc"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "2cbc5aba-c961-48a0-ba50-94123f651744",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-038",
+    "question": "Which source-backed work investigates this relation: We introduce Illustrator Depth novel definition of depth that addresses key challenge in digital content creation decomposing flat images into editable ordered layers Inspired by an artist compositional process illustrator depth infers?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/maruani_illustrators_depth_monocular_layer_index_prediction_for_image_decomposition_cvpr_2026_paper.html",
+    "designated_paper_id": "9aff1f8a-c290-4e19-9915-71ff866fd58b",
+    "dangerous_prior_paper_id": "9aff1f8a-c290-4e19-9915-71ff866fd58b",
+    "closest_prior_paper_id": "9aff1f8a-c290-4e19-9915-71ff866fd58b",
+    "false_friend_paper_ids": [
+      "4064642d-13f3-49ad-b7e6-fd25218a3a2b",
+      "9334ccc0-c4e1-41e8-b1e2-245d4579fa0c"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "10669bdf-a01e-40f7-8dac-e2d7acae4bef",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-039",
+    "question": "Which source-backed work investigates this relation: Recent advances in AI-generated content AIGC have led to the emergence of powerful text-to-video generation models Despite these successes evaluating the quality of AIGC-generated videos remains challenging due to limited generalization lack?",
+    "designated_identifier": "doi:10.1609/aaai.v40i15.38285",
+    "designated_paper_id": "bdb46415-84e5-4d15-b0d6-c67e4e29e729",
+    "dangerous_prior_paper_id": "bdb46415-84e5-4d15-b0d6-c67e4e29e729",
+    "closest_prior_paper_id": "bdb46415-84e5-4d15-b0d6-c67e4e29e729",
+    "false_friend_paper_ids": [
+      "3df8621c-9b77-4815-8cea-4638654c7900",
+      "98ff0cc9-b63b-45b3-bfa2-93893f782314"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "2307ccb4-a7fb-4b57-a6ed-45b4e09a8669",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-040",
+    "question": "Which source-backed work investigates this relation: jats Downstream adaptation of contrastively pretrained vision--language model can improve in-domain accuracy while degrading performance on unseen transfer tasks This study examines how full fine-tuning and low-rank adaptation alter attention heatmaps under?",
+    "designated_identifier": "doi:10.20944/preprints202604.0317.v1",
+    "designated_paper_id": "bdfdea70-3ef5-4c0c-ad96-96697ce577ce",
+    "dangerous_prior_paper_id": "bdfdea70-3ef5-4c0c-ad96-96697ce577ce",
+    "closest_prior_paper_id": "bdfdea70-3ef5-4c0c-ad96-96697ce577ce",
+    "false_friend_paper_ids": [
+      "389346f7-d949-436e-b115-f74893d57a5c",
+      "606ff021-4cf4-4629-9a51-68a42e259394"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "0026cbdb-e95e-484a-8da0-2297418e1a0c",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-041",
+    "question": "Which source-backed work investigates this relation: jats Customer prioritization in e-commerce remains dominated by value-based logics that allocate retention effort to the most profitable customers even though risk-based targeting can be ineffective when intervention responsiveness is ignored This?",
+    "designated_identifier": "doi:10.3390/digital6030057",
+    "designated_paper_id": "c0830d08-3388-41e3-8d76-afa2e67b33fb",
+    "dangerous_prior_paper_id": "c0830d08-3388-41e3-8d76-afa2e67b33fb",
+    "closest_prior_paper_id": "c0830d08-3388-41e3-8d76-afa2e67b33fb",
+    "false_friend_paper_ids": [
+      "6c81526f-22af-47f2-8e34-69ef99a35aa5",
+      "bdfdea70-3ef5-4c0c-ad96-96697ce577ce"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "312df526-2e68-49ed-8774-99dca11cd8f5",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-042",
+    "question": "Which source-backed work investigates this relation: jats The transition from preclinical learning to clinical practice requires nursing students to possess adequate competence and self-confidence in performing clinical skills Mismatch between competence and confidence may affect clinical readiness and?",
+    "designated_identifier": "doi:10.33650/jkp.v14i2.15006",
+    "designated_paper_id": "c1713001-dfd5-436d-8848-cfea6a0b02cb",
+    "dangerous_prior_paper_id": "c1713001-dfd5-436d-8848-cfea6a0b02cb",
+    "closest_prior_paper_id": "c1713001-dfd5-436d-8848-cfea6a0b02cb",
+    "false_friend_paper_ids": [
+      "11603ecb-34cf-479e-886f-cb56bb37230d",
+      "e47fa96c-da57-4473-a695-c3469f5d0fce"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "0f487032-4bb7-42bc-8a36-6bf140d0a85e",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-043",
+    "question": "Which source-backed work investigates this relation: Multi-modal knowledge graph completion MMKGC aims to infer missing entities of triples by leveraging heterogeneous information in knowledge graph KG However existing approaches often struggle with inconsistent modality alignment limited reasoning depth?",
+    "designated_identifier": "doi:10.1609/aaai.v40i18.38613",
+    "designated_paper_id": "c95a3ce3-5392-4127-b844-a4fa901255e7",
+    "dangerous_prior_paper_id": "c95a3ce3-5392-4127-b844-a4fa901255e7",
+    "closest_prior_paper_id": "c95a3ce3-5392-4127-b844-a4fa901255e7",
+    "false_friend_paper_ids": [
+      "98ff0cc9-b63b-45b3-bfa2-93893f782314",
+      "428b654f-ced9-4b8c-938f-afed0b42b4fc"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "2160d1dc-090c-42d7-ba33-3fdfa6780483",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-044",
+    "question": "Which source-backed work investigates this relation: Deep learning models continue to scale with some requiring more storage than many large-scale datasets Thus we introduce new paradigm Continual Distillation CD where student learns sequentially from stream of teacher models?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/michel_continual_distillation_of_teachers_from_different_domains_cvpr_2026_paper.html",
+    "designated_paper_id": "cca6635d-8eb3-4b3f-abb6-fb4dc9a35de8",
+    "dangerous_prior_paper_id": "cca6635d-8eb3-4b3f-abb6-fb4dc9a35de8",
+    "closest_prior_paper_id": "cca6635d-8eb3-4b3f-abb6-fb4dc9a35de8",
+    "false_friend_paper_ids": [
+      "05f8cdd3-f65b-486a-bc94-c93b4e2067d9",
+      "fc1d103d-5d8a-44bd-9ad0-536b23697908"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "20a28fce-1a11-4a40-b995-bca71bd6bdc3",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-045",
+    "question": "Which source-backed work investigates this relation: Free-Viewpoint Video FVV enables immersive experiences but efficient compression of dynamic representation remains major challenge Existing dynamic Gaussian Splatting methods couple reconstruction with optimization-dependent compression and customized motion formats limiting generalization and?",
+    "designated_identifier": "doi:10.1609/aaai.v40i19.38674",
+    "designated_paper_id": "d00b61c9-d991-4b52-8d4e-57c9cd60e983",
+    "dangerous_prior_paper_id": "d00b61c9-d991-4b52-8d4e-57c9cd60e983",
+    "closest_prior_paper_id": "d00b61c9-d991-4b52-8d4e-57c9cd60e983",
+    "false_friend_paper_ids": [
+      "ef33b00f-1104-4c8a-b915-083095e13dc0",
+      "fc053066-8e68-4e2c-b98b-bf0b446812cf"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "209f82e4-bb36-4c38-b6e9-f20c6d7bc940",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-046",
+    "question": "Which source-backed work investigates this relation: Unsupervised Concept Extraction aims to extract concepts from single image yet existing methods suffer from the inability to extract composable intrinsic concepts To address this this paper introduces new task called Compositional?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/shi_intrinsic_concept_extraction_based_on_compositional_interpretability_cvpr_2026_paper.html",
+    "designated_paper_id": "d1b70b1f-a538-45f9-a152-14da535cb604",
+    "dangerous_prior_paper_id": "d1b70b1f-a538-45f9-a152-14da535cb604",
+    "closest_prior_paper_id": "d1b70b1f-a538-45f9-a152-14da535cb604",
+    "false_friend_paper_ids": [
+      "e81f98da-0bdd-41a8-bda5-f9b8f43a5ffc",
+      "8596ed8b-6acf-44f9-adf2-a41ddfb6ba97"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0f267ef2-61fc-4fd9-8e79-f81ffaf7df7f",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-047",
+    "question": "Which source-backed work investigates this relation: Current methodologies for incremental object detection IOD primarily rely on Faster R-CNN or DETR series detectors however these approaches do not accommodate the real-time YOLO detection frameworks In this paper we first?",
+    "designated_identifier": "doi:10.1609/aaai.v40i15.38271",
+    "designated_paper_id": "d27a5cb5-ec1e-43a7-bbc6-a336797896a5",
+    "dangerous_prior_paper_id": "d27a5cb5-ec1e-43a7-bbc6-a336797896a5",
+    "closest_prior_paper_id": "d27a5cb5-ec1e-43a7-bbc6-a336797896a5",
+    "false_friend_paper_ids": [
+      "ef33b00f-1104-4c8a-b915-083095e13dc0",
+      "fc1d103d-5d8a-44bd-9ad0-536b23697908"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "10da56fc-864e-45a5-b515-6a28c494f2b5",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-048",
+    "question": "Which source-backed work investigates this relation: Turbulence mitigation TM is highly ill-posed due to the stochastic nature of atmospheric turbulence Most methods rely on multiple frames recorded by conventional cameras to capture stable patterns in natural scenarios However?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/zhang_high-quality_and_efficient_turbulence_mitigation_with_events_cvpr_2026_paper.html",
+    "designated_paper_id": "d2c723d9-6e9b-4c74-b5b2-07a68ab22eef",
+    "dangerous_prior_paper_id": "d2c723d9-6e9b-4c74-b5b2-07a68ab22eef",
+    "closest_prior_paper_id": "d2c723d9-6e9b-4c74-b5b2-07a68ab22eef",
+    "false_friend_paper_ids": [
+      "8e34ea8a-3c0f-47d0-b3a0-b2fc970a8c85",
+      "e81f98da-0bdd-41a8-bda5-f9b8f43a5ffc"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0ec84c50-aa3a-425b-b0c8-7c5f00598c49",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-049",
+    "question": "Which source-backed work investigates this relation: Vision-Language-Action VLA models enable robotic systems to perform embodied tasks but face deployment challenges due to the high computational demands of the dense Large Language Models LLMs with existing early-exit-based sparsification methods?",
+    "designated_identifier": "doi:10.1609/aaai.v40i22.38945",
+    "designated_paper_id": "d62604fc-3c30-4f14-ba77-1efcb0be41d0",
+    "dangerous_prior_paper_id": "d62604fc-3c30-4f14-ba77-1efcb0be41d0",
+    "closest_prior_paper_id": "d62604fc-3c30-4f14-ba77-1efcb0be41d0",
+    "false_friend_paper_ids": [
+      "57550be0-cbf6-4054-a633-f1e969d2fbd1",
+      "428b654f-ced9-4b8c-938f-afed0b42b4fc"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "05ec8d5d-11bf-4f0b-a246-c95fcf6541f7",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-050",
+    "question": "Which source-backed work investigates this relation: Multivariate time series forecasting is crucial across wide range of domains While presenting notable progress for the Transformer architecture iTransformer still lags behind the latest MLP-based models We attribute this performance gap?",
+    "designated_identifier": "doi:10.1609/aaai.v40i34.40095",
+    "designated_paper_id": "d6eb659c-bcc8-4198-afcb-658f8885c5d8",
+    "dangerous_prior_paper_id": "d6eb659c-bcc8-4198-afcb-658f8885c5d8",
+    "closest_prior_paper_id": "d6eb659c-bcc8-4198-afcb-658f8885c5d8",
+    "false_friend_paper_ids": [
+      "8596ed8b-6acf-44f9-adf2-a41ddfb6ba97",
+      "6c81526f-22af-47f2-8e34-69ef99a35aa5"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0118ca08-9dd4-4115-ac6b-8052a524d436",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-051",
+    "question": "Which source-backed work investigates this relation: Distinct from attention-based compression methods this paper presents an information uniqueness driven video compression framework termed UniComp which aims to maximize the information fidelity of video representations under constrained computational budgets Starting?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/yuan_unicomp_rethinking_video_compression_through_informational_uniqueness_cvpr_2026_paper.html",
+    "designated_paper_id": "db7619e8-35eb-4e0b-ab48-51bdecfba56a",
+    "dangerous_prior_paper_id": "db7619e8-35eb-4e0b-ab48-51bdecfba56a",
+    "closest_prior_paper_id": "db7619e8-35eb-4e0b-ab48-51bdecfba56a",
+    "false_friend_paper_ids": [
+      "c95a3ce3-5392-4127-b844-a4fa901255e7",
+      "3e3a98dd-ddc7-47e9-89e9-0f78af2e94f0"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0408938a-6c55-4043-b758-bf12bbd874d3",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-052",
+    "question": "Which source-backed work investigates this relation: jats Behavioral Intelligence Design Cotte introduced the architecture capture lt br gt behavioral signals from operational contexts operationalize them against behavioral lt br gt science theory infer psychological trajectory rather than transaction?",
+    "designated_identifier": "doi:10.2139/ssrn.6566978",
+    "designated_paper_id": "db79cf0b-5e52-49a4-ab0c-74b44539d897",
+    "dangerous_prior_paper_id": "db79cf0b-5e52-49a4-ab0c-74b44539d897",
+    "closest_prior_paper_id": "db79cf0b-5e52-49a4-ab0c-74b44539d897",
+    "false_friend_paper_ids": [
+      "822a9244-7a87-4f77-9cd0-3aa49df7758a",
+      "2f8c9163-e5f2-442d-a75b-9cf292dcc3b7"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "070dff5f-74fd-4e11-8d19-aa26a00cd538",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-053",
+    "question": "Which source-backed work investigates this relation: Enabling robots to grasp disorganized cloth for efficient storage is valuable in robot-assisted room organization Diverse deformations of cloth and the stacking of multiple items limit grasping-pose estimation that relies on annotations?",
+    "designated_identifier": "doi:10.1609/aaai.v40i22.38957",
+    "designated_paper_id": "e2e54835-f090-4411-99c3-db9c1ea0fd33",
+    "dangerous_prior_paper_id": "e2e54835-f090-4411-99c3-db9c1ea0fd33",
+    "closest_prior_paper_id": "e2e54835-f090-4411-99c3-db9c1ea0fd33",
+    "false_friend_paper_ids": [
+      "e9ae8f73-1952-40cc-b8b3-e680745aeb9b",
+      "ef33b00f-1104-4c8a-b915-083095e13dc0"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0001514b-8afc-48b3-8795-95d5974abfb2",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-054",
+    "question": "Which source-backed work investigates this relation: Computer-Aided Design CAD is essential in industrial design but the complexity of traditional CAD modeling and workflows presents significant challenges for automating the generation of high-precision editable CAD models Existing methods such?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/niu_cme-cad_heterogeneous_collaborative_multi-expert_reinforcement_learning_for_cad_code_generation_cvpr_2026_paper.html",
+    "designated_paper_id": "e40ca191-2c2e-4f2f-92eb-e346f1e88e7b",
+    "dangerous_prior_paper_id": "e40ca191-2c2e-4f2f-92eb-e346f1e88e7b",
+    "closest_prior_paper_id": "e40ca191-2c2e-4f2f-92eb-e346f1e88e7b",
+    "false_friend_paper_ids": [
+      "4064642d-13f3-49ad-b7e6-fd25218a3a2b",
+      "05f8cdd3-f65b-486a-bc94-c93b4e2067d9"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "15f47efb-a576-4603-92af-e97ee2996da2",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-055",
+    "question": "Which source-backed work investigates this relation: jats Second language researchers have increasingly explored engagement in the context of use and development Hiver et al In the Task-Based Language Teaching TBLT framework task engagement captures learners commitment attention and?",
+    "designated_identifier": "doi:10.2139/ssrn.7030087",
+    "designated_paper_id": "e47fa96c-da57-4473-a695-c3469f5d0fce",
+    "dangerous_prior_paper_id": "e47fa96c-da57-4473-a695-c3469f5d0fce",
+    "closest_prior_paper_id": "e47fa96c-da57-4473-a695-c3469f5d0fce",
+    "false_friend_paper_ids": [
+      "5e12c2a7-e48a-4dd7-9027-a7b532f76922",
+      "11603ecb-34cf-479e-886f-cb56bb37230d"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "08d73f27-6b8f-4808-9aaf-9e44a22c6002",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-056",
+    "question": "Which source-backed work investigates this relation: Following the success of Group Relative Policy Optimization GRPO in foundation LLMs an increasing number of works have sought to adapt GRPO to Visual Large Language Models VLLMs for visual perception tasks?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/sun_dr._seg_revisiting_grpo_training_for_visual_large_language_models_cvpr_2026_paper.html",
+    "designated_paper_id": "e4877592-e38f-4220-835e-68dd99b41900",
+    "dangerous_prior_paper_id": "e4877592-e38f-4220-835e-68dd99b41900",
+    "closest_prior_paper_id": "e4877592-e38f-4220-835e-68dd99b41900",
+    "false_friend_paper_ids": [
+      "cca6635d-8eb3-4b3f-abb6-fb4dc9a35de8",
+      "6c81526f-22af-47f2-8e34-69ef99a35aa5"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "11127c28-c404-408d-aebd-93ce1f15117e",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-057",
+    "question": "Which source-backed work investigates this relation: jats title Abstract jats title jats Motor sequence performance improves during and between brief practice bouts micro-online and offline gains We compared both metrics across two groups one exposed to an implicit?",
+    "designated_identifier": "doi:10.64898/2026.08.17.745334",
+    "designated_paper_id": "e48a1383-7e96-4f40-899d-1b5d7e3f1bc8",
+    "dangerous_prior_paper_id": "e48a1383-7e96-4f40-899d-1b5d7e3f1bc8",
+    "closest_prior_paper_id": "e48a1383-7e96-4f40-899d-1b5d7e3f1bc8",
+    "false_friend_paper_ids": [
+      "cca6635d-8eb3-4b3f-abb6-fb4dc9a35de8",
+      "fc1d103d-5d8a-44bd-9ad0-536b23697908"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "313c2c22-8c59-4a9f-b3e6-78b80b981826",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-058",
+    "question": "Which source-backed work investigates this relation: Cross-modal hashing CMH has achieved remarkable success in large-scale cross-modal retrieval due to its low storage cost and high computational efficiency However most existing CMH methods rely on accurately annotated training data?",
+    "designated_identifier": "doi:10.1609/aaai.v40i30.39760",
+    "designated_paper_id": "e81f98da-0bdd-41a8-bda5-f9b8f43a5ffc",
+    "dangerous_prior_paper_id": "e81f98da-0bdd-41a8-bda5-f9b8f43a5ffc",
+    "closest_prior_paper_id": "e81f98da-0bdd-41a8-bda5-f9b8f43a5ffc",
+    "false_friend_paper_ids": [
+      "98ff0cc9-b63b-45b3-bfa2-93893f782314",
+      "6ceaf9ce-9516-4fcf-b01a-0caa883a7d97"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "2c25e3bc-855c-4858-8fd2-8fa0a58b54d0",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-059",
+    "question": "Which source-backed work investigates this relation: Chest X-ray report generation aims to reduce radiologists workload by automatically producing high-quality preliminary reports critical yet underexplored aspect of this task is the effective use of patient-specific prior knowledge---including clinical context?",
+    "designated_identifier": "doi:10.1609/aaai.v40i9.37657",
+    "designated_paper_id": "e9ae8f73-1952-40cc-b8b3-e680745aeb9b",
+    "dangerous_prior_paper_id": "e9ae8f73-1952-40cc-b8b3-e680745aeb9b",
+    "closest_prior_paper_id": "e9ae8f73-1952-40cc-b8b3-e680745aeb9b",
+    "false_friend_paper_ids": [
+      "c95a3ce3-5392-4127-b844-a4fa901255e7",
+      "8596ed8b-6acf-44f9-adf2-a41ddfb6ba97"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "071ebb8c-f3eb-4422-9e27-a5b723f2a3b2",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-060",
+    "question": "Which source-backed work investigates this relation: Recently All-in-One image restoration AiOIR has advanced significantly offering promising solutions for complex real-world degradations However most existing approaches heavily rely on degradation-specific representation learning which can lead to oversmoothing and artifacts?",
+    "designated_identifier": "doi:10.1609/aaai.v40i15.38284",
+    "designated_paper_id": "ef33b00f-1104-4c8a-b915-083095e13dc0",
+    "dangerous_prior_paper_id": "ef33b00f-1104-4c8a-b915-083095e13dc0",
+    "closest_prior_paper_id": "ef33b00f-1104-4c8a-b915-083095e13dc0",
+    "false_friend_paper_ids": [
+      "428b654f-ced9-4b8c-938f-afed0b42b4fc",
+      "3df8621c-9b77-4815-8cea-4638654c7900"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "14906db3-88f6-40f6-bd4a-1e5a9db655c0",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-061",
+    "question": "Which source-backed work investigates this relation: Recent advances in diffusion-based video generation have achieved remarkable visual realism but still struggle to obey basic physical laws such as gravity inertia and collision Generated objects often move inconsistently across frames?",
+    "designated_identifier": "proceedings:https://openaccess.thecvf.com/content/cvpr2026/html/foo_physical_simulator_in-the-loop_video_generation_cvpr_2026_paper.html",
+    "designated_paper_id": "fc053066-8e68-4e2c-b98b-bf0b446812cf",
+    "dangerous_prior_paper_id": "fc053066-8e68-4e2c-b98b-bf0b446812cf",
+    "closest_prior_paper_id": "fc053066-8e68-4e2c-b98b-bf0b446812cf",
+    "false_friend_paper_ids": [
+      "4064642d-13f3-49ad-b7e6-fd25218a3a2b",
+      "d00b61c9-d991-4b52-8d4e-57c9cd60e983"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0175d065-e1ff-4fd3-8994-028c08dab925",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-062",
+    "question": "Which source-backed work investigates this relation: Deep state-space models DSSMs enable temporal predictions by learning the underlying dynamics of observed sequence data They are often trained by maximising the evidence lower bound However as we show this does?",
+    "designated_identifier": "doi:10.48550/arxiv.2602.23050",
+    "designated_paper_id": "fc1d103d-5d8a-44bd-9ad0-536b23697908",
+    "dangerous_prior_paper_id": "fc1d103d-5d8a-44bd-9ad0-536b23697908",
+    "closest_prior_paper_id": "fc1d103d-5d8a-44bd-9ad0-536b23697908",
+    "false_friend_paper_ids": [
+      "98ff0cc9-b63b-45b3-bfa2-93893f782314",
+      "05fbec53-39f3-4ed0-89d0-0d80a1298be6"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "26820001-f2f6-437e-952b-aac69eb8db2a",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-063",
+    "question": "Which source-backed work investigates this relation: title Abstract title The global shipping network carries over of global freight volumes yet the systemic threat of multi-hazard climate risks to this critical infrastructure has not been quantified at the network?",
+    "designated_identifier": "doi:10.21203/rs.3.rs-10468653/v1",
+    "designated_paper_id": "fe976cf1-fe6d-4754-81fc-35e81f7176d7",
+    "dangerous_prior_paper_id": "fe976cf1-fe6d-4754-81fc-35e81f7176d7",
+    "closest_prior_paper_id": "fe976cf1-fe6d-4754-81fc-35e81f7176d7",
+    "false_friend_paper_ids": [
+      "011895a5-e460-48df-9c7b-bfa7f0178f1c",
+      "05fbec53-39f3-4ed0-89d0-0d80a1298be6"
+    ],
+    "source_scope": "EXTERNAL",
+    "source_chunk_id": "2120a587-5784-4595-bb62-c34814e870a6",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-064",
+    "question": "Which source-backed work investigates this relation: Local Stochastic Sensitivity Analysis For Dynamical SystemsNishant Panda Jehanzeb Chaudhry Natalie Klein James Carzon Troy ButlerWe?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v258/panda25b.html",
+    "designated_paper_id": "000847cf-541e-44e9-a360-d397530f31ec",
+    "dangerous_prior_paper_id": "000847cf-541e-44e9-a360-d397530f31ec",
+    "closest_prior_paper_id": "000847cf-541e-44e9-a360-d397530f31ec",
+    "false_friend_paper_ids": [
+      "01f1dfed-93dc-4833-9170-c76a0759dbeb",
+      "02398b5b-432e-407e-9242-eab262b0ce0a"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "de0f085b-9d49-4fd0-b1ca-69276e9c2869",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-065",
+    "question": "Which source-backed work investigates this relation: Be Goldfish Forgetting Bad Conditioning in Sparse Linear Regression via Variational AutoencodersKuheli Pratihar Debdeep MukhopadhyayVariational Auto?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/pratihar25a.html",
+    "designated_paper_id": "000f3484-2748-4212-bdd0-9a16e966ded7",
+    "dangerous_prior_paper_id": "000f3484-2748-4212-bdd0-9a16e966ded7",
+    "closest_prior_paper_id": "000f3484-2748-4212-bdd0-9a16e966ded7",
+    "false_friend_paper_ids": [
+      "018b9094-1dd2-4d32-9185-ccd53765b827",
+      "03b890bc-e330-4f73-9730-f62627c3ab02"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "dc549451-dbc6-4a20-ac60-6ef22e11363a",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-066",
+    "question": "Which source-backed work investigates this relation: MIRROR Make Your Object-Level Multi-View Generation More Consistent with Training-Free RectificationTianchi Xing Bonan Li Congying Han Xin?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/xing25b.html",
+    "designated_paper_id": "00164d03-c83a-4695-9df0-90ad10e4da51",
+    "dangerous_prior_paper_id": "00164d03-c83a-4695-9df0-90ad10e4da51",
+    "closest_prior_paper_id": "00164d03-c83a-4695-9df0-90ad10e4da51",
+    "false_friend_paper_ids": [
+      "01b0b0d5-aaaf-4c79-9ae7-2ff8303c151d",
+      "00f1b32f-a257-4ff3-818b-332da4618264"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "3fe235ba-2fc0-4da0-9f81-aa5fbf920b51",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-067",
+    "question": "Which source-backed work investigates this relation: Adapter Naturally Serves as Decoupler for Cross-Domain Few-Shot Semantic SegmentationJintao Tong Ran Ma Yixiong Zou Guangyao Chen Yuh?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/tong25b.html",
+    "designated_paper_id": "002a045d-1b27-442f-b589-f4136a107058",
+    "dangerous_prior_paper_id": "002a045d-1b27-442f-b589-f4136a107058",
+    "closest_prior_paper_id": "002a045d-1b27-442f-b589-f4136a107058",
+    "false_friend_paper_ids": [
+      "00e83c3f-7c7c-4108-9279-d2b0e9137d2e",
+      "0168444b-3805-4b00-8c43-0cdbfed1e2db"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "38078cfb-759e-426a-9648-0d248819d7c3",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-068",
+    "question": "Which source-backed work investigates this relation: Multi-Turn Code Generation Through Single-Step RewardsArnav Kumar Jain Gonzalo Gonzalez-Pumariega Wayne Chen Alexander Rush Wenting?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/jain25a.html",
+    "designated_paper_id": "002e5c29-89cf-45f0-921f-0eea7cd6adc7",
+    "dangerous_prior_paper_id": "002e5c29-89cf-45f0-921f-0eea7cd6adc7",
+    "closest_prior_paper_id": "002e5c29-89cf-45f0-921f-0eea7cd6adc7",
+    "false_friend_paper_ids": [
+      "00f1b32f-a257-4ff3-818b-332da4618264",
+      "0379e839-5e05-42de-bc3a-a0e19167b4c9"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "a4a4610b-873d-4644-a99f-ff397ab28f37",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-069",
+    "question": "Which source-backed work investigates this relation: CSG-ODE ControlSynth Graph ODE For Modeling Complex Evolution of Dynamic GraphsZhiqiang Wang Xiaoyi Wang Jianqing LiangGraph Neural Ordinary Dif?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/wang25dd.html",
+    "designated_paper_id": "0031083a-72cc-4037-a475-cc8186ee872f",
+    "dangerous_prior_paper_id": "0031083a-72cc-4037-a475-cc8186ee872f",
+    "closest_prior_paper_id": "0031083a-72cc-4037-a475-cc8186ee872f",
+    "false_friend_paper_ids": [
+      "024018e1-a322-423d-b31d-b93f8f6983c2",
+      "036e1c63-8d6b-42c4-bc2e-a834ddad7295"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "1df602c2-c86d-4f56-b7d6-5ee983af4480",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-070",
+    "question": "Which source-backed work investigates this relation: Learning with Exact Invariances in Polynomial TimeAshkan Soleymani Behrooz Tahmasebi Stefanie Jegelka Patrick JailletWe study the statistic?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/soleymani25a.html",
+    "designated_paper_id": "009f06d6-3384-433b-9223-2717a7d657e5",
+    "dangerous_prior_paper_id": "009f06d6-3384-433b-9223-2717a7d657e5",
+    "closest_prior_paper_id": "009f06d6-3384-433b-9223-2717a7d657e5",
+    "false_friend_paper_ids": [
+      "01192833-7c16-4268-8fcf-296e8767c762",
+      "025681ad-ddd1-4494-aef4-937c23b4a317"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "aad746f7-50e7-4a65-905e-78cfcebe7656",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-071",
+    "question": "Which source-backed work investigates this relation: Quantum Speedup for Hypergraph SparsificationChenghua Liu Minbo Gao Zhengfeng Ji Mingsheng YingGraph sparsification serves as foundation?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/liu25r.html",
+    "designated_paper_id": "00e83c3f-7c7c-4108-9279-d2b0e9137d2e",
+    "dangerous_prior_paper_id": "00e83c3f-7c7c-4108-9279-d2b0e9137d2e",
+    "closest_prior_paper_id": "00e83c3f-7c7c-4108-9279-d2b0e9137d2e",
+    "false_friend_paper_ids": [
+      "002a045d-1b27-442f-b589-f4136a107058",
+      "01afa188-891d-4442-b3d1-0b0a672527c5"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "a28cbeaf-bc3e-430c-bdd5-ccf9e8b687a3",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-072",
+    "question": "Which source-backed work investigates this relation: SNAP Sequential Non-Ancestor Pruning for Targeted Causal Effect Estimation With an Unknown GraphM ty Schubert Tom Claassen Sara MagliacaneCaus?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v258/schubert25a.html",
+    "designated_paper_id": "00e9eed5-7601-4714-bb20-35f169935c04",
+    "dangerous_prior_paper_id": "00e9eed5-7601-4714-bb20-35f169935c04",
+    "closest_prior_paper_id": "00e9eed5-7601-4714-bb20-35f169935c04",
+    "false_friend_paper_ids": [
+      "0289de2d-18dd-467e-b04f-eb12c0575e38",
+      "01f1dfed-93dc-4833-9170-c76a0759dbeb"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "559573bb-4dc2-422e-b56f-a478f617ecbf",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-073",
+    "question": "Which source-backed work investigates this relation: Addressing Imbalanced Domain-Incremental Learning through Dual-Balance Collaborative ExpertsLan Li Da-Wei Zhou Han-Jia Ye De-Chuan ZhanDoma?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/li25eb.html",
+    "designated_paper_id": "00f1b32f-a257-4ff3-818b-332da4618264",
+    "dangerous_prior_paper_id": "00f1b32f-a257-4ff3-818b-332da4618264",
+    "closest_prior_paper_id": "00f1b32f-a257-4ff3-818b-332da4618264",
+    "false_friend_paper_ids": [
+      "025681ad-ddd1-4494-aef4-937c23b4a317",
+      "020fc822-f57b-4652-bb5c-f9861d88fa2b"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "4da1975d-70d0-4120-bf4e-b196e2d2123c",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-074",
+    "question": "Which source-backed work investigates this relation: nyi Neural ProcessesXuesong Wang He Zhao Edwin BonillaNeural Processes NPs are deep probabilistic models that represent stochastic process?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/wang25ew.html",
+    "designated_paper_id": "01086f1f-4239-4918-bb93-764ecd2b12fc",
+    "dangerous_prior_paper_id": "01086f1f-4239-4918-bb93-764ecd2b12fc",
+    "closest_prior_paper_id": "01086f1f-4239-4918-bb93-764ecd2b12fc",
+    "false_friend_paper_ids": [
+      "01f69482-b1ba-42f9-b47f-7489645fc4a8",
+      "0031083a-72cc-4037-a475-cc8186ee872f"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "17a3b74f-11d4-4fef-be7e-0a1d3dac3a68",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-075",
+    "question": "Which source-backed work investigates this relation: Learning Minimum-Size BDDs Towards Efficient Exact AlgorithmsChristian Komusiewicz Andre Schidler Frank Sommer Manuel Sorge Luca Pas?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/komusiewicz25a.html",
+    "designated_paper_id": "01192833-7c16-4268-8fcf-296e8767c762",
+    "dangerous_prior_paper_id": "01192833-7c16-4268-8fcf-296e8767c762",
+    "closest_prior_paper_id": "01192833-7c16-4268-8fcf-296e8767c762",
+    "false_friend_paper_ids": [
+      "009f06d6-3384-433b-9223-2717a7d657e5",
+      "0168444b-3805-4b00-8c43-0cdbfed1e2db"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "40c05485-e991-43ab-8e36-104d3bf6929a",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-076",
+    "question": "Which source-backed work investigates this relation: Boost-and-Skip Simple Guidance-Free Diffusion for Minority GenerationSoobin Um Beomsu Kim Jong Chul YeMinority samples are underrepresented in?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/um25b.html",
+    "designated_paper_id": "01277e74-a3ad-4736-89a1-52f51a197915",
+    "dangerous_prior_paper_id": "01277e74-a3ad-4736-89a1-52f51a197915",
+    "closest_prior_paper_id": "01277e74-a3ad-4736-89a1-52f51a197915",
+    "false_friend_paper_ids": [
+      "0176cce9-a09a-4f27-a6f8-e388356a6267",
+      "01afa188-891d-4442-b3d1-0b0a672527c5"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "9e2ac2ec-4cc0-446f-a45d-c208f953af35",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-077",
+    "question": "Which source-backed work investigates this relation: Sparse Activations as Conformal PredictorsMargarida Campos Jo lem Sophia Sklaviadis Mario Figueiredo Andre MartinsConform?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v258/campos25a.html",
+    "designated_paper_id": "0168444b-3805-4b00-8c43-0cdbfed1e2db",
+    "dangerous_prior_paper_id": "0168444b-3805-4b00-8c43-0cdbfed1e2db",
+    "closest_prior_paper_id": "0168444b-3805-4b00-8c43-0cdbfed1e2db",
+    "false_friend_paper_ids": [
+      "01192833-7c16-4268-8fcf-296e8767c762",
+      "00e83c3f-7c7c-4108-9279-d2b0e9137d2e"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "b3e596cc-2439-423d-80e2-433337248574",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-078",
+    "question": "Which source-backed work investigates this relation: Upcycling Text-to-Image Diffusion Models for Multi-Task CapabilitiesRuchika Chavhan Abhinav Mehrotra Malcolm Chadwick Alberto Gil Couto Pim?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/chavhan25a.html",
+    "designated_paper_id": "0176cce9-a09a-4f27-a6f8-e388356a6267",
+    "dangerous_prior_paper_id": "0176cce9-a09a-4f27-a6f8-e388356a6267",
+    "closest_prior_paper_id": "0176cce9-a09a-4f27-a6f8-e388356a6267",
+    "false_friend_paper_ids": [
+      "01ab5ab4-d648-4653-9935-ea4ee16e1e12",
+      "01277e74-a3ad-4736-89a1-52f51a197915"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "686a6cdf-9d8e-4b9e-a9a8-5d7c4e9dae69",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-079",
+    "question": "Which source-backed work investigates this relation: Knowledge-Guided Wasserstein Distributionally Robust OptimizationZitao Wang Ziyuan Wang Molei Liu Nian SiWasserstein Distributionally Robus?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/wang25df.html",
+    "designated_paper_id": "017da356-281c-46ae-aadc-91535e5d18f1",
+    "dangerous_prior_paper_id": "017da356-281c-46ae-aadc-91535e5d18f1",
+    "closest_prior_paper_id": "017da356-281c-46ae-aadc-91535e5d18f1",
+    "false_friend_paper_ids": [
+      "036e1c63-8d6b-42c4-bc2e-a834ddad7295",
+      "02f215f5-93ab-4771-ae38-e698bdc6cec8"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "8720e7d0-7cfc-4dfe-af5b-094da301bc21",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-080",
+    "question": "Which source-backed work investigates this relation: Identifying Causal Direction via Variational Bayesian CompressionQuang-Duy Tran Bao Duong Phuoc Nguyen Thin NguyenTelling apart the cause?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/tran25a.html",
+    "designated_paper_id": "018b9094-1dd2-4d32-9185-ccd53765b827",
+    "dangerous_prior_paper_id": "018b9094-1dd2-4d32-9185-ccd53765b827",
+    "closest_prior_paper_id": "018b9094-1dd2-4d32-9185-ccd53765b827",
+    "false_friend_paper_ids": [
+      "000f3484-2748-4212-bdd0-9a16e966ded7",
+      "020fc822-f57b-4652-bb5c-f9861d88fa2b"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "7bdc3040-4667-469b-9356-17346ef952ce",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-081",
+    "question": "Which source-backed work investigates this relation: Density Ratio-based Proxy Causal Learning Without Density RatiosBariscan Bozkurt Ben Deaner Dimitri Meunier Liyuan Xu Arthur GrettonW?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v258/bozkurt25a.html",
+    "designated_paper_id": "0196d271-1766-4d9c-bc43-7897eab8740a",
+    "dangerous_prior_paper_id": "0196d271-1766-4d9c-bc43-7897eab8740a",
+    "closest_prior_paper_id": "0196d271-1766-4d9c-bc43-7897eab8740a",
+    "false_friend_paper_ids": [
+      "020fc822-f57b-4652-bb5c-f9861d88fa2b",
+      "00f1b32f-a257-4ff3-818b-332da4618264"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "80538fe8-9a0b-42da-b3b0-b69f01c764c3",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-082",
+    "question": "Which source-backed work investigates this relation: Interchangeable Token Embeddings for Extendable Vocabulary and Alpha-Equivalence lker Ramazan Gokberk Cinbis Ebru Aydin GolLanguage models?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/isik25a.html",
+    "designated_paper_id": "01ab5ab4-d648-4653-9935-ea4ee16e1e12",
+    "dangerous_prior_paper_id": "01ab5ab4-d648-4653-9935-ea4ee16e1e12",
+    "closest_prior_paper_id": "01ab5ab4-d648-4653-9935-ea4ee16e1e12",
+    "false_friend_paper_ids": [
+      "0176cce9-a09a-4f27-a6f8-e388356a6267",
+      "02c42cfd-745d-4c56-8719-368bb5e8922d"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "8cbe5253-93ad-4ac6-82b4-fda2e874c8ab",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-083",
+    "question": "Which source-backed work investigates this relation: Controlling Underestimation Bias in Constrained Reinforcement Learning for Safe ExplorationShiqing Gao Jiaxin Ding Luoyi Fu Xinbing WangCon?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/gao25b.html",
+    "designated_paper_id": "01afa188-891d-4442-b3d1-0b0a672527c5",
+    "dangerous_prior_paper_id": "01afa188-891d-4442-b3d1-0b0a672527c5",
+    "closest_prior_paper_id": "01afa188-891d-4442-b3d1-0b0a672527c5",
+    "false_friend_paper_ids": [
+      "01f1dfed-93dc-4833-9170-c76a0759dbeb",
+      "00e83c3f-7c7c-4108-9279-d2b0e9137d2e"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "3189c494-f489-4493-ab49-c48c53890b46",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-084",
+    "question": "Which source-backed work investigates this relation: Clients Collaborate Flexible Differentially Private Federated Learning with Guaranteed Improvement of Utility-Privacy Trade-offYuecheng Li Lele Fu nb?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/li25n.html",
+    "designated_paper_id": "01b0b0d5-aaaf-4c79-9ae7-2ff8303c151d",
+    "dangerous_prior_paper_id": "01b0b0d5-aaaf-4c79-9ae7-2ff8303c151d",
+    "closest_prior_paper_id": "01b0b0d5-aaaf-4c79-9ae7-2ff8303c151d",
+    "false_friend_paper_ids": [
+      "020fc822-f57b-4652-bb5c-f9861d88fa2b",
+      "00f1b32f-a257-4ff3-818b-332da4618264"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "a238cef1-896b-4cc0-8ff2-49bcd9b6a4e5",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-085",
+    "question": "Which source-backed work investigates this relation: Graph-Assisted Stitching for Offline Hierarchical Reinforcement LearningSeungho Baek Taegeon Park Jongchan Park Seungjun Oh Yusung Ki?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/baek25a.html",
+    "designated_paper_id": "01f1dfed-93dc-4833-9170-c76a0759dbeb",
+    "dangerous_prior_paper_id": "01f1dfed-93dc-4833-9170-c76a0759dbeb",
+    "closest_prior_paper_id": "01f1dfed-93dc-4833-9170-c76a0759dbeb",
+    "false_friend_paper_ids": [
+      "01afa188-891d-4442-b3d1-0b0a672527c5",
+      "02398b5b-432e-407e-9242-eab262b0ce0a"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "b70cc0d0-1821-4ccd-bc8c-53df178b3c49",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-086",
+    "question": "Which source-backed work investigates this relation: DDEQs Distributional Deep Equilibrium Models through Wasserstein Gradient FlowsJonathan Geuter Cl ment Bonet Anna Korba David Alvarez-Meli?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v258/geuter25a.html",
+    "designated_paper_id": "01f69482-b1ba-42f9-b47f-7489645fc4a8",
+    "dangerous_prior_paper_id": "01f69482-b1ba-42f9-b47f-7489645fc4a8",
+    "closest_prior_paper_id": "01f69482-b1ba-42f9-b47f-7489645fc4a8",
+    "false_friend_paper_ids": [
+      "01086f1f-4239-4918-bb93-764ecd2b12fc",
+      "017da356-281c-46ae-aadc-91535e5d18f1"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "a4cd28ca-771a-4c34-9c11-254af19be276",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-087",
+    "question": "Which source-backed work investigates this relation: On the Identifiability of Causal AbstractionsXiusi Li kou-Oumar Kaba Siamak RavanbakhshCausal representation learning CRL enhances machine le?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v258/li25g.html",
+    "designated_paper_id": "020fc822-f57b-4652-bb5c-f9861d88fa2b",
+    "dangerous_prior_paper_id": "020fc822-f57b-4652-bb5c-f9861d88fa2b",
+    "closest_prior_paper_id": "020fc822-f57b-4652-bb5c-f9861d88fa2b",
+    "false_friend_paper_ids": [
+      "025681ad-ddd1-4494-aef4-937c23b4a317",
+      "01b0b0d5-aaaf-4c79-9ae7-2ff8303c151d"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "0dfc5d14-a584-476b-a34c-298cea193ee6",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-088",
+    "question": "Which source-backed work investigates this relation: ActionPiece Contextually Tokenizing Action Sequences for Generative RecommendationYupeng Hou Jianmo Ni Zhankui He Noveen Sachdeva Wa?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/hou25f.html",
+    "designated_paper_id": "02398b5b-432e-407e-9242-eab262b0ce0a",
+    "dangerous_prior_paper_id": "02398b5b-432e-407e-9242-eab262b0ce0a",
+    "closest_prior_paper_id": "02398b5b-432e-407e-9242-eab262b0ce0a",
+    "false_friend_paper_ids": [
+      "01f1dfed-93dc-4833-9170-c76a0759dbeb",
+      "01ab5ab4-d648-4653-9935-ea4ee16e1e12"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "3221b6be-ba23-4ab7-802a-d3981770648f",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-089",
+    "question": "Which source-backed work investigates this relation: Hyperbolic-PDE GNN Spectral Graph Neural Networks in the Perspective of System of Hyperbolic Partial Differential EquationsJuwei Yue Haikuo Li?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/yue25b.html",
+    "designated_paper_id": "024018e1-a322-423d-b31d-b93f8f6983c2",
+    "dangerous_prior_paper_id": "024018e1-a322-423d-b31d-b93f8f6983c2",
+    "closest_prior_paper_id": "024018e1-a322-423d-b31d-b93f8f6983c2",
+    "false_friend_paper_ids": [
+      "025681ad-ddd1-4494-aef4-937c23b4a317",
+      "020fc822-f57b-4652-bb5c-f9861d88fa2b"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "1e4b3f64-4573-487c-aa89-8ef7a4e5345d",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-090",
+    "question": "Which source-backed work investigates this relation: Heterogeneous Graph Structure Learning through the Lens of Data-generating ProcessesKeyue Jiang Bohan Tang Xiaowen Dong Laura ToniInferring?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v258/jiang25a.html",
+    "designated_paper_id": "025681ad-ddd1-4494-aef4-937c23b4a317",
+    "dangerous_prior_paper_id": "025681ad-ddd1-4494-aef4-937c23b4a317",
+    "closest_prior_paper_id": "025681ad-ddd1-4494-aef4-937c23b4a317",
+    "false_friend_paper_ids": [
+      "020fc822-f57b-4652-bb5c-f9861d88fa2b",
+      "024018e1-a322-423d-b31d-b93f8f6983c2"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "f3989588-a0ba-473a-9d34-d74977833b4f",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-091",
+    "question": "Which source-backed work investigates this relation: LLMScan Causal Scan for LLM Misbehavior DetectionMengdi Zhang Goh Kai Kiat Peixin Zhang Jun Sun Lin Xin Rose Hongyu ZhangDespi?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/zhang25al.html",
+    "designated_paper_id": "0289de2d-18dd-467e-b04f-eb12c0575e38",
+    "dangerous_prior_paper_id": "0289de2d-18dd-467e-b04f-eb12c0575e38",
+    "closest_prior_paper_id": "0289de2d-18dd-467e-b04f-eb12c0575e38",
+    "false_friend_paper_ids": [
+      "00e9eed5-7601-4714-bb20-35f169935c04",
+      "02f215f5-93ab-4771-ae38-e698bdc6cec8"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "01e346ae-1f99-4847-8454-af7d11f640f1",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-092",
+    "question": "Which source-backed work investigates this relation: Curvature-aware Graph Attention for PDEs on ManifoldsYunfeng Liao Jiawen Guan Xiucheng LiDeep models have recently achieved remarkable performanc?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/liao25b.html",
+    "designated_paper_id": "02c42cfd-745d-4c56-8719-368bb5e8922d",
+    "dangerous_prior_paper_id": "02c42cfd-745d-4c56-8719-368bb5e8922d",
+    "closest_prior_paper_id": "02c42cfd-745d-4c56-8719-368bb5e8922d",
+    "false_friend_paper_ids": [
+      "01ab5ab4-d648-4653-9935-ea4ee16e1e12",
+      "0176cce9-a09a-4f27-a6f8-e388356a6267"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "92688078-16b9-436a-872f-9a7d57ee1d4b",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-093",
+    "question": "Which source-backed work investigates this relation: Reward-Augmented Data Enhances Direct Preference Alignment of LLMsShenao Zhang Zhihan Liu Boyi Liu Yufeng Zhang Yingxiang Yang?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/zhang25az.html",
+    "designated_paper_id": "02f215f5-93ab-4771-ae38-e698bdc6cec8",
+    "dangerous_prior_paper_id": "02f215f5-93ab-4771-ae38-e698bdc6cec8",
+    "closest_prior_paper_id": "02f215f5-93ab-4771-ae38-e698bdc6cec8",
+    "false_friend_paper_ids": [
+      "020fc822-f57b-4652-bb5c-f9861d88fa2b",
+      "017da356-281c-46ae-aadc-91535e5d18f1"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "00d71e96-9df1-4ecc-a928-0187e565bee3",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-094",
+    "question": "Which source-backed work investigates this relation: Convergence of Policy Mirror Descent Beyond Compatible Function ApproximationUri Sherman Tomer Koren Yishay MansourModern policy optimization met?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/sherman25a.html",
+    "designated_paper_id": "032a462c-5b9b-41d7-bfac-834f17cb5e76",
+    "dangerous_prior_paper_id": "032a462c-5b9b-41d7-bfac-834f17cb5e76",
+    "closest_prior_paper_id": "032a462c-5b9b-41d7-bfac-834f17cb5e76",
+    "false_friend_paper_ids": [
+      "02f215f5-93ab-4771-ae38-e698bdc6cec8",
+      "025681ad-ddd1-4494-aef4-937c23b4a317"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "b5b91bc3-e7a0-4ef5-b9a6-1b5a819e145c",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-095",
+    "question": "Which source-backed work investigates this relation: FedOne Query-Efficient Federated Learning for Black-box Discrete Prompt LearningGanyu Wang Jinjie Fang Maxwell Juncheng Yin Bin Gu?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/wang25ab.html",
+    "designated_paper_id": "03399bfa-c58a-40ae-aa7b-2048da199b71",
+    "dangerous_prior_paper_id": "03399bfa-c58a-40ae-aa7b-2048da199b71",
+    "closest_prior_paper_id": "03399bfa-c58a-40ae-aa7b-2048da199b71",
+    "false_friend_paper_ids": [
+      "01b0b0d5-aaaf-4c79-9ae7-2ff8303c151d",
+      "01afa188-891d-4442-b3d1-0b0a672527c5"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "4019ae5f-a179-4850-aa4a-721eb62f8fe7",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-096",
+    "question": "Which source-backed work investigates this relation: Optimizing Noise Distributions for Differential PrivacyAtefeh Gilani Juan Felipe Gomez Shahab Asoodeh Flavio Calmon Oliver Kosut nbs?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/gilani25a.html",
+    "designated_paper_id": "035c3d73-47e2-4ca6-bb77-144e143ac2e7",
+    "dangerous_prior_paper_id": "035c3d73-47e2-4ca6-bb77-144e143ac2e7",
+    "closest_prior_paper_id": "035c3d73-47e2-4ca6-bb77-144e143ac2e7",
+    "false_friend_paper_ids": [
+      "01f1dfed-93dc-4833-9170-c76a0759dbeb",
+      "02398b5b-432e-407e-9242-eab262b0ce0a"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "337803bd-47bd-4e42-ae69-61ba4039daf3",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-097",
+    "question": "Which source-backed work investigates this relation: Unifying Knowledge from Diverse Datasets to Enhance Spatial-Temporal Modeling Granularity-Adaptive Geographical Embedding ApproachZhigaoyuan Wang Yi?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/wang25cu.html",
+    "designated_paper_id": "036e1c63-8d6b-42c4-bc2e-a834ddad7295",
+    "dangerous_prior_paper_id": "036e1c63-8d6b-42c4-bc2e-a834ddad7295",
+    "closest_prior_paper_id": "036e1c63-8d6b-42c4-bc2e-a834ddad7295",
+    "false_friend_paper_ids": [
+      "03a5e538-5c9b-4703-82a9-b129c6e3b6ab",
+      "0031083a-72cc-4037-a475-cc8186ee872f"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "ad233455-01ab-42af-9f34-22b6f16ab494",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-098",
+    "question": "Which source-backed work investigates this relation: Relational Conformal Prediction for Correlated Time SeriesAndrea Cini Alexander Jenkins Danilo Mandic Cesare Alippi Filippo Maria Bia?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/cini25a.html",
+    "designated_paper_id": "0379e839-5e05-42de-bc3a-a0e19167b4c9",
+    "dangerous_prior_paper_id": "0379e839-5e05-42de-bc3a-a0e19167b4c9",
+    "closest_prior_paper_id": "0379e839-5e05-42de-bc3a-a0e19167b4c9",
+    "false_friend_paper_ids": [
+      "0168444b-3805-4b00-8c43-0cdbfed1e2db",
+      "01f1dfed-93dc-4833-9170-c76a0759dbeb"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "982352b5-0529-49d3-85b3-0d6cdbfda972",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-099",
+    "question": "Which source-backed work investigates this relation: Knowledge Swapping via Learning and UnlearningMingyu Xing Lechao Cheng Shengeng Tang Yaxiong Wang Zhun Zhong Meng WangWe introd?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v267/xing25a.html",
+    "designated_paper_id": "03a5e538-5c9b-4703-82a9-b129c6e3b6ab",
+    "dangerous_prior_paper_id": "03a5e538-5c9b-4703-82a9-b129c6e3b6ab",
+    "closest_prior_paper_id": "03a5e538-5c9b-4703-82a9-b129c6e3b6ab",
+    "false_friend_paper_ids": [
+      "036e1c63-8d6b-42c4-bc2e-a834ddad7295",
+      "03399bfa-c58a-40ae-aa7b-2048da199b71"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "68826f23-a8a4-4f62-bb24-d5b657af2f2a",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  },
+  {
+    "question_id": "real-prior-100",
+    "question": "Which source-backed work investigates this relation: Adversarial Training in High-Dimensional Regression Generated Data and Neural NetworksYue XingIn recent years studies such as Carmon et al Gowal?",
+    "designated_identifier": "proceedings:https://proceedings.mlr.press/v258/xing25a.html",
+    "designated_paper_id": "03b890bc-e330-4f73-9730-f62627c3ab02",
+    "dangerous_prior_paper_id": "03b890bc-e330-4f73-9730-f62627c3ab02",
+    "closest_prior_paper_id": "03b890bc-e330-4f73-9730-f62627c3ab02",
+    "false_friend_paper_ids": [
+      "000f3484-2748-4212-bdd0-9a16e966ded7",
+      "024018e1-a322-423d-b31d-b93f8f6983c2"
+    ],
+    "source_scope": "CORE_OFFICIAL",
+    "source_chunk_id": "25a65c84-94df-434a-bd35-ea5511963452",
+    "verification_status": "SOURCE_DERIVED_AND_DETERMINISTICALLY_VERIFIED",
+    "verification_rule": "question concepts are extracted from the designated source abstract; false friends are the two lexically closest distinct frozen benchmark papers"
+  }
+]

@@ -19,6 +19,7 @@ build/
 
 # Research outputs (可选，不上传生成的数据)
 research_output/
+artifacts/
 
 # Database
 *.db

@@ -81,9 +81,11 @@ def test_paper_version_appearance_and_official_core_evidence_are_distinct(litera
     repository, service = literature
     paper = service.ingest_record(_record("2402.00002", "Official Core Paper"))
     appearance = service.add_official_appearance(paper["paper_id"], "ICLR", 2024, "main", official_source_url="https://openreview.net/group?id=ICLR.cc/2024/Conference")
+    repeated = service.add_official_appearance(paper["paper_id"], "ICLR", 2024, "main", official_source_url="https://openreview.net/group?id=ICLR.cc/2024/Conference")
     unverified = service.ingest_record(_record("2402.00003", "Claimed Accepted Paper", "arxiv"))
     assert paper["paper_id"] != paper["paper_version_id"]
     assert appearance["is_core_accepted"] is True
+    assert repeated["paper_appearance_id"] == appearance["paper_appearance_id"]
     assert repository.list_appearances(unverified["paper_id"]) == []
 
 
