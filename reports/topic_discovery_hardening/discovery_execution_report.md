@@ -1,5 +1,7 @@
 # Hardened Discovery Execution Report
 
+> Historical run record. The live Codex topic executor used by this run was subsequently quarantined and removed from the production CLI after an isolation and bounded-runtime failure. This report is not evidence that unattended execution is currently enabled.
+
 ## Codex Scout generation
 
 - Model/executor: `codex-cli` through `CodexExecutor`

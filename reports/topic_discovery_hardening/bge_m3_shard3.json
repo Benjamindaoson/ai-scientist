@@ -1,8 +1,0 @@
-{
-  "embedded": 1120,
-  "errors": 0,
-  "model": "BAAI/bge-m3",
-  "pending_at_start": 1120,
-  "runtime_seconds": 5574.093,
-  "shard": "4/4"
-}

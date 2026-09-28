@@ -2,12 +2,16 @@
 
 ## MODIFIED Requirements
 
-### Requirement: Production candidates are executor generated
-Production discovery SHALL reject static candidate templates and persist model, prompt hash, input signals, literature context, reasoning summary, and generation timestamp.
+### Requirement: Production candidates are provenance validated
+Production discovery SHALL reject static candidate templates and candidates that lack model, prompt hash, input signals, literature context, reasoning summary, or generation timestamp. Live executor generation SHALL remain unavailable until it has an enforceable filesystem boundary and bounded runtime.
 
-#### Scenario: Production generation is requested
-- **WHEN** a discovery wave starts
-- **THEN** an executor-backed Scout generates candidates and every persisted candidate has complete provenance
+#### Scenario: A discovery wave starts
+- **WHEN** no provenance-validated recorded candidate file is supplied
+- **THEN** discovery fails closed before candidate generation, model execution, or scientific review
+
+#### Scenario: External search is incomplete
+- **WHEN** any required external source is unavailable or partial
+- **THEN** the candidate remains `NOVELTY_UNCERTAIN` and full-text hydration and deep review do not execute
 
 ### Requirement: Every wave is compared
 The system SHALL cheap-screen every candidate, rank all survivors, deep-audit at least five survivors when available, and select only after the audited survivor set is complete.

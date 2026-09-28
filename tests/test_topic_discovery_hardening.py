@@ -71,8 +71,11 @@ def hardened_evidence(candidate: CandidateIdea | None = None) -> GateEvidence:
 
 def test_hardcoded_lenses_are_not_production_generator():
     from ai_scientist.topic_discovery.service import ProductionTopicPipeline
-    with pytest.raises(ValueError, match="executor-backed candidate generator"):
-        ProductionTopicPipeline(None, None, None)
+
+    pipeline = ProductionTopicPipeline.__new__(ProductionTopicPipeline)
+    pipeline.candidate_generator = None
+    with pytest.raises(RuntimeError, match="provenance-validated --candidate-file"):
+        pipeline.candidates(20, "test")
 
 
 def test_hardening_invalidates_previous_ready_run():
@@ -217,51 +220,6 @@ def test_conclusive_covering_prior_kills_even_when_another_prior_is_unavailable(
     assert decision.killing_paper_id == "covering"
 
 
-def test_executor_backed_reviewer_resolves_structured_novelty_dimensions(tmp_path):
-    import json
-    from pathlib import Path
-    from ai_scientist.research_os.agents import TaskResult
-    from ai_scientist.topic_discovery.service import CodexScientificGateExecutor
-
-    class Executor:
-        def run(self, task):
-            assert Path(task.workspace).resolve() != tmp_path.resolve()
-            assert not (Path(task.workspace) / ".git").exists()
-            output = Path(task.context["required_output_path"])
-            output.write_text(json.dumps([{
-                "paper_id": "prior", "scientific_question_overlap": "TRUE", "claim_overlap": "TRUE",
-                "assumption_overlap": "PARTIAL", "method_overlap": "PARTIAL", "measurement_overlap": "TRUE",
-                "setting_overlap": "PARTIAL", "conclusion_overlap": "TRUE", "evidence_refs": ["chunk"],
-            }]), encoding="utf-8")
-            return TaskResult(task_id=task.task_id, role=task.role, status="SUCCEEDED", summary="reviewed")
-
-    audit = {"paper_id": "prior", "full_text_status": "AVAILABLE", "source_chunk_ids": ["chunk"], "source_spans": [{"chunk_id": "chunk", "text": "source"}]}
-    reviewed = CodexScientificGateExecutor(Executor(), tmp_path).review_novelty(idea(), [audit])[0]
-    assert reviewed["review_status"] == "REVIEWED"
-    assert reviewed["scientific_question_overlap"] == "TRUE"
-
-
-def test_executor_review_without_source_linked_refs_stays_unreviewed(tmp_path):
-    import json
-    from pathlib import Path
-    from ai_scientist.research_os.agents import TaskResult
-    from ai_scientist.topic_discovery.service import CodexScientificGateExecutor
-
-    class Executor:
-        def run(self, task):
-            output = Path(task.context["required_output_path"])
-            output.write_text(json.dumps([{
-                "paper_id": "prior", "scientific_question_overlap": "TRUE", "claim_overlap": "TRUE",
-                "assumption_overlap": "TRUE", "method_overlap": "TRUE", "measurement_overlap": "TRUE",
-                "setting_overlap": "TRUE", "conclusion_overlap": "TRUE", "evidence_refs": [],
-            }]), encoding="utf-8")
-            return TaskResult(task_id=task.task_id, role=task.role, status="SUCCEEDED", summary="reviewed")
-
-    audit = {"paper_id": "prior", "full_text_status": "AVAILABLE", "source_chunk_ids": ["chunk"], "source_spans": [{"chunk_id": "chunk", "text": "source"}]}
-    reviewed = CodexScientificGateExecutor(Executor(), tmp_path).review_novelty(idea(), [audit])[0]
-    assert "review_status" not in reviewed
-
-
 def test_frozen_benchmark_metadata_triggers_legal_full_text_hydration(monkeypatch):
     from ai_scientist.topic_discovery.service import ProductionTopicPipeline
     engine = create_engine(os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os_test"), pool_pre_ping=True)
@@ -282,7 +240,6 @@ def test_frozen_benchmark_metadata_triggers_legal_full_text_hydration(monkeypatc
     monkeypatch.setattr("ai_scientist.topic_discovery.service.httpx.get", lambda *args, **kwargs: Response())
     pipeline = ProductionTopicPipeline.__new__(ProductionTopicPipeline)
     pipeline.literature_repository, pipeline.literature = repository, service
-    pipeline.gate_executor = None
     audit = pipeline._structured_deep_audit(idea(), [{"paper_id": paper["paper_id"], "title": "Hydration prior"}])[0]
     assert audit["full_text_status"] == "AVAILABLE"
     assert audit["source_spans"]
@@ -407,3 +364,94 @@ def test_adversarial_solved_candidates_are_killed_but_uncertain_is_not():
     uncertain = judge.decide(idea(99), [{"paper_id": "other", "title": "Unrelated theorem", "abstract": "orthogonal result", "source_chunk_ids": ["c"]}], search_complete=False)
     assert killed >= 8
     assert uncertain.decision.value == "NOVELTY_UNCERTAIN"
+
+
+def test_live_codex_topic_executors_are_not_public():
+    import ai_scientist.topic_discovery as topic_discovery
+
+    assert not hasattr(topic_discovery, "CodexCandidateGenerator")
+    assert not hasattr(topic_discovery, "CodexScientificGateExecutor")
+
+
+def test_topic_discovery_requires_recorded_candidates():
+    from ai_scientist.research_store.cli import _parser
+
+    with pytest.raises(SystemExit):
+        _parser().parse_args(["topic", "discover"])
+
+
+def test_unsafe_live_candidate_generation_command_is_removed():
+    from ai_scientist.research_store.cli import _parser
+
+    with pytest.raises(SystemExit):
+        _parser().parse_args([
+            "topic", "generate-candidates", "--output", "candidates.json",
+        ])
+
+
+def test_deep_audit_collection_never_invokes_external_executor():
+    from contextlib import nullcontext
+    from types import SimpleNamespace
+
+    from ai_scientist.topic_discovery.service import ProductionTopicPipeline
+
+    class ExecutorSpy:
+        calls = 0
+
+        def review_novelty(self, candidate, audits):
+            self.calls += 1
+            return audits
+
+    pipeline = ProductionTopicPipeline.__new__(ProductionTopicPipeline)
+    pipeline.literature_repository = SimpleNamespace(
+        engine=SimpleNamespace(connect=lambda: nullcontext(SimpleNamespace()))
+    )
+    pipeline.gate_executor = ExecutorSpy()
+
+    assert pipeline._structured_deep_audit(idea(), []) == []
+    assert pipeline.gate_executor.calls == 0
+
+
+def test_incomplete_search_short_circuits_before_deep_audit():
+    from types import SimpleNamespace
+
+    from ai_scientist.topic_discovery.core import GapDecision, NoveltyDecision
+    from ai_scientist.topic_discovery.service import ProductionTopicPipeline
+
+    candidate = idea()
+    priors = [{"paper_id": f"prior-{index}"} for index in range(10)]
+    scout = {
+        "executed_query_count": 7,
+        "retrieval_run_id": "scout-run",
+        "results": priors,
+    }
+    reviewer = {
+        "executed_query_count": 7,
+        "retrieval_run_id": "reviewer-run",
+        "results": priors,
+        "query_executions": {},
+        "citation_expansion": {},
+        "external_expansion": {
+            "sources": {
+                "crossref": {"status": "COMPLETE"},
+                "openalex": {"status": "COMPLETE"},
+                "semantic_scholar": {"status": "PARTIAL"},
+                "arxiv": {"status": "COMPLETE"},
+                "openreview": {"status": "COMPLETE"},
+            }
+        },
+    }
+    audit_results = iter([
+        (scout, NoveltyDecision(GapDecision.NOVELTY_UNCERTAIN)),
+        (reviewer, NoveltyDecision(GapDecision.NOVELTY_UNCERTAIN)),
+    ])
+    pipeline = ProductionTopicPipeline.__new__(ProductionTopicPipeline)
+    pipeline._audit = lambda *args, **kwargs: next(audit_results)
+    pipeline._structured_deep_audit = lambda *args, **kwargs: (_ for _ in ()).throw(
+        AssertionError("deep audit must not run for incomplete search")
+    )
+    pipeline.judge = NoveltyJudge()
+    pipeline.opportunity_repository = SimpleNamespace(insert=lambda *args, **kwargs: None)
+    pipeline._mark_state = lambda *args, **kwargs: None
+
+    assert pipeline.evaluate(candidate) is None

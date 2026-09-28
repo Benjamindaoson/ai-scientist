@@ -1,10 +1,8 @@
 from __future__ import annotations
 
-import hashlib
 import html as html_module
 import json
 import re
-import shutil
 import uuid
 import time
 import xml.etree.ElementTree as ET
@@ -22,18 +20,12 @@ from ai_scientist.opportunity_intelligence import OFFICIAL_SOURCES, OpportunityR
 from ai_scientist.opportunity_intelligence import models as opportunity_models
 from ai_scientist.opportunity_intelligence.repository import new_id
 from ai_scientist.research_store.repository import canonical_hash
-from ai_scientist.research_os.agents import AgentExecutor, Capability, ResearchRole, TaskSpec
 
 from .core import (
     CandidateIdea, DiscoveryLoop, GapDecision, GateEvidence, IdeaDeduplicator, NoveltyJudge,
     ResearchProgram, TopicReadinessGate, normalize,
 )
 
-
-DISCOVERY_HEURISTICS = (
-    "measurement and identification", "contradictions and negative results", "new dataset affordances",
-    "benchmark changes", "reviewer pain points", "citation-neighborhood gaps", "cross-domain transfer",
-)
 
 KNOWN_DANGEROUS_VLA_PRIORS = (
     {"title": "Failure Prediction at Runtime for Generative Robot Policies", "arxiv": "2510.09459"},
@@ -59,48 +51,8 @@ def validate_dataset_preflight(evidence: dict[str, Any]) -> dict[str, Any]:
     return {**evidence, "status": status, "missing": missing}
 
 
-class CodexCandidateGenerator:
-    def __init__(self, executor: AgentExecutor, workspace: str | Path = "."):
-        self.executor = executor
-        self.workspace = Path(workspace).resolve()
-
-    def generate(self, *, minimum: int, strategy: str, signals: list[dict], literature_context: list[dict], killed_memory: list[dict]) -> list[dict]:
-        task_id = f"topic-generation-{uuid.uuid4().hex[:12]}"
-        output = self.workspace / "artifacts" / "topic_discovery" / f"{task_id}.json"
-        output.parent.mkdir(parents=True, exist_ok=True)
-        isolated_workspace = self.workspace.parent / ".research-os-executor" / task_id
-        isolated_workspace.mkdir(parents=True, exist_ok=False)
-        isolated_output = isolated_workspace / "candidates.json"
-        context = {
-            "strategy": strategy, "minimum_candidates": minimum, "heuristics": list(DISCOVERY_HEURISTICS),
-            "signals": signals[:40], "recent_literature": literature_context[:80], "killed_idea_memory": killed_memory[:100],
-            "required_output_path": str(isolated_output),
-            "candidate_fields": ["title", "current_belief", "proposed_challenge", "scientific_question", "falsifiable_claim", "why_now", "input_signal_ids", "literature_context_ids", "reasoning_summary", "expected_contribution_type", "possible_target_venues", "cheap_falsifier", "main_risk", "proposed_data_source", "target_variable"],
-            "constraints": ["Do not copy examples or use static templates", "Each question and claim must be coherent and falsifiable", "Use only supplied signal and literature IDs", "Write a JSON array with at least minimum_candidates records", "Write only required_output_path and Research OS task-package files", "Do not run git, create branches, commit, push, or edit source code"],
-        }
-        prompt_hash = hashlib.sha256(json.dumps(context, sort_keys=True, default=str).encode()).hexdigest()
-        result = self.executor.run(TaskSpec(
-            task_id=task_id, role=ResearchRole.SCOUT, capability=Capability.DISCOVER_CANDIDATES,
-            objective=f"Generate at least {minimum} distinct research candidates and write the JSON array to {isolated_output}",
-            workspace=str(isolated_workspace), input_refs=[str(isolated_workspace)],
-            acceptance_criteria=["All candidates use supplied evidence IDs", "No static template candidates", "Output is valid JSON at required_output_path"],
-            context=context,
-        ))
-        if result.status != "SUCCEEDED" or not isolated_output.is_file():
-            raise RuntimeError(f"Codex candidate generation failed: {result.error_code or result.summary}")
-        rows = json.loads(isolated_output.read_text(encoding="utf-8"))
-        output.write_text(json.dumps(rows, indent=2), encoding="utf-8")
-        shutil.copytree(isolated_workspace, self.workspace / ".research-os" / "executor-workspaces" / task_id, dirs_exist_ok=True)
-        if not isinstance(rows, list) or len(rows) < minimum:
-            raise ValueError("Codex candidate generation returned fewer than the required candidates")
-        timestamp = datetime.now(timezone.utc).isoformat()
-        for row in rows:
-            row.update(generation_model="codex-cli", prompt_hash=prompt_hash, generation_timestamp=timestamp)
-        return rows
-
-
 class RecordedCodexCandidateGenerator:
-    """Resume a recorded Codex generation without invoking a second model run."""
+    """Replay provenance-validated candidates without invoking an external executor."""
     def __init__(self, path: str | Path):
         self.path = Path(path)
 
@@ -109,135 +61,6 @@ class RecordedCodexCandidateGenerator:
         if len(rows) < minimum or any(row.get("generation_model") != "codex-cli" or not row.get("prompt_hash") or not row.get("generation_timestamp") for row in rows):
             raise ValueError("recorded candidates lack verified Codex generation provenance")
         return rows
-
-
-class CodexScientificGateExecutor:
-    """Runs evidence-bounded PI, Engineer, and Reviewer gate work through the existing Codex executor."""
-
-    def __init__(self, executor: AgentExecutor, workspace: str | Path = "."):
-        self.executor = executor
-        self.workspace = Path(workspace).resolve()
-
-    def _run_json(self, *, role: ResearchRole, capability: Capability, objective: str, context: dict[str, Any], name: str) -> Any:
-        task_id = f"topic-{name}-{uuid.uuid4().hex[:12]}"
-        archive = self.workspace / ".research-os" / "executor-workspaces" / task_id
-        isolated_workspace = self.workspace.parent / ".research-os-executor" / task_id
-        isolated_workspace.mkdir(parents=True, exist_ok=False)
-        output = isolated_workspace / "result.json"
-        bounded_context = {**context, "required_output_path": str(output), "execution_constraints": [
-            "Write only required_output_path and Research OS task-package files",
-            "Do not run git, create branches, commit, push, or edit source code",
-            "Use only supplied evidence refs; mark unsupported fields unresolved",
-        ]}
-        result = self.executor.run(TaskSpec(
-            task_id=task_id, role=role, capability=capability, objective=objective,
-            workspace=str(isolated_workspace), input_refs=[str(isolated_workspace)],
-            acceptance_criteria=["Output is valid JSON at required_output_path", "Every scientific conclusion cites supplied evidence refs", "Unsupported requirements remain unresolved or blocked"],
-            context=bounded_context,
-        ))
-        if result.status != "SUCCEEDED" or not output.is_file():
-            raise RuntimeError(f"{role.value} gate execution failed: {result.error_code or result.summary}")
-        payload = json.loads(output.read_text(encoding="utf-8"))
-        shutil.copytree(isolated_workspace, archive, dirs_exist_ok=True)
-        isolated_root, archive_root = str(isolated_workspace), str(archive)
-
-        def remap(value):
-            if isinstance(value, str) and value.startswith(isolated_root):
-                return archive_root + value[len(isolated_root):]
-            if isinstance(value, list):
-                return [remap(item) for item in value]
-            if isinstance(value, dict):
-                return {key: remap(item) for key, item in value.items()}
-            return value
-
-        return remap(payload)
-
-    def review_novelty(self, candidate: CandidateIdea, audits: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        reviewable = [{**row, "source_spans": row.get("source_spans", [])[:4]} for row in audits if row.get("full_text_status") == "AVAILABLE"]
-        if not reviewable:
-            return audits
-        rows = self._run_json(
-            role=ResearchRole.REVIEWER, capability=Capability.INDEPENDENT_NOVELTY_AUDIT,
-            name="novelty-review",
-            objective="Independently compare every supplied prior with the candidate on the seven required scientific dimensions and write a JSON array.",
-            context={"candidate": asdict(candidate), "priors": reviewable,
-                "required_fields": ["paper_id", "scientific_question_overlap", "claim_overlap", "assumption_overlap", "method_overlap", "measurement_overlap", "setting_overlap", "conclusion_overlap", "evidence_refs"],
-                "allowed_overlap_values": ["TRUE", "FALSE", "PARTIAL", "UNKNOWN"]},
-        )
-        by_id = {row["paper_id"]: row for row in rows if isinstance(row, dict) and row.get("paper_id")}
-        dimensions = ("scientific_question_overlap", "claim_overlap", "assumption_overlap", "method_overlap", "measurement_overlap", "setting_overlap", "conclusion_overlap")
-        merged = []
-        for audit in audits:
-            review = by_id.get(audit.get("paper_id"))
-            legal_refs = set(audit.get("source_chunk_ids", []))
-            refs = review.get("evidence_refs", []) if review else []
-            if review and refs and set(refs) <= legal_refs and all(review.get(name) in {"TRUE", "FALSE", "PARTIAL", "UNKNOWN"} for name in dimensions):
-                audit = {**audit, **{name: review[name] for name in dimensions}, "review_status": "REVIEWED", "review_evidence_refs": review.get("evidence_refs", [])}
-            merged.append(audit)
-        return merged
-
-    def assess_readiness(self, candidate: CandidateIdea, *, priors: list[dict[str, Any]], data_preflight: dict[str, Any]) -> dict[str, Any]:
-        shared = {"candidate": asdict(candidate), "dangerous_priors": [{**row, "source_spans": row.get("source_spans", [])[:3]} for row in priors], "data_preflight": data_preflight}
-        pi = self._run_json(
-            role=ResearchRole.PI, capability=Capability.STUDY_DESIGN, name="pi-assessment",
-            objective="Answer all 15 critical questions and produce candidate-specific method, compute, timeline, killer experiment, and construct-coherence JSON without starting a full experiment.",
-            context={**shared, "required_keys": ["scientific_question", "falsifiable_claim", "critical_questions", "method", "compute", "time_estimate", "killer_experiment", "coherence"]},
-        )
-        engineering = self._run_json(
-            role=ResearchRole.ENGINEER, capability=Capability.TEST_CODE, name="engineering-preflight",
-            objective="Perform only a small legal metadata/loader/baseline smoke check and write candidate-specific data and engineering readiness JSON with exact commands, artifact paths, and execution receipts; do not run the full research experiment.",
-            context={**shared, "pi_method": pi.get("method"), "required_keys": ["data", "engineering"],
-                "receipt_contract": {"data.metadata_load": ["command", "artifact", "execution_receipt"],
-                                     "engineering": ["command", "artifact", "execution_receipt", "metric_computed"],
-                                     "execution_receipt": ["command", "exit_code", "artifact_sha256"]}},
-        )
-        engineering_gate = engineering.get("engineering") or {}
-        engineering_artifact = engineering_gate.get("artifact")
-        artifact_path = Path(engineering_artifact) if engineering_artifact else None
-        if artifact_path and not artifact_path.is_absolute():
-            artifact_path = self.workspace / artifact_path
-        receipt_ref = engineering_gate.get("execution_receipt")
-        receipt_path = Path(receipt_ref) if receipt_ref else None
-        if receipt_path and not receipt_path.is_absolute():
-            receipt_path = self.workspace / receipt_path
-        receipt = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path and receipt_path.is_file() else {}
-        artifact_hash = hashlib.sha256(artifact_path.read_bytes()).hexdigest() if artifact_path and artifact_path.is_file() else None
-        engineering_valid = (
-            engineering_gate.get("command") and artifact_hash and receipt.get("exit_code") == 0
-            and receipt.get("command") == engineering_gate.get("command")
-            and receipt.get("artifact_sha256") == artifact_hash
-        )
-        if engineering_gate.get("status") == "READY" and not engineering_valid:
-            engineering["engineering"] = {**engineering_gate, "status": "BLOCKED", "reason": "Engineering command receipt or artifact hash is invalid."}
-        data_gate = engineering.get("data") or {}
-        metadata = data_gate.get("metadata_load") or {}
-        metadata_artifact = metadata.get("artifact")
-        metadata_path = Path(metadata_artifact) if metadata_artifact else None
-        if metadata_path and not metadata_path.is_absolute():
-            metadata_path = self.workspace / metadata_path
-        metadata_receipt_ref = metadata.get("execution_receipt")
-        metadata_receipt_path = Path(metadata_receipt_ref) if metadata_receipt_ref else None
-        if metadata_receipt_path and not metadata_receipt_path.is_absolute():
-            metadata_receipt_path = self.workspace / metadata_receipt_path
-        metadata_receipt = json.loads(metadata_receipt_path.read_text(encoding="utf-8")) if metadata_receipt_path and metadata_receipt_path.is_file() else {}
-        metadata_hash = hashlib.sha256(metadata_path.read_bytes()).hexdigest() if metadata_path and metadata_path.is_file() else None
-        metadata_valid = (
-            metadata.get("command") and metadata_hash and metadata_receipt.get("exit_code") == 0
-            and metadata_receipt.get("command") == metadata.get("command")
-            and metadata_receipt.get("artifact_sha256") == metadata_hash
-        )
-        if metadata.get("status") == "SUCCEEDED" and not metadata_valid:
-            engineering["data"] = {**data_gate, "metadata_load": {**metadata, "status": "FAILED", "reason": "Metadata command receipt or artifact hash is invalid."}}
-        reviewer = self._run_json(
-            role=ResearchRole.REVIEWER, capability=Capability.PROTOCOL_AUDIT, name="reviewer-gates",
-            objective="Independently audit the PI and Engineer artifacts, adjudicate all 15 critical answers and all eight significance gates, coherence, reviewer attacks, and fatal objections.",
-            context={**shared, "pi": pi, "engineering": engineering,
-                "significance_gates": ["fundamental", "surprising", "broad", "actionable", "cheap_to_falsify", "hard_to_explain_away", "defensible_novelty", "value_over_cost"],
-                "required_keys": ["critical_questions", "significance", "coherence", "reviewer_attacks", "unresolved_fatal_objections"]},
-        )
-        return {**pi, **engineering, **reviewer}
-
-
 class ExternalPriorExpander:
     def __init__(self, literature: LiteratureService, *, client: httpx.Client | None = None):
         self.literature = literature
@@ -343,9 +166,7 @@ class ExternalPriorExpander:
 
 
 class ProductionTopicPipeline:
-    def __init__(self, opportunity_repository: OpportunityRepository, literature_repository: LiteratureRepository, embedding_provider, *, candidate_generator: CodexCandidateGenerator | RecordedCodexCandidateGenerator | None = None, gate_executor: CodexScientificGateExecutor | None = None, output_root: str | Path = "reports/topic_discovery_hardening", live_sync: bool = True):
-        if candidate_generator is None:
-            raise ValueError("production requires an executor-backed candidate generator")
+    def __init__(self, opportunity_repository: OpportunityRepository, literature_repository: LiteratureRepository, embedding_provider, *, candidate_generator: RecordedCodexCandidateGenerator | None = None, output_root: str | Path = "reports/topic_discovery_hardening", live_sync: bool = True):
         self.opportunity_repository = opportunity_repository
         self.opportunities = OpportunityService(opportunity_repository)
         self.literature_repository = literature_repository
@@ -359,7 +180,6 @@ class ProductionTopicPipeline:
         self.output_root.mkdir(parents=True, exist_ok=True)
         self.live_sync = live_sync
         self.candidate_generator = candidate_generator
-        self.gate_executor = gate_executor
         self._signals: list[dict] = []
         self._wave = 0
         self.last_dossier: dict[str, Any] | None = None
@@ -376,6 +196,8 @@ class ProductionTopicPipeline:
         return self._signals
 
     def candidates(self, minimum: int, strategy: str) -> list[CandidateIdea]:
+        if self.candidate_generator is None:
+            raise RuntimeError("topic discovery requires a provenance-validated --candidate-file")
         self._wave += 1
         signals = self._signals or [{"signal_id": "no-current-signal", "title": "Recent literature", "evidence_refs": []}]
         with self.literature_repository.engine.connect() as connection:
@@ -550,7 +372,7 @@ class ProductionTopicPipeline:
                     "review_status": "UNRESOLVED: independent reviewer assessment required" if spans else "FULL_TEXT_UNAVAILABLE",
                     "hydration_error": hydration_error,
                 })
-        return self.gate_executor.review_novelty(candidate, audits) if self.gate_executor else audits
+        return audits
 
     def _mark_state(self, candidate: CandidateIdea, state: str, gate: str, reason: str) -> None:
         self._outcomes[candidate.idea_id] = state
@@ -569,13 +391,13 @@ class ProductionTopicPipeline:
             return None
         reviewer, _ = self._audit(candidate, "reviewer", external=True)
         dangerous = reviewer["results"][:10]
-        deep_audit = self._structured_deep_audit(candidate, dangerous)
         external_sources = reviewer.get("external_expansion", {}).get("sources", {})
         search_complete = (
             scout.get("executed_query_count") == 7 and reviewer.get("executed_query_count") == 7
             and len(dangerous) >= 10 and len(external_sources) == 5
             and all(row.get("status") == "COMPLETE" for row in external_sources.values())
         )
+        deep_audit = self._structured_deep_audit(candidate, dangerous) if search_complete else []
         reviewer_decision = self.judge.deep_decide(candidate, deep_audit, search_complete=search_complete)
         self.opportunity_repository.insert(
             opportunity_models.novelty_audits, novelty_audit_id=new_id(), idea_id=candidate.idea_id,
@@ -592,7 +414,7 @@ class ProductionTopicPipeline:
                 self._mark_state(candidate, state, "REVIEWER_DEEP_AUDIT", reviewer_decision.reason)
             return None
         data = self._data_preflight(candidate)
-        assessment = self.gate_executor.assess_readiness(candidate, priors=deep_audit, data_preflight=data) if self.gate_executor else {}
+        assessment = {}
         data = validate_dataset_preflight(assessment.get("data", data))
         if data["status"] != "DATA_READY":
             self._record_feasibility(candidate.idea_id, "DATA", "BLOCKED", data)

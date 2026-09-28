@@ -81,18 +81,11 @@ def _parser() -> argparse.ArgumentParser:
         discovery.add_argument("--embedding-provider", choices=("bge-m3", "hashing"), default="bge-m3")
         discovery.add_argument("--max-waves", type=int, default=0)
         discovery.add_argument("--no-live-sync", action="store_true")
-        discovery.add_argument("--workspace", default=".")
-        discovery.add_argument("--candidate-file")
-    generate_candidates = topic_commands.add_parser("generate-candidates")
-    generate_candidates.add_argument("--count", type=int, default=20)
-    generate_candidates.add_argument("--workspace", default=".")
-    generate_candidates.add_argument("--output", required=True)
+        discovery.add_argument("--candidate-file", required=True)
     topic_commands.add_parser("status")
     topic_commands.add_parser("list")
     reaudit = topic_commands.add_parser("re-audit-current")
     reaudit.add_argument("--embedding-provider", choices=("bge-m3", "hashing"), default="bge-m3")
-    reaudit.add_argument("--candidate-file")
-    reaudit.add_argument("--workspace", default=".")
     topic_reports = topic_commands.add_parser("reports")
     topic_reports.add_argument("--benchmark-result")
     for name in ("show", "audit", "lineage", "dossier"):
@@ -194,35 +187,13 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.group == "topic":
         from ai_scientist.literature_intelligence import BGEEmbeddingProvider, HashingEmbeddingProvider, LiteratureRepository, initialize_literature_database
-        from ai_scientist.opportunity_intelligence import OpportunityRepository, OpportunityService, initialize_opportunity_database
-        from ai_scientist.topic_discovery import CodexCandidateGenerator, CodexScientificGateExecutor, ProductionTopicPipeline, RecordedCodexCandidateGenerator, TopicDiscoveryService, TopicReportWriter
-        from ai_scientist.research_os.agents import CodexExecutor
-        from ai_scientist.research_os.config import ResearchOSConfig
+        from ai_scientist.opportunity_intelligence import OpportunityRepository, initialize_opportunity_database
+        from ai_scientist.topic_discovery import ProductionTopicPipeline, RecordedCodexCandidateGenerator, TopicDiscoveryService, TopicReportWriter
         initialize_opportunity_database(engine)
         initialize_literature_database(engine)
-        config = ResearchOSConfig.from_env()
-        codex_executor = CodexExecutor(config.codex_executable, timeout_seconds=config.codex_timeout_seconds)
-        codex_generator = CodexCandidateGenerator(codex_executor, getattr(args, "workspace", "."))
-        gate_executor = CodexScientificGateExecutor(codex_executor, getattr(args, "workspace", "."))
-        if args.command == "generate-candidates":
-            from sqlalchemy import select
-            from ai_scientist.literature_intelligence import models as literature_models
-            opportunity_repository = OpportunityRepository(engine)
-            signals = OpportunityService(opportunity_repository).generate_signals(domain="Embodied AI and Robot Learning")
-            with engine.connect() as connection:
-                context = [dict(row._mapping) for row in connection.execute(select(
-                    literature_models.papers.c.paper_id, literature_models.papers.c.title,
-                    literature_models.papers.c.abstract, literature_models.papers.c.publication_year,
-                ).order_by(literature_models.papers.c.publication_year.desc().nulls_last()).limit(80))]
-            rows = codex_generator.generate(minimum=args.count, strategy="HARDENED_DYNAMIC", signals=signals, literature_context=context, killed_memory=opportunity_repository.list_killed_lineage())
-            output = Path(args.output)
-            output.parent.mkdir(parents=True, exist_ok=True)
-            output.write_text(json.dumps(rows, indent=2, default=str), encoding="utf-8")
-            _json({"output": str(output), "candidates": len(rows), "generation_model": "codex-cli"})
-            return 0
         provider = BGEEmbeddingProvider() if getattr(args, "embedding_provider", "hashing") == "bge-m3" else HashingEmbeddingProvider()
-        generator = (RecordedCodexCandidateGenerator(args.candidate_file) if getattr(args, "candidate_file", None) else codex_generator)
-        service = TopicDiscoveryService(ProductionTopicPipeline(OpportunityRepository(engine), LiteratureRepository(engine), provider, candidate_generator=generator, gate_executor=gate_executor, live_sync=not getattr(args, "no_live_sync", False)))
+        generator = RecordedCodexCandidateGenerator(args.candidate_file) if getattr(args, "candidate_file", None) else None
+        service = TopicDiscoveryService(ProductionTopicPipeline(OpportunityRepository(engine), LiteratureRepository(engine), provider, candidate_generator=generator, live_sync=not getattr(args, "no_live_sync", False)))
         if args.command in {"discover", "run-until-ready"}:
             max_waves = args.max_waves or (1 if args.command == "discover" else None)
             _json(service.run_until_ready(max_waves=max_waves))

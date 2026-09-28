@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from datetime import datetime, timezone
 import os
 import uuid
@@ -434,9 +435,11 @@ def test_crossref_conference_adapter_rejects_wrong_container():
 
 def test_dataset_url_unavailable_is_data_blocked(monkeypatch):
     monkeypatch.setattr("ai_scientist.topic_discovery.service.httpx.get", lambda *args, **kwargs: (_ for _ in ()).throw(TimeoutError("offline")))
-    candidate = _candidate()
-    candidate.proposed_data_source = "DROID"
-    candidate.target_variable = "closed-loop intervention failure"
+    candidate = replace(
+        _candidate(),
+        proposed_data_source="DROID",
+        target_variable="closed-loop intervention failure",
+    )
     result = ProductionTopicPipeline._data_preflight(object(), candidate)
     assert result["status"] == "DATA_BLOCKED"
     assert "offline" in result["preflight"]

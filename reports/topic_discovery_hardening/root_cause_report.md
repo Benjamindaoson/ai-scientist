@@ -8,7 +8,9 @@ The dossier, candidate, and lineage are now `NOVELTY_UNCERTAIN`; a separate `FEA
 
 ## Corrective controls
 
-- Production candidate generation requires a real `AgentExecutor` and persists model, prompt hash, signal IDs, literature IDs, reasoning summary, and timestamp.
+- Unsafe live topic generation and scientific-gate execution are quarantined. Production discovery accepts only a recorded candidate file with model, prompt hash, signal IDs, literature IDs, reasoning summary, and timestamp.
+- The repository-adjacent `.research-os-executor` workspace and the `topic generate-candidates` command were removed. Prompt instructions are not treated as a filesystem sandbox.
+- Incomplete required external-source coverage short-circuits to `NOVELTY_UNCERTAIN` before full-text hydration or deep review.
 - All candidates are cheap-screened before survivor ranking; at least five ranked survivors receive deep audit.
 - Every declared Scout and Reviewer query executes FTS and BGE-M3 dense retrieval and records per-query counts/ranks plus multi-query RRF fusion.
 - External expansion probes Crossref, OpenAlex, Semantic Scholar, arXiv, and OpenReview and records failed sources.
@@ -19,4 +21,16 @@ The dossier, candidate, and lineage are now `NOVELTY_UNCERTAIN`; a separate `FEA
 ## Scope boundary
 
 No killer experiment, paper writing, or full research experiment was started.
+
+The historical discovery executions above are retained only as audit evidence. They do not prove that the current cleaned runtime is ready for unattended execution.
+
+## Cleanup verification
+
+- Removed 192 lines of unsafe live topic-executor implementation and the production CLI entry point that invoked it.
+- Removed seven unreferenced BGE-M3 intermediate JSON reports whose point-in-time counts no longer matched the live database.
+- Added fail-closed regression coverage for CLI candidate provenance, removed live executor exports, executor-free deep-audit collection, and incomplete-search short-circuiting.
+- `python -m compileall -q auto_research/src`: exit 0 in the project test container.
+- `python -m pytest -q`: 164 passed, 0 failed, 14 pre-existing return-value warnings.
+- `openspec validate research-os-v2-topic-discovery-hardening --strict`: valid.
+- `ai-scientist topic status`: exit 0 without constructing or invoking a Codex topic executor.
 
