@@ -349,10 +349,16 @@ class LiteratureService:
         return json.loads(Path(path).read_text(encoding="utf-8"))
 
     def run_known_prior_benchmark(self, benchmark: list[dict[str, Any]], search) -> dict[str, Any]:
-        top10 = top20 = top50 = inspectable = fabricated = external_total = external_found = false_friend_hits = false_friend_total = 0
+        from .production import validate_known_prior_benchmark_v2
+        validation = validate_known_prior_benchmark_v2(benchmark) if benchmark and benchmark[0].get("benchmark_version") == "known_prior_v2" else {"status": "LEGACY", "top_level_use": False}
+        top5 = top10 = top20 = top50 = inspectable = fabricated = external_total = external_found = false_friend_hits = false_friend_total = 0
         reciprocal_ranks = 0.0
         for item in benchmark:
-            paper = self.repository.get_paper(item["designated_paper_id"]) if item.get("designated_paper_id") else self.repository.find_paper_by_identifiers({"arxiv": item["designated_identifier"].split(":", 1)[1]})
+            if item.get("designated_paper_id"):
+                paper = self.repository.get_paper(item["designated_paper_id"])
+            else:
+                identifier_type, identifier_value = item["designated_identifier"].split(":", 1)
+                paper = self.repository.find_paper_by_identifiers({identifier_type: identifier_value})
             if not paper:
                 continue
             with self.repository.engine.connect() as connection:
@@ -365,6 +371,8 @@ class LiteratureService:
             ids = [row["paper_id"] for row in result["results"]]
             if paper["paper_id"] in ids[:50]:
                 top50 += 1
+            if paper["paper_id"] in ids[:5]:
+                top5 += 1
             if paper["paper_id"] in ids[:20]:
                 top20 += 1
             if paper["paper_id"] in ids[:10]:
@@ -375,6 +383,11 @@ class LiteratureService:
                 external_total += 1
                 external_found += int(paper["paper_id"] in ids[:50])
             false_friends = set(item.get("false_friend_paper_ids", []))
+            for identifier in item.get("false_friend_identifiers", []):
+                identifier_type, identifier_value = identifier.split(":", 1)
+                false_friend = self.repository.find_paper_by_identifiers({identifier_type: identifier_value})
+                if false_friend:
+                    false_friends.add(false_friend["paper_id"])
             false_friend_total += len(false_friends)
             false_friend_hits += len(false_friends & set(ids[:10]))
             designated = next((row for row in result["results"] if row["paper_id"] == paper["paper_id"]), None)
@@ -383,10 +396,12 @@ class LiteratureService:
             fabricated += sum(1 for paper_id in ids if self.repository.get_paper(paper_id) is None)
         total = len(benchmark)
         return {
-            "queries": total, "recall_at_10": top10 / total, "top_20_recall": top20 / total,
+            "benchmark_status": validation["status"], "eligible_as_topic_ready_evidence": validation["top_level_use"],
+            "queries": total, "recall_at_5": top5 / total, "recall_at_10": top10 / total, "top_20_recall": top20 / total,
             "top_50_recall": top50 / total, "mrr": reciprocal_ranks / total,
             "dangerous_prior_recall": top50 / total,
             "external_prior_recall": external_found / external_total if external_total else None,
-            "false_positive_rate": false_friend_hits / false_friend_total if false_friend_total else 0.0,
+            "false_positive_rate": false_friend_hits / false_friend_total if false_friend_total else None,
+            "evaluable_false_friends": false_friend_total,
             "inspectable_source_rate": inspectable / total, "fabricated_ids": fabricated,
         }

@@ -1,0 +1,16 @@
+{
+  "benchmark_status": "PROVISIONAL",
+  "dangerous_prior_recall": 0.75,
+  "eligible_as_topic_ready_evidence": false,
+  "evaluable_false_friends": 6,
+  "external_prior_recall": 0.75,
+  "fabricated_ids": 0,
+  "false_positive_rate": 0.0,
+  "inspectable_source_rate": 0.75,
+  "mrr": 0.1388781055900621,
+  "queries": 8,
+  "recall_at_10": 0.375,
+  "recall_at_5": 0.25,
+  "top_20_recall": 0.375,
+  "top_50_recall": 0.75
+}

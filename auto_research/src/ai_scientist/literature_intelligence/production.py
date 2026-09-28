@@ -572,3 +572,24 @@ def build_real_known_prior_benchmark(repository: LiteratureRepository, output: s
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(benchmark, indent=2), encoding="utf-8")
     return benchmark
+def classify_coverage(*, expected: int | None, ingested: int) -> str:
+    if expected is None:
+        return "UNAVAILABLE" if ingested == 0 else "PARTIAL"
+    return "COMPLETE" if ingested >= expected else "PARTIAL"
+
+
+def validate_known_prior_benchmark_v2(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """Reject reverse-lookups and label non-adjudicated idea-style benchmarks honestly."""
+    if not rows:
+        raise ValueError("known-prior v2 benchmark is empty")
+    for row in rows:
+        query_tokens = set(re.findall(r"[a-z0-9]+", row.get("question", "").lower()))
+        title_tokens = set(re.findall(r"[a-z0-9]+", row.get("target_title", "").lower()))
+        source_tokens = set(re.findall(r"[a-z0-9]+", f"{row.get('target_title', '')} {row.get('target_abstract', '')}".lower()))
+        if query_tokens and (len(query_tokens & source_tokens) / len(query_tokens) >= 0.65
+                             or (title_tokens and len(query_tokens & title_tokens) / len(title_tokens) >= 0.8)):
+            raise ValueError("self-retrieval benchmark query copies target language")
+        if not row.get("dangerous_prior_ids"):
+            raise ValueError("every benchmark question requires independently confirmed dangerous priors")
+    adjudicated = all(row.get("adjudication", {}).get("status") == "HUMAN_CONFIRMED" for row in rows)
+    return {"status": "FROZEN" if adjudicated else "PROVISIONAL", "question_count": len(rows), "top_level_use": adjudicated}

@@ -290,9 +290,10 @@ class _ScriptedPipeline:
         self.strategies.append(strategy)
         return [_candidate(f"idea-{self.wave}-{i}") for i in range(minimum)]
     def evaluate(self, candidate):
-        if self.wave <= self.killed_waves:
-            return None
         return GateEvidence.complete()
+    def cheap_screen(self, candidate): return self.wave > self.killed_waves
+    def rank_survivors(self, candidates): return candidates
+    def select(self, ready): return ready[0]
 
 
 def test_candidate_and_whole_wave_failure_continue_until_ready():
@@ -433,17 +434,21 @@ def test_crossref_conference_adapter_rejects_wrong_container():
 
 def test_dataset_url_unavailable_is_data_blocked(monkeypatch):
     monkeypatch.setattr("ai_scientist.topic_discovery.service.httpx.get", lambda *args, **kwargs: (_ for _ in ()).throw(TimeoutError("offline")))
-    result = ProductionTopicPipeline._data_preflight(object())
+    candidate = _candidate()
+    candidate.proposed_data_source = "DROID"
+    candidate.target_variable = "closed-loop intervention failure"
+    result = ProductionTopicPipeline._data_preflight(object(), candidate)
     assert result["status"] == "DATA_BLOCKED"
     assert "offline" in result["preflight"]
 
 
-def test_external_search_timeout_retries_then_resumes(monkeypatch, opportunity_repository):
+def test_external_search_continues_after_source_failures(monkeypatch, opportunity_repository):
     initialize_literature_database(opportunity_repository.engine)
 
     class Response:
+        headers = {"content-type": "application/json"}
         def raise_for_status(self): return None
-        def json(self): return {"message": {"items": []}}
+        def json(self): return {"message": {"items": []}, "results": [], "data": [], "notes": []}
 
     class Client:
         calls = 0
@@ -458,7 +463,8 @@ def test_external_search_timeout_retries_then_resumes(monkeypatch, opportunity_r
     service = LiteratureService(LiteratureRepository(opportunity_repository.engine))
     result = ExternalPriorExpander(service, client=client).expand("robot learning reliability")
     assert result["status"] == "COMPLETE"
-    assert result["attempts"] == client.calls == 3
+    assert set(result["sources"]) == {"crossref", "openalex", "semantic_scholar", "arxiv", "openreview"}
+    assert client.calls >= 5
 
 
 def test_novelty_audit_performs_real_citation_and_author_expansion():

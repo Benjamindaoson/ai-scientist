@@ -1,0 +1,20 @@
+[
+  {
+    "source": "arxiv", "source_record_id": "2301.04104", "title": "Mastering Diverse Domains through World Models",
+    "abstract": "DreamerV3 learns an environment model and improves behavior through imagined futures, using one configuration across more than 150 diverse control tasks.",
+    "publication_year": 2023, "identifiers": {"arxiv": "2301.04104"}, "authors": [],
+    "version": {"version_label": "arxiv-v1", "source_url": "https://arxiv.org/abs/2301.04104"}
+  },
+  {
+    "source": "arxiv", "source_record_id": "2204.14198", "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+    "abstract": "Flamingo bridges pretrained vision and language models, handles interleaved visual and textual sequences, and adapts to image and video tasks through in-context few-shot prompting.",
+    "publication_year": 2022, "identifiers": {"arxiv": "2204.14198"}, "authors": [],
+    "version": {"version_label": "arxiv-v1", "source_url": "https://arxiv.org/abs/2204.14198"}
+  },
+  {
+    "source": "arxiv", "source_record_id": "2308.03688", "title": "AgentBench: Evaluating LLMs as Agents",
+    "abstract": "AgentBench evaluates language models as agents across eight interactive environments, measuring reasoning, decision making, instruction following, and long-horizon failures.",
+    "publication_year": 2023, "identifiers": {"arxiv": "2308.03688"}, "authors": [],
+    "version": {"version_label": "arxiv-v1", "source_url": "https://arxiv.org/abs/2308.03688"}
+  }
+]
