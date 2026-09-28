@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "AI 科学家运行时架构",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [1380, 900],
+    "repository": {
+      "url": "https://github.com/Benjamindaoson/ai-scientist.git",
+      "revision": "46b22a8a309b13d1d42d519b7410145f34e93089"
+    }
+  },
+  "components": [
+    {
+      "id": "caller",
+      "type": "external",
+      "label": "调用方",
+      "sublabel": "Python API / run.py",
+      "pos": [24, 334],
+      "size": [140, 72],
+      "sources": [{"path": "run.py", "line": 1}]
+    },
+    {
+      "id": "orchestrator",
+      "type": "backend",
+      "label": "AIScientist",
+      "sublabel": "总编排与共享会话",
+      "pos": [200, 334],
+      "size": [160, 72],
+      "sources": [{"path": "auto_research/src/ai_scientist/orchestrator.py", "line": 47}]
+    },
+    {
+      "id": "literature",
+      "type": "backend",
+      "label": "文献层",
+      "sublabel": "检索、阅读、证据校验",
+      "pos": [400, 160],
+      "size": [170, 72],
+      "sources": [
+        {"path": "auto_research/src/ai_scientist/literature/search.py", "line": 52},
+        {"path": "auto_research/src/ai_scientist/literature/reader.py", "line": 45},
+        {"path": "auto_research/src/ai_scientist/literature/validator.py", "line": 89}
+      ]
+    },
+    {
+      "id": "reasoning",
+      "type": "backend",
+      "label": "科学推理层",
+      "sublabel": "领域模型与理论引擎",
+      "pos": [400, 334],
+      "size": [170, 72],
+      "sources": [
+        {"path": "auto_research/src/ai_scientist/core/models/domain.py", "line": 34},
+        {"path": "auto_research/src/ai_scientist/engine/theory_engine.py", "line": 96}
+      ]
+    },
+    {
+      "id": "debate",
+      "type": "security",
+      "label": "科学裁决层",
+      "sublabel": "多角色辩论、异议账本、硬门控",
+      "pos": [600, 334],
+      "size": [166, 72],
+      "sources": [
+        {"path": "auto_research/src/ai_scientist/engine/multi_agent_debate.py", "line": 145},
+        {"path": "auto_research/src/ai_scientist/engine/objection_ledger.py", "line": 76},
+        {"path": "auto_research/src/ai_scientist/engine/final_research_court.py", "line": 287}
+      ]
+    },
+    {
+      "id": "autonomous",
+      "type": "backend",
+      "label": "自主研究闭环",
+      "sublabel": "假设、实验、消融、修订",
+      "pos": [800, 334],
+      "size": [180, 72],
+      "sources": [{"path": "auto_research/src/ai_scientist/autonomous_loop.py", "line": 21}]
+    },
+    {
+      "id": "experiment",
+      "type": "security",
+      "label": "实验运行时",
+      "sublabel": "Engineer / Runner / Sandbox",
+      "pos": [990, 160],
+      "size": [190, 72],
+      "sources": [
+        {"path": "auto_research/src/ai_scientist/experiment/engineer.py", "line": 24},
+        {"path": "auto_research/src/ai_scientist/experiment/runner.py", "line": 16},
+        {"path": "auto_research/src/ai_scientist/experiment/sandbox.py", "line": 32}
+      ]
+    },
+    {
+      "id": "evidence",
+      "type": "backend",
+      "label": "证据与完整性",
+      "sublabel": "证据图、指标核对、复现",
+      "pos": [990, 334],
+      "size": [190, 72],
+      "sources": [
+        {"path": "auto_research/src/ai_scientist/evidence_graph.py", "line": 8},
+        {"path": "auto_research/src/ai_scientist/integrity.py", "line": 35}
+      ]
+    },
+    {
+      "id": "review",
+      "type": "backend",
+      "label": "审稿与元审",
+      "sublabel": "问题路由、反驳、元审",
+      "pos": [1210, 334],
+      "size": [140, 72],
+      "sources": [
+        {"path": "auto_research/src/ai_scientist/scientific_review.py", "line": 21},
+        {"path": "auto_research/src/ai_scientist/review_loop.py", "line": 23}
+      ]
+    },
+    {
+      "id": "sqlite",
+      "type": "database",
+      "label": "SQLite",
+      "sublabel": "项目、实体、事件、异议",
+      "pos": [600, 582],
+      "size": [190, 72],
+      "sources": [
+        {"path": "auto_research/src/ai_scientist/db/repository.py", "line": 24},
+        {"path": "auto_research/src/ai_scientist/db/schema.sql", "line": 1}
+      ]
+    },
+    {
+      "id": "package",
+      "type": "database",
+      "label": "研究包文件",
+      "sublabel": "状态、证据图、审稿、审计、手稿",
+      "pos": [990, 582],
+      "size": [190, 72],
+      "sources": [{"path": "auto_research/src/ai_scientist/research_package.py", "line": 11}]
+    },
+    {
+      "id": "external",
+      "type": "external",
+      "label": "外部服务",
+      "sublabel": "Anthropic/Relay 与 arXiv/S2",
+      "pos": [600, 72],
+      "size": [190, 72],
+      "sources": [
+        {"path": "auto_research/src/ai_scientist/core/gateway.py", "line": 41},
+        {"path": "auto_research/src/ai_scientist/literature/search.py", "line": 125}
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "security-group",
+      "label": "本地可信边界",
+      "wraps": ["orchestrator", "literature", "reasoning", "debate", "autonomous", "experiment", "evidence", "review", "sqlite", "package"],
+      "pad": 22
+    }
+  ],
+  "connections": [
+    {"id": "call", "from": "caller", "to": "orchestrator", "label": "调用 API", "variant": "emphasis", "labelDy": 60},
+    {"id": "search", "from": "orchestrator", "to": "literature", "label": "检索与分析", "fromSide": "top", "toSide": "left"},
+    {"id": "reason", "from": "orchestrator", "to": "reasoning", "label": "现象→谜题→理论", "labelDy": -30},
+    {"id": "judge", "from": "reasoning", "to": "debate", "label": "候选研究方向", "variant": "emphasis", "labelDy": 60},
+    {"id": "loop", "from": "debate", "to": "autonomous", "label": "通过门控的假设", "variant": "emphasis", "labelDy": -30},
+    {"id": "run", "from": "autonomous", "to": "experiment", "label": "规格与受限命令", "fromSide": "top", "toSide": "left"},
+    {"id": "measure", "from": "experiment", "to": "evidence", "label": "指标、日志、产物", "fromSide": "bottom", "toSide": "top", "labelDy": 24},
+    {"id": "review-evidence", "from": "evidence", "to": "review", "label": "可追溯研究状态", "variant": "emphasis", "labelDy": -30},
+    {"id": "revise", "from": "review", "to": "autonomous", "label": "反驳实验 / 修订", "variant": "dashed", "fromSide": "bottom", "toSide": "bottom"},
+    {"id": "persist", "from": "orchestrator", "to": "sqlite", "label": "事务化持久化", "fromSide": "bottom", "toSide": "left"},
+    {"id": "ledger", "from": "debate", "to": "sqlite", "label": "异议与裁决", "fromSide": "bottom", "toSide": "top", "labelDy": 24},
+    {"id": "export", "from": "review", "to": "package", "label": "导出研究包", "fromSide": "bottom", "toSide": "right", "labelDx": -70},
+    {"id": "model", "from": "external", "to": "orchestrator", "label": "模型响应", "variant": "dashed", "toSide": "top", "labelDy": -24},
+    {"id": "papers", "from": "external", "to": "literature", "label": "HTTP 元数据 / PDF", "variant": "dashed", "toSide": "top", "labelDy": 24}
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "主执行路径",
+      "items": ["科学推理和实验闭环是两层系统", "未提供实验规格时停在 READY_FOR_EXPERIMENT"]
+    },
+    {
+      "dot": "rose",
+      "title": "信任边界",
+      "items": ["LLM 与文献 API 返回不可信内容", "本地子进程沙箱不是虚拟机安全边界"]
+    }
+  ]
+}
