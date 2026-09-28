@@ -12,7 +12,7 @@ from ai_scientist.research_store import ResearchRepository, initialize_database
 from ai_scientist import AIScientist
 
 
-DATABASE_URL = os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os")
+DATABASE_URL = os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os_test")
 
 
 class RecordingRunner:

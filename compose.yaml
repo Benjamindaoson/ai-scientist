@@ -14,16 +14,30 @@ services:
       retries: 30
     volumes:
       - research-postgres:/var/lib/postgresql/data
+  postgres-test:
+    profiles: ["test"]
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: research_os_test
+      POSTGRES_USER: research
+      POSTGRES_PASSWORD: research
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U research -d research_os_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    tmpfs:
+      - /var/lib/postgresql/data
   test:
     profiles: ["test"]
     build:
       context: .
       dockerfile: Dockerfile.test
     depends_on:
-      postgres:
+      postgres-test:
         condition: service_healthy
     environment:
-      RESEARCH_DATABASE_URL: postgresql+psycopg://research:research@postgres:5432/research_os
+      RESEARCH_DATABASE_URL: postgresql+psycopg://research:research@postgres-test:5432/research_os_test
       PYTHONIOENCODING: utf-8
     volumes:
       - .:/workspace

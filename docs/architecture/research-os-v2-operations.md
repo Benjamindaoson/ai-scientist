@@ -11,6 +11,10 @@ docker compose --profile test run --rm test alembic upgrade head
 docker compose --profile test run --rm test python -m pytest -q
 ```
 
+The Compose `test` service uses the dedicated, ephemeral `postgres-test` service and the
+`research_os_test` database. The root pytest guard refuses any database name that does
+not end in `_test`; never override this guard to point tests at `research_os`.
+
 The database URL, artifact roots and executor settings belong in environment variables. Copy `.env.example` to a private local file; never commit credentials.
 
 ## CLI

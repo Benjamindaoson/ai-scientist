@@ -10,4 +10,6 @@
 - [x] Quarantine unsafe live Codex topic generation and scientific-gate execution.
 - [x] Short-circuit incomplete search before full-text hydration and deep audit.
 - [x] Remove stale, unreferenced BGE-M3 intermediate run reports.
-- [ ] Generate required reports, run full verification, commit, push, and verify remote.
+- [x] Isolate pytest in an ephemeral `research_os_test` PostgreSQL service and fail closed on non-test database names.
+- [x] Generate the hardening and original-vision gap reports and run full verification.
+- [x] Commit, push, and verify the final hardening changes on the remote branch.

@@ -31,7 +31,7 @@ from ai_scientist.topic_discovery.service import ExternalPriorExpander, Producti
 from ai_scientist.literature_intelligence import HashingEmbeddingProvider, LiteratureRepository, LiteratureService, OpenAlexProductionCorpus, ResumableEmbeddingIndexer, build_real_known_prior_benchmark, initialize_literature_database
 
 
-DATABASE_URL = os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os")
+DATABASE_URL = os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os_test")
 
 
 @pytest.fixture

@@ -24,13 +24,26 @@ No killer experiment, paper writing, or full research experiment was started.
 
 The historical discovery executions above are retained only as audit evidence. They do not prove that the current cleaned runtime is ready for unattended execution.
 
+## Database isolation incident
+
+The former Compose `test` service pointed `RESEARCH_DATABASE_URL` at the production
+`research_os` database. Tests that intentionally delete table contents therefore removed
+the live literature corpus. No recoverable SQL dump or alternate PostgreSQL volume was
+found. The incident is not treated as a scientific result or silently repaired in reports;
+the production corpus must be re-ingested.
+
+The corrective control is enforced in two places: Compose routes tests to the ephemeral
+`postgres-test` service, and pytest aborts at session start unless the database name ends
+in `_test`. A destructive regression run was executed while comparing production counts
+before and after; the production counts were unchanged.
+
 ## Cleanup verification
 
 - Removed 192 lines of unsafe live topic-executor implementation and the production CLI entry point that invoked it.
 - Removed seven unreferenced BGE-M3 intermediate JSON reports whose point-in-time counts no longer matched the live database.
 - Added fail-closed regression coverage for CLI candidate provenance, removed live executor exports, executor-free deep-audit collection, and incomplete-search short-circuiting.
 - `python -m compileall -q auto_research/src`: exit 0 in the project test container.
-- `python -m pytest -q`: 164 passed, 0 failed, 14 pre-existing return-value warnings.
+- `python -m pytest -q`: 167 passed, 0 failed, 14 pre-existing return-value warnings.
 - `openspec validate research-os-v2-topic-discovery-hardening --strict`: valid.
 - `ai-scientist topic status`: exit 0 without constructing or invoking a Codex topic executor.
 

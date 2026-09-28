@@ -19,7 +19,7 @@ from ai_scientist.literature_intelligence.claims import add_lazy_claim
 from ai_scientist.research_store.cli import main as cli_main
 
 
-DATABASE_URL = os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os")
+DATABASE_URL = os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os_test")
 
 
 @pytest.fixture(scope="module")

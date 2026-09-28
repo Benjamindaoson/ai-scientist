@@ -35,7 +35,7 @@ from benchmarks.discovery.problem import ResearchProblem
 from benchmarks.runners.baseline_runner import run_baseline
 
 
-DATABASE_URL = os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os")
+DATABASE_URL = os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os_test")
 
 
 def _task(tmp_path, role=ResearchRole.SCOUT, capability=Capability.PRIOR_SEARCH, task_id="task-1"):
