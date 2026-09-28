@@ -7,4 +7,4 @@
 - [x] Add correctness and failure-injection regression tests.
 - [x] Execute real opportunity, literature, benchmark, and run-until-ready workflows.
 - [x] Generate architecture documentation, reports, and the final Topic Dossier.
-- [ ] Run the full regression suite, commit, push, and verify the remote branch.
+- [x] Run the full regression suite, commit, push, and verify the remote branch.
