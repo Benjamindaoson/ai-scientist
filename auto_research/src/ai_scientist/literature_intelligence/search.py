@@ -29,6 +29,8 @@ class HybridSearch:
         document = func.to_tsvector("english", models.papers.c.title + " " + models.papers.c.abstract)
         keyword_rank: dict[str, int] = {}
         dense_rank: dict[str, int] = {}
+        per_query: dict[str, dict[str, Any]] = {}
+        scores: dict[str, float] = {}
         with self.repository.engine.connect() as connection:
             model = connection.execute(select(models.embedding_models).where(models.embedding_models.c.model_name == self.embedding_provider.model_name).order_by(models.embedding_models.c.created_at.desc()).limit(1)).first()
             vectors = self.embedding_provider.embed_many(variants) if model and hasattr(self.embedding_provider, "embed_many") else None
@@ -39,8 +41,12 @@ class HybridSearch:
                     .where(or_(document.op("@@")(query_expr), func.similarity(models.papers.c.normalized_title, variant.lower()) > 0.1))
                     .order_by((func.ts_rank_cd(document, query_expr) + func.similarity(models.papers.c.normalized_title, variant.lower())).desc()).limit(limit)
                 ).all()
+                query_keyword: dict[str, int] = {}
+                query_dense: dict[str, int] = {}
                 for index, row in enumerate(keyword_rows, 1):
+                    query_keyword[row.paper_id] = index
                     keyword_rank[row.paper_id] = min(index, keyword_rank.get(row.paper_id, index))
+                    scores[row.paper_id] = scores.get(row.paper_id, 0.0) + 1 / (60 + index)
                 if model:
                     vector = vectors[variant_index] if vectors is not None else self.embedding_provider.embed(variant)
                     distance = models.embeddings.c.embedding.cosine_distance(vector)
@@ -52,9 +58,14 @@ class HybridSearch:
                         .group_by(models.paper_versions.c.paper_id).order_by(func.min(distance)).limit(limit)
                     ).all()
                     for index, row in enumerate(dense_rows, 1):
+                        query_dense[row.paper_id] = index
                         dense_rank[row.paper_id] = min(index, dense_rank.get(row.paper_id, index))
+                        scores[row.paper_id] = scores.get(row.paper_id, 0.0) + 1 / (60 + index)
+                per_query[variant] = {
+                    "query_index": variant_index, "keyword_result_count": len(keyword_rows),
+                    "dense_result_count": len(query_dense), "keyword_ranks": query_keyword, "dense_ranks": query_dense,
+                }
         paper_ids = set(keyword_rank) | set(dense_rank)
-        scores = {paper_id: (1 / (60 + keyword_rank[paper_id]) if paper_id in keyword_rank else 0) + (1 / (60 + dense_rank[paper_id]) if paper_id in dense_rank else 0) for paper_id in paper_ids}
         ordered = sorted(scores, key=scores.get, reverse=True)[:limit]
         deep_read = []
         with self.repository.engine.begin() as connection:
@@ -70,8 +81,14 @@ class HybridSearch:
                     retrieval_result_id=_uuid(), retrieval_run_id=run["retrieval_run_id"], paper_id=paper_id, rank=rank,
                     score=scores[paper_id], keyword_rank=keyword_rank.get(paper_id), dense_rank=dense_rank.get(paper_id), source_chunk_ids=source_chunk_ids,
                 ))
-            connection.execute(update(models.retrieval_runs).where(models.retrieval_runs.c.retrieval_run_id == run["retrieval_run_id"]).values(candidate_count=len(ordered), deep_read_set=deep_read))
-        return {"retrieval_run_id": run["retrieval_run_id"], "results": self.repository.retrieval_results(run["retrieval_run_id"]), "source_chunk_ids": [chunk for row in self.repository.retrieval_results(run["retrieval_run_id"]) for chunk in row["source_chunk_ids"]]}
+            connection.execute(update(models.retrieval_runs).where(models.retrieval_runs.c.retrieval_run_id == run["retrieval_run_id"]).values(
+                candidate_count=len(ordered), deep_read_set=deep_read,
+                retrieval_config={"keyword": "postgresql_fts+pg_trgm", "dense": "pgvector_cosine", "fusion": "multi-query-rrf", "rrf_k": 60, "query_executions": per_query},
+            ))
+        results = self.repository.retrieval_results(run["retrieval_run_id"])
+        return {"retrieval_run_id": run["retrieval_run_id"], "results": results,
+                "source_chunk_ids": [chunk for row in results for chunk in row["source_chunk_ids"]],
+                "query_executions": per_query, "executed_query_count": len(per_query)}
 
 
 class NoveltyService:

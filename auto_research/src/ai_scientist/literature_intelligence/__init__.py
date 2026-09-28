@@ -4,11 +4,12 @@ from .repository import LiteratureRepository
 from .search import HybridSearch, NoveltyService
 from .service import CORE_VENUES, CORE_YEARS, LiteratureService
 from .sources import SOURCE_ADAPTERS
-from .production import OpenAlexProductionCorpus, ProductionSyncResult, ResumableEmbeddingIndexer, build_real_known_prior_benchmark, corpus_counts
+from .production import OpenAlexProductionCorpus, ProductionSyncResult, ResumableEmbeddingIndexer, build_real_known_prior_benchmark, classify_coverage, corpus_counts, validate_known_prior_benchmark_v2
 
 __all__ = [
     "BGEEmbeddingProvider", "CORE_VENUES", "CORE_YEARS", "HashingEmbeddingProvider", "HybridSearch",
     "LiteratureRepository", "LiteratureService", "NoveltyService", "SOURCE_ADAPTERS", "initialize_literature_database",
     "OpenAlexProductionCorpus", "ProductionSyncResult", "ResumableEmbeddingIndexer", "corpus_counts",
     "build_real_known_prior_benchmark",
+    "classify_coverage", "validate_known_prior_benchmark_v2",
 ]

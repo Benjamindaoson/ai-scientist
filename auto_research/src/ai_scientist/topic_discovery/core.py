@@ -54,6 +54,12 @@ class CandidateIdea:
     possible_target_venues: tuple[str, ...]
     cheap_falsifier: str
     main_risk: str
+    generation_model: str = ""
+    prompt_hash: str = ""
+    input_signal_ids: tuple[str, ...] = ()
+    literature_context_ids: tuple[str, ...] = ()
+    reasoning_summary: str = ""
+    generation_timestamp: str = ""
 
     @property
     def semantic_fingerprint(self) -> str:
@@ -98,6 +104,7 @@ class NoveltyJudge:
         self.kill_threshold = kill_threshold
 
     def decide(self, idea: CandidateIdea, priors: list[dict], *, search_complete: bool) -> NoveltyDecision:
+        """Cheap lexical screening only; never grants final novelty."""
         for prior in priors:
             content = f"{prior.get('title', '')} {prior.get('abstract', '')} {prior.get('claim_text', '')}"
             question_overlap = claim_coverage(idea.scientific_question, content)
@@ -116,7 +123,27 @@ class NoveltyJudge:
                 required_expansion=("wider_years", "adjacent_fields", "external_corpus", "citation_graph", "exact_claims", "preprints_and_journals"),
                 reason="Documented coverage is insufficient to let novelty survive audit.",
             )
-        return NoveltyDecision(GapDecision.NOVELTY_SURVIVES_AUDIT, reason="No inspected source-backed prior fully covers the core question and claim under the declared protocol.")
+        return NoveltyDecision(GapDecision.NOVELTY_UNCERTAIN, reason="Cheap screening found no obvious overlap; structured full-text audit is required.")
+
+    def deep_decide(self, idea: CandidateIdea, audits: list[dict], *, search_complete: bool) -> NoveltyDecision:
+        dimensions = (
+            "scientific_question_overlap", "claim_overlap", "assumption_overlap", "method_overlap",
+            "measurement_overlap", "setting_overlap", "conclusion_overlap",
+        )
+        if not search_complete or not audits:
+            return NoveltyDecision(GapDecision.NOVELTY_UNCERTAIN, reason="Independent search coverage is incomplete.")
+        for audit in audits:
+            if audit.get("full_text_status") != "AVAILABLE" or not audit.get("source_spans"):
+                return NoveltyDecision(GapDecision.NOVELTY_UNCERTAIN, reason="A dangerous prior lacks legal full text or source spans.")
+            if any(audit.get(name) not in {"TRUE", "FALSE", "PARTIAL", "UNKNOWN"} for name in dimensions):
+                return NoveltyDecision(GapDecision.NOVELTY_UNCERTAIN, reason="Structured scientific-overlap fields are incomplete.")
+            if audit.get("scientific_question_overlap") == "TRUE" and audit.get("claim_overlap") == "TRUE":
+                return NoveltyDecision(GapDecision.KILLED_BY_PRIOR, audit.get("paper_id"), reason="Full-text evidence covers the question and claim.")
+            if audit.get("claim_overlap") == "PARTIAL" and audit.get("measurement_overlap") in {"TRUE", "PARTIAL"}:
+                return NoveltyDecision(GapDecision.REFRAME_REQUIRED, audit.get("paper_id"), reason="A prior covers the broad claim and measurement; a narrower reframe is required.")
+            if any(audit.get(name) == "UNKNOWN" for name in dimensions):
+                return NoveltyDecision(GapDecision.NOVELTY_UNCERTAIN, reason="At least one deep-comparison dimension remains unknown.")
+        return NoveltyDecision(GapDecision.NOVELTY_SURVIVES_AUDIT, reason="Independent structured full-text audits found no prior covering the question and claim.")
 
 
 class IdeaDeduplicator:
@@ -187,26 +214,34 @@ class GateEvidence:
     future_cycle_target: bool = False
     reviewer_attacks: list[str] | None = None
     unresolved_fatal_objections: tuple[str, ...] = ()
+    generation_provenance: dict | None = None
+    deep_audit: list[dict] | None = None
+    coherence: dict | None = None
+    benchmark_status: str | None = None
 
     @classmethod
     def complete(cls) -> "GateEvidence":
-        return cls(
+        evidence = cls(
             scientific_question="Does a measurable relation distinguish two competing scientific explanations?",
             falsifiable_claim="The relation improves failure identification by at least a declared effect under matched controls.",
             scout_retrieval_run_id="scout-run", reviewer_retrieval_run_id="reviewer-run", no_covering_prior=True,
             closest_prior_work=[{"paper_id": "p1", "source_chunk_ids": ["c1"]}], adjacent_field_search=True,
             citation_expansion=True, gap_statement="Existing work does not test the declared relation under matched controls.",
-            significance={"fundamental": True, "surprising": True, "broad": True, "actionable": True},
-            critical_questions=[{"question": str(index), "answer": "resolved", "evidence_refs": ["e1"], "unresolved": []} for index in range(15)],
-            data={"status": "DATA_READY", "source": "public", "access_verified": True},
+            significance={name: {"pass": True, "reason": name, "evidence_refs": ["e1"], "assessor": "reviewer"} for name in ("fundamental", "surprising", "broad", "actionable", "cheap_to_falsify", "hard_to_explain_away", "defensible_novelty", "value_over_cost")},
+            critical_questions=[{"question": str(index), "answer": f"resolved {index}", "evidence_refs": ["e1"], "counterarguments": ["counter"], "confidence_class": "MEDIUM", "unresolved": [], "status": "RESOLVED", "answer_model": "codex", "prompt_hash": f"{index:064x}"} for index in range(15)],
+            data={"status": "DATA_READY", "target_variable": "outcome", "target_variable_available": True, "official_docs": ["doc"], "actual_size": "small", "download_method": "command", "license": "documented", "schema": ["outcome"], "metadata_load": {"status": "SUCCEEDED", "command": "loader", "artifact": "metadata.json"}},
             method={"research_type": "MEASUREMENT", "baselines": ["calibration"], "controls": ["matched success"], "metrics": ["AUROC"], "analysis": "paired bootstrap"},
-            engineering={"status": "READY", "preflight": "loader smoke"},
-            compute={"best_case": {"gpu_hours": 2}, "expected": {"gpu_hours": 8}, "worst_reasonable": {"gpu_hours": 24}, "vram_gb": 24, "storage_gb": 50},
-            time_estimate={"best_days": 7, "expected_days": 14, "p90_days": 21},
-            killer_experiment={"data": "public", "sample_size": 200, "baseline": "calibration", "control": "matched success", "metric": "AUROC", "statistical_test": "paired bootstrap", "runtime_hours": 12, "kill_condition": "no improvement"},
+            engineering={"status": "READY", "command": "python smoke.py", "artifact": "smoke.json", "metric_computed": "AUROC"},
+            compute={"candidate_id": "candidate", "assumptions": ["sample count"], "calculation": "samples/rate", "best_case": {"gpu_hours": 2}, "expected": {"gpu_hours": 8}, "worst_reasonable": {"gpu_hours": 24}, "vram_gb": 24, "storage_gb": 50},
+            time_estimate={"candidate_id": "candidate", "assumptions": ["loader ready"], "calculation": "sum tasks", "best_days": 7, "expected_days": 14, "p90_days": 21},
+            killer_experiment={"candidate_id": "candidate", "data": "public", "sample_size": 200, "baseline": "calibration", "control": "matched success", "metric": "AUROC", "statistical_test": "paired bootstrap", "runtime_hours": 12, "kill_condition": "no improvement"},
             venue_fit={"primary": "ICLR", "secondary": "CoRL", "workshop": "robot learning", "scope_evidence": "official CFP"},
             future_cycle_target=True, reviewer_attacks=[f"attack {index}" for index in range(5)],
+            generation_provenance={"generation_model": "codex", "prompt_hash": "a" * 64, "input_signal_ids": ["s1"], "literature_context_ids": ["p1"], "reasoning_summary": "evidence-backed", "generation_timestamp": "2026-01-01T00:00:00Z"},
+            deep_audit=[{"paper_version_id": "v1", "full_text_status": "AVAILABLE", "source_chunk_ids": ["c1"], "source_spans": [{"section": "method", "text": "evidence"}], "scientific_question_overlap": "FALSE", "claim_overlap": "FALSE", "assumption_overlap": "PARTIAL", "method_overlap": "PARTIAL", "measurement_overlap": "FALSE", "setting_overlap": "PARTIAL", "conclusion_overlap": "FALSE"}],
+            coherence={"pass": True, "question_construct": "relation", "claim_construct": "relation", "primary_measurement": "relation", "outcome": "failure", "baseline": "baseline"},
         )
+        return evidence
 
 
 @dataclass(frozen=True)
@@ -222,6 +257,32 @@ class TopicReadinessGate:
         self.now = now or (lambda: datetime.now(timezone.utc))
 
     def evaluate(self, evidence: GateEvidence) -> TopicVerdict:
+        significance_keys = {"fundamental", "surprising", "broad", "actionable", "cheap_to_falsify", "hard_to_explain_away", "defensible_novelty", "value_over_cost"}
+        significance_ok = bool(evidence.significance and significance_keys <= set(evidence.significance) and all(
+            isinstance(evidence.significance[name], dict)
+            and evidence.significance[name].get("pass") is True
+            and evidence.significance[name].get("reason")
+            and evidence.significance[name].get("evidence_refs")
+            and evidence.significance[name].get("assessor") == "reviewer"
+            for name in significance_keys
+        ))
+        critical_ok = bool(evidence.critical_questions and len(evidence.critical_questions) >= 15 and all(
+            row.get("status") == "RESOLVED" and row.get("answer") and row.get("evidence_refs")
+            and row.get("counterarguments") and row.get("confidence_class") in {"LOW", "MEDIUM", "HIGH"}
+            and not row.get("unresolved") and row.get("answer_model") and row.get("prompt_hash")
+            for row in evidence.critical_questions
+        ))
+        data_ok = bool(evidence.data and evidence.data.get("status") == "DATA_READY"
+                       and evidence.data.get("target_variable_available") is True
+                       and evidence.data.get("target_variable") and evidence.data.get("schema")
+                       and evidence.data.get("metadata_load", {}).get("status") == "SUCCEEDED"
+                       and evidence.data.get("metadata_load", {}).get("command")
+                       and evidence.data.get("metadata_load", {}).get("artifact"))
+        provenance_ok = bool(evidence.generation_provenance and evidence.generation_provenance.get("generation_model") not in {None, "", "static", "template"}
+                             and evidence.generation_provenance.get("prompt_hash") and evidence.generation_provenance.get("input_signal_ids")
+                             and evidence.generation_provenance.get("literature_context_ids") and evidence.generation_provenance.get("reasoning_summary")
+                             and evidence.generation_provenance.get("generation_timestamp"))
+        deep_audit_ok = bool(evidence.deep_audit and all(row.get("full_text_status") == "AVAILABLE" and row.get("source_spans") for row in evidence.deep_audit))
         required = {
             "scientific_question": bool(evidence.scientific_question and "?" in evidence.scientific_question),
             "falsifiable_claim": bool(evidence.falsifiable_claim),
@@ -233,14 +294,17 @@ class TopicReadinessGate:
             "adjacent_field_search": evidence.adjacent_field_search,
             "citation_expansion": evidence.citation_expansion,
             "gap_statement": bool(evidence.gap_statement),
-            "significance": bool(evidence.significance and all(value is True or (isinstance(value, dict) and value.get("pass") is True) for value in evidence.significance.values())),
-            "critical_questions": bool(evidence.critical_questions and len(evidence.critical_questions) >= 15 and not any(row.get("unresolved") for row in evidence.critical_questions)),
-            "data": bool(evidence.data and evidence.data.get("status") in {"DATA_READY", "DATA_PARTIAL"}),
+            "generation_provenance": provenance_ok,
+            "deep_audit": deep_audit_ok,
+            "significance": significance_ok,
+            "critical_questions": critical_ok,
+            "data": data_ok,
             "method": bool(evidence.method and evidence.method.get("baselines") and evidence.method.get("controls") and evidence.method.get("metrics")),
-            "engineering": bool(evidence.engineering and evidence.engineering.get("status") == "READY"),
-            "compute": bool(evidence.compute and all(key in evidence.compute for key in ("best_case", "expected", "worst_reasonable"))),
-            "time_estimate": bool(evidence.time_estimate and evidence.time_estimate.get("p90_days")),
-            "killer_experiment": bool(evidence.killer_experiment and evidence.killer_experiment.get("kill_condition")),
+            "engineering": bool(evidence.engineering and evidence.engineering.get("status") == "READY" and evidence.engineering.get("command") and evidence.engineering.get("artifact") and evidence.engineering.get("metric_computed")),
+            "compute": bool(evidence.compute and evidence.compute.get("candidate_id") and evidence.compute.get("assumptions") and evidence.compute.get("calculation") and all(key in evidence.compute for key in ("best_case", "expected", "worst_reasonable"))),
+            "time_estimate": bool(evidence.time_estimate and evidence.time_estimate.get("candidate_id") and evidence.time_estimate.get("assumptions") and evidence.time_estimate.get("calculation") and evidence.time_estimate.get("p90_days")),
+            "killer_experiment": bool(evidence.killer_experiment and evidence.killer_experiment.get("candidate_id") and evidence.killer_experiment.get("kill_condition")),
+            "coherence": bool(evidence.coherence and evidence.coherence.get("pass") is True),
             "venue_fit": bool(evidence.venue_fit and evidence.venue_fit.get("primary") and evidence.venue_fit.get("scope_evidence")),
             "reviewer_attacks": bool(evidence.reviewer_attacks and len(evidence.reviewer_attacks) >= 5),
             "no_unresolved_fatal": not evidence.unresolved_fatal_objections,
@@ -273,6 +337,9 @@ class DiscoveryResult:
     ideas_killed: int
     selected_idea: CandidateIdea | None
     gate_evidence: GateEvidence | None
+    candidates_screened: int = 0
+    candidates_deep_audited: int = 0
+    ready_candidates: tuple[CandidateIdea, ...] = ()
 
 
 class DiscoveryLoop:
@@ -284,7 +351,7 @@ class DiscoveryLoop:
         self.max_waves = max_waves
 
     def run_until_topic_ready(self) -> DiscoveryResult:
-        generated = killed = wave = 0
+        generated = killed = screened = deep_audited = wave = 0
         while self.max_waves is None or wave < self.max_waves:
             self.pipeline.sync()
             self.pipeline.signals()
@@ -294,13 +361,31 @@ class DiscoveryLoop:
             if len(candidates) < self.program.candidate_batch_size:
                 raise ValueError("each discovery wave must contain at least 20 candidates")
             generated += len(candidates)
+            survivors = []
             for candidate in candidates:
+                screened += 1
+                if hasattr(self.pipeline, "cheap_screen") and not self.pipeline.cheap_screen(candidate):
+                    killed += 1
+                    continue
+                survivors.append(candidate)
+            if not survivors:
+                continue
+            ranked = self.pipeline.rank_survivors(survivors) if hasattr(self.pipeline, "rank_survivors") else survivors
+            audited = ranked[:max(5, min(len(ranked), 5))]
+            ready: list[tuple[CandidateIdea, GateEvidence]] = []
+            for candidate in audited:
+                deep_audited += 1
                 evidence = self.pipeline.evaluate(candidate)
                 if evidence is None:
                     killed += 1
                     continue
                 verdict = TopicReadinessGate().evaluate(evidence)
                 if verdict.ready:
-                    return DiscoveryResult("TOPIC_READY", wave, generated, killed, candidate, evidence)
-                killed += 1
-        return DiscoveryResult("NO_TOPIC_READY_WITHIN_LIMIT", wave, generated, killed, None, None)
+                    ready.append((candidate, evidence))
+                else:
+                    killed += 1
+            if ready:
+                selected = self.pipeline.select(ready) if hasattr(self.pipeline, "select") else ready[0]
+                candidate, evidence = selected
+                return DiscoveryResult("TOPIC_READY", wave, generated, killed, candidate, evidence, screened, deep_audited, tuple(item[0] for item in ready))
+        return DiscoveryResult("NO_TOPIC_READY_WITHIN_LIMIT", wave, generated, killed, None, None, screened, deep_audited)

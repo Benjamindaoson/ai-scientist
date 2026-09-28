@@ -81,6 +81,7 @@ def _parser() -> argparse.ArgumentParser:
         discovery.add_argument("--embedding-provider", choices=("bge-m3", "hashing"), default="bge-m3")
         discovery.add_argument("--max-waves", type=int, default=0)
         discovery.add_argument("--no-live-sync", action="store_true")
+        discovery.add_argument("--workspace", default=".")
     topic_commands.add_parser("status")
     topic_commands.add_parser("list")
     topic_reports = topic_commands.add_parser("reports")
@@ -185,11 +186,15 @@ def main(argv: list[str] | None = None) -> int:
     if args.group == "topic":
         from ai_scientist.literature_intelligence import BGEEmbeddingProvider, HashingEmbeddingProvider, LiteratureRepository, initialize_literature_database
         from ai_scientist.opportunity_intelligence import OpportunityRepository, initialize_opportunity_database
-        from ai_scientist.topic_discovery import ProductionTopicPipeline, TopicDiscoveryService, TopicReportWriter
+        from ai_scientist.topic_discovery import CodexCandidateGenerator, ProductionTopicPipeline, TopicDiscoveryService, TopicReportWriter
+        from ai_scientist.research_os.agents import CodexExecutor
+        from ai_scientist.research_os.config import ResearchOSConfig
         initialize_opportunity_database(engine)
         initialize_literature_database(engine)
         provider = BGEEmbeddingProvider() if getattr(args, "embedding_provider", "hashing") == "bge-m3" else HashingEmbeddingProvider()
-        service = TopicDiscoveryService(ProductionTopicPipeline(OpportunityRepository(engine), LiteratureRepository(engine), provider, live_sync=not getattr(args, "no_live_sync", False)))
+        config = ResearchOSConfig.from_env()
+        generator = CodexCandidateGenerator(CodexExecutor(config.codex_executable, timeout_seconds=config.codex_timeout_seconds), getattr(args, "workspace", "."))
+        service = TopicDiscoveryService(ProductionTopicPipeline(OpportunityRepository(engine), LiteratureRepository(engine), provider, candidate_generator=generator, live_sync=not getattr(args, "no_live_sync", False)))
         if args.command in {"discover", "run-until-ready"}:
             max_waves = args.max_waves or (1 if args.command == "discover" else None)
             _json(service.run_until_ready(max_waves=max_waves))

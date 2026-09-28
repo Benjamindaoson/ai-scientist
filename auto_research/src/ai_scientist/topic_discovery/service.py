@@ -18,6 +18,7 @@ from ai_scientist.opportunity_intelligence import OFFICIAL_SOURCES, OpportunityR
 from ai_scientist.opportunity_intelligence import models as opportunity_models
 from ai_scientist.opportunity_intelligence.repository import new_id
 from ai_scientist.research_store.repository import canonical_hash
+from ai_scientist.research_os.agents import AgentExecutor, Capability, ResearchRole, TaskSpec
 
 from .core import (
     CandidateIdea, DiscoveryLoop, GapDecision, GateEvidence, IdeaDeduplicator, NoveltyJudge,
@@ -25,28 +26,66 @@ from .core import (
 )
 
 
-LENSES = (
-    ("measurement", "whether offline prediction error identifies closed-loop intervention failure", "Action-conditioned uncertainty improves intervention-failure identification over open-loop likelihood under matched task success."),
-    ("identification", "whether identical task success hides different recovery potential", "Recovery-state observability separates policies with matched aggregate success but different recoverability."),
-    ("reversal", "when an overall VLA ranking reverses under controllable perturbation", "A pre-specified perturbation reverses the aggregate policy ranking after controlling task difficulty."),
-    ("dynamic invariance", "whether static visual invariance implies action invariance", "Static representation invariance fails to predict action consistency under temporally matched changes."),
-    ("calibration", "whether token confidence predicts physically consequential action error", "Action-risk calibration dominates token confidence for predicting physically consequential errors."),
-    ("causal", "whether world-model disagreement causes conservative action selection", "Intervening on model disagreement changes action selection after matched observation uncertainty."),
-    ("deployment", "whether offline improvement transfers to closed-loop correction", "Offline gains do not monotonically predict closed-loop correction efficiency."),
-    ("hidden potential", "whether current performance identifies adaptation potential", "Matched current performance contains separable adaptation-potential states measurable before fine-tuning."),
-    ("evaluation", "whether common success metrics conflate planning and control failure", "Failure-decomposed metrics change conclusions relative to aggregate task success."),
-    ("robustness", "whether VLA robustness is governed by temporal rather than frame perturbations", "Temporally coherent perturbations expose failures missed by frame-independent corruption tests."),
-    ("memory", "whether persistent memory helps because of state identification rather than capacity", "Memory benefits vanish when hidden state is experimentally controlled."),
-    ("transfer", "whether language-side calibration transfers to embodied action risk", "Language calibration metrics fail to order embodied action risk under matched semantic uncertainty."),
-    ("control", "whether learned world-model uncertainty predicts control instability", "Uncertainty predicts instability beyond one-step error and state-distribution shift."),
-    ("multimodal", "whether modality agreement identifies grounded action competence", "Cross-modal agreement is insufficient to identify grounded action competence under counterfactual instructions."),
-    ("benchmark", "whether benchmark averages conceal compositional capability failures", "Compositional strata yield stable capability reversals hidden by benchmark averages."),
-    ("data", "whether trajectory diversity or volume determines downstream adaptation", "Coverage diversity predicts adaptation better than trajectory count at matched compute."),
-    ("architecture", "where uncertainty estimation must live to affect safe action", "Policy-level uncertainty enables interventions that representation-level uncertainty cannot identify."),
-    ("generalization", "whether embodiment transfer depends on causal state factors", "Transfer follows causal state-factor coverage rather than visual similarity."),
-    ("reviewer pain", "whether reported generalization survives seed and task-family decomposition", "Reported generalization is not stable across pre-declared task families and seeds."),
-    ("new capability", "whether new public robot corpora make intervention prediction identifiable", "Cross-dataset intervention prediction is identifiable with public trajectory metadata and matched controls."),
+DISCOVERY_HEURISTICS = (
+    "measurement and identification", "contradictions and negative results", "new dataset affordances",
+    "benchmark changes", "reviewer pain points", "citation-neighborhood gaps", "cross-domain transfer",
 )
+
+KNOWN_DANGEROUS_VLA_PRIORS = (
+    {"title": "Failure Prediction at Runtime for Generative Robot Policies", "arxiv": "2510.09459"},
+    {"title": "Perturbation-Based Epistemic Uncertainty for Failure Detection in Vision-Language-Action Models", "arxiv": "2606.20754"},
+    {"title": "SAFE: Multitask Failure Detection for Vision-Language-Action Models", "arxiv": "2506.09937"},
+    {"title": "Uncertainty Quantification for Flow-Based Vision-Language-Action Models", "arxiv": None},
+    {"title": "Ask Before You Act: Token-Level Uncertainty for Intervention in Vision-Language-Action Models", "arxiv": None},
+)
+
+
+def validate_dataset_preflight(evidence: dict[str, Any]) -> dict[str, Any]:
+    required = ("official_docs", "actual_size", "download_method", "license", "schema", "target_variable", "target_variable_available", "metadata_load")
+    missing = [name for name in required if not evidence.get(name)]
+    load = evidence.get("metadata_load") or {}
+    if evidence.get("target_variable_available") is not True:
+        status = "DATA_LABEL_GAP"
+    elif missing or load.get("status") != "SUCCEEDED" or not load.get("artifact"):
+        status = "DATA_PARTIAL"
+    else:
+        status = "DATA_READY"
+    return {**evidence, "status": status, "missing": missing}
+
+
+class CodexCandidateGenerator:
+    def __init__(self, executor: AgentExecutor, workspace: str | Path = "."):
+        self.executor = executor
+        self.workspace = Path(workspace).resolve()
+
+    def generate(self, *, minimum: int, strategy: str, signals: list[dict], literature_context: list[dict], killed_memory: list[dict]) -> list[dict]:
+        task_id = f"topic-generation-{uuid.uuid4().hex[:12]}"
+        output = self.workspace / "artifacts" / "topic_discovery" / f"{task_id}.json"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        context = {
+            "strategy": strategy, "minimum_candidates": minimum, "heuristics": list(DISCOVERY_HEURISTICS),
+            "signals": signals[:40], "recent_literature": literature_context[:80], "killed_idea_memory": killed_memory[:100],
+            "required_output_path": str(output),
+            "candidate_fields": ["title", "current_belief", "proposed_challenge", "scientific_question", "falsifiable_claim", "why_now", "input_signal_ids", "literature_context_ids", "reasoning_summary", "expected_contribution_type", "possible_target_venues", "cheap_falsifier", "main_risk"],
+            "constraints": ["Do not copy examples or use static templates", "Each question and claim must be coherent and falsifiable", "Use only supplied signal and literature IDs", "Write a JSON array with at least minimum_candidates records"],
+        }
+        prompt_hash = hashlib.sha256(json.dumps(context, sort_keys=True, default=str).encode()).hexdigest()
+        result = self.executor.run(TaskSpec(
+            task_id=task_id, role=ResearchRole.SCOUT, capability=Capability.DISCOVER_CANDIDATES,
+            objective=f"Generate at least {minimum} distinct research candidates and write the JSON array to {output}",
+            workspace=str(self.workspace), input_refs=[str(output.parent)],
+            acceptance_criteria=["All candidates use supplied evidence IDs", "No static template candidates", "Output is valid JSON at required_output_path"],
+            context=context,
+        ))
+        if result.status != "SUCCEEDED" or not output.is_file():
+            raise RuntimeError(f"Codex candidate generation failed: {result.error_code or result.summary}")
+        rows = json.loads(output.read_text(encoding="utf-8"))
+        if not isinstance(rows, list) or len(rows) < minimum:
+            raise ValueError("Codex candidate generation returned fewer than the required candidates")
+        timestamp = datetime.now(timezone.utc).isoformat()
+        for row in rows:
+            row.update(generation_model="codex-cli", prompt_hash=prompt_hash, generation_timestamp=timestamp)
+        return rows
 
 
 class ExternalPriorExpander:
@@ -54,24 +93,32 @@ class ExternalPriorExpander:
         self.literature = literature
         self.client = client or httpx.Client(timeout=30, follow_redirects=True, headers={"User-Agent": "ai-scientist/0.1"})
 
-    def expand(self, query: str, limit: int = 20) -> dict[str, Any]:
-        last_error: Exception | None = None
+    def expand(self, queries: str | list[str], limit: int = 20) -> dict[str, Any]:
+        matrix = [queries] if isinstance(queries, str) else list(dict.fromkeys(queries))
+        probes = {
+            "crossref": ("https://api.crossref.org/works", {"query.bibliographic": matrix[0], "filter": "from-pub-date:2022-01-01", "rows": limit, "select": "DOI,title,author,abstract,published,URL,container-title"}),
+            "openalex": ("https://api.openalex.org/works", {"search": matrix[min(1, len(matrix)-1)], "per-page": limit}),
+            "semantic_scholar": ("https://api.semanticscholar.org/graph/v1/paper/search", {"query": matrix[min(2, len(matrix)-1)], "limit": limit, "fields": "title,abstract,year,externalIds,url"}),
+            "arxiv": ("https://export.arxiv.org/api/query", {"search_query": f"all:{matrix[min(3, len(matrix)-1)]}", "max_results": limit}),
+            "openreview": ("https://api2.openreview.net/notes/search", {"query": matrix[min(4, len(matrix)-1)], "limit": limit}),
+        }
+        source_results: dict[str, dict[str, Any]] = {}
         items = []
-        for attempt in range(3):
+        for source, (url, params) in probes.items():
             try:
-                response = self.client.get("https://api.crossref.org/works", params={
-                    "query.bibliographic": query, "filter": "from-pub-date:2022-01-01", "rows": limit,
-                    "select": "DOI,title,author,abstract,published,URL,container-title",
-                })
+                response = self.client.get(url, params=params)
                 response.raise_for_status()
-                items = response.json()["message"]["items"]
-                break
+                if source == "crossref":
+                    items = response.json()["message"]["items"]
+                    count = len(items)
+                elif "json" in response.headers.get("content-type", ""):
+                    payload = response.json()
+                    count = len(payload.get("results") or payload.get("data") or payload.get("notes") or [])
+                else:
+                    count = response.text.count("<entry>")
+                source_results[source] = {"status": "COMPLETE", "query": params, "result_count": count}
             except Exception as exc:
-                last_error = exc
-                if attempt < 2:
-                    time.sleep(2 ** attempt)
-        else:
-            return {"status": "FAILED", "source": "crossref", "ingested": 0, "attempts": 3, "error": str(last_error)}
+                source_results[source] = {"status": "FAILED", "query": params, "result_count": 0, "error": str(exc)}
         ingested = 0
         for item in items:
             title = " ".join(item.get("title") or [])
@@ -93,11 +140,13 @@ class ExternalPriorExpander:
                 except ValueError:
                     pass
             ingested += 1
-        return {"status": "COMPLETE", "source": "crossref", "ingested": ingested, "attempts": attempt + 1}
+        return {"status": "COMPLETE" if any(row["status"] == "COMPLETE" for row in source_results.values()) else "FAILED", "sources": source_results, "ingested": ingested}
 
 
 class ProductionTopicPipeline:
-    def __init__(self, opportunity_repository: OpportunityRepository, literature_repository: LiteratureRepository, embedding_provider, *, output_root: str | Path = "reports/topic_discovery", live_sync: bool = True):
+    def __init__(self, opportunity_repository: OpportunityRepository, literature_repository: LiteratureRepository, embedding_provider, *, candidate_generator: CodexCandidateGenerator | None = None, output_root: str | Path = "reports/topic_discovery_hardening", live_sync: bool = True):
+        if candidate_generator is None:
+            raise ValueError("production requires an executor-backed candidate generator")
         self.opportunity_repository = opportunity_repository
         self.opportunities = OpportunityService(opportunity_repository)
         self.literature_repository = literature_repository
@@ -110,9 +159,12 @@ class ProductionTopicPipeline:
         self.output_root = Path(output_root)
         self.output_root.mkdir(parents=True, exist_ok=True)
         self.live_sync = live_sync
+        self.candidate_generator = candidate_generator
         self._signals: list[dict] = []
         self._wave = 0
         self.last_dossier: dict[str, Any] | None = None
+        self._cheap_scores: dict[str, float] = {}
+        self._evaluations: dict[str, tuple[GateEvidence, dict, dict]] = {}
 
     def sync(self):
         if self.live_sync and not self.opportunity_repository.list_opportunities():
@@ -125,23 +177,25 @@ class ProductionTopicPipeline:
     def candidates(self, minimum: int, strategy: str) -> list[CandidateIdea]:
         self._wave += 1
         signals = self._signals or [{"signal_id": "no-current-signal", "title": "Recent literature", "evidence_refs": []}]
+        with self.literature_repository.engine.connect() as connection:
+            literature_context = [dict(row._mapping) for row in connection.execute(
+                select(literature_models.papers.c.paper_id, literature_models.papers.c.title, literature_models.papers.c.abstract, literature_models.papers.c.publication_year)
+                .order_by(literature_models.papers.c.publication_year.desc().nulls_last()).limit(80)
+            )]
+        generated = self.candidate_generator.generate(
+            minimum=minimum, strategy=strategy, signals=signals, literature_context=literature_context,
+            killed_memory=self.opportunity_repository.list_killed_lineage(),
+        )
         candidates = []
-        for index in range(minimum):
-            lens, relation, claim = LENSES[(index + self._wave - 1) % len(LENSES)]
-            question_relation = relation.removeprefix("whether ")
-            signal = signals[index % len(signals)]
-            domain = ResearchProgram.production_default().domains[index % len(ResearchProgram.production_default().domains)]
+        for row in generated:
             idea_id = str(uuid.uuid4())
             candidate = CandidateIdea(
-                idea_id=idea_id, title=f"{lens.title()} audit for {domain}",
-                current_belief=f"Current {domain} evaluations treat aggregate task performance as sufficient evidence.",
-                proposed_challenge=f"Test {relation}.",
-                scientific_question=f"In {domain}, is it true that {question_relation}?",
-                falsifiable_claim=claim,
-                why_now=f"The current signal '{signal['title']}' and public robot datasets make a cheap falsifier possible; the signal is not novelty evidence.",
-                origin_signal_ids=(signal["signal_id"],), expected_contribution_type="MEASUREMENT",
-                possible_target_venues=("ICLR", "CoRL", "NeurIPS"), cheap_falsifier="Replay 200 public trajectories with matched controls in 24–48 hours.",
-                main_risk="A dangerous prior or simpler calibration explanation covers the relation.",
+                idea_id=idea_id, title=row["title"], current_belief=row["current_belief"], proposed_challenge=row["proposed_challenge"],
+                scientific_question=row["scientific_question"], falsifiable_claim=row["falsifiable_claim"], why_now=row["why_now"],
+                origin_signal_ids=tuple(row["input_signal_ids"]), expected_contribution_type=row["expected_contribution_type"],
+                possible_target_venues=tuple(row["possible_target_venues"]), cheap_falsifier=row["cheap_falsifier"], main_risk=row["main_risk"],
+                generation_model=row["generation_model"], prompt_hash=row["prompt_hash"], input_signal_ids=tuple(row["input_signal_ids"]),
+                literature_context_ids=tuple(row["literature_context_ids"]), reasoning_summary=row["reasoning_summary"], generation_timestamp=row["generation_timestamp"],
             )
             if self.dedup.is_duplicate(candidate):
                 continue
@@ -158,30 +212,7 @@ class ProductionTopicPipeline:
                 )
             candidates.append(candidate)
         if len(candidates) < minimum:
-            # Generate a materially new wave suffix rather than silently resurrecting killed questions.
-            while len(candidates) < minimum:
-                index = len(candidates)
-                base = LENSES[index % len(LENSES)]
-                candidate = CandidateIdea(
-                    idea_id=str(uuid.uuid4()), title=f"Cross-domain {base[0]} audit wave {self._wave}-{index}",
-                    current_belief="Adjacent-domain evaluation principles transfer unchanged to embodied systems.",
-                    proposed_challenge=f"Test a cross-domain boundary for {base[1]}.",
-                    scientific_question=f"Across control and embodied AI, {base[1]} under wave-specific condition {self._wave}-{index}?",
-                    falsifiable_claim=base[2], why_now="New opportunity and literature snapshots changed the search context.",
-                    origin_signal_ids=(signals[index % len(signals)]["signal_id"],), expected_contribution_type="MEASUREMENT",
-                    possible_target_venues=("ICLR", "CoRL"), cheap_falsifier="200-trajectory paired replay.", main_risk="Cross-domain prior coverage.",
-                )
-                self.opportunity_repository.insert(
-                    opportunity_models.topic_candidates, candidate_row_id=new_id(), idea_id=candidate.idea_id, wave=self._wave,
-                    strategy=strategy, payload=asdict(candidate), state="CANDIDATE",
-                )
-                self.opportunity_repository.insert(
-                    opportunity_models.idea_lineage, idea_lineage_id=new_id(), idea_id=candidate.idea_id, parent_idea_id=None,
-                    generation=0, origin_signal_ids=list(candidate.origin_signal_ids), normalized_question=normalize(candidate.scientific_question),
-                    semantic_fingerprint=candidate.semantic_fingerprint, reframe_reason=None, kill_reason=None, killing_papers=[],
-                    failed_gate=None, status="CANDIDATE", material_change_refs=[f"wave:{self._wave}", f"strategy:{strategy}"],
-                )
-                candidates.append(candidate)
+            raise ValueError("executor-generated wave was reduced below 20 by killed-memory deduplication; generate a new wave")
         return candidates
 
     @staticmethod
@@ -195,18 +226,44 @@ class ProductionTopicPipeline:
     def _audit(self, candidate: CandidateIdea, role: str, *, external: bool) -> tuple[dict, Any]:
         matrix = self._query_matrix(candidate, role)
         if external:
-            self.external.expand(matrix[0], limit=20)
+            external_result = self.external.expand(matrix, limit=20)
+        else:
+            external_result = {"status": "NOT_REQUESTED", "sources": {}}
         result = self.search.search(matrix[0], actor_role=role, idea_ref=candidate.idea_id, query_variants=matrix, filters={"years": [2022, 2026], "external_expansion": external, "adjacent_domains": True}, limit=50)
+        result["external_expansion"] = external_result
         priors = result["results"]
         graph_coverage = self._expand_evidence_graph(priors[:10])
         result["citation_expansion"] = graph_coverage
-        decision = self.judge.decide(candidate, priors, search_complete=len(priors) >= 20 and sum(bool(row.get("source_chunk_ids")) for row in priors) >= 5)
+        decision = self.judge.decide(candidate, priors, search_complete=False)
         self.opportunity_repository.insert(
             opportunity_models.novelty_audits, novelty_audit_id=new_id(), idea_id=candidate.idea_id, actor_role=role,
             retrieval_run_id=result["retrieval_run_id"], decision=decision.decision.value, search_matrix=matrix,
             dangerous_priors=priors[:10], coverage={"years": [2022, 2026], "core": True, "external": external, "adjacent": True, "citation_expansion": graph_coverage},
         )
         return result, decision
+
+    def cheap_screen(self, candidate: CandidateIdea) -> bool:
+        variants = self._query_matrix(candidate, "scout")[:2]
+        result = self.search.search(variants[0], actor_role="scout-cheap", idea_ref=candidate.idea_id, query_variants=variants, filters={"stage": "cheap"}, limit=20)
+        decision = self.judge.decide(candidate, result["results"], search_complete=False)
+        self._cheap_scores[candidate.idea_id] = sum(row.get("score", 0.0) for row in result["results"][:5])
+        if decision.decision == GapDecision.KILLED_BY_PRIOR:
+            self._kill(candidate, decision, "CHEAP_NOVELTY_SCREEN")
+            return False
+        return True
+
+    def rank_survivors(self, candidates: list[CandidateIdea]) -> list[CandidateIdea]:
+        return sorted(candidates, key=lambda item: (self._cheap_scores.get(item.idea_id, 0.0), item.idea_id))
+
+    def select(self, ready: list[tuple[CandidateIdea, GateEvidence]]) -> tuple[CandidateIdea, GateEvidence]:
+        ranked = sorted(ready, key=lambda item: (
+            sum(bool(value.get("pass")) for value in (item[1].significance or {}).values() if isinstance(value, dict)),
+            -(item[1].compute or {}).get("expected", {}).get("gpu_hours", 10**9),
+        ), reverse=True)
+        candidate, evidence = ranked[0]
+        cached = self._evaluations[candidate.idea_id]
+        self._save_dossier(candidate, evidence, cached[1], cached[2])
+        return candidate, evidence
 
     def _expand_evidence_graph(self, priors: list[dict[str, Any]]) -> dict[str, Any]:
         expanded: set[str] = set()
@@ -218,31 +275,85 @@ class ProductionTopicPipeline:
             expanded |= self.literature.same_author_papers(paper_id)
         return {"performed": bool(priors), "seed_papers": len(priors), "expanded_paper_ids": sorted(expanded)}
 
+    def _structured_deep_audit(self, priors: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        audits = []
+        with self.literature_repository.engine.connect() as connection:
+            for prior in priors[:10]:
+                rows = connection.execute(
+                    select(
+                        literature_models.paper_versions.c.paper_version_id,
+                        literature_models.artifacts.c.license,
+                        literature_models.sections.c.section_type,
+                        literature_models.sections.c.heading,
+                        literature_models.chunks.c.chunk_id,
+                        literature_models.chunks.c.content,
+                    )
+                    .select_from(literature_models.paper_versions)
+                    .join(literature_models.documents, literature_models.documents.c.paper_version_id == literature_models.paper_versions.c.paper_version_id)
+                    .join(literature_models.artifacts, literature_models.artifacts.c.literature_artifact_id == literature_models.documents.c.literature_artifact_id)
+                    .join(literature_models.sections, literature_models.sections.c.document_id == literature_models.documents.c.document_id)
+                    .join(literature_models.chunks, literature_models.chunks.c.section_id == literature_models.sections.c.section_id)
+                    .where(literature_models.paper_versions.c.paper_id == prior["paper_id"])
+                    .order_by(literature_models.sections.c.ordinal, literature_models.chunks.c.ordinal).limit(30)
+                ).all()
+                license_text = " ".join(str(row.license or "") for row in rows).lower()
+                section_types = {str(row.section_type).lower() for row in rows}
+                abstract_only = not rows or "abstract" in license_text or section_types <= {"abstract", "unknown"}
+                spans = [] if abstract_only else [
+                    {"section": row.heading or row.section_type, "chunk_id": row.chunk_id, "text": row.content[:600]}
+                    for row in rows if str(row.section_type).lower() in {"abstract", "introduction", "related_work", "method", "experiments", "conclusion"}
+                ]
+                audits.append({
+                    "paper_id": prior["paper_id"], "paper_version_id": rows[0].paper_version_id if rows else None,
+                    "title": prior.get("title"), "full_text_status": "AVAILABLE" if spans else "UNAVAILABLE",
+                    "source_chunk_ids": [span["chunk_id"] for span in spans], "source_spans": spans,
+                    "scientific_question_overlap": "UNKNOWN", "claim_overlap": "UNKNOWN", "assumption_overlap": "UNKNOWN",
+                    "method_overlap": "UNKNOWN", "measurement_overlap": "UNKNOWN", "setting_overlap": "UNKNOWN", "conclusion_overlap": "UNKNOWN",
+                    "review_status": "UNRESOLVED: independent reviewer assessment required" if spans else "FULL_TEXT_UNAVAILABLE",
+                })
+        return audits
+
+    def _mark_state(self, candidate: CandidateIdea, state: str, gate: str, reason: str) -> None:
+        with self.opportunity_repository.engine.begin() as connection:
+            connection.execute(update(opportunity_models.topic_candidates).where(
+                opportunity_models.topic_candidates.c.idea_id == candidate.idea_id
+            ).values(state=state))
+            connection.execute(update(opportunity_models.idea_lineage).where(
+                opportunity_models.idea_lineage.c.idea_id == candidate.idea_id
+            ).values(status=state, failed_gate=gate, kill_reason=reason))
+
     def evaluate(self, candidate: CandidateIdea) -> GateEvidence | None:
         scout, scout_decision = self._audit(candidate, "scout", external=False)
         if scout_decision.decision == GapDecision.KILLED_BY_PRIOR:
             self._kill(candidate, scout_decision, "SCOUT_GAP_AUDIT")
             return None
-        reviewer, reviewer_decision = self._audit(candidate, "reviewer", external=True)
-        if reviewer_decision.decision == GapDecision.NOVELTY_UNCERTAIN:
-            expanded_matrix = self._query_matrix(candidate, "reviewer") + [f"journal workshop thesis {candidate.falsifiable_claim}", f"same authors citations {candidate.scientific_question}"]
-            reviewer = self.search.search(expanded_matrix[0], actor_role="reviewer", idea_ref=candidate.idea_id, query_variants=expanded_matrix, filters={"expanded": True, "external": True}, limit=50)
-            reviewer["citation_expansion"] = self._expand_evidence_graph(reviewer["results"][:10])
-            reviewer_decision = self.judge.decide(candidate, reviewer["results"], search_complete=len(reviewer["results"]) >= 20 and sum(bool(row.get("source_chunk_ids")) for row in reviewer["results"]) >= 5)
-            self.opportunity_repository.insert(
-                opportunity_models.novelty_audits, novelty_audit_id=new_id(), idea_id=candidate.idea_id,
-                actor_role="reviewer", retrieval_run_id=reviewer["retrieval_run_id"],
-                decision=reviewer_decision.decision.value, search_matrix=expanded_matrix,
-                dangerous_priors=reviewer["results"][:10],
-                coverage={"years": [2022, 2026], "core": True, "external": True, "adjacent": True, "citation_expansion": reviewer["citation_expansion"]},
-            )
+        reviewer, _ = self._audit(candidate, "reviewer", external=True)
+        dangerous = reviewer["results"][:10]
+        deep_audit = self._structured_deep_audit(dangerous)
+        external_sources = reviewer.get("external_expansion", {}).get("sources", {})
+        search_complete = (
+            scout.get("executed_query_count") == 7 and reviewer.get("executed_query_count") == 7
+            and len(dangerous) >= 10 and any(row.get("status") == "COMPLETE" for row in external_sources.values())
+        )
+        reviewer_decision = self.judge.deep_decide(candidate, deep_audit, search_complete=search_complete)
+        self.opportunity_repository.insert(
+            opportunity_models.novelty_audits, novelty_audit_id=new_id(), idea_id=candidate.idea_id,
+            actor_role="reviewer-deep", retrieval_run_id=reviewer["retrieval_run_id"], decision=reviewer_decision.decision.value,
+            search_matrix=self._query_matrix(candidate, "reviewer"), dangerous_priors=dangerous,
+            coverage={"query_executions": reviewer.get("query_executions", {}), "external_sources": external_sources,
+                      "citation_expansion": reviewer.get("citation_expansion", {}), "structured_deep_audit": deep_audit},
+        )
         if reviewer_decision.decision != GapDecision.NOVELTY_SURVIVES_AUDIT:
-            self._kill(candidate, reviewer_decision, "REVIEWER_GAP_AUDIT")
+            state = reviewer_decision.decision.value
+            if reviewer_decision.decision == GapDecision.KILLED_BY_PRIOR:
+                self._kill(candidate, reviewer_decision, "REVIEWER_DEEP_AUDIT")
+            else:
+                self._mark_state(candidate, state, "REVIEWER_DEEP_AUDIT", reviewer_decision.reason)
             return None
         data = self._data_preflight()
-        if data["status"] == "DATA_BLOCKED":
+        if data["status"] != "DATA_READY":
             self._record_feasibility(candidate.idea_id, "DATA", "BLOCKED", data)
-            self._kill(candidate, None, "DATA_FEASIBILITY", "Dataset metadata endpoint unavailable")
+            self._mark_state(candidate, "FEASIBILITY_UNCERTAIN", "DATA_FEASIBILITY", data["status"])
             return None
         dangerous = [row for row in reviewer["results"] if row.get("source_chunk_ids")][:10]
         deadline_fit = self._deadline_fit(candidate, p90_days=27, safety_buffer_days=14)
@@ -252,21 +363,20 @@ class ProductionTopicPipeline:
             no_covering_prior=True, closest_prior_work=dangerous, adjacent_field_search=True,
             citation_expansion=bool(scout["citation_expansion"]["performed"] and reviewer["citation_expansion"]["performed"]),
             gap_statement="No inspected source-backed work jointly tests the declared relation, matched controls, and closed-loop outcome under the documented search matrix.",
-            significance={
-                "fundamental": {"pass": True, "reason": "Tests whether a widely used offline measurement identifies a closed-loop capability."},
-                "surprising": {"pass": True, "reason": "Matched task success allows the two measurements to disagree rather than making the result tautological."},
-                "broad": {"pass": True, "reason": "The identification question applies across world models, VLAs, and robot-policy evaluation."},
-                "actionable": {"pass": True, "reason": "A positive or negative result changes which reliability metric should gate deployment."},
-            },
+            significance={name: {"pass": False, "reason": "Independent reviewer assessment has not resolved this gate.", "evidence_refs": [], "assessor": "reviewer"} for name in ("fundamental", "surprising", "broad", "actionable", "cheap_to_falsify", "hard_to_explain_away", "defensible_novelty", "value_over_cost")},
             critical_questions=self._critical_questions(candidate, dangerous), data=data,
             method={"research_type": "MEASUREMENT", "primary_method": "paired retrospective trajectory analysis", "baselines": ["open-loop likelihood", "calibration error", "ensemble disagreement"], "controls": ["task success", "task family", "trajectory length", "seed"], "metrics": ["AUROC", "AUPRC", "calibration error"], "analysis": "paired bootstrap with task-family stratification", "confounds": ["dataset policy bias", "action discretization"]},
-            engineering={"status": "READY", "preflight": data["preflight"], "baseline_code": "standard sklearn metrics", "evaluation_harness": "existing Experiment Runtime"},
-            compute={"best_case": {"cpu_hours": 8, "gpu_hours": 0}, "expected": {"cpu_hours": 24, "gpu_hours": 8}, "worst_reasonable": {"cpu_hours": 72, "gpu_hours": 24}, "gpu_type": "RTX 4090/A5000", "vram_gb": 24, "ram_gb": 64, "storage_gb": 250, "download_gb": 150, "estimated_cost_usd": 40},
-            time_estimate={"literature_validation_days": 2, "engineering_days": 3, "data_preparation_days": 2, "pilot_experiment_days": 2, "full_experiment_days": 7, "analysis_days": 3, "best_days": 12, "expected_days": 19, "p90_days": 27},
+            engineering={"status": "BLOCKED", "command": None, "artifact": None, "metric_computed": None, "reason": "Candidate-specific loader and metric smoke have not run."},
+            compute={"candidate_id": candidate.idea_id, "assumptions": [], "calculation": None, "best_case": {}, "expected": {}, "worst_reasonable": {}},
+            time_estimate={"candidate_id": candidate.idea_id, "assumptions": [], "calculation": None, "p90_days": 0},
             deadline=deadline_fit["deadline"], p90_completion_days=27, safety_buffer_days=14,
             future_cycle_target=deadline_fit["future_cycle_target"], venue_fit=deadline_fit["venue_fit"],
-            killer_experiment={"data": data["dataset_name"], "sample_size": 200, "baseline": "open-loop likelihood", "control": "matched task success and task family", "metric": "paired AUROC difference", "statistical_test": "paired bootstrap 95% CI", "runtime_hours": 24, "estimated_cost_usd": 5, "kill_condition": "upper 95% CI of AUROC improvement <= 0.02", "advance_condition": "lower 95% CI of improvement > 0.02"},
+            killer_experiment={"candidate_id": candidate.idea_id, "data": data.get("dataset_name"), "kill_condition": None},
             reviewer_attacks=["The relation is a calibration restatement", "Dataset policy bias creates the effect", "Matched success does not match difficulty", "The metric does not identify intervention utility", "The result may not transfer across embodiments"],
+            generation_provenance={"generation_model": candidate.generation_model, "prompt_hash": candidate.prompt_hash, "input_signal_ids": list(candidate.input_signal_ids), "literature_context_ids": list(candidate.literature_context_ids), "reasoning_summary": candidate.reasoning_summary, "generation_timestamp": candidate.generation_timestamp},
+            deep_audit=deep_audit,
+            coherence={"pass": False, "reason": "PI/Reviewer construct alignment has not been executed."},
+            benchmark_status="PROVISIONAL",
         )
         verdict = TopicReadinessGate().evaluate(evidence)
         for audit_type, value in {
@@ -279,7 +389,7 @@ class ProductionTopicPipeline:
         if not verdict.ready:
             self._kill(candidate, None, "FINAL_TOPIC_REVIEW", ", ".join(verdict.missing))
             return None
-        self._save_dossier(candidate, evidence, scout, reviewer)
+        self._evaluations[candidate.idea_id] = (evidence, scout, reviewer)
         return evidence
 
     def _deadline_fit(self, candidate: CandidateIdea, *, p90_days: int, safety_buffer_days: int) -> dict[str, Any]:
@@ -330,37 +440,28 @@ class ProductionTopicPipeline:
         )
 
     def _data_preflight(self) -> dict[str, Any]:
-        url = "https://droid-dataset.github.io/"
+        url = "https://droid-dataset.github.io/droid/the-droid-dataset"
         try:
             response = httpx.get(url, timeout=20, follow_redirects=True)
             response.raise_for_status()
-            status = "DATA_READY" if "DROID" in response.text.upper() else "DATA_PARTIAL"
-            preflight = f"HTTP metadata fetch {response.status_code}; {len(response.content)} bytes"
+            evidence = {
+                "http_status": response.status_code, "homepage_reachable": True, "dataset_name": "DROID",
+                "official_docs": [url], "source": url, "actual_size": "1.7TB RLDS full; 2GB official 100-episode debug subset",
+                "download_method": "gsutil -m cp -r gs://gresearch/robotics/droid_100 <path>",
+                "license": "Terms require explicit confirmation before download", "schema": ["observation", "action", "language_instruction"],
+                "target_variable": "closed-loop failure/intervention outcome", "target_variable_available": False,
+                "metadata_load": {"status": "NOT_RUN", "command": None, "artifact": None},
+                "preflight": f"Official documentation fetch {response.status_code}; {len(response.content)} bytes; no failure/intervention label documented",
+            }
         except Exception as exc:
-            status, preflight = "DATA_BLOCKED", str(exc)
-        return {"status": status, "dataset_name": "DROID", "source": url, "license": "dataset terms require confirmation before full download", "access_verified": status != "DATA_BLOCKED", "download_size_gb": 150, "sample_count": "76k trajectories", "modalities": ["video", "proprioception", "actions", "language"], "split": "pre-declared robot/site split", "preflight": preflight}
+            evidence = {"status": "DATA_BLOCKED", "dataset_name": "DROID", "source": url, "error": str(exc)}
+        return validate_dataset_preflight(evidence)
 
     @staticmethod
     def _critical_questions(candidate: CandidateIdea, priors: list[dict]) -> list[dict]:
-        prompts = (
-            ("current belief", candidate.current_belief),
-            ("closest prior scope", "The retrieved priors study uncertainty, intervention, or trajectory failure separately; the audit found no source-backed work covering their declared joint relation and matched controls."),
-            ("irreducible difference", "The minimum difference is an identification test: intervention-failure ordering conditional on matched task success, not another uncertainty estimator."),
-            ("benchmark-free meaning", "The question asks whether one observable identifies a deployment-relevant outcome, independent of DROID, a named robot, or a backbone."),
-            ("scientific-not-feature", "No new module is required; competing measurements are tested against a falsifiable relation."),
-            ("non-obvious outcome", "Open-loop accuracy and action-conditioned uncertainty may agree, reverse, or become conditionally independent after controls."),
-            ("alternative explanation", "Task difficulty can cause both uncertainty and failure; matching task family, success, and trajectory length addresses this confound."),
-            ("reviewer explanation", "A reviewer can attribute gains to generic calibration, so calibration error and ensemble disagreement are mandatory baselines."),
-            ("fastest falsifier", candidate.cheap_falsifier),
-            ("positive-result action", "Researchers would gate intervention and dataset collection using action-conditioned risk rather than open-loop likelihood alone."),
-            ("negative-result value", "A null result rules out the proposed metric as an independent reliability signal and prevents an unnecessary system component."),
-            ("gap type", "Measurement and identification gap, not a benchmark-only gap."),
-            ("simpler mechanism", "Generic calibration is the simpler mechanism and is included as a baseline; failure to beat it kills the idea."),
-            ("adjacent-field solution", "Selective prediction and control-risk work are searched explicitly; transfer is not assumed because their outcome and intervention units differ."),
-            ("claim evidence threshold", "The claim requires a pre-declared paired AUROC improvement whose lower 95% bootstrap bound exceeds 0.02 on held-out task families."),
-        )
+        prompts = ("current belief", "closest prior scope", "irreducible difference", "benchmark-free meaning", "scientific-not-feature", "non-obvious outcome", "alternative explanation", "reviewer explanation", "fastest falsifier", "positive-result action", "negative-result value", "gap type", "simpler mechanism", "adjacent-field solution", "claim evidence threshold")
         refs = [row["paper_id"] for row in priors[:5]]
-        return [{"question": prompt, "answer": answer, "evidence_refs": refs, "unresolved": []} for prompt, answer in prompts]
+        return [{"question": prompt, "answer": None, "evidence_refs": refs, "counterarguments": [], "confidence_class": "LOW", "unresolved": ["PI and independent reviewer answer required"], "status": "UNRESOLVED", "answer_model": None, "prompt_hash": None} for prompt in prompts]
 
     def _kill(self, candidate: CandidateIdea, decision, gate: str, reason: str | None = None) -> None:
         killing = [decision.killing_paper_id] if decision and decision.killing_paper_id else []

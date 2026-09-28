@@ -2,10 +2,13 @@ from __future__ import annotations
 
 from dataclasses import replace
 from datetime import datetime, timezone
+import os
 
 import pytest
+from sqlalchemy import create_engine
 
 from ai_scientist.literature_intelligence.production import classify_coverage, validate_known_prior_benchmark_v2
+from ai_scientist.literature_intelligence import HashingEmbeddingProvider, HybridSearch, LiteratureRepository, LiteratureService, initialize_literature_database
 from ai_scientist.topic_discovery import CandidateIdea, DiscoveryLoop, GateEvidence, NoveltyJudge, ResearchProgram, TopicReadinessGate
 from ai_scientist.topic_discovery.service import validate_dataset_preflight
 
@@ -66,6 +69,26 @@ def test_hardcoded_lenses_are_not_production_generator():
     from ai_scientist.topic_discovery.service import ProductionTopicPipeline
     with pytest.raises(ValueError, match="executor-backed candidate generator"):
         ProductionTopicPipeline(None, None, None)
+
+
+def test_all_declared_query_variants_are_actually_executed():
+    engine = create_engine(os.getenv("RESEARCH_DATABASE_URL", "postgresql+psycopg://research:research@localhost:55432/research_os_test"), pool_pre_ping=True)
+    initialize_literature_database(engine)
+    repository, service = LiteratureRepository(engine), LiteratureService(LiteratureRepository(engine))
+    native = f"hardening-{datetime.now(timezone.utc).timestamp()}"
+    paper = service.ingest_record({
+        "source": "hardening-test", "source_record_id": native, "title": "Runtime robot failure prediction",
+        "abstract": "Action uncertainty detects robot failure and intervention need.", "publication_year": 2026,
+        "version": {"version_label": "v1", "source_url": "https://example.test/paper"},
+    })
+    doc = service.ingest_full_text(paper["paper_version_id"], "Introduction\nRobot failure prediction.\nMethod\nAction uncertainty and intervention.", source_url="https://example.test/paper", license_name="test open access")
+    provider = HashingEmbeddingProvider()
+    service.embed_document(doc["document_id"], provider)
+    variants = [f"robot failure query {i}" for i in range(7)]
+    result = HybridSearch(repository, provider).search(variants[0], actor_role="scout", query_variants=variants, limit=5)
+    assert result["executed_query_count"] == 7
+    assert set(result["query_executions"]) == set(variants)
+    assert all("keyword_result_count" in item and "dense_result_count" in item for item in result["query_executions"].values())
 
 
 def test_first_passing_candidate_does_not_short_circuit_wave():
