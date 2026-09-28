@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import math
+import os
 from dataclasses import dataclass
 
 
@@ -33,7 +34,7 @@ class BGEEmbeddingProvider:
             from sentence_transformers import SentenceTransformer
         except ImportError as exc:
             raise RuntimeError("Install the literature embedding extra to use BAAI/bge-m3") from exc
-        self._model = SentenceTransformer(self.model_name)
+        self._model = SentenceTransformer(os.getenv("BGE_M3_MODEL_PATH", self.model_name))
 
     def embed(self, text: str) -> list[float]:
         return self._model.encode([text], normalize_embeddings=True)[0].tolist()

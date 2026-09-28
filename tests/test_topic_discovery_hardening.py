@@ -300,6 +300,20 @@ def test_partial_venue_corpus_cannot_claim_complete():
     assert classify_coverage(expected=None, ingested=0) == "UNAVAILABLE"
 
 
+def test_bge_provider_can_use_verified_local_model_path(monkeypatch, tmp_path):
+    import sys
+    from types import ModuleType
+    from ai_scientist.literature_intelligence.embeddings import BGEEmbeddingProvider
+
+    loaded = []
+    module = ModuleType("sentence_transformers")
+    module.SentenceTransformer = lambda path: loaded.append(path) or object()
+    monkeypatch.setitem(sys.modules, "sentence_transformers", module)
+    monkeypatch.setenv("BGE_M3_MODEL_PATH", str(tmp_path))
+    BGEEmbeddingProvider()
+    assert loaded == [str(tmp_path)]
+
+
 def test_critical_answers_cannot_all_be_static_defaults():
     evidence = hardened_evidence()
     evidence.critical_questions = [{"question": str(i), "answer": "resolved", "evidence_refs": ["e"], "unresolved": []} for i in range(15)]

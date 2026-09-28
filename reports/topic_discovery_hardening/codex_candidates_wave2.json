@@ -1,0 +1,1017 @@
+[
+  {
+    "title": "Closed-Loop Validity Tests for Offline-Accurate Visuomotor Policies",
+    "current_belief": "Embodied policies are often promoted using offline prediction or imitation metrics that may not reveal feedback-loop instability.",
+    "proposed_challenge": "Test whether offline accuracy preserves the ordering of policies once their predictions alter future observations and actions.",
+    "scientific_question": "When does offline visuomotor accuracy cease to predict closed-loop task success under observation and actuation perturbations?",
+    "falsifiable_claim": "Across at least three perturbation families, offline error ranking will disagree with closed-loop success ranking for at least 25% of policy pairs, while a stability-aware score will reduce that discordance by at least 30%.",
+    "why_now": "The supplied literature reports a neural estimator that performs extremely well offline yet must be assessed inside a feedback loop, while current robotics calls emphasize reliable embodied learning.",
+    "input_signal_ids": [
+      "6791868a-9f81-4cde-8d54-ea6c70461fb2",
+      "6992c3b1-914b-4d46-b8a3-2c8204d8ec38"
+    ],
+    "literature_context_ids": [
+      "6462fd3a-9f04-4d4e-8133-961c766ec54d",
+      "1a7aaf93-de3d-4f38-9129-47f4dbf305b8"
+    ],
+    "reasoning_summary": "This transfers a documented offline-versus-loop distinction into robot policy evaluation and asks for an identification boundary rather than another accuracy benchmark.",
+    "expected_contribution_type": "evaluation protocol and diagnostic metric",
+    "possible_target_venues": [
+      "IROS",
+      "CoRL"
+    ],
+    "cheap_falsifier": "Replay two public control policies in simulation with one-step observation delay; abandon the idea if offline and closed-loop rankings remain identical across seeds and delay levels.",
+    "main_risk": "Ranking reversals may be specific to unstable controllers rather than general to learned visuomotor policies.",
+    "proposed_data_source": "Public simulated manipulation or locomotion rollouts with logged observations, actions, and perturbation sweeps",
+    "target_variable": "closed-loop success rank discordance",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Uncertainty-Triggered Active Perception for Tabletop Planning",
+    "current_belief": "Uncertainty-aware symbolic planners can request information-gathering actions, but a fixed confidence threshold may not remain calibrated across scene difficulty or sensor shift.",
+    "proposed_challenge": "Replace a global trigger threshold with a risk-calibrated decision rule that accounts for predicate uncertainty and the cost of an extra observation.",
+    "scientific_question": "Can cost-aware calibration choose active-perception actions more reliably than a fixed confidence threshold in cluttered manipulation?",
+    "falsifiable_claim": "At matched task success, a cost-aware trigger will reduce unnecessary information-gathering actions by at least 15% without increasing unsafe plan execution by more than 1 percentage point.",
+    "why_now": "The supplied neuro-symbolic planning work exposes calibrated predicate confidence and explicit look-closer actions, creating a direct test bed for decision calibration.",
+    "input_signal_ids": [
+      "60b79467-cc13-45ec-bfcf-cd7e09900058",
+      "936b289b-4405-462a-8fbd-9f00d41386f5"
+    ],
+    "literature_context_ids": [
+      "c4e57a2c-56c7-451a-96ff-650f2c3ab721",
+      "631b1dd0-0f22-4322-9a0b-6e2f11d895af"
+    ],
+    "reasoning_summary": "The opportunity lies in connecting calibrated perception to the downstream value of information rather than treating confidence as an isolated score.",
+    "expected_contribution_type": "decision rule and controlled benchmark study",
+    "possible_target_venues": [
+      "ICRA",
+      "NeurIPS"
+    ],
+    "cheap_falsifier": "Sweep fixed and cost-aware thresholds on existing simulated RGB-D scenes; stop if the Pareto frontiers for success and sensing cost overlap within bootstrap uncertainty.",
+    "main_risk": "Results may depend on an arbitrary cost model for information-gathering actions.",
+    "proposed_data_source": "PyBullet tabletop scenes with injected occlusion, depth noise, and action costs",
+    "target_variable": "unsafe-execution rate at matched sensing cost",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Action-Sufficient State Compression for Robot Control",
+    "current_belief": "Predictive representations retain distinctions needed to forecast futures, although a controller may only need distinctions that change the set of acceptable actions.",
+    "proposed_challenge": "Measure whether action-sufficient abstractions can be smaller than predictive-state representations without sacrificing safe task completion.",
+    "scientific_question": "How much can an embodied agent compress its latent state when the preservation target is acceptable action rather than full future prediction?",
+    "falsifiable_claim": "On finite-state partially observed control tasks, an action-sufficient code will use at least 20% fewer discrete states than a prediction-sufficient code while keeping unacceptable-action probability within 1 percentage point.",
+    "why_now": "A supplied formal result distinguishes predictive state from viable action, while robotics venues are actively soliciting work on embodied reasoning and control.",
+    "input_signal_ids": [
+      "8d30b996-d241-48c5-9d52-42c94261e820",
+      "6992c3b1-914b-4d46-b8a3-2c8204d8ec38"
+    ],
+    "literature_context_ids": [
+      "1a7aaf93-de3d-4f38-9129-47f4dbf305b8",
+      "c4e57a2c-56c7-451a-96ff-650f2c3ab721"
+    ],
+    "reasoning_summary": "This converts a static action-sufficiency distinction into a measurable representation-learning hypothesis while keeping recursive updateability as an explicit limitation.",
+    "expected_contribution_type": "representation objective and theory-guided experiment",
+    "possible_target_venues": [
+      "ICLR",
+      "CoRL"
+    ],
+    "cheap_falsifier": "Enumerate belief states and acceptable-action sets in small POMDPs; reject the premise if minimum action and predictive partitions have equal size across the suite.",
+    "main_risk": "Static action sufficiency may fail to produce a recursively updateable controller state.",
+    "proposed_data_source": "Small tabular POMDPs plus a simulated partially observed manipulation task",
+    "target_variable": "minimum latent code size at a fixed action-risk tolerance",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Scale-Aware Abstention for Edge Robot Planners",
+    "current_belief": "Small language models deployed on edge devices need abstention, but inexpensive confidence signals can degrade differently as model scale changes.",
+    "proposed_challenge": "Test whether confidence calibrators chosen at one language-model scale remain valid when the model is embedded in a robot planning stack at another scale.",
+    "scientific_question": "Which confidence signal best preserves selective planning risk across sub-7B models used for embodied instruction following?",
+    "falsifiable_claim": "Sampling-consistency calibration will improve failure AUROC by at least 0.05 over token-probability calibration on models at or below 1B parameters, at a compute overhead below two additional plan samples per accepted action on average.",
+    "why_now": "The supplied cross-scale calibration study identifies scale-dependent confidence degradation, and edge robotics creates a consequential deployment setting for that claim.",
+    "input_signal_ids": [
+      "3017349a-4546-425c-b605-f1677a6b0e33",
+      "60b79467-cc13-45ec-bfcf-cd7e09900058"
+    ],
+    "literature_context_ids": [
+      "da2b0772-7d82-4dfa-8a96-805d6e3ec0f6",
+      "c4e57a2c-56c7-451a-96ff-650f2c3ab721"
+    ],
+    "reasoning_summary": "The candidate tests whether a language-only calibration result survives contact with embodied action risk and strict compute budgets.",
+    "expected_contribution_type": "cross-scale evaluation and deployment rule",
+    "possible_target_venues": [
+      "AAAI",
+      "ICRA"
+    ],
+    "cheap_falsifier": "Run two small open-weight models on a simulator instruction set; drop the idea if all confidence signals have indistinguishable selective-risk curves.",
+    "main_risk": "Planning failures may be dominated by perception or control rather than language-model uncertainty.",
+    "proposed_data_source": "Simulated household instruction-following episodes with plan validity labels",
+    "target_variable": "selective task-failure risk versus inference cost",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Does Low-Rank Test-Time Adaptation Destabilize Robot Feedback Loops?",
+    "current_belief": "Low-rank test-time adaptation can reduce update cost under domain shift, but adaptation is usually evaluated on prediction performance rather than feedback-loop stability.",
+    "proposed_challenge": "Insert low-rank and full-parameter test-time adaptation into the same visual-control loop and compare stability under matched update budgets.",
+    "scientific_question": "Can low-rank test-time adaptation improve shifted visual perception without inducing closed-loop oscillation or policy drift?",
+    "falsifiable_claim": "Under at least two visual shifts, low-rank adaptation will recover at least 80% of the task-success gain of full adaptation while producing at least 25% fewer instability events.",
+    "why_now": "The supplied literature combines an efficient LoRA-TTA proposal with direct evidence that offline estimator quality is insufficient for closed-loop safety.",
+    "input_signal_ids": [
+      "ac2e8abf-4aa0-415d-a873-28aa0dfe1ab1",
+      "6791868a-9f81-4cde-8d54-ea6c70461fb2"
+    ],
+    "literature_context_ids": [
+      "c23eb277-1fe5-4d1d-a233-a6ac0dd929d4",
+      "6462fd3a-9f04-4d4e-8133-961c766ec54d"
+    ],
+    "reasoning_summary": "Efficiency claims become scientifically stronger if adaptation is evaluated as part of a dynamical system rather than as an isolated predictor.",
+    "expected_contribution_type": "closed-loop adaptation study",
+    "possible_target_venues": [
+      "ICML",
+      "IROS"
+    ],
+    "cheap_falsifier": "Apply low-rank updates to a visual line-following controller under color shift; stop if adaptation never changes loop dynamics relative to the frozen model.",
+    "main_risk": "Observed instability may arise from an aggressive optimizer rather than the low-rank parameterization.",
+    "proposed_data_source": "Vision-based control simulators with controlled appearance shifts and high-frequency trajectory logs",
+    "target_variable": "instability-event rate under test-time adaptation",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Attention-Heatmap Drift as an Early Warning for Embodied Transfer Failure",
+    "current_belief": "Vision-language adaptation can improve in-domain accuracy while changing attention patterns and degrading unseen transfer, but the predictive value of attention drift for control is unresolved.",
+    "proposed_challenge": "Evaluate attention drift as a prospective warning signal rather than a post-hoc visualization.",
+    "scientific_question": "Does attention-heatmap drift predict out-of-domain robot policy failure earlier than validation accuracy?",
+    "falsifiable_claim": "Across adaptation checkpoints, attention-drift features will predict held-out control failure with AUROC at least 0.10 higher than in-domain validation accuracy alone.",
+    "why_now": "A supplied controlled comparison measures attention drift under full and low-rank adaptation, while multimodal fine-tuning work highlights heterogeneous component failure modes.",
+    "input_signal_ids": [
+      "c7513b7b-6828-47e7-a780-fad03797bef0",
+      "6992c3b1-914b-4d46-b8a3-2c8204d8ec38"
+    ],
+    "literature_context_ids": [
+      "bdfdea70-3ef5-4c0c-ad96-96697ce577ce",
+      "16af92af-672d-4718-b24e-ffab9e5e0263"
+    ],
+    "reasoning_summary": "The key gap is identification: whether representation drift contains actionable pre-deployment information about embodied transfer loss.",
+    "expected_contribution_type": "failure predictor and adaptation diagnostic",
+    "possible_target_venues": [
+      "CVPR",
+      "CoRL"
+    ],
+    "cheap_falsifier": "Adapt one vision-language encoder on a small manipulation dataset and correlate heatmap drift with held-out simulator success; abandon if the correlation is near zero with wide uncertainty.",
+    "main_risk": "Attention maps may be unstable or non-causal explanations of policy behavior.",
+    "proposed_data_source": "Checkpointed vision-language robot policies evaluated on held-out object, texture, and viewpoint splits",
+    "target_variable": "AUROC for predicting held-out policy failure",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Dynamic Rank Allocation for Vision-Language Robot Adaptation",
+    "current_belief": "A fixed low-rank budget treats every layer and task phase alike even though embodied adaptation demands may be sparse and task dependent.",
+    "proposed_challenge": "Learn and prune rank components under a joint objective for task success, transfer retention, and deployment memory.",
+    "scientific_question": "Can rank-gated low-rank adaptation discover a smaller and more transferable parameter update for vision-language robot policies than fixed-rank LoRA?",
+    "falsifiable_claim": "Rank-gated adaptation will match fixed-rank LoRA within 1 percentage point of in-domain success while reducing retained adapter parameters by at least 30% and improving held-out success by at least 3 points.",
+    "why_now": "The supplied rank-gated LoRA work and modality-aware adaptation survey jointly motivate sparse, locus-specific updates, but embodied policy transfer remains an open test.",
+    "input_signal_ids": [
+      "8d30b996-d241-48c5-9d52-42c94261e820",
+      "4ea7e678-c18a-4925-82a1-1b071c99f4ff"
+    ],
+    "literature_context_ids": [
+      "36ecccc4-8e92-43a5-9536-10ee848003f9",
+      "16af92af-672d-4718-b24e-ffab9e5e0263"
+    ],
+    "reasoning_summary": "This asks whether rank sparsity is a real property of embodied adaptation rather than merely a compression device.",
+    "expected_contribution_type": "adaptation method and transfer analysis",
+    "possible_target_venues": [
+      "ICLR",
+      "ECCV"
+    ],
+    "cheap_falsifier": "Train gated and fixed-rank adapters on one small vision-language control task; reject if gates remain dense and no parameter reduction is possible without loss.",
+    "main_risk": "Gating gains may disappear after fair hyperparameter matching.",
+    "proposed_data_source": "Public vision-language manipulation benchmark with object and scene generalization splits",
+    "target_variable": "held-out task success per retained adapter parameter",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Long-Tail Skill Metrics for Embodied Benchmarks",
+    "current_belief": "Aggregate success can conceal severe failure on rare classes or skills, especially when evaluation distributions are imbalanced.",
+    "proposed_challenge": "Replace one-number robot benchmark reporting with frequency-stratified success, worst-group risk, and uncertainty intervals.",
+    "scientific_question": "How often do aggregate embodied-agent scores reverse model rankings once rare skills and objects receive explicit weight?",
+    "falsifiable_claim": "On at least two embodied benchmarks, frequency-stratified evaluation will reverse at least one pairwise model ranking and reveal a worst-decile skill success rate at least 20 points below the aggregate score.",
+    "why_now": "The supplied oracle-character study explicitly shows aggregate metrics concealing long-tailed defects, and a NeurIPS evaluations-and-datasets signal supports benchmark-focused work.",
+    "input_signal_ids": [
+      "970964c5-38b6-42f0-bd53-93509fcbdd36",
+      "8606ecdb-0350-4efc-b805-a3f7162c9f1f"
+    ],
+    "literature_context_ids": [
+      "583b7d61-f6f7-49cf-ab8a-4a0e32b7e00b",
+      "c4e57a2c-56c7-451a-96ff-650f2c3ab721"
+    ],
+    "reasoning_summary": "The cross-domain transfer is methodological: class-frequency diagnostics from recognition become skill-frequency diagnostics for embodied evaluation.",
+    "expected_contribution_type": "benchmark audit and reporting standard",
+    "possible_target_venues": [
+      "NeurIPS Evaluations & Datasets",
+      "CoRL"
+    ],
+    "cheap_falsifier": "Recompute frequency deciles from one benchmark's public episode logs; stop if skill frequencies are balanced and stratification changes neither conclusions nor rankings.",
+    "main_risk": "Existing logs may not contain reliable skill or object-frequency annotations.",
+    "proposed_data_source": "Public episode-level embodied benchmark results with task, object, and success metadata",
+    "target_variable": "worst-decile skill success and ranking reversal count",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Voice Lever or Judgment Lever? Role Prompts in Robot Decision Making",
+    "current_belief": "Character prompts strongly affect phrasing on subjective tasks but may have little effect on factual verification; robot-agent role prompts could similarly alter explanations without changing decisions.",
+    "proposed_challenge": "Separate linguistic style attribution from changes in action selection, factual scene judgments, and safety refusals.",
+    "scientific_question": "Do role personas change an embodied agent's control judgments, or only the language used to explain them?",
+    "falsifiable_claim": "Across at least four personas, style-attribution accuracy will change by at least 30 points while action-selection agreement changes by less than 5 points on fact-grounded tasks.",
+    "why_now": "The supplied persona crossover reports task-conditioned effects, while language-supervised autonomous driving supplies an embodied reasoning chain where wording and action can be measured separately.",
+    "input_signal_ids": [
+      "e5f18a5b-b888-44ec-8a23-c5c259662ea9",
+      "1d2f75c9-4a44-4abb-abe1-63dbd6ab7609"
+    ],
+    "literature_context_ids": [
+      "0c72a837-f74f-4326-b3de-7c35ff5219aa",
+      "e620b999-952f-41d3-bd25-26772a90ba4d"
+    ],
+    "reasoning_summary": "A controlled decomposition would prevent verbal differences from being mistaken for policy-level behavioral control.",
+    "expected_contribution_type": "behavioral evaluation and negative-result study",
+    "possible_target_venues": [
+      "EMNLP",
+      "ACL"
+    ],
+    "cheap_falsifier": "Apply four personas to a small driving-QA set and compare both lexical style and selected action; drop if neither output dimension changes.",
+    "main_risk": "Prompted explanations may not be causally connected to the policy action head.",
+    "proposed_data_source": "Driving or navigation scenarios with paired natural-language rationales and discrete action labels",
+    "target_variable": "persona-induced action disagreement versus style shift",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Delta-Encoded 4D Scene Memory for Long-Horizon Robots",
+    "current_belief": "Dynamic Gaussian-splat representations can store temporal change compactly, but their usefulness as robot memory depends on preserving task-relevant changes over long horizons.",
+    "proposed_challenge": "Evaluate per-frame delta encoding by downstream navigation and manipulation decisions rather than rendering quality alone.",
+    "scientific_question": "What compression level can a delta-encoded 4D scene memory sustain before task-relevant temporal changes become unusable for embodied planning?",
+    "falsifiable_claim": "A delta-encoded memory will reduce storage by at least 50% relative to independent-frame splats while keeping change-conditioned action success within 3 percentage points.",
+    "why_now": "The supplied differential 4D Gaussian-splat work targets temporal scalability, and current vision and robotics calls create a natural venue for task-grounded evaluation.",
+    "input_signal_ids": [
+      "c7513b7b-6828-47e7-a780-fad03797bef0",
+      "a6f525d4-fdf2-4336-b21e-674a4d7717fb"
+    ],
+    "literature_context_ids": [
+      "0f767dd0-f539-43ad-8ce0-bc949edbe96e",
+      "20590239-3fb4-4432-a306-92dfdff75a41"
+    ],
+    "reasoning_summary": "The benchmark changes the unit of value from photorealistic replay to whether temporal memory supports the right action.",
+    "expected_contribution_type": "memory representation benchmark",
+    "possible_target_venues": [
+      "CVPR",
+      "RSS"
+    ],
+    "cheap_falsifier": "Compress a short synthetic scene with moving obstacles and test collision-free planning; stop if storage savings are negligible or planning fails even without compression.",
+    "main_risk": "Gaussian-splat rendering artifacts may confound the intended memory-capacity question.",
+    "proposed_data_source": "Synthetic indoor dynamic scenes with ground-truth object trajectories and navigation queries",
+    "target_variable": "task success as a function of bytes per temporal scene",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Temporal Coherence Without Wave Erasure in Robot World Models",
+    "current_belief": "Temporal smoothing improves coherent reconstruction but can erase small, fast surface changes that may matter for contact or locomotion.",
+    "proposed_challenge": "Design a world-model objective that preserves high-frequency task cues while suppressing frame-wise reconstruction jitter.",
+    "scientific_question": "Can frequency-aware temporal regularization preserve contact-relevant microdynamics better than uniform smoothing in monocular world models?",
+    "falsifiable_claim": "Frequency-aware regularization will reduce temporal jitter by at least 20% while retaining at least 90% of ground-truth high-frequency energy and improving contact-timing error by at least 10%.",
+    "why_now": "The supplied monocular fluid work explicitly identifies the tension between temporal coherence and fine-wave preservation.",
+    "input_signal_ids": [
+      "4ea7e678-c18a-4925-82a1-1b071c99f4ff",
+      "6791868a-9f81-4cde-8d54-ea6c70461fb2"
+    ],
+    "literature_context_ids": [
+      "3885c6ea-e8c4-4fda-8b48-9ceb6e6bfb4e",
+      "5e36b8ed-c050-4728-8070-998b5cd341b9"
+    ],
+    "reasoning_summary": "This turns an image-reconstruction trade-off into a downstream dynamics question with measurable control consequences.",
+    "expected_contribution_type": "temporal objective and dynamics benchmark",
+    "possible_target_venues": [
+      "ECCV",
+      "IROS"
+    ],
+    "cheap_falsifier": "Use procedurally generated waves with known spectra; reject if uniform smoothing already lies on the same jitter-versus-detail frontier.",
+    "main_risk": "Synthetic wave spectra may not reflect task-relevant real-world dynamics.",
+    "proposed_data_source": "Rendered monocular fluid and deformable-surface sequences with ground-truth geometry",
+    "target_variable": "contact-timing error under controlled temporal smoothing",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Viewpoint-Invariance Versus Temporal Consistency in Action-Centric Perception",
+    "current_belief": "Embodied action detectors need both viewpoint invariance and temporal consistency, but optimizing one may suppress cues needed by the other.",
+    "proposed_challenge": "Build a matched intervention matrix that independently strengthens viewpoint augmentation and temporal regularization.",
+    "scientific_question": "Is there a measurable trade-off between viewpoint invariance and temporal boundary accuracy in robot action detection?",
+    "falsifiable_claim": "Increasing viewpoint invariance will improve cross-view action AP by at least 5 points but worsen temporal boundary error by at least 10% unless the model uses separate spatial and temporal adaptation paths.",
+    "why_now": "A supplied paper title directly targets both properties, while temporally coherent reconstruction work supplies a complementary mechanism for controlled testing.",
+    "input_signal_ids": [
+      "00a1eda3-9cce-4e2d-9f3d-5d29bad0a998",
+      "6992c3b1-914b-4d46-b8a3-2c8204d8ec38"
+    ],
+    "literature_context_ids": [
+      "5e36b8ed-c050-4728-8070-998b5cd341b9",
+      "3885c6ea-e8c4-4fda-8b48-9ceb6e6bfb4e"
+    ],
+    "reasoning_summary": "The contribution would identify whether two commonly bundled desiderata are actually compatible under a fixed model budget.",
+    "expected_contribution_type": "factorial benchmark and architectural ablation",
+    "possible_target_venues": [
+      "ICCV",
+      "CoRL"
+    ],
+    "cheap_falsifier": "Run a 2x2 augmentation and temporal-loss grid on one multi-view action dataset; stop if both metrics improve monotonically with no interaction.",
+    "main_risk": "The supplied action-detection record lacks an abstract, so the exact prior scope requires later literature verification.",
+    "proposed_data_source": "Multi-view robot-action videos with frame-level temporal boundaries",
+    "target_variable": "cross-view AP and temporal boundary error interaction",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Calibrated Synthetic Vibration for Robot Fault Learning",
+    "current_belief": "Text-conditioned diffusion can generate vibration signals with uncertainty estimates, but synthetic augmentation is useful only if uncertainty predicts downstream diagnostic value under domain shift.",
+    "proposed_challenge": "Filter or weight generated robot vibration sequences using calibrated uncertainty before training a fault classifier.",
+    "scientific_question": "Does uncertainty-filtered vibration synthesis improve low-label robot fault diagnosis under changes in load, speed, and sensor placement?",
+    "falsifiable_claim": "With no more than 20 labeled target examples per fault, uncertainty-filtered augmentation will improve shifted-domain macro-F1 by at least 5 points over unfiltered synthetic augmentation.",
+    "why_now": "The supplied U-T2V study connects calibrated generative uncertainty to predictive-maintenance augmentation, offering a direct cross-domain test on robotic hardware.",
+    "input_signal_ids": [
+      "60b79467-cc13-45ec-bfcf-cd7e09900058",
+      "2b65d696-5853-4b1f-af83-614f74938309"
+    ],
+    "literature_context_ids": [
+      "6c38032c-46e0-46bc-96f5-d3396d312615",
+      "631b1dd0-0f22-4322-9a0b-6e2f11d895af"
+    ],
+    "reasoning_summary": "The study would test uncertainty as a selection mechanism, not merely report fidelity of generated signals.",
+    "expected_contribution_type": "data-augmentation protocol and calibration study",
+    "possible_target_venues": [
+      "ICRA",
+      "AISTATS"
+    ],
+    "cheap_falsifier": "Train on one public bearing dataset with a held-out load condition; abandon if uncertainty is uncorrelated with synthetic-sample utility.",
+    "main_risk": "Industrial bearing vibrations may not transfer to faults in articulated robots.",
+    "proposed_data_source": "Public vibration datasets plus small motor or joint recordings under controlled faults",
+    "target_variable": "shifted-domain fault macro-F1 per target label",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Physical-Consistency Gates for Open-World Robot Alarms",
+    "current_belief": "Closed-set recognition accuracy can coexist with high false-alarm rates on unknown nuisance events, and confidence thresholding alone may not eliminate the problem.",
+    "proposed_challenge": "Combine learned confidence with a label-free physical-consistency test tailored to robot sensor dynamics.",
+    "scientific_question": "Can physical-consistency gating reduce open-world robot false alarms without suppressing novel hazardous events?",
+    "falsifiable_claim": "At 95% recall on known hazards, a physical-consistency gate will reduce false alarms on unseen nuisances by at least 30% relative to confidence-only conformal thresholding.",
+    "why_now": "The supplied optical-fiber study reports a closed-set/open-world failure and proposes physical consistency as a corrective signal; embodied sensing offers a high-impact transfer setting.",
+    "input_signal_ids": [
+      "936b289b-4405-462a-8fbd-9f00d41386f5",
+      "6791868a-9f81-4cde-8d54-ea6c70461fb2"
+    ],
+    "literature_context_ids": [
+      "bf7eab1e-816d-4cc9-95a6-3da211452f4c",
+      "da2b0772-7d82-4dfa-8a96-805d6e3ec0f6"
+    ],
+    "reasoning_summary": "This tests whether invariants from robot kinematics or sensor physics can reject unknown nuisances more robustly than model confidence.",
+    "expected_contribution_type": "open-world alarm filter",
+    "possible_target_venues": [
+      "NeurIPS",
+      "IROS"
+    ],
+    "cheap_falsifier": "Inject impossible kinematic patterns and realistic nuisance signals into logged sensor traces; stop if the gate cannot separate them above chance.",
+    "main_risk": "A rigid physics gate may reject real hazards that violate the assumed model.",
+    "proposed_data_source": "Robot proprioceptive and force-torque logs with known events plus synthetically and physically generated nuisances",
+    "target_variable": "open-world false-alarm rate at fixed hazard recall",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Ranking Disagreement as Uncertainty in Language-Grounded Object Retrieval",
+    "current_belief": "Embedding uncertainty may not reflect the reliability of the final ranked list used by an embodied agent.",
+    "proposed_challenge": "Estimate uncertainty from disagreement between global-semantic and local-detail object rankings before committing to a grasp or navigation target.",
+    "scientific_question": "Does cross-granularity ranking disagreement predict language-grounding failures better than embedding-space uncertainty?",
+    "falsifiable_claim": "Cross-granularity disagreement will improve grounding-error AUROC by at least 0.07 over embedding variance and reduce wrong-object actions by at least 15% under selective abstention.",
+    "why_now": "The supplied image-text retrieval work measures uncertainty directly in ranking space, which maps naturally to object selection in embodied tasks.",
+    "input_signal_ids": [
+      "c7513b7b-6828-47e7-a780-fad03797bef0",
+      "970964c5-38b6-42f0-bd53-93509fcbdd36"
+    ],
+    "literature_context_ids": [
+      "c0a163a9-1f46-4f52-bd3b-95f4bc37cc04",
+      "c4e57a2c-56c7-451a-96ff-650f2c3ab721"
+    ],
+    "reasoning_summary": "The candidate moves uncertainty estimation to the decision object that actually drives behavior: the candidate ranking.",
+    "expected_contribution_type": "uncertainty estimator and grounding evaluation",
+    "possible_target_venues": [
+      "CVPR",
+      "NeurIPS Evaluations & Datasets"
+    ],
+    "cheap_falsifier": "Evaluate global/local rank disagreement on a small referring-expression set; reject if incorrect targets show no higher disagreement than correct targets.",
+    "main_risk": "Global and local rankers may share errors, making disagreement falsely reassuring.",
+    "proposed_data_source": "Referring-expression grounding data augmented with clutter and attribute-confusable objects",
+    "target_variable": "wrong-object action rate under selective grounding",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Identity-Calibrated Forecasting for Social Robot Navigation",
+    "current_belief": "Crowd trajectory models can combine identity-aware representations with post-hoc confidence calibration, but calibration must be tied to collision risk rather than trajectory error alone.",
+    "proposed_challenge": "Evaluate whether persistent identity improves both uncertainty calibration and safe planning in dense social navigation.",
+    "scientific_question": "Does identity-aware trajectory calibration reduce collision risk for social robots under re-identification errors and crowd occlusion?",
+    "falsifiable_claim": "Identity-aware calibration will reduce collision rate by at least 20% at matched travel time when identity switches remain below 10%, but lose that advantage once switches exceed a measurable threshold.",
+    "why_now": "The supplied crowd-forecasting record proposes identity-aware calibrated prediction, while robotics calls foreground real-world navigation and interaction.",
+    "input_signal_ids": [
+      "a6f525d4-fdf2-4336-b21e-674a4d7717fb",
+      "6791868a-9f81-4cde-8d54-ea6c70461fb2"
+    ],
+    "literature_context_ids": [
+      "6fe78f8c-2064-42c3-a7d7-c34c4b7ba4b8",
+      "b2025650-a9f2-436e-acf3-4d7f5e070f43"
+    ],
+    "reasoning_summary": "The experiment identifies a failure boundary for identity-aware forecasting rather than assuming identity information is always beneficial.",
+    "expected_contribution_type": "social-navigation robustness study",
+    "possible_target_venues": [
+      "RSS",
+      "IROS"
+    ],
+    "cheap_falsifier": "Inject controlled identity switches into recorded crowd tracks and compare risk calibration; stop if identity features never affect risk estimates or plans.",
+    "main_risk": "Duplicate supplied literature records may represent one underlying study rather than independent evidence.",
+    "proposed_data_source": "Public pedestrian trajectory datasets replayed in a robot navigation simulator",
+    "target_variable": "collision rate versus identity-switch probability",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Safe Diagnostic Actions Before Manipulation Commitment",
+    "current_belief": "When hidden states require different safe actions, passive observation may be insufficient; limited diagnostic actions can improve decisions but consume time and may disturb the scene.",
+    "proposed_challenge": "Learn when to inspect, probe, or reposition before committing to an irreversible manipulation action.",
+    "scientific_question": "When does an active diagnostic action make a partially observed manipulation problem operationally recoverable before its rescue window closes?",
+    "falsifiable_claim": "For tasks with disjoint acceptable actions across hidden states, one learned non-destructive diagnostic will reduce unacceptable actions by at least 25% whenever the induced observation total variation exceeds the decision threshold predicted by the supplied recoverability bound.",
+    "why_now": "The supplied action-sufficiency work gives a formal diagnostic limit, and uncertainty-aware planning supplies concrete information-gathering actions.",
+    "input_signal_ids": [
+      "6992c3b1-914b-4d46-b8a3-2c8204d8ec38",
+      "60b79467-cc13-45ec-bfcf-cd7e09900058"
+    ],
+    "literature_context_ids": [
+      "1a7aaf93-de3d-4f38-9129-47f4dbf305b8",
+      "c4e57a2c-56c7-451a-96ff-650f2c3ab721"
+    ],
+    "reasoning_summary": "This operationalizes a formal bound as a robotics experiment with explicit time, disturbance, and action-availability constraints.",
+    "expected_contribution_type": "theory-to-benchmark validation",
+    "possible_target_venues": [
+      "CoRL",
+      "ICRA"
+    ],
+    "cheap_falsifier": "Construct a two-hidden-state simulator with one probe; reject if empirical selection error does not track observation separability.",
+    "main_risk": "A diagnostic useful in simulation may be unavailable or unsafe on real hardware.",
+    "proposed_data_source": "Partially observed tabletop tasks with hidden mass, friction, or attachment state",
+    "target_variable": "unacceptable-action probability before deadline",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Reportability Before Interpretability in Robot Latent Dynamics",
+    "current_belief": "Named latent coefficients are not automatically interpretable; structural identifiability and practical recovery must be established before mechanistic claims are reported.",
+    "proposed_challenge": "Audit which latent dynamics parameters can actually be recovered from standard robot observation and action logs.",
+    "scientific_question": "Which parameters of a mechanistic robot world model are structurally identifiable and practically recoverable under the deployed observation policy?",
+    "falsifiable_claim": "At least one semantically named parameter will show non-identifiability or rank recovery below 0.5 under the default logging policy, while an orthogonalized intervention will improve its recovery by at least 0.15 Spearman correlation.",
+    "why_now": "The supplied identifiability study distinguishes semantic assignment from recoverability and demonstrates configuration-dependent reporting limits.",
+    "input_signal_ids": [
+      "2b65d696-5853-4b1f-af83-614f74938309",
+      "936b289b-4405-462a-8fbd-9f00d41386f5"
+    ],
+    "literature_context_ids": [
+      "96c18142-2594-4377-b38c-7351640e19d4",
+      "6462fd3a-9f04-4d4e-8133-961c766ec54d"
+    ],
+    "reasoning_summary": "The candidate makes interpretability claims conditional on an explicit parameter-to-observation map and recovery experiment.",
+    "expected_contribution_type": "identifiability audit and experimental design rule",
+    "possible_target_venues": [
+      "AISTATS",
+      "NeurIPS"
+    ],
+    "cheap_falsifier": "Run synthetic recovery on a two-parameter dynamics model; stop if all parameters are trivially identifiable and accurately recovered under passive logs.",
+    "main_risk": "A simple simulator may overstate identifiability relative to a real robot.",
+    "proposed_data_source": "Synthetic robot dynamics with known parameters plus matched logged trajectories",
+    "target_variable": "parameter rank recovery under alternative observation policies",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Hidden Recovery State in Repeated Robot Repair Tasks",
+    "current_belief": "A system may appear recovered under the current task yet retain a hidden state that changes its response to a later perturbation.",
+    "proposed_challenge": "Detect latent post-recovery state by re-challenging a robot after apparently successful adaptation or repair.",
+    "scientific_question": "Can two robot policies with identical immediate recovery behavior be distinguished by their response to a standardized second perturbation?",
+    "falsifiable_claim": "A re-challenge protocol will separate at least two post-recovery policy states whose initial task success differs by less than 2 points but whose second-perturbation recovery time differs by at least 20%.",
+    "why_now": "The supplied planarian model motivates persistent hidden recovery state, while embodied learning needs protocols that go beyond immediate task restoration.",
+    "input_signal_ids": [
+      "ffcdf5dc-77a5-4c65-9c8c-2b1b4e52d2e8",
+      "6992c3b1-914b-4d46-b8a3-2c8204d8ec38"
+    ],
+    "literature_context_ids": [
+      "9722bc6b-caad-450c-9490-d23e80467cea",
+      "1a7aaf93-de3d-4f38-9129-47f4dbf305b8"
+    ],
+    "reasoning_summary": "This is a cross-domain transfer of a hidden-state diagnostic, not a claim that biological regeneration and robot learning share a mechanism.",
+    "expected_contribution_type": "recovery evaluation protocol",
+    "possible_target_venues": [
+      "NeurIPS Position Papers",
+      "CoRL"
+    ],
+    "cheap_falsifier": "Adapt two policies to one actuator perturbation, restore nominal conditions, then repeat the perturbation; reject if second responses contain no additional information.",
+    "main_risk": "The effect may reduce to optimizer state rather than a scientifically interesting policy memory.",
+    "proposed_data_source": "Simulated locomotion policies subjected to repeated actuator or morphology perturbations",
+    "target_variable": "second-challenge recovery time conditional on first recovery success",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Preparation-Time Corrections for Measuring Robot Micro-Learning",
+    "current_belief": "Performance gains measured across brief rests can change sign when preparation time is included, so apparent offline learning may be a timing artifact.",
+    "proposed_challenge": "Recompute short-horizon robot skill gains using both action-execution time and pre-action planning time.",
+    "scientific_question": "Do reported micro-offline gains in iterative robot skill learning persist after accounting for action preparation latency?",
+    "falsifiable_claim": "Including planning latency will change the sign or halve the magnitude of measured between-bout gains in at least one commonly used online adaptation setting.",
+    "why_now": "Two supplied motor-learning papers disagree with common micro-offline interpretations and isolate preparation-time measurement as a plausible source of reversal.",
+    "input_signal_ids": [
+      "ac2e8abf-4aa0-415d-a873-28aa0dfe1ab1",
+      "970964c5-38b6-42f0-bd53-93509fcbdd36"
+    ],
+    "literature_context_ids": [
+      "cfef7f3f-aabf-4267-98fd-e489ee2962be",
+      "e48a1383-7e96-4f40-899d-1b5d7e3f1bc8"
+    ],
+    "reasoning_summary": "The research gap is measurement validity: whether learning is inferred from a metric that omits part of the action cycle.",
+    "expected_contribution_type": "measurement correction and negative-result audit",
+    "possible_target_venues": [
+      "ICML",
+      "NeurIPS Evaluations & Datasets"
+    ],
+    "cheap_falsifier": "Reanalyze one public adaptation log with and without pre-action latency; stop if estimates are identical within numerical tolerance.",
+    "main_risk": "Human motor preparation may not map cleanly to machine planning latency.",
+    "proposed_data_source": "Timestamped robot-learning episodes containing observation, planning-start, action-start, and action-end times",
+    "target_variable": "between-bout performance gain with preparation-time correction",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Evaluation-Trajectory Recycling Under Closed-Loop Shift",
+    "current_belief": "Offline policy improvement can reuse evaluation trajectories, but recycled data may become misleading as the updated policy changes the visited state distribution.",
+    "proposed_challenge": "Quantify when trajectory recycling remains valid and when closed-loop distribution shift breaks its advantage.",
+    "scientific_question": "How much policy-induced state-distribution shift can evaluation-trajectory recycling tolerate before offline improvement becomes harmful?",
+    "falsifiable_claim": "A divergence gate on recycled trajectories will prevent at least half of harmful updates while retaining at least 80% of beneficial updates across controlled traffic shifts.",
+    "why_now": "The supplied eco-driving title proposes closed-loop offline improvement through trajectory recycling, and the offline-instability study warns that loop behavior can invalidate static evaluation.",
+    "input_signal_ids": [
+      "2b65d696-5853-4b1f-af83-614f74938309",
+      "6791868a-9f81-4cde-8d54-ea6c70461fb2"
+    ],
+    "literature_context_ids": [
+      "e395d18f-9154-43e0-8686-9bd4d8114cf8",
+      "6462fd3a-9f04-4d4e-8133-961c766ec54d"
+    ],
+    "reasoning_summary": "The study targets an identification boundary for data reuse rather than assuming recycled evaluation data remain on-policy enough.",
+    "expected_contribution_type": "offline-improvement safety gate",
+    "possible_target_venues": [
+      "AISTATS",
+      "IROS"
+    ],
+    "cheap_falsifier": "Recycle trajectories in a toy signalized-intersection simulator while increasing behavior-policy divergence; reject if harmful updates never emerge.",
+    "main_risk": "The relevant supplied paper has no abstract, so its exact algorithmic assumptions need later verification.",
+    "proposed_data_source": "Signalized-intersection simulator with logged evaluation trajectories and controlled demand shifts",
+    "target_variable": "rate of harmful policy updates versus trajectory divergence",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Spatial-Uncertainty Stress Tests for Multi-Robot Offloading",
+    "current_belief": "Task-offloading policies in digital-twin UAV networks can be brittle when spatial estimates differ from the deployed environment.",
+    "proposed_challenge": "Evaluate offloading decisions under structured localization, channel-map, and mobility-model errors rather than average random noise.",
+    "scientific_question": "Which forms of spatial uncertainty most strongly reverse task-offloading decisions in digital-twin-enabled robot teams?",
+    "falsifiable_claim": "Correlated spatial bias will cause at least twice as many offloading decision reversals as equal-variance independent noise, and a robust policy will reduce deadline misses by at least 15% under that bias.",
+    "why_now": "A supplied 2026 record directly identifies robust task offloading under spatial uncertainty, while robotics venues solicit multi-agent and networked systems work.",
+    "input_signal_ids": [
+      "6791868a-9f81-4cde-8d54-ea6c70461fb2",
+      "60b79467-cc13-45ec-bfcf-cd7e09900058"
+    ],
+    "literature_context_ids": [
+      "df0d5b99-4f0a-4497-9acb-62e7ca720113",
+      "12aae88d-b917-42b6-a6d8-fe17e433952a"
+    ],
+    "reasoning_summary": "The candidate emphasizes structured perturbations and decision reversals, which are more diagnostic than mean latency alone.",
+    "expected_contribution_type": "robustness benchmark and policy comparison",
+    "possible_target_venues": [
+      "IROS",
+      "ICRA"
+    ],
+    "cheap_falsifier": "Simulate two UAVs and one edge server under independent versus correlated position errors; stop if decision reversals and deadline misses are unchanged.",
+    "main_risk": "The offloading literature record lacks an abstract, limiting confidence about novelty until a later audit.",
+    "proposed_data_source": "Digital-twin UAV-network simulator with controllable localization and channel-map errors",
+    "target_variable": "deadline-miss rate under structured spatial uncertainty",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Spectral Early Warning for Cascading Failures in Robot Teams",
+    "current_belief": "Local perturbations can propagate through coupled systems, yet robot-team monitoring often focuses on per-agent failures rather than network-level stability.",
+    "proposed_challenge": "Transfer multiscale spectral stability diagnostics from networked infrastructure to communication-coupled robot teams.",
+    "scientific_question": "Can a spectral stability statistic predict cascade onset in multi-robot coordination before task-level performance collapses?",
+    "falsifiable_claim": "A spectral statistic computed from interaction graphs will predict cascade onset at least five control steps earlier than aggregate task error with AUROC above 0.80 across two coupling topologies.",
+    "why_now": "The supplied smart-grid work proposes an operator view of multiscale cascading failure, while multi-robot systems present analogous coupled perturbation pathways worth testing.",
+    "input_signal_ids": [
+      "a6f525d4-fdf2-4336-b21e-674a4d7717fb",
+      "936b289b-4405-462a-8fbd-9f00d41386f5"
+    ],
+    "literature_context_ids": [
+      "12aae88d-b917-42b6-a6d8-fe17e433952a",
+      "df0d5b99-4f0a-4497-9acb-62e7ca720113"
+    ],
+    "reasoning_summary": "The transfer is a falsifiable systems hypothesis about coupled dynamics, not an assertion that power grids and robot teams are equivalent.",
+    "expected_contribution_type": "early-warning metric and cascade benchmark",
+    "possible_target_venues": [
+      "RSS",
+      "NeurIPS"
+    ],
+    "cheap_falsifier": "Simulate consensus control with one degraded agent; reject if graph spectra provide no earlier signal than mean tracking error.",
+    "main_risk": "Spectral changes may simply restate obvious communication-graph degradation.",
+    "proposed_data_source": "Multi-agent formation and task-allocation simulations with injected sensor, actuator, and communication faults",
+    "target_variable": "lead time and AUROC for cascade prediction",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Separating Model Uncertainty from Ensemble Disagreement in Robot Perception",
+    "current_belief": "Raw forecast disagreement can conflate disagreement between models with uncertainty within each model, leading to incorrect interpretations of risk.",
+    "proposed_challenge": "Decompose ensemble dispersion for robot perception and test which component predicts downstream errors under shift.",
+    "scientific_question": "Does within-model uncertainty or between-model disagreement better identify unsafe robot perception decisions under domain shift?",
+    "falsifiable_claim": "After decomposition, within-model uncertainty will explain more than 60% of raw ensemble dispersion and outperform between-model disagreement by at least 0.05 AUROC for unsafe-decision prediction.",
+    "why_now": "The supplied finance study shows that raw machine disagreement can mostly reflect model uncertainty, while QUAD separately integrates uncertainty, domain risk, and disagreement.",
+    "input_signal_ids": [
+      "2b65d696-5853-4b1f-af83-614f74938309",
+      "970964c5-38b6-42f0-bd53-93509fcbdd36"
+    ],
+    "literature_context_ids": [
+      "a41a179e-974f-4ae8-a1d4-3c8360e5dcde",
+      "631b1dd0-0f22-4322-9a0b-6e2f11d895af"
+    ],
+    "reasoning_summary": "The candidate tests whether a widely used ensemble signal has the interpretation practitioners assign to it.",
+    "expected_contribution_type": "uncertainty decomposition and diagnostic study",
+    "possible_target_venues": [
+      "AISTATS",
+      "NeurIPS Evaluations & Datasets"
+    ],
+    "cheap_falsifier": "Use a small deep ensemble on shifted image classification and estimate both components; stop if the decomposition is unidentifiable or components are perfectly collinear.",
+    "main_risk": "The Bayesian decomposition from investor forecasts may require assumptions that do not hold for neural ensembles.",
+    "proposed_data_source": "Ensembles of robot perception models evaluated on controlled visual and sensor shifts",
+    "target_variable": "unsafe-decision AUROC by uncertainty component",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Competence-Confidence Calibration in Human-Robot Shared Control",
+    "current_belief": "Human self-confidence can diverge from objective competence, and shared-control systems that trust confidence reports may allocate autonomy poorly.",
+    "proposed_challenge": "Use observed competence-confidence mismatch to adapt authority allocation during training and operation.",
+    "scientific_question": "Does calibration-aware shared control outperform confidence-only authority allocation for novice operators?",
+    "falsifiable_claim": "Calibration-aware allocation will reduce critical task errors by at least 15% relative to confidence-only allocation without increasing completion time by more than 10%.",
+    "why_now": "The supplied nursing study foregrounds competence-confidence mismatch as a safety concern, offering a human-factors bridge to robot teleoperation.",
+    "input_signal_ids": [
+      "6791868a-9f81-4cde-8d54-ea6c70461fb2",
+      "ffcdf5dc-77a5-4c65-9c8c-2b1b4e52d2e8"
+    ],
+    "literature_context_ids": [
+      "c1713001-dfd5-436d-8848-cfea6a0b02cb",
+      "88478c71-73d6-4263-bbbc-5411f6f87867"
+    ],
+    "reasoning_summary": "The study turns a human calibration measurement into a concrete autonomy-allocation rule with safety and efficiency outcomes.",
+    "expected_contribution_type": "human-robot interaction policy",
+    "possible_target_venues": [
+      "IROS",
+      "NeurIPS Position Papers"
+    ],
+    "cheap_falsifier": "Run a small simulated teleoperation study using historical competence plus trial-level confidence; reject if mismatch does not predict errors.",
+    "main_risk": "The supplied confidence evidence is from a small cross-sectional educational setting and may not generalize to teleoperation.",
+    "proposed_data_source": "Controlled novice teleoperation sessions with confidence ratings and objective task scores",
+    "target_variable": "critical error rate under adaptive authority allocation",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Difficulty-Controlled Language Curricula for Robot Skills",
+    "current_belief": "Generated tasks can be assigned nominal difficulty levels, but semantic drift increases when generation moves into unfamiliar domains.",
+    "proposed_challenge": "Generate robot-language tasks with controlled compositional difficulty and independently verify both semantics and embodied solvability.",
+    "scientific_question": "Can a generator-critic curriculum control embodied task difficulty without increasing semantic drift across new robot domains?",
+    "falsifiable_claim": "A critic-filtered curriculum will keep intended-versus-measured difficulty correlation above 0.70 and reduce semantic-invalidity rate by at least 30% relative to unfiltered generation on a held-out domain.",
+    "why_now": "The supplied test-generation work reports controlled difficulty and a 12-18% unfamiliar-domain quality drop, while language supervision is entering end-to-end embodied systems.",
+    "input_signal_ids": [
+      "e5f18a5b-b888-44ec-8a23-c5c259662ea9",
+      "8d30b996-d241-48c5-9d52-42c94261e820"
+    ],
+    "literature_context_ids": [
+      "b43cb3e6-0d27-47ab-bdb7-0214117c91da",
+      "e620b999-952f-41d3-bd25-26772a90ba4d"
+    ],
+    "reasoning_summary": "The key advance would be validating difficulty against actual agent performance and semantic executability, not taxonomy labels alone.",
+    "expected_contribution_type": "dataset-generation method and curriculum benchmark",
+    "possible_target_venues": [
+      "EMNLP",
+      "ICLR"
+    ],
+    "cheap_falsifier": "Generate 100 simulator instructions across three nominal levels and test monotonicity against a baseline agent; stop if measured success is unrelated to intended difficulty.",
+    "main_risk": "Agent-specific competence may confound intrinsic task difficulty.",
+    "proposed_data_source": "Procedurally generated household manipulation tasks with executable goal predicates",
+    "target_variable": "correlation between intended difficulty and empirical failure rate",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Choosing the Adaptation Locus in Multimodal Robot Policies",
+    "current_belief": "Multimodal models contain encoders, connectors, and language backbones with different failure modes, so treating adaptation as one undifferentiated parameter update may be inefficient or brittle.",
+    "proposed_challenge": "Compare encoder-only, connector-only, backbone-only, and sparse hybrid adaptation under matched parameter and compute budgets.",
+    "scientific_question": "Which adaptation locus best improves a new embodied capability while preserving pretrained cross-modal grounding?",
+    "falsifiable_claim": "A task-selected adaptation locus will match full-model adaptation within 2 points of in-domain success while reducing held-out grounding loss by at least 25% and trainable parameters by at least 50%.",
+    "why_now": "The supplied multimodal fine-tuning survey argues for modality-aware, causally relevant adaptation, and rank-gated LoRA supplies a concrete sparse mechanism.",
+    "input_signal_ids": [
+      "4ea7e678-c18a-4925-82a1-1b071c99f4ff",
+      "8d30b996-d241-48c5-9d52-42c94261e820"
+    ],
+    "literature_context_ids": [
+      "16af92af-672d-4718-b24e-ffab9e5e0263",
+      "36ecccc4-8e92-43a5-9536-10ee848003f9"
+    ],
+    "reasoning_summary": "The study makes adaptation-locus choice an empirical selection problem with retention constraints.",
+    "expected_contribution_type": "matched adaptation study and decision guide",
+    "possible_target_venues": [
+      "ECCV",
+      "ICLR"
+    ],
+    "cheap_falsifier": "Fine-tune each locus on one compact grounding task; reject if all loci yield indistinguishable success, retention, and cost.",
+    "main_risk": "Results may be architecture-specific and fail to support a general selection rule.",
+    "proposed_data_source": "Open multimodal robot-policy checkpoints and paired image-instruction-action datasets",
+    "target_variable": "held-out grounding retention at matched task success",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Fine-Tune, Retrieve, or Combine for Embodied Knowledge?",
+    "current_belief": "Fine-tuning and retrieval solve different adaptation problems, and the right architecture may depend on knowledge volatility, latency, and fail-closed behavior.",
+    "proposed_challenge": "Build an auditable decision matrix for robot instructions that separates stable procedural skills from changing environment facts.",
+    "scientific_question": "Which knowledge-volatility and latency conditions favor fine-tuning, retrieval, or hybrid adaptation for embodied instruction following?",
+    "falsifiable_claim": "Retrieval will outperform fine-tuning by at least 10 points on fresh environment facts, fine-tuning will outperform retrieval by at least 5 points on stable action-format compliance, and the hybrid will dominate only when interference remains below a declared threshold.",
+    "why_now": "The supplied measured architecture framework exposes explicit axes and interference checks, while embodied language supervision creates mixed knowledge demands.",
+    "input_signal_ids": [
+      "3017349a-4546-425c-b605-f1677a6b0e33",
+      "e5f18a5b-b888-44ec-8a23-c5c259662ea9"
+    ],
+    "literature_context_ids": [
+      "bd0f62a1-f738-4b64-ae9c-8787f2bac623",
+      "e620b999-952f-41d3-bd25-26772a90ba4d"
+    ],
+    "reasoning_summary": "The candidate transfers a measured architecture-selection framework to embodied knowledge while preserving explicit fail-closed and interference tests.",
+    "expected_contribution_type": "architecture decision framework and benchmark",
+    "possible_target_venues": [
+      "AAAI",
+      "EMNLP"
+    ],
+    "cheap_falsifier": "Create a small simulator set with stable skills and time-varying object facts; stop if the three architectures show no interaction with volatility.",
+    "main_risk": "A small benchmark may encode the expected architecture ordering by construction.",
+    "proposed_data_source": "Embodied instruction tasks with controlled updates to maps, object locations, and procedural rules",
+    "target_variable": "task success by knowledge volatility class and architecture",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Adversarial Detection Tokens for Robot Vision Transformers",
+    "current_belief": "A dedicated detection token may identify adversarial inputs to vision transformers, but robot safety depends on detecting physically realizable and temporally persistent attacks.",
+    "proposed_challenge": "Evaluate one-token adversarial detection inside a perception-control loop under digital and physical-style perturbations.",
+    "scientific_question": "Can a single additional detection token identify adversarial robot observations early enough to prevent unsafe actions?",
+    "falsifiable_claim": "The detection token will achieve attack AUROC above 0.90 and reduce unsafe actions by at least 40% at less than 5% clean-task success loss.",
+    "why_now": "The supplied Detection Token record offers a minimal architectural intervention, and robotics venues provide the consequential closed-loop setting needed to test it.",
+    "input_signal_ids": [
+      "c7513b7b-6828-47e7-a780-fad03797bef0",
+      "60b79467-cc13-45ec-bfcf-cd7e09900058"
+    ],
+    "literature_context_ids": [
+      "bdf3f3d6-e74e-40f9-aafb-4b1adaaf4c5c",
+      "6462fd3a-9f04-4d4e-8133-961c766ec54d"
+    ],
+    "reasoning_summary": "The research value is not another attack classifier but proof that detection latency changes downstream safety.",
+    "expected_contribution_type": "robust perception module and closed-loop evaluation",
+    "possible_target_venues": [
+      "CVPR",
+      "ICRA"
+    ],
+    "cheap_falsifier": "Add a token to a small ViT controller under patch attacks; reject if attack scores cannot separate clean and attacked observations above a simple entropy baseline.",
+    "main_risk": "The supplied detection-token paper has no abstract, so implementation and claimed scope require later verification.",
+    "proposed_data_source": "Vision-based driving or manipulation simulation with digital patches and viewpoint variation",
+    "target_variable": "unsafe-action reduction at fixed clean performance",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Training-Only Language Supervision Under Causal Reasoning Ablations",
+    "current_belief": "Training-only language supervision can inject a staged perception-to-planning reasoning chain without autoregressive inference, but it is unclear which stages cause control gains.",
+    "proposed_challenge": "Intervene on supervision stages and answer quality while keeping the visual-control architecture and inference cost fixed.",
+    "scientific_question": "Which stage of task-decomposed language supervision contributes causally to end-to-end driving robustness?",
+    "falsifiable_claim": "Removing risk-stage supervision will reduce rare-hazard planning success by at least 5 points more than removing register-matched but semantically irrelevant language of equal token count.",
+    "why_now": "The supplied TaLS record exposes a four-stage reasoning chain, making stage-level causal ablation possible rather than treating language supervision as a single block.",
+    "input_signal_ids": [
+      "ac2e8abf-4aa0-415d-a873-28aa0dfe1ab1",
+      "6992c3b1-914b-4d46-b8a3-2c8204d8ec38"
+    ],
+    "literature_context_ids": [
+      "e620b999-952f-41d3-bd25-26772a90ba4d",
+      "0c72a837-f74f-4326-b3de-7c35ff5219aa"
+    ],
+    "reasoning_summary": "The experiment separates semantic supervision from generic linguistic regularization and stylistic effects.",
+    "expected_contribution_type": "causal ablation and mechanism study",
+    "possible_target_venues": [
+      "ICML",
+      "CoRL"
+    ],
+    "cheap_falsifier": "Train a reduced model with correct versus shuffled risk answers; stop if both conditions produce indistinguishable planning behavior.",
+    "main_risk": "Stage ablations may alter optimization difficulty rather than isolate semantic mechanisms.",
+    "proposed_data_source": "DriveLM-derived staged question-answer supervision paired with end-to-end driving data",
+    "target_variable": "rare-hazard planning success under stage ablation",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Uncertainty-Aware Weak Supervision for Temporal Robot Skill Localization",
+    "current_belief": "Weakly supervised temporal localization can exploit knowledge selection, but confidence may be poorly calibrated on unseen viewpoints and skill compositions.",
+    "proposed_challenge": "Tie localization uncertainty to selective downstream skill segmentation and controller switching.",
+    "scientific_question": "Can calibrated uncertainty make weakly supervised temporal skill localization safe enough for controller handoffs?",
+    "falsifiable_claim": "At 80% temporal coverage, uncertainty-based abstention will reduce incorrect controller handoffs by at least 25% over confidence thresholding from the base localizer.",
+    "why_now": "The supplied weakly supervised localization title and action-detection record point to uncertainty, viewpoint, and temporal consistency as a combined embodied evaluation gap.",
+    "input_signal_ids": [
+      "00a1eda3-9cce-4e2d-9f3d-5d29bad0a998",
+      "970964c5-38b6-42f0-bd53-93509fcbdd36"
+    ],
+    "literature_context_ids": [
+      "4cf2e557-4e05-466f-b190-137ef8d3d61d",
+      "5e36b8ed-c050-4728-8070-998b5cd341b9"
+    ],
+    "reasoning_summary": "The contribution measures whether uncertainty improves an actual temporal decision rather than only localization calibration.",
+    "expected_contribution_type": "selective temporal localization benchmark",
+    "possible_target_venues": [
+      "ICCV",
+      "NeurIPS Evaluations & Datasets"
+    ],
+    "cheap_falsifier": "Calibrate a public weakly supervised localizer on one action dataset; reject if uncertainty is unrelated to handoff-boundary errors.",
+    "main_risk": "Both supplied records lack abstracts, so the novelty relationship needs subsequent source verification.",
+    "proposed_data_source": "Long-horizon robot videos with coarse task labels and frame-level skill boundaries for evaluation",
+    "target_variable": "incorrect controller-handoff rate at fixed temporal coverage",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Procedural Invariance Tests for Robot Preference Elicitation",
+    "current_belief": "Choice estimates can change with elicitation procedure, and open-ended formats may trade realism for flexibility and hypothetical bias.",
+    "proposed_challenge": "Compare pairwise, ranked, and mixed open-ended queries for learning human preferences over robot behaviors.",
+    "scientific_question": "Are learned human preferences over robot actions invariant to the elicitation procedure used to collect them?",
+    "falsifiable_claim": "At least one procedure pair will yield policy rankings with Kendall correlation below 0.8, and inconsistency will predict held-out choice error better than self-reported confidence.",
+    "why_now": "The supplied choice-experiment study foregrounds hypothetical bias, consistency, and procedural invariance, all central to preference-based robot learning.",
+    "input_signal_ids": [
+      "8d30b996-d241-48c5-9d52-42c94261e820",
+      "ffcdf5dc-77a5-4c65-9c8c-2b1b4e52d2e8"
+    ],
+    "literature_context_ids": [
+      "0486bfda-4179-4fe7-9c08-3f870df37ec2",
+      "88478c71-73d6-4263-bbbc-5411f6f87867"
+    ],
+    "reasoning_summary": "The candidate treats the annotation interface as part of the measurement model rather than a neutral data-collection detail.",
+    "expected_contribution_type": "human-preference measurement study",
+    "possible_target_venues": [
+      "ICLR",
+      "NeurIPS Position Papers"
+    ],
+    "cheap_falsifier": "Collect a small within-subject comparison of pairwise and ranking judgments on prerecorded robot trajectories; stop if rankings are nearly identical and equally predictive.",
+    "main_risk": "Small interface effects may not matter after policy optimization.",
+    "proposed_data_source": "Human judgments over short simulated robot trajectories collected with multiple elicitation formats",
+    "target_variable": "cross-procedure preference-ranking consistency",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Calibration-Aware Abstention for Subjective Robot-Language Safety Labels",
+    "current_belief": "Subjective harm labels contain annotator disagreement, yet training pipelines often collapse them to a single label and ignore uncertainty.",
+    "proposed_challenge": "Use annotator agreement and token-level uncertainty to decide when a robot-language safety classifier should abstain or request clarification.",
+    "scientific_question": "Can reliability-aware preference optimization improve selective safety decisions for ambiguous embodied instructions?",
+    "falsifiable_claim": "At 70% coverage, reliability-aware training will reduce safety-label error by at least 20% relative to majority-label training and improve calibration error by at least 0.03.",
+    "why_now": "The supplied RA-DPO study combines annotator agreement, model confidence, and token uncertainty, while embodied agents increasingly receive ambiguous natural-language commands.",
+    "input_signal_ids": [
+      "e5f18a5b-b888-44ec-8a23-c5c259662ea9",
+      "3017349a-4546-425c-b605-f1677a6b0e33"
+    ],
+    "literature_context_ids": [
+      "606ff021-4cf4-4629-9a51-68a42e259394",
+      "da2b0772-7d82-4dfa-8a96-805d6e3ec0f6"
+    ],
+    "reasoning_summary": "This tests whether disagreement-aware learning improves a downstream abstention decision in an embodied instruction domain.",
+    "expected_contribution_type": "selective safety classifier and annotation protocol",
+    "possible_target_venues": [
+      "EMNLP",
+      "AAAI"
+    ],
+    "cheap_falsifier": "Relabel a few hundred ambiguous robot instructions with multiple annotators; reject if agreement and model error are unrelated.",
+    "main_risk": "Normative disagreement may not be reducible to predictive uncertainty.",
+    "proposed_data_source": "Multi-annotator safety labels for ambiguous household and navigation instructions",
+    "target_variable": "selective safety-label error at fixed coverage",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Natural-Attack Stress Tests for Embodied Infrastructure Networks",
+    "current_belief": "Random node removal can underestimate systemic risk when real hazards target structurally or environmentally correlated components.",
+    "proposed_challenge": "Compare random failures with hazard-informed removal of charging, communication, or transfer nodes used by robot fleets.",
+    "scientific_question": "Do hazard-informed node failures expose qualitatively different fragility in large robot-service networks than random-failure tests?",
+    "falsifiable_claim": "Removing nodes in descending hazard vulnerability will reach a 50% service-efficiency loss after at least 30% fewer removals than random attack, with the vulnerable-node ranking stable across bootstrap samples.",
+    "why_now": "The supplied global-shipping study reports climate-informed stress tests that reveal hidden high-risk ports, suggesting a benchmark change for embodied service networks.",
+    "input_signal_ids": [
+      "936b289b-4405-462a-8fbd-9f00d41386f5",
+      "8606ecdb-0350-4efc-b805-a3f7162c9f1f"
+    ],
+    "literature_context_ids": [
+      "fe976cf1-fe6d-4754-81fc-35e81f7176d7",
+      "12aae88d-b917-42b6-a6d8-fe17e433952a"
+    ],
+    "reasoning_summary": "The contribution is an evaluation intervention: failures follow an external hazard model instead of an analytically convenient random process.",
+    "expected_contribution_type": "network stress-test benchmark",
+    "possible_target_venues": [
+      "NeurIPS",
+      "IROS"
+    ],
+    "cheap_falsifier": "Apply vulnerability-ranked and random removal to one synthetic delivery network; stop if degradation curves are indistinguishable.",
+    "main_risk": "Hazard maps may dominate results and obscure robot-specific coordination effects.",
+    "proposed_data_source": "Synthetic or public mobility-service networks with charging, depot, and communication-node metadata",
+    "target_variable": "node-removal fraction at 50% service-efficiency loss",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  },
+  {
+    "title": "Rebound Effects of Efficient Embodied Inference",
+    "current_belief": "Efficiency gains can lower per-inference cost while increasing total compute consumption through higher deployment volume or control frequency.",
+    "proposed_challenge": "Measure total system compute before and after quantization or parameter-efficient adaptation, including induced changes in robot fleet scale and inference cadence.",
+    "scientific_question": "Under what demand elasticity does more efficient embodied inference increase rather than decrease total compute consumption?",
+    "falsifiable_claim": "In at least one fleet workload, a 2x reduction in per-step compute will induce more than a 2x increase in inference volume, yielding higher total compute under an explicitly estimated demand response.",
+    "why_now": "The supplied AI-infrastructure position identifies a Jevons-style rebound hypothesis, while low-rank and edge adaptation make per-deployment efficiency a live embodied-AI issue.",
+    "input_signal_ids": [
+      "ffcdf5dc-77a5-4c65-9c8c-2b1b4e52d2e8",
+      "8d30b996-d241-48c5-9d52-42c94261e820"
+    ],
+    "literature_context_ids": [
+      "1115b1ec-1009-48ce-888b-040b76cafb94",
+      "9a68ccb3-9450-4b98-a620-01e712a680fc"
+    ],
+    "reasoning_summary": "This is a measurement and systems-identification candidate, not an assumption that rebound necessarily occurs.",
+    "expected_contribution_type": "systems measurement and position validation",
+    "possible_target_venues": [
+      "NeurIPS Position Papers",
+      "ICLR"
+    ],
+    "cheap_falsifier": "Model one fleet workload using observed request logs and counterfactual per-step costs; reject if plausible demand elasticities cannot produce rebound.",
+    "main_risk": "Real demand response may be unavailable, leaving only speculative elasticity assumptions.",
+    "proposed_data_source": "Robot-fleet inference logs or trace-driven simulation with cost and cadence controls",
+    "target_variable": "total compute consumption after efficiency intervention",
+    "generation_model": "codex-cli",
+    "prompt_hash": "d9f0747ade4be8a65da49d97a5c893ed0ea48c5a97a93a79d05639d09acdd934",
+    "generation_timestamp": "2026-09-28T13:20:11.705482+00:00"
+  }
+]

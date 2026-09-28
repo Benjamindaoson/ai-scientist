@@ -5,7 +5,6 @@ import html as html_module
 import json
 import re
 import shutil
-import tempfile
 import uuid
 import time
 import xml.etree.ElementTree as ET
@@ -69,29 +68,29 @@ class CodexCandidateGenerator:
         task_id = f"topic-generation-{uuid.uuid4().hex[:12]}"
         output = self.workspace / "artifacts" / "topic_discovery" / f"{task_id}.json"
         output.parent.mkdir(parents=True, exist_ok=True)
-        with tempfile.TemporaryDirectory(prefix="research-os-topic-") as isolated:
-            isolated_workspace = Path(isolated)
-            isolated_output = isolated_workspace / "candidates.json"
-            context = {
-                "strategy": strategy, "minimum_candidates": minimum, "heuristics": list(DISCOVERY_HEURISTICS),
-                "signals": signals[:40], "recent_literature": literature_context[:80], "killed_idea_memory": killed_memory[:100],
-                "required_output_path": str(isolated_output),
-                "candidate_fields": ["title", "current_belief", "proposed_challenge", "scientific_question", "falsifiable_claim", "why_now", "input_signal_ids", "literature_context_ids", "reasoning_summary", "expected_contribution_type", "possible_target_venues", "cheap_falsifier", "main_risk", "proposed_data_source", "target_variable"],
-                "constraints": ["Do not copy examples or use static templates", "Each question and claim must be coherent and falsifiable", "Use only supplied signal and literature IDs", "Write a JSON array with at least minimum_candidates records", "Write only required_output_path and Research OS task-package files", "Do not run git, create branches, commit, push, or edit source code"],
-            }
-            prompt_hash = hashlib.sha256(json.dumps(context, sort_keys=True, default=str).encode()).hexdigest()
-            result = self.executor.run(TaskSpec(
-                task_id=task_id, role=ResearchRole.SCOUT, capability=Capability.DISCOVER_CANDIDATES,
-                objective=f"Generate at least {minimum} distinct research candidates and write the JSON array to {isolated_output}",
-                workspace=str(isolated_workspace), input_refs=[str(isolated_workspace)],
-                acceptance_criteria=["All candidates use supplied evidence IDs", "No static template candidates", "Output is valid JSON at required_output_path"],
-                context=context,
-            ))
-            if result.status != "SUCCEEDED" or not isolated_output.is_file():
-                raise RuntimeError(f"Codex candidate generation failed: {result.error_code or result.summary}")
-            rows = json.loads(isolated_output.read_text(encoding="utf-8"))
-            output.write_text(json.dumps(rows, indent=2), encoding="utf-8")
-            shutil.copytree(isolated_workspace, self.workspace / ".research-os" / "executor-workspaces" / task_id, dirs_exist_ok=True)
+        isolated_workspace = self.workspace.parent / ".research-os-executor" / task_id
+        isolated_workspace.mkdir(parents=True, exist_ok=False)
+        isolated_output = isolated_workspace / "candidates.json"
+        context = {
+            "strategy": strategy, "minimum_candidates": minimum, "heuristics": list(DISCOVERY_HEURISTICS),
+            "signals": signals[:40], "recent_literature": literature_context[:80], "killed_idea_memory": killed_memory[:100],
+            "required_output_path": str(isolated_output),
+            "candidate_fields": ["title", "current_belief", "proposed_challenge", "scientific_question", "falsifiable_claim", "why_now", "input_signal_ids", "literature_context_ids", "reasoning_summary", "expected_contribution_type", "possible_target_venues", "cheap_falsifier", "main_risk", "proposed_data_source", "target_variable"],
+            "constraints": ["Do not copy examples or use static templates", "Each question and claim must be coherent and falsifiable", "Use only supplied signal and literature IDs", "Write a JSON array with at least minimum_candidates records", "Write only required_output_path and Research OS task-package files", "Do not run git, create branches, commit, push, or edit source code"],
+        }
+        prompt_hash = hashlib.sha256(json.dumps(context, sort_keys=True, default=str).encode()).hexdigest()
+        result = self.executor.run(TaskSpec(
+            task_id=task_id, role=ResearchRole.SCOUT, capability=Capability.DISCOVER_CANDIDATES,
+            objective=f"Generate at least {minimum} distinct research candidates and write the JSON array to {isolated_output}",
+            workspace=str(isolated_workspace), input_refs=[str(isolated_workspace)],
+            acceptance_criteria=["All candidates use supplied evidence IDs", "No static template candidates", "Output is valid JSON at required_output_path"],
+            context=context,
+        ))
+        if result.status != "SUCCEEDED" or not isolated_output.is_file():
+            raise RuntimeError(f"Codex candidate generation failed: {result.error_code or result.summary}")
+        rows = json.loads(isolated_output.read_text(encoding="utf-8"))
+        output.write_text(json.dumps(rows, indent=2), encoding="utf-8")
+        shutil.copytree(isolated_workspace, self.workspace / ".research-os" / "executor-workspaces" / task_id, dirs_exist_ok=True)
         if not isinstance(rows, list) or len(rows) < minimum:
             raise ValueError("Codex candidate generation returned fewer than the required candidates")
         timestamp = datetime.now(timezone.utc).isoformat()
@@ -122,25 +121,25 @@ class CodexScientificGateExecutor:
     def _run_json(self, *, role: ResearchRole, capability: Capability, objective: str, context: dict[str, Any], name: str) -> Any:
         task_id = f"topic-{name}-{uuid.uuid4().hex[:12]}"
         archive = self.workspace / ".research-os" / "executor-workspaces" / task_id
-        with tempfile.TemporaryDirectory(prefix="research-os-topic-") as isolated:
-            isolated_workspace = Path(isolated)
-            output = isolated_workspace / "result.json"
-            bounded_context = {**context, "required_output_path": str(output), "execution_constraints": [
-                "Write only required_output_path and Research OS task-package files",
-                "Do not run git, create branches, commit, push, or edit source code",
-                "Use only supplied evidence refs; mark unsupported fields unresolved",
-            ]}
-            result = self.executor.run(TaskSpec(
-                task_id=task_id, role=role, capability=capability, objective=objective,
-                workspace=str(isolated_workspace), input_refs=[str(isolated_workspace)],
-                acceptance_criteria=["Output is valid JSON at required_output_path", "Every scientific conclusion cites supplied evidence refs", "Unsupported requirements remain unresolved or blocked"],
-                context=bounded_context,
-            ))
-            if result.status != "SUCCEEDED" or not output.is_file():
-                raise RuntimeError(f"{role.value} gate execution failed: {result.error_code or result.summary}")
-            payload = json.loads(output.read_text(encoding="utf-8"))
-            shutil.copytree(isolated_workspace, archive, dirs_exist_ok=True)
-            isolated_root, archive_root = str(isolated_workspace), str(archive)
+        isolated_workspace = self.workspace.parent / ".research-os-executor" / task_id
+        isolated_workspace.mkdir(parents=True, exist_ok=False)
+        output = isolated_workspace / "result.json"
+        bounded_context = {**context, "required_output_path": str(output), "execution_constraints": [
+            "Write only required_output_path and Research OS task-package files",
+            "Do not run git, create branches, commit, push, or edit source code",
+            "Use only supplied evidence refs; mark unsupported fields unresolved",
+        ]}
+        result = self.executor.run(TaskSpec(
+            task_id=task_id, role=role, capability=capability, objective=objective,
+            workspace=str(isolated_workspace), input_refs=[str(isolated_workspace)],
+            acceptance_criteria=["Output is valid JSON at required_output_path", "Every scientific conclusion cites supplied evidence refs", "Unsupported requirements remain unresolved or blocked"],
+            context=bounded_context,
+        ))
+        if result.status != "SUCCEEDED" or not output.is_file():
+            raise RuntimeError(f"{role.value} gate execution failed: {result.error_code or result.summary}")
+        payload = json.loads(output.read_text(encoding="utf-8"))
+        shutil.copytree(isolated_workspace, archive, dirs_exist_ok=True)
+        isolated_root, archive_root = str(isolated_workspace), str(archive)
 
         def remap(value):
             if isinstance(value, str) and value.startswith(isolated_root):
