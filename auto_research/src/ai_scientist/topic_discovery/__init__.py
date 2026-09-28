@@ -11,13 +11,13 @@ from .core import (
     TopicReadinessGate,
     TopicVerdict,
 )
-from .service import CodexCandidateGenerator, ExternalPriorExpander, ProductionTopicPipeline, TopicDiscoveryService
+from .service import CodexCandidateGenerator, ExternalPriorExpander, ProductionTopicPipeline, RecordedCodexCandidateGenerator, TopicDiscoveryService
 from .reporting import TopicReportWriter
 
 __all__ = [
     "CandidateIdea", "DiscoveryLoop", "DiscoveryResult", "GapDecision", "GateEvidence",
     "IdeaDeduplicator", "NoveltyDecision", "NoveltyJudge", "ResearchProgram",
     "TopicReadinessGate", "TopicVerdict",
-    "CodexCandidateGenerator", "ExternalPriorExpander", "ProductionTopicPipeline", "TopicDiscoveryService",
+    "CodexCandidateGenerator", "RecordedCodexCandidateGenerator", "ExternalPriorExpander", "ProductionTopicPipeline", "TopicDiscoveryService",
     "TopicReportWriter",
 ]

@@ -35,8 +35,8 @@ KNOWN_DANGEROUS_VLA_PRIORS = (
     {"title": "Failure Prediction at Runtime for Generative Robot Policies", "arxiv": "2510.09459"},
     {"title": "Perturbation-Based Epistemic Uncertainty for Failure Detection in Vision-Language-Action Models", "arxiv": "2606.20754"},
     {"title": "SAFE: Multitask Failure Detection for Vision-Language-Action Models", "arxiv": "2506.09937"},
-    {"title": "Uncertainty Quantification for Flow-Based Vision-Language-Action Models", "arxiv": None},
-    {"title": "Ask Before You Act: Token-Level Uncertainty for Intervention in Vision-Language-Action Models", "arxiv": None},
+    {"title": "Uncertainty Quantification for Flow-Based Vision-Language-Action Models", "arxiv": "2606.18043"},
+    {"title": "Ask Before You Act: Token-Level Uncertainty for Intervention in Vision-Language-Action Models", "arxiv": None, "openreview": "NX0euXAv98"},
 )
 
 
@@ -44,7 +44,9 @@ def validate_dataset_preflight(evidence: dict[str, Any]) -> dict[str, Any]:
     required = ("official_docs", "actual_size", "download_method", "license", "schema", "target_variable", "target_variable_available", "metadata_load")
     missing = [name for name in required if not evidence.get(name)]
     load = evidence.get("metadata_load") or {}
-    if evidence.get("target_variable_available") is not True:
+    if evidence.get("status") == "DATA_BLOCKED":
+        status = "DATA_BLOCKED"
+    elif evidence.get("target_variable_available") is not True:
         status = "DATA_LABEL_GAP"
     elif missing or load.get("status") != "SUCCEEDED" or not load.get("artifact"):
         status = "DATA_PARTIAL"
@@ -85,6 +87,18 @@ class CodexCandidateGenerator:
         timestamp = datetime.now(timezone.utc).isoformat()
         for row in rows:
             row.update(generation_model="codex-cli", prompt_hash=prompt_hash, generation_timestamp=timestamp)
+        return rows
+
+
+class RecordedCodexCandidateGenerator:
+    """Resume a recorded Codex generation without invoking a second model run."""
+    def __init__(self, path: str | Path):
+        self.path = Path(path)
+
+    def generate(self, *, minimum: int, strategy: str, signals: list[dict], literature_context: list[dict], killed_memory: list[dict]) -> list[dict]:
+        rows = json.loads(self.path.read_text(encoding="utf-8"))
+        if len(rows) < minimum or any(row.get("generation_model") != "codex-cli" or not row.get("prompt_hash") or not row.get("generation_timestamp") for row in rows):
+            raise ValueError("recorded candidates lack verified Codex generation provenance")
         return rows
 
 
@@ -454,7 +468,7 @@ class ProductionTopicPipeline:
                 "preflight": f"Official documentation fetch {response.status_code}; {len(response.content)} bytes; no failure/intervention label documented",
             }
         except Exception as exc:
-            evidence = {"status": "DATA_BLOCKED", "dataset_name": "DROID", "source": url, "error": str(exc)}
+            evidence = {"status": "DATA_BLOCKED", "dataset_name": "DROID", "source": url, "error": str(exc), "preflight": str(exc)}
         return validate_dataset_preflight(evidence)
 
     @staticmethod
@@ -525,10 +539,22 @@ class TopicDiscoveryService:
         self.program = program or ResearchProgram.production_default()
 
     def run_until_ready(self, *, max_waves: int | None = None) -> dict[str, Any]:
+        with self.pipeline.opportunity_repository.engine.begin() as connection:
+            previous = connection.execute(select(opportunity_models.topic_dossiers.c.idea_id).where(opportunity_models.topic_dossiers.c.status == "TOPIC_READY")).all()
+            if previous:
+                idea_ids = [row.idea_id for row in previous]
+                connection.execute(update(opportunity_models.topic_dossiers).where(opportunity_models.topic_dossiers.c.idea_id.in_(idea_ids)).values(status="NOVELTY_UNCERTAIN"))
+                connection.execute(update(opportunity_models.topic_candidates).where(opportunity_models.topic_candidates.c.idea_id.in_(idea_ids)).values(state="NOVELTY_UNCERTAIN"))
+                connection.execute(update(opportunity_models.idea_lineage).where(opportunity_models.idea_lineage.c.idea_id.in_(idea_ids)).values(status="NOVELTY_UNCERTAIN", failed_gate="HARDENING_REAUDIT"))
+                for idea_id in idea_ids:
+                    connection.execute(opportunity_models.feasibility_audits.insert().values(
+                        feasibility_audit_id=new_id(), idea_id=idea_id, audit_type="HARDENING_REAUDIT",
+                        status="FEASIBILITY_UNCERTAIN", evidence={"reason": "Previous readiness used abstract-only novelty evidence and homepage-only data preflight."},
+                    ))
         run = self.pipeline.opportunity_repository.insert(opportunity_models.discovery_runs, discovery_run_id=new_id(), program=asdict(self.program), status="RUNNING", wave=0, counts={})
         try:
             result = DiscoveryLoop(self.pipeline, self.program, max_waves=max_waves).run_until_topic_ready()
-            values = {"status": result.status, "wave": result.waves_run, "counts": {"ideas_generated": result.ideas_generated, "ideas_killed": result.ideas_killed}, "completed_at": datetime.now(timezone.utc), "topic_id": self.pipeline.last_dossier["topic_id"] if self.pipeline.last_dossier else None}
+            values = {"status": result.status, "wave": result.waves_run, "counts": {"ideas_generated": result.ideas_generated, "ideas_killed": result.ideas_killed, "candidates_screened": result.candidates_screened, "candidates_deep_audited": result.candidates_deep_audited, "topic_ready_survivors": len(result.ready_candidates)}, "completed_at": datetime.now(timezone.utc), "topic_id": self.pipeline.last_dossier["topic_id"] if self.pipeline.last_dossier else None}
             with self.pipeline.opportunity_repository.engine.begin() as connection:
                 connection.execute(update(opportunity_models.discovery_runs).where(opportunity_models.discovery_runs.c.discovery_run_id == run["discovery_run_id"]).values(**values))
             return {"discovery_run_id": run["discovery_run_id"], **values, "dossier": self.pipeline.last_dossier}

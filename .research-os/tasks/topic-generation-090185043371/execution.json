@@ -1,0 +1,26 @@
+{
+  "task_id": "topic-generation-090185043371",
+  "executor": "codex_cli",
+  "workspace": "D:\\01_work\\AI\u79d1\u5b66\u5bb6\uff08auto_research\uff09",
+  "argv": [
+    "codex",
+    "--ask-for-approval",
+    "never",
+    "--sandbox",
+    "workspace-write",
+    "exec",
+    "--ephemeral",
+    "--skip-git-repo-check",
+    "--cd",
+    "D:\\01_work\\AI\u79d1\u5b66\u5bb6\uff08auto_research\uff09",
+    "--output-schema",
+    "D:\\01_work\\AI\u79d1\u5b66\u5bb6\uff08auto_research\uff09\\.research-os\\tasks\\topic-generation-090185043371\\task-result.schema.json",
+    "--output-last-message",
+    "D:\\01_work\\AI\u79d1\u5b66\u5bb6\uff08auto_research\uff09\\.research-os\\tasks\\topic-generation-090185043371\\output.json"
+  ],
+  "return_code": 0,
+  "stdout_sha256": "f02668e78adee8952bd7ac50ef082104df0e8d7041c998ecd2f5efdebe2511da",
+  "stderr_sha256": "2039e59319a41b772d992690bb77529b391e5494385a81bb24335564d1b83fd3",
+  "stdout_ref": "D:\\01_work\\AI\u79d1\u5b66\u5bb6\uff08auto_research\uff09\\.research-os\\tasks\\topic-generation-090185043371\\stdout.log",
+  "stderr_ref": "D:\\01_work\\AI\u79d1\u5b66\u5bb6\uff08auto_research\uff09\\.research-os\\tasks\\topic-generation-090185043371\\stderr.log"
+}

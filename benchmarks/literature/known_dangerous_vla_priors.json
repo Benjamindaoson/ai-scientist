@@ -1,0 +1,32 @@
+[
+  {
+    "source": "arxiv", "source_record_id": "2510.09459", "title": "Failure Prediction at Runtime for Generative Robot Policies",
+    "abstract": "FIPER predicts runtime failure in generative imitation-learning policies using observation out-of-distribution scores and action-chunk entropy calibrated on successful rollouts.",
+    "publication_year": 2025, "identifiers": {"arxiv": "2510.09459"}, "authors": [],
+    "version": {"version_label": "arxiv-v1", "source_url": "https://arxiv.org/abs/2510.09459"}
+  },
+  {
+    "source": "arxiv", "source_record_id": "2606.20754", "title": "Perturbation-Based Epistemic Uncertainty for Failure Detection in Vision-Language-Action Models",
+    "abstract": "A training-free framework injects low-rank weight perturbations into VLA models and uses action disagreement as epistemic uncertainty for failure detection under distribution shift.",
+    "publication_year": 2026, "identifiers": {"arxiv": "2606.20754"}, "authors": [],
+    "version": {"version_label": "arxiv-v1", "source_url": "https://arxiv.org/abs/2606.20754"}
+  },
+  {
+    "source": "arxiv", "source_record_id": "2506.09937", "title": "SAFE: Multitask Failure Detection for Vision-Language-Action Models",
+    "abstract": "SAFE learns a task-general failure score from VLA internal features, evaluates unseen tasks and environments, and calibrates time-varying alert thresholds with conformal prediction.",
+    "publication_year": 2025, "identifiers": {"arxiv": "2506.09937"}, "authors": [],
+    "version": {"version_label": "arxiv-v1", "source_url": "https://arxiv.org/abs/2506.09937"}
+  },
+  {
+    "source": "arxiv", "source_record_id": "2606.18043", "title": "Uncertainty Quantification for Flow-Based Vision-Language-Action Models",
+    "abstract": "Velocity-field disagreement across a small ensemble quantifies epistemic uncertainty in flow-based VLAs for failure detection and active multitask fine-tuning.",
+    "publication_year": 2026, "identifiers": {"arxiv": "2606.18043"}, "authors": [],
+    "version": {"version_label": "arxiv-v1", "source_url": "https://arxiv.org/abs/2606.18043"}
+  },
+  {
+    "source": "openreview", "source_record_id": "NX0euXAv98", "title": "Ask Before You Act: Token-Level Uncertainty for Intervention in Vision-Language-Action Models",
+    "abstract": "Token-level entropy and perplexity from a fine-tuned pi0-FAST policy trigger human intervention and shared control during robotic manipulation.",
+    "publication_year": 2025, "identifiers": {"openreview": "NX0euXAv98"}, "authors": [],
+    "version": {"version_label": "openreview-current", "source_url": "https://openreview.net/forum?id=NX0euXAv98"}
+  }
+]

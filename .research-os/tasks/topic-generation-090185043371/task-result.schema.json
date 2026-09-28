@@ -1,0 +1,151 @@
+{
+  "$defs": {
+    "ResearchRole": {
+      "enum": [
+        "scout",
+        "pi",
+        "engineer",
+        "analyst",
+        "editor",
+        "reviewer"
+      ],
+      "title": "ResearchRole",
+      "type": "string"
+    },
+    "ReviewFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "WRITING",
+            "STATISTICS",
+            "IMPLEMENTATION",
+            "MISSING_EXPERIMENT",
+            "NOVELTY",
+            "CITATION",
+            "CLAIM_EVIDENCE",
+            "PROTOCOL"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "BLOCKING",
+            "MAJOR",
+            "MINOR"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "impact": {
+          "title": "Impact",
+          "type": "string"
+        },
+        "required_resolution": {
+          "title": "Required Resolution",
+          "type": "string"
+        }
+      },
+      "required": [
+        "finding_id",
+        "category",
+        "severity",
+        "target",
+        "evidence_refs",
+        "impact",
+        "required_resolution"
+      ],
+      "title": "ReviewFinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {
+      "title": "Task Id",
+      "type": "string"
+    },
+    "role": {
+      "$ref": "#/$defs/ResearchRole"
+    },
+    "status": {
+      "enum": [
+        "SUCCEEDED",
+        "FAILED",
+        "WAIT_FOR_HUMAN"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "output_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Output Refs",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/ReviewFinding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "execution_record_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Execution Record Ref"
+    },
+    "error_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Code"
+    }
+  },
+  "required": [
+    "task_id",
+    "role",
+    "status",
+    "summary",
+    "output_refs",
+    "findings",
+    "execution_record_ref",
+    "error_code"
+  ],
+  "title": "TaskResult",
+  "type": "object"
+}

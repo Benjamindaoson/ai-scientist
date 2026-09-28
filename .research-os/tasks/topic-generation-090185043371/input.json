@@ -1,0 +1,1340 @@
+{
+  "task_id": "topic-generation-090185043371",
+  "role": "scout",
+  "capability": "discover_candidates",
+  "objective": "Generate at least 20 distinct research candidates and write the JSON array to D:\\01_work\\AI科学家（auto_research）\\artifacts\\topic_discovery\\topic-generation-090185043371.json",
+  "workspace": "D:\\01_work\\AI科学家（auto_research）",
+  "input_refs": [
+    "D:\\01_work\\AI科学家（auto_research）\\artifacts\\topic_discovery"
+  ],
+  "acceptance_criteria": [
+    "All candidates use supplied evidence IDs",
+    "No static template candidates",
+    "Output is valid JSON at required_output_path"
+  ],
+  "context": {
+    "strategy": "HARDENED_DYNAMIC",
+    "minimum_candidates": 20,
+    "heuristics": [
+      "measurement and identification",
+      "contradictions and negative results",
+      "new dataset affordances",
+      "benchmark changes",
+      "reviewer pain points",
+      "citation-neighborhood gaps",
+      "cross-domain transfer"
+    ],
+    "signals": [
+      {
+        "signal_id": "2b65d696-5853-4b1f-af83-614f74938309",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "e6e24eff-e89a-4285-b451-dfcc1502c2f2",
+        "title": "AISTATS 2026 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://virtual.aistats.org/Conferences/2026/CallForPapers",
+            "content_hash": "047d984222f30ca6034ececf4fab5b88c7227d3fe93ca32e19929ea84e85e12c",
+            "opportunity_id": "e6e24eff-e89a-4285-b451-dfcc1502c2f2"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "AISTATS",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "4d14cbf60cb2f0a6b007891736a720a1a459307fb85449004d9f9413c78f572d",
+        "created_at": "2026-09-28T05:37:06.592409Z"
+      },
+      {
+        "signal_id": "c7513b7b-6828-47e7-a780-fad03797bef0",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "7aad461d-6bad-42c9-af05-8c6484791ff2",
+        "title": "CVPR 2026 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://cvpr.thecvf.com/Conferences/2026/CallForPapers",
+            "content_hash": "7a2294437604d5faf8605b73f2cd9f4e6bcae42ac979a80d06f33ad265a9ea87",
+            "opportunity_id": "7aad461d-6bad-42c9-af05-8c6484791ff2"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "CVPR",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "1fdce6a0db2eb3273c1d962788e57fb37cb807af13792b2c6a9d22eebab0ad6d",
+        "created_at": "2026-09-28T05:37:06.596877Z"
+      },
+      {
+        "signal_id": "ac2e8abf-4aa0-415d-a873-28aa0dfe1ab1",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "443bcfd2-6270-4497-bac0-395306bc06b2",
+        "title": "ICML 2026 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://icml.cc/Conferences/2026/CallForPapers",
+            "content_hash": "bbdaf73cb028bb030372236f160d7a06f4daff2008f44bda2d386ad31eacf8e3",
+            "opportunity_id": "443bcfd2-6270-4497-bac0-395306bc06b2"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ICML",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "188c6d3350ad75f83f749d733ca4feb176b1046cc35c7878c5c28205b68248ff",
+        "created_at": "2026-09-28T05:37:06.600215Z"
+      },
+      {
+        "signal_id": "6791868a-9f81-4cde-8d54-ea6c70461fb2",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "752fb4ff-e918-4d44-9cc4-6846a81c4c67",
+        "title": "IROS 2026 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2026.ieee-iros.org/",
+            "content_hash": "46cc94bfee2b40c86e5c87367925d4ef8fe838b96a7b38e1398ad4793d1fc99d",
+            "opportunity_id": "752fb4ff-e918-4d44-9cc4-6846a81c4c67"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "IROS",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "c38cd58fa38ddf8968de82bb65d379bf27302aa6370c7e8c9deae5b281a1aa55",
+        "created_at": "2026-09-28T05:37:06.603335Z"
+      },
+      {
+        "signal_id": "4ea7e678-c18a-4925-82a1-1b071c99f4ff",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "94fb9357-6d89-4db0-a346-79d4bf9c65c4",
+        "title": "ECCV 2026 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://eccv.ecva.net/Conferences/2026/CallForPapers",
+            "content_hash": "328ba890f8d115f5c9f5e42dca1ae1a731cd839ab307bff2effb6da29c988e0b",
+            "opportunity_id": "94fb9357-6d89-4db0-a346-79d4bf9c65c4"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ECCV",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "e34161e5bd66f7c2f05140ecd441afaa69d53e7a63d505ac8a7ebb6295cd821e",
+        "created_at": "2026-09-28T05:37:06.605879Z"
+      },
+      {
+        "signal_id": "970964c5-38b6-42f0-bd53-93509fcbdd36",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "0e890afc-5511-4f6e-857a-a71f1b4952a2",
+        "title": "NeurIPS 2026 Evaluations & Datasets",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://neurips.cc/Conferences/2026/CallForEvaluationsDatasets",
+            "content_hash": "c068ce69fe410aa243e69c3e1396a924c74fb259bfc8812915f259e997922105",
+            "opportunity_id": "0e890afc-5511-4f6e-857a-a71f1b4952a2"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "NeurIPS",
+          "DATASET_BENCHMARK_TRACK"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "a811b8d36da13a1cdbeda6245910972a6f37907b300b5ae8e19f52097bce50de",
+        "created_at": "2026-09-28T05:37:06.608315Z"
+      },
+      {
+        "signal_id": "936b289b-4405-462a-8fbd-9f00d41386f5",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "38bf5a31-c4df-4f2b-9647-34b6792887b1",
+        "title": "NeurIPS 2026 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://neurips.cc/Conferences/2026/CallForPapers",
+            "content_hash": "93b39289ffd6ad125f8465bf4508e49a23c8c19c73b97ca6a2b83fd57224f861",
+            "opportunity_id": "38bf5a31-c4df-4f2b-9647-34b6792887b1"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "NeurIPS",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "1aeb299cb8a1b7600eef2eb32d7f25520553a2ef79497d5453a555ad3b468dd8",
+        "created_at": "2026-09-28T05:37:06.610927Z"
+      },
+      {
+        "signal_id": "ffcdf5dc-77a5-4c65-9c8c-2b1b4e52d2e8",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "fdd9986b-960f-46b8-a585-b28ccc42de35",
+        "title": "NeurIPS 2026 Position Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://neurips.cc/Conferences/2026/CallForPositionPapers",
+            "content_hash": "1192903ad6c9ce078f46942ee6030d513e2fc8572a720a9b3928302a86396905",
+            "opportunity_id": "fdd9986b-960f-46b8-a585-b28ccc42de35"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "NeurIPS",
+          "POSITION_PAPER_CALL"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "16870e5e52d0750e7f27ce6392db96d19855cbf9d92b248c0c633e207bc1ca79",
+        "created_at": "2026-09-28T05:37:06.613248Z"
+      },
+      {
+        "signal_id": "8606ecdb-0350-4efc-b805-a3f7162c9f1f",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "686f8426-be18-43b2-92fe-a1d539311172",
+        "title": "NeurIPS 2026 Competitions",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://neurips.cc/Conferences/2026/CallForCompetitions",
+            "content_hash": "b45e8031a4ecebda514da3af8061dd0e523c1f92fa1323c835f1a55050b48253",
+            "opportunity_id": "686f8426-be18-43b2-92fe-a1d539311172"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "NeurIPS",
+          "COMPETITION"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "26c3400ae697777cbf83adcaca45ade16d0ec7d3ccda35b103ee50fb8c3bead8",
+        "created_at": "2026-09-28T05:37:06.615581Z"
+      },
+      {
+        "signal_id": "e5f18a5b-b888-44ec-8a23-c5c259662ea9",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "70733d38-8d34-4de0-bd30-53adcf16cdfc",
+        "title": "EMNLP 2026 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2026.emnlp.org/calls/main_conference_papers/",
+            "content_hash": "ffff86ce5c90e7ca3dd7e5ebc41aea1e9f91a843dcc6bcc9e4b196343588b44b",
+            "opportunity_id": "70733d38-8d34-4de0-bd30-53adcf16cdfc"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "EMNLP",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "4c63ba64db567120aee7d23f577fe0463c7c85ed78f69ef0b2812bca075c664d",
+        "created_at": "2026-09-28T05:37:06.618122Z"
+      },
+      {
+        "signal_id": "3017349a-4546-425c-b605-f1677a6b0e33",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "8ef4cb93-3f6c-41be-a3de-23d8dafa907c",
+        "title": "AAAI-27 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://aaai.org/conference/aaai/aaai-27/",
+            "content_hash": "a9237624c5906a424e42b93cfd03afa9fc3717d9214bd7dcfa2e55844f10d487",
+            "opportunity_id": "8ef4cb93-3f6c-41be-a3de-23d8dafa907c"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "AAAI",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "f659f11411cda66071f9b6af112e70012b53f23449661cdb94fa141484c44755",
+        "created_at": "2026-09-28T05:37:06.620734Z"
+      },
+      {
+        "signal_id": "60b79467-cc13-45ec-bfcf-cd7e09900058",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "7903d062-c59f-4b8f-8030-09ad615171d1",
+        "title": "ICRA 2027 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2027.ieee-icra.org/announcements/call-for-technical-papers/",
+            "content_hash": "f3cbf7bcb70f6eed1a95bd22496614599e37b616a8ccba9baeddf5602279b07c",
+            "opportunity_id": "7903d062-c59f-4b8f-8030-09ad615171d1"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ICRA",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "9ce92bae7af64550da0bdbe45f4ab7f730a2e3621785119b892163b7c45cc65b",
+        "created_at": "2026-09-28T05:37:06.622913Z"
+      },
+      {
+        "signal_id": "8d30b996-d241-48c5-9d52-42c94261e820",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "604cfb36-72c9-4d7e-9c7d-14aaf7ed06cf",
+        "title": "ICLR 2027 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://iclr.cc/Conferences/2027/CallForPapers",
+            "content_hash": "38f00e4ffc6d8cf819dc3e0ca40921ff9b2fb1580244a7955bffa0e3cc5e2e73",
+            "opportunity_id": "604cfb36-72c9-4d7e-9c7d-14aaf7ed06cf"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ICLR",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "19df5c8b27f0ddc5b5f1e0a0dd9b2936166364e177de54b76534d04039d1672d",
+        "created_at": "2026-09-28T05:37:06.624901Z"
+      },
+      {
+        "signal_id": "3aa39b7f-db2e-42f0-aff0-abbaba0106d0",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "b28fd46c-e73b-4ce1-8032-83ffb4757b7a",
+        "title": "Call for Workshops & Tutorials",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2027.ieee-icra.org/contribute/call-for-workshop-and-tutorial/",
+            "content_hash": "cd2ebf66ece62ff94e24eb73c2b8b5f89bd0751048c926bf10513f451bdca1ed",
+            "opportunity_id": "b28fd46c-e73b-4ce1-8032-83ffb4757b7a"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ICRA",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "2803cdcb52b7ca8b7aa118d308ded0fcfece23a0954b5cc9fe633e9cff1040bc",
+        "created_at": "2026-09-28T05:37:06.627922Z"
+      },
+      {
+        "signal_id": "ea2ea818-7ac6-49e6-ba1f-657594974911",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "13f20632-692c-4bf7-9e6a-2c804846e05e",
+        "title": "Previous Call for Workshops and Tutorials “Pre-Proposal”",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2027.ieee-icra.org/announcements/icra-2027-workshops-and-tutorials-call-for-pre-proposal/",
+            "content_hash": "3f85eaad0b7d99490ba0f93d51521fc641cc4127395fc599a1e502175355c449",
+            "opportunity_id": "13f20632-692c-4bf7-9e6a-2c804846e05e"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ICRA",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "71700dee6039ab486ed69d62692c35a87b147731a660c8dc616bea2d2f4242f3",
+        "created_at": "2026-09-28T05:37:06.630274Z"
+      },
+      {
+        "signal_id": "dc41e806-69fb-4238-b62f-dfc9a29adbe8",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "3f45e2f3-42f4-4438-8b53-f72acbe6bfb6",
+        "title": "IROS Conference Paper Review Board (CPRB)",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-conference-paper-review-board/",
+            "content_hash": "3a7bf84e9dfd000db1ab3f584c1ff23f65850b8ec016b7b1e6414552f1acee6f",
+            "opportunity_id": "3f45e2f3-42f4-4438-8b53-f72acbe6bfb6"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "IROS",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "df806a869aeb08481b92568cd088c25e6b615364a0b7c40ad20da375b285993d",
+        "created_at": "2026-09-28T05:37:06.633013Z"
+      },
+      {
+        "signal_id": "b7edb5d0-9467-434c-aed7-348d3e048026",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "5adc4ce3-9bda-49b0-a0e4-1168a635bc7c",
+        "title": "Workshop Proposal Guide",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://iclr.cc/Conferences/2027/WorkshopGuidelines",
+            "content_hash": "e2dfb19b4a845c5f9190dc113d9df2dacf09c32a311a8b1b84bbaa1b311d5935",
+            "opportunity_id": "5adc4ce3-9bda-49b0-a0e4-1168a635bc7c"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ICLR",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "4c2bdbfde1c3a91e1d55c8f9934467b908b458d488d74556f2ecd41ca703a7c1",
+        "created_at": "2026-09-28T05:37:06.635278Z"
+      },
+      {
+        "signal_id": "639b0591-4d66-46d1-a17e-34fd77540684",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "1522939c-4db1-425d-a9f2-14bbbd32d4e4",
+        "title": "Call for Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://www.corl.org/contributions/call-for-workshops",
+            "content_hash": "a5d2561ce69a8f00e0834f2be879baa8f870d66f06af7f8b5e21eb1d5e04bead",
+            "opportunity_id": "1522939c-4db1-425d-a9f2-14bbbd32d4e4"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "CoRL",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "3dfe1c3ac92d5da62a7488e55f3fd9d0e64f8d5cfd85d964e342c4592bb8fa2c",
+        "created_at": "2026-09-28T05:37:06.637450Z"
+      },
+      {
+        "signal_id": "fe87d9c8-8253-4661-848f-bd775b1ca2df",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "516fce5a-9446-41af-98c4-99986ec8fa27",
+        "title": "on a separate page",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2026.aclweb.org/calls/student_research_workshop/",
+            "content_hash": "bb04c40316a63278176d05eda3a74a74e5b404bd586a0f661288be06a7436693",
+            "opportunity_id": "516fce5a-9446-41af-98c4-99986ec8fa27"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ACL",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "b269f59c63d7bfd00dae74c0ac174884b491f7fbf6b0e40f7bfbd821f1dfc73f",
+        "created_at": "2026-09-28T05:37:06.639670Z"
+      },
+      {
+        "signal_id": "9d2f4074-d474-40ae-86bc-e4250afc071b",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "5df84b91-7dbe-4f9a-9a9d-78125eeff566",
+        "title": "Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://aaai.org/conference/aaai/aaai-27/workshops-call/",
+            "content_hash": "1e96eaa7aca1dc57ab21c1e91aa388abbcaa9825b2ca094fc53113d0a327f278",
+            "opportunity_id": "5df84b91-7dbe-4f9a-9a9d-78125eeff566"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "AAAI",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "a1c14db641e1286fdc6287f1c613106dfc300a3f9b5a84943461c19ae360dc3c",
+        "created_at": "2026-09-28T05:37:06.641720Z"
+      },
+      {
+        "signal_id": "55df6349-f25b-4782-ab53-726f67567545",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "a2f7f858-7cd0-4412-9af3-217cff93d7a5",
+        "title": "Workshops & Tutorials",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2026.ieee-iros.org/program/workshops-tutorials/",
+            "content_hash": "2027bbfa451f64fa7702f89a38ee27c2998d2f8393f51dc786c7549955f5e485",
+            "opportunity_id": "a2f7f858-7cd0-4412-9af3-217cff93d7a5"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "IROS",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "acd36e4a7d1f9a960d14404565078ef6c969245aaba3972fdd0fc4dc98c9568e",
+        "created_at": "2026-09-28T05:37:06.643792Z"
+      },
+      {
+        "signal_id": "00a1eda3-9cce-4e2d-9f3d-5d29bad0a998",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "0ec6ddf7-3c56-4908-bca2-7172bc009a21",
+        "title": "ICCV 2027 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://iccv.thecvf.com/Conferences/2027/CallForPapers",
+            "content_hash": "a22535f048c98a988053687d80dbd6719eec74c5def01b087dcc7eabf7af3053",
+            "opportunity_id": "0ec6ddf7-3c56-4908-bca2-7172bc009a21"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ICCV",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "564b5531845e60e4e891d2dbf2b19e83df104494bc5f635c5f41aa7b3221511d",
+        "created_at": "2026-09-28T05:37:06.646009Z"
+      },
+      {
+        "signal_id": "69ae482c-421c-4cf1-bf9a-2e8867fd2779",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "46e33fb2-1c79-4f61-ba11-1a26a6e3fb32",
+        "title": "Call for Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://neurips.cc/Conferences/2026/CallForWorkshops",
+            "content_hash": "a5d2561ce69a8f00e0834f2be879baa8f870d66f06af7f8b5e21eb1d5e04bead",
+            "opportunity_id": "46e33fb2-1c79-4f61-ba11-1a26a6e3fb32"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "NeurIPS",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "a59c2c5d635f222ef4c3fc52b6695a32e260b7e7efc92353690dd07d2dc15b4d",
+        "created_at": "2026-09-28T05:37:06.648734Z"
+      },
+      {
+        "signal_id": "3aab08c1-632d-425f-bc76-92ac81b85b08",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "401989ff-202e-4bcd-bab5-5da08b0535a7",
+        "title": "Call for Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://cvpr.thecvf.com/Conferences/2026/CallForWorkshops",
+            "content_hash": "a5d2561ce69a8f00e0834f2be879baa8f870d66f06af7f8b5e21eb1d5e04bead",
+            "opportunity_id": "401989ff-202e-4bcd-bab5-5da08b0535a7"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "CVPR",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "bad7558e683e795a5e8ecca9fa7b7b620cd364f32dc8bb494c3ea59b90d935ce",
+        "created_at": "2026-09-28T05:37:06.651152Z"
+      },
+      {
+        "signal_id": "cbf37c0e-ed61-4876-8eac-02be8ebadf17",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "6bcd9f09-68fd-4898-a8b2-3ff9db2ec23c",
+        "title": "Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://www.corl.org/program/workshops",
+            "content_hash": "1e96eaa7aca1dc57ab21c1e91aa388abbcaa9825b2ca094fc53113d0a327f278",
+            "opportunity_id": "6bcd9f09-68fd-4898-a8b2-3ff9db2ec23c"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "CoRL",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "455831a7194b708632a5397c984d33e502f87bfd28afa22c419b0b7b843c3257",
+        "created_at": "2026-09-28T05:37:06.653535Z"
+      },
+      {
+        "signal_id": "17750a0e-0a61-4d3e-9df6-492455ba17ad",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "a824a617-0b20-4934-88b5-150b53cd4d14",
+        "title": "Call for Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://eccv.ecva.net/Conferences/2026/CallForWorkshops",
+            "content_hash": "a5d2561ce69a8f00e0834f2be879baa8f870d66f06af7f8b5e21eb1d5e04bead",
+            "opportunity_id": "a824a617-0b20-4934-88b5-150b53cd4d14"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ECCV",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "bbf9b980ca28c55f3645c28e5500827bd7222f2f957e2f8bba3d8b7916056de5",
+        "created_at": "2026-09-28T05:37:06.655909Z"
+      },
+      {
+        "signal_id": "1d2f75c9-4a44-4abb-abe1-63dbd6ab7609",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "18c0fb15-0053-420a-b930-da63b587ede5",
+        "title": "ACL 2026 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2026.aclweb.org/calls/main_conference_papers/",
+            "content_hash": "e3634b5dd0830edb2df53f69554a0819fa700887f5c10f1b743cab272da0836d",
+            "opportunity_id": "18c0fb15-0053-420a-b930-da63b587ede5"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ACL",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "ec20437f57ded504d3d5b344cab68adc91c748f05bfd38d4c849e07bbb0f644e",
+        "created_at": "2026-09-28T05:37:06.658103Z"
+      },
+      {
+        "signal_id": "6d1dc075-2bc8-4974-81a0-4e6897a111a4",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "7271f5e5-d7e6-41dc-899a-eaac9a89489e",
+        "title": "Call for Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://iclr.cc/Conferences/2027/CallForWorkshops",
+            "content_hash": "a5d2561ce69a8f00e0834f2be879baa8f870d66f06af7f8b5e21eb1d5e04bead",
+            "opportunity_id": "7271f5e5-d7e6-41dc-899a-eaac9a89489e"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ICLR",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "2ded6960aef904eb5a82ea3c710114aeb50f5d4bfdb92890f0953473b9e83d70",
+        "created_at": "2026-09-28T05:37:06.660578Z"
+      },
+      {
+        "signal_id": "7c41d5c8-b08b-408d-8e56-6090e963d155",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "72924126-4f2e-41da-9988-c03dfbcac410",
+        "title": "workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://icml.cc/Conferences/2026/CallForWorkshops",
+            "content_hash": "98bd471737f76e05ba2905956c7375ef2c037915c87817239c865b8fd8bd373f",
+            "opportunity_id": "72924126-4f2e-41da-9988-c03dfbcac410"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "ICML",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "fc3f1217717626a4e6ff2b4f0774b8d69707eff3681c7a9c8d71cee8ef30e006",
+        "created_at": "2026-09-28T05:37:06.664214Z"
+      },
+      {
+        "signal_id": "55fda3cf-3a96-4740-991e-a63f0476d03d",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "d214314a-2dd7-4937-a28c-c48c21a4d837",
+        "title": "Call For Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://virtual.aistats.org/Conferences/2026/CallForWorkshops",
+            "content_hash": "108e226048f6e24bfab6b4122ac2fc875b1ac0e928854e7cf6776d18ca23d987",
+            "opportunity_id": "d214314a-2dd7-4937-a28c-c48c21a4d837"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "AISTATS",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "baac0ef881689a42f8f69ed6a0e6d199000cf5897b96d3e324dc74d37ddc35a9",
+        "created_at": "2026-09-28T05:37:06.667093Z"
+      },
+      {
+        "signal_id": "a6f525d4-fdf2-4336-b21e-674a4d7717fb",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "741340d0-3fea-4a7e-9434-7d0f17803131",
+        "title": "RSS 2027 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://roboticsconference.org/information/call-for-papers/",
+            "content_hash": "ec8a9cf9906ffe5c0e5fbf2d201ab44fcfd90e7142fd5a5bbe1f66b9969d6d8f",
+            "opportunity_id": "741340d0-3fea-4a7e-9434-7d0f17803131"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "RSS",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "aff41c7eeeaa27828177fc9f7434589636a3adc6ef12c127b8815ece71778d48",
+        "created_at": "2026-09-28T05:37:06.669625Z"
+      },
+      {
+        "signal_id": "8a94c9fa-0837-45ae-9f26-516ec3323072",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "1ad0eec7-f036-4ba0-aee4-38c721620241",
+        "title": "Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://virtual.aistats.org/virtual/2026/events/workshop",
+            "content_hash": "1e96eaa7aca1dc57ab21c1e91aa388abbcaa9825b2ca094fc53113d0a327f278",
+            "opportunity_id": "1ad0eec7-f036-4ba0-aee4-38c721620241"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "AISTATS",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "0c28705b46ac8194d83766f523f15be9ab6214f18f166e17cdbbac74da6833fa",
+        "created_at": "2026-09-28T05:37:06.672490Z"
+      },
+      {
+        "signal_id": "010ffeae-ee8a-4771-b174-e768517a1236",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "a15b41ab-5688-493c-810d-f416bd1493e0",
+        "title": "Workshops & Tutorials",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2026.ieee-iros.org/contribute/call-for-workshops-tutorials/",
+            "content_hash": "2027bbfa451f64fa7702f89a38ee27c2998d2f8393f51dc786c7549955f5e485",
+            "opportunity_id": "a15b41ab-5688-493c-810d-f416bd1493e0"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "IROS",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "53b39a6b23472eadcb5fbc9e08b956e93c940c67e30ba3fc9f0b28dbbe24fe96",
+        "created_at": "2026-09-28T05:37:06.675309Z"
+      },
+      {
+        "signal_id": "d11808c1-d52a-4320-8c7f-6dbef3f35f6b",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "df4e24d8-0ec1-440e-8c5b-572b2d58d91b",
+        "title": "Workshops",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://2026.emnlp.org/calls/workshops/",
+            "content_hash": "1e96eaa7aca1dc57ab21c1e91aa388abbcaa9825b2ca094fc53113d0a327f278",
+            "opportunity_id": "df4e24d8-0ec1-440e-8c5b-572b2d58d91b"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "EMNLP",
+          "WORKSHOP_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "632c378522b699b646619ff7e4950597c88e2332eec6068a75dffb9a5d813d61",
+        "created_at": "2026-09-28T05:37:06.678265Z"
+      },
+      {
+        "signal_id": "6992c3b1-914b-4d46-b8a3-2c8204d8ec38",
+        "signal_type": "COMMUNITY_INTEREST_SIGNAL",
+        "source_type": "OPPORTUNITY",
+        "source_id": "ce5f6ca8-5f12-40c3-b0e5-3e838fb9adce",
+        "title": "CoRL 2026 Call for Papers",
+        "description": "Official opportunity mentions themes relevant to Embodied AI and Robot Learning; this is interest evidence, not novelty evidence.",
+        "evidence_refs": [
+          {
+            "url": "https://www.corl.org/call-for-papers",
+            "content_hash": "010d1ec12ee310efe0c6f242517269b0bfd5ee344070311ef69edd37d8ea2435",
+            "opportunity_id": "ce5f6ca8-5f12-40c3-b0e5-3e838fb9adce"
+          }
+        ],
+        "domain": "Embodied AI and Robot Learning",
+        "topic_tags": [
+          "CoRL",
+          "MAIN_CONFERENCE_CFP"
+        ],
+        "novelty_hint": "REQUIRES_LITERATURE_AUDIT",
+        "fingerprint": "a278c06a2c85930b5d2691147cbffa58e59292737f43e59635105068067f81c1",
+        "created_at": "2026-09-28T05:37:06.681006Z"
+      }
+    ],
+    "recent_literature": [
+      {
+        "paper_id": "7a1dbbb8-b7df-4d51-b6b5-0dd60133aa97",
+        "title": "Repeated failures expose gaps in Indonesia’s nickel waste management",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "d4f21f9e-4edc-40d0-85ba-1aab7955278e",
+        "title": "Why Seeding Works When Nucleation Barriers Vanish",
+        "abstract": "<jats:p>Crystallization is a process governed by the interplay between nucleation and growth. While crystalline seeds are known to reduce nucleation barriers and accelerate crystallization under nucleation-limited conditions, their influence when nucleation is not the limiting step remains poorly understood. This creates a mechanistic puzzle in systems where nucleation barriers are already negligible, yet seeding still accelerates crystallization. The synthesis of zeolites is a quintessential example of growth-limited crystallization that can be directed by seeds that promote heterogeneous nucleation. Using coarse-grained molecular dynamics simulations, we show that crystalline seeds direct crystallization pathways by enforcing heteroepitaxial growth, effectively shortening the time required to develop long-range order. This explains why seeded zeolite syntheses can reach XRD-detectable crystallinity earlier, even when nucleation barriers are negligible. We conclude that under growth-limited conditions, while seeds still provide favorable interfaces for heterogeneous nucleation, their primary function is not to accelerate crystallization via barrier reduction but to enforce coherent growth, thereby shortening the time required to develop long-range order detectable by X-ray diffraction.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "bd0f62a1-f738-4b64-ae9c-8787f2bac623",
+        "title": "Fine-Tuning, Retrieval, or Both? A Measured Framework for Choosing Domain-Adaptation Architectures in Large Language Models",
+        "abstract": "<jats:p>Low-Rank Adaptation (LoRA) and Retrieval-Augmented Generation (RAG) are routinely treated as interchangeable alternatives for adapting large language models to vertical domains, yet the choice is usually made by intuition or budget rather than measured evidence. We argue it should be a measured, reproducible decision and present a decision framework with explicit measurement axes — factual fidelity, catastrophic forgetting, knowledge freshness, computational cost, and latency — together with declared thresholds. We introduce a taxonomy of domain-knowledge volatility (V1–V4) that predicts which architecture should dominate for each class of knowledge, and a protocol for detecting interference in hybrid LoRA+RAG systems; the framework&amp;apos;s output is an auditable architecture certificate. We instantiate it on a production banking-compliance platform built on Mistral 7B with a LoRA adapter (r=16, 2,360 training examples) and a pgvector-based RAG pipeline over 27 regulatory documents. Against an evaluation suite of 8 deployment gates (87 scenarios at promotion time, later 107), the hybrid configuration passes all system-level gates, while a no-adaptation baseline reaches 63.6% overall but only 7.1% on refusal-class scenarios, producing zero refusals in 107 queries — fail-closed behaviour is attributable to adaptation, not prompting. Repeated runs show aggregate stability (SD ≈ 0.5 points), and an adapter rank sweep (r ∈ {4, 8, 16}) shows refusal behaviour is rank-insensitive while definitional fidelity rises with rank. We quantify full costs in dollars — one training run costs roughly as much as serving 850–1,700 queries — and distil the results into two fail-closed decision rules.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "e620b999-952f-41d3-bd25-26772a90ba4d",
+        "title": "Task-Decomposed Language Supervision for End-to-End Autonomous Driving",
+        "abstract": "<jats:p>End-to-end (E2E) autonomous driving models integrate perception, prediction, and planning into a single differentiable pipeline but do not explicitly encode high-level semantic reasoning; recent LLM/VLM-based methods add such reasoning, but inference-time approaches incur autoregressive generation cost. We propose TaLS, a training-only language-supervision framework. We restructure the DriveLM QA into a four-stage reasoning chain (perception → motion → risk → planning) and inject the answer-end LLM hidden state of each stage into the corresponding decoder queries as a gate-free residual during training; the autoregressive LLM is removed at inference. On the nuScenes open-loop benchmark, TaLS reduces the TemAvg collision rate by 31.3% relative to the GenAD baseline while preserving comparable L2 and perception performance. To identify where these gains reside, we additionally apply a retraining-free prune analysis, which indicates that a substantial part of the collision improvement persists after disabling the BEV token augmentation path, consistent with partial encoding in the retained decoder weights, whereas the L2 performance depends on the retained BEV token path. Task-decomposed language supervision can improve E2E planning while removing the autoregressive LLM at inference, and the resulting gains are metric-specific.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "0f767dd0-f539-43ad-8ce0-bc949edbe96e",
+        "title": "Temporally Differential 4D Gaussian Splatting with Per-Frame Delta Encoding for Scalable Volumetric Video",
+        "abstract": "<jats:p>The growing demand for immersive experiences in AR/VR and volumetric media has intensified interest in scalable dynamic scene reconstruction. While 3D Gaussian Splatting (3DGS) enables real-time rendering of static scenes, existing dynamic extensions remain constrained by high memory consumption, limited temporal scalability, and impractical storage requirements—especially for long sequences on consumer-grade hardware.We present a differential 4D Gaussian Splatting pipeline that enables full-scene dynamic reconstruction with per-frame delta encoding and online updates. By decoupling temporal dependencies through batch-wise optimization and storing only inter-frame differences, our method achieves real-time rendering (&gt;30 FPS and up to 60 FPS) on consumer-grade GPUs with maintaining a compact representation (&lt;1MB per frame storage, &lt;7.6GB peak memory usage), all while preserving high visual fidelity and seamless handling of emerging objects. Beyond the initial conference version, this journal work provides enhanced differential frame analysis, checkpoint-based ablation studies, and comprehensive baseline comparisons, offering a reproducible and scalable framework for temporally stable, arbitrarily long volumetric sequences.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "c0f97b39-5842-4f25-a96f-0f51ae3288cd",
+        "title": "In-Between Modes of Engaging with Risk and Uncertainty",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "bdfdea70-3ef5-4c0c-ad96-96697ce577ce",
+        "title": "Attention Heatmap Drift in a Contrastively Pretrained Vision–Language Model: A Controlled Matched-Learning-Rate Comparison of Full Fine-Tuning and Low-Rank Adaptation",
+        "abstract": "<jats:p>Downstream adaptation of a contrastively pretrained vision--language model can improve in-domain accuracy while degrading performance on unseen transfer tasks. This study examines how full fine-tuning and low-rank adaptation alter attention heatmaps under a controlled design that matches learning rate across adaptation methods. The completed matched-learning-rate matrix contains 80 runs using the OpenAI Contrastive Language--Image Pretraining model with a base 32-patch vision transformer image encoder, two datasets (EuroSAT and Oxford-IIIT Pets), four shared learning rates (1e-6, 5e-6, 1e-5, and 5e-5), and five random seeds. We measure classification-token-to-patch attention entropy, the fraction of patches required to capture 95\\% of attention mass, attention concentration, head diversity, in-domain validation accuracy, and adapter-aware zero-shot accuracy on CIFAR-100. Three findings emerge. First, learning rate is a primary determinant of structural drift: on EuroSAT, full fine-tuning moves from entropy broadening at 1e-6 (+1.83%) to marked contraction at 5e-5 (-3.99%), whereas low-rank adaptation remains entropy-positive across the full matched grid (+0.68% to +1.50%). Second, low-rank adaptation preserves out-of-domain transfer substantially better than full fine-tuning at matched learning rates: averaged across the EuroSAT grid, zero-shot accuracy on CIFAR-100 is 45.13% for low-rank adaptation versus 11.28% for full fine-tuning; on Oxford-IIIT Pets, the corresponding averages are 58.01% and 8.54%. Third, Oxford-IIIT Pets exhibits a clear interaction with optimization scale: low-learning-rate low-rank adaptation underfits the in-domain task, so method-only averages can obscure the regime in which it becomes competitive. Additional rollout, patch-to-patch, centered-kernel-alignment, and backbone analyses are directionally consistent with these controlled results. Across both controlled datasets, runs with broader retained attention support also retain more zero-shot performance. Taken together, these findings support attention heatmap drift as an informative descriptive lens on model adaptation while arguing against a universal interpretation of the observed behavior as a single collapse phenomenon.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "c23eb277-1fe5-4d1d-a233-a6ac0dd929d4",
+        "title": "LoRA-TTA: Efficient Test-Time Adaptation via Low-Rank Fine-Tuning with Theoretical Guarantees and Empirical Validation",
+        "abstract": "<jats:p>Test-Time Adaptation (TTA) enables models to adapt to unseen target domains without access to source data. However, existing TTA methods update all model parameters during adaptation, incurring computational costs and memory overhead that preclude deployment on resource-constrained devices.We propose LoRA-TTA, a parameter-efficient TTA framework that applies Low-Rank Adaptation (LoRA) to parameterize model updates. Instead of optimizing millions of parameters, LoRA-TTA learns low-rank decomposition matrices with only thousands of trainable parameters. Theoretical analysis establishes a generalization bound with O(1/√r) dependence on rank and derives an optimal rank formula r* proportional to domain shift magnitude to the power of 2/3.Experiments across 24 domain pairs on two datasets (Office-Home and PACS) and two architectures (ResNet-50 and ViT-B/16) demonstrate consistent improvement. LoRA-TTA updates only 0.033-0.22% of model parameters (462-3029x reduction) while achieving 101-105% of baseline performance. The scaling law is empirically validated with alpha approx 0.74, consistent with the theoretical prediction 2/3, and statistical significance is confirmed across 5 independent runs (p&lt;0.0001). These results demonstrate that LoRA-TTA enables efficient TTA on resource-constrained devices without performance compromise.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "5b88562d-ce5e-4220-a480-6abef619242e",
+        "title": "Conclusions, as a series of questions",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "583b7d61-f6f7-49cf-ab8a-4a0e32b7e00b",
+        "title": "Beyond Aggregate Metrics Diagnosing the Long-Tailed Failure of Oracle Bone Character Detection and Recognition",
+        "abstract": "<title>Abstract</title>\n                <p>Oracle bone inscriptions, the earliest mature Chinese writing system, are a primary source for studying ancient Chinese civilization, yet their interpretation remains labor-intensive. Automatically detecting and recognizing visible characters on rubbing images is therefore an entrance task for AI-assisted interpretation. The Oracle Bone Inscription Multi-modal Dataset exposes the problem of extreme long-tailed class distribution: aggregate evaluation conceals severe performance defects on rare classes — the detector can reach an overall AP50 of 0.63, while the few-shot class AP50 is only 0.06. we conduct a systematic diagnosis with a frequency-aware stratified evaluation protocol, confirming that the task bottleneck lies in long-tail recognition rather than class-agnostic localization, and naive reweighting within the detection head is counterproductive. We thus propose FAR-YOLO, a minimal decoupled baseline that separates localization and recognition training, optimizing the recognition branch only with frequency-aware sampling and morphology-preserving augmentation. While maintaining nearly unchanged overall AP50, FAR-YOLO improves the few-shot AP50 by 10.5 percentage points.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "b420e707-6cea-4863-afd5-c2057e79b786",
+        "title": "Digital Wage Failures Expose Distinct Legal Boundaries Among Underpayment, Enforcement Escalation, Corporate Attribution, and Criminal Culpability",
+        "abstract": "<jats:p>Digital wage underpayment in technologically mediated workplaces presents a layered legal problem because payment outcomes may arise from interactions among scheduling systems, timekeeping tools, payroll rules, managerial practices, and organisational controls. This study examines how law should distinguish causal system failure, wage-law breach, enforcement escalation, corporate attribution, and criminal culpability within the Australian federal workplace framework, using hospitality as the principal sectoral context. Employing doctrinal legal research, interdisciplinary synthesis, and functional comparative analysis, the study evaluates wage entitlement, regulatory significance, organisational responsibility, and offence-specific fault. The findings show that the cause of a payment shortfall must remain separate from the legal question of whether remuneration due has remained unpaid. Stronger enforcement becomes more compelling when verified notice, effective control, remedial capacity, organisational response, and avoidable persistence converge. Corporate attribution requires independent examination of systems, policies, safeguards, audits, and organisational practices, while criminal liability further requires proof of applicable physical and fault elements. The framework preserves doctrinal boundaries while improving analytical precision in digitally managed workplaces where information, control, intervention, and corrective capacity are distributed across multiple actors and technological systems.\n </jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "3885c6ea-e8c4-4fda-8b48-9ceb6e6bfb4e",
+        "title": "Temporally Coherent Fluid Surface and Wave Reconstruction from Monocular Video",
+        "abstract": "<title>Abstract</title>\n                <p>Reconstructing dynamic fluid surfaces from a single RGB video enables the observed motion to be directly reproduced without requiring separate fluid simulation data or physical measurements. However, frame-wise monocular reconstruction often lacks temporal coherence, and small-scale surface waves can easily be lost during the smoothing process used for stabilization. In this paper, we propose a framework that reconstructs both the large-scale fluid surface and temporally coherent fine-scale waves using only a single RGB video as input. An initial height field is reconstructed for each frame using Shape from Shading (SFS), and an image-space velocity field is estimated so that the consecutive height changes are consistent with the mass-conservation relation of the shallow-water equation. In addition, large-scale surface motion and local geometric variations are progressively constructed through coarse-to-fine residual reconstruction. Fine-scale waves are generated using the curvature of the reconstructed surface and motion-compensated high-frequency variations in the input video as auxiliary cues. To simultaneously reduce temporal discontinuities in frame-wise wave sources and high-frequency attenuation caused by uniform blending, we introduce \\emph{frequency-aware adaptive source transport}, which decomposes the source into low-, mid-, and high-frequency bands and adjusts the contributions of the previous and current sources according to the temporal consistency of each band. The resulting source is injected into an iWave-based surface-wave solver and combined with the base surface. Experiments on various ocean-wave, stream, and gently undulating water videos show that the proposed method reduces temporal discontinuities while preserving fine-scale wave structures more effectively than frame-independent wave generation and uniform source blending. The proposed framework provides a video-based free-surface reconstruction approach that does not require multi-view images, training data, measured velocity or pressure fields, or precomputed volumetric fluid simulations as reconstruction inputs.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "ad4e912d-bedd-49fb-852c-61e959b69b6d",
+        "title": "Conclusions—A New Phenomenology of Risk and Uncertainty",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "9722bc6b-caad-450c-9490-d23e80467cea",
+        "title": "Hidden regenerative state in planarians: A geometric model of bioelectric memory using Tangential Action Spaces",
+        "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>Planarian fragments can regenerate with normal gross anatomy after a transient bioelectric perturbation yet display altered outcomes upon re-cutting, implying that regeneration can store a persistent hidden state. Here we formulate an open-path version of Tangential Action Spaces (TAS) for this setting. Regeneration after a given cut is represented as a prescribed coarse anatomical trajectory together with multiple physiological lifts in a higher-dimensional state space. A metric on physiological state space defines a baseline lift, an effective excess-cost functional, and a baseline-relative endpoint displacement that serves as written hidden regenerative state.</jats:p>\n                <jats:p>Re-cutting converts this open-path construction into a challenge readout. Locally, the theory yields a cut-dependent memory co-metric that identifies latent directions that are easy, difficult, or inaccessible to rewrite. We show that this geometry is consistent with published observations of cryptic phenotypes, stable re-challenge ratios, and near-absorbing double-headed outcomes. A reduced rank-one latent-threshold realization fitted to published 8-OH immediate and re-challenge counts identifies a challenge-sensitive cryptic interval below the immediate double-headed threshold and predicts out-of-sample re-challenge penetrances near 15% for nigericin- and monensin-treated immediate single-headed survivors using only their immediate phenotype penetrances.</jats:p>\n                <jats:p>\n                  As a mechanistic bridge, a local electrodiffusive in-silico example instantiates a local version of the physiological-state effort metric\n                  <jats:italic>G</jats:italic>\n                  . This metric defines the baseline lift and excess rewriting cost, in relative biophysical units, and yields explicit example local write geometry. An illustrative semimechanistic readout based on integrated wound-edge gap-junction contrast and Na/K-ATPase load reproduces the treated-family ordering and similar transfer predictions when the untreated baseline is softly anchored near zero. These quantitative layers are intended as proof-of-concept calibratability and mechanistic-grounding checks rather than full validation of the complete open-path model. The framework therefore turns cryptic regenerative memory into a geometric, costed, and experimentally testable object, yielding predictions about temporal-profile dependence, compensatory cancellation, sign-reversing controls, cut dependence, anisotropic rewriting, and multi-round accumulation of hidden regenerative state.\n                </jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "d3e81296-3841-4624-bc87-9ac949d1b1c4",
+        "title": "Edge-Based Intelligent Monitoring and Early Warning for Material Ropeways Using Offline Closed Loop Optimization",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "822a9244-7a87-4f77-9cd0-3aa49df7758a",
+        "title": "Justice Impacted AI Career Intelligence High Efficiency Career Routing Using a Machine-Readable Eligibility Substrate and a Closed Outcome Loop",
+        "abstract": "<jats:p>A criminal conviction restricts occupational access through several thousand provisions spread across federal law, state codes, administrative rules, and licensing board practice. None of it is indexed to an occupational classification system. All of it is written in offense class language that does not match how people describe their own records. Much of it expires, and much of the rest can be waived. A job seeker cannot determine which paths are closed, which are conditionally open, and which are unrestricted. Neither can the workforce professionals support them. Practice therefore defaults to one of two failures: blanket avoidance of regulated sectors, or silence until a background check ends a placement after the training has been paid for. This paper describes a system that routes justice impacted individuals to viable careers in seconds rather than weeks and improves as outcomes return. It rests on three components. An eligibility substrate encodes 37 federal and Michigan provisions with statutory authority, offense class key, NAICS and SOC index, temporal horizon, relief path, and per provision verification confidence. A routing layer composes a substrate with occupational transferability, regional labor demand, and a destination tier constraint, narrowing roughly 2,000 verified training programs to a scored shortlist before any generative step runs. A feedback layer closes the loop through declared intent, engagement, and, where available, placement outcome. Three findings are reported. The regulated universe is small: 39 four-digit NAICS industries appear anywhere in the corpus, so most of the economy restricts nothing and reaching it requires no analysis. Foreclosure is bounded even at the extreme; a felony level-controlled substance record leaves 7 of those 39 industries fully open and 16 more open subject to a stated requirement. And offense classification dominates offense category, because residual clauses attach to any felony without regard to conduct. That last finding inverts the emphasis of conventional reentry counseling, which organizes around offense type. We also identify an unwritten barrier that a statute only corpus cannot see. Employers decline candidates on the ground that insurance will not cover them, citing nothing, appealable to no one, and frequently without having read the policy. The mechanism is insurance for employers that hire felons, and the remedy already 2 exists in the Federal Bonding Program, which is built for exactly the population commercial underwriters decline. We argue this makes bonding a routing output rather than a resource listing, and we flag insurance underwriting practice as the most consequential omission in the present dataset. Of the 37 provisions enclosed, 8 are both permanent and without any waiver, consent, or expiry. The other 29 carry a named process or a date. We catalogue those as affirmative pathways and treat surfacing them, rather than cataloguing restrictions, as the operative contribution. The system is governed by three constraints: asymmetric error cost, which requires it to fail open; confidence gating, which stops unverified provisions from driving exclusion; and zero retention screening, under which a sensitive attribute conditions inference and has never persisted.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "9a68ccb3-9450-4b98-a620-01e712a680fc",
+        "title": "Performance–Efficiency Trade-offs of Low-Rank Adaptation and Full Fine-Tuning for Transformer-Based Natural Language Understanding",
+        "abstract": "<jats:p>Parameter-efficient fine-tuning offers a practical way to adapt pretrained language models under limited computational resources, but its performance–efficiency trade-offs remain task dependent. This study contrasts Low-Rank Adaptation (LoRA) with full fine-tuning of DeBERTa-v3-base on five natural language understanding tasks from the GLUE benchmark: SST-2, CoLA, QNLI, MRPC, and RTE. The experiments are conducted in a controlled single-GPU environment with fixed preprocessing, fixed random seeds, a fixed batch setup, task-specific evaluation measures, and runlevel integrity checks. We compare predictive performance together with the number of trainable parameters, peak GPU memory, and wall-clock training time. Across 15 successful experimental runs, LoRA reduces the number of trainable parameters from 184.42 million to approximately 1.18 million, corresponding to a reduction of about 99.36%. Peak allocated GPU memory is also substantially lower with LoRA, with observed reductions of approximately 47–58% across tasks. Predictive performance is generally competitive, but the relative advantage of LoRA and full fine-tuning varies across tasks. On SST-2, full fine-tuning shows a slight advantage across the repeated paired runs, but no consistent performance ranking is observed across the five tasks. LoRA does not reduce wall-clock training time under the chosen protocol, in which it is trained for more epochs. These findings suggest that LoRA can achieve substantial parameter and memory savings while maintaining competitive task performance, and that method selection should consider task characteristics and training configuration rather than computational efficiency alone.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "eb30d6c0-edc2-40f9-898a-2ffc9d2c4c61",
+        "title": "From Uncharted Data to Edge Adaptation: Fine-Tuning Gemma 3 270M for Multilingual Indic RxNorm Medicine Normalization",
+        "abstract": "<jats:p>Low-resource artificial intelligence is often framed as a language-coverage problem, but practical deployment also depends on low-resource compute: models must be small enough to adapt, evaluate, and serve in clinics, mobile workflows, offline assistants, speech pipelines, and other constrained environments. This paper presents IndicRxNorm-LexMap-15K, a multilingual Indic medicine terminology instruction dataset grounded in RxNorm/RxNav metadata, and demonstrates its use in adapting a compact open model, Gemma 3 270M, for structured medicine normalization. The dataset contains a curated 15,000-row base set and a 14,910-row adapted instruction set covering Hindi, Bengali, Hinglish, and Banglish across six task families: medicine named-entity recognition, RxNorm-style normalization, RxCUI entity linking, drug-field extraction, terminology summaries, and safety-boundary refusal. Using Adaption Labs' Adaptive Data workflow, the dataset was refined from a platform platform quality score of 8.0 to 9.0, from grade B to A, while preserving RxCUI facts, language style, JSON structure, and terminologyonly safety boundaries. We fine-tuned Gemma 3 270M with LoRA/PEFT using Unsloth and evaluated the adapter against the base model on an initial held-out RxCUI-grouped test sample. The base model achieved a JSON parse rate of 7.22% and RxCUI exact-match rate of 2.33%; the fine-tuned adapter improved these to 71.67% and 74.42%, respectively. We report Wilson 95% confidence intervals for this initial evaluation, explicitly identify the limited sample size and RxCUI ambiguity as threats to validity, and provide a follow-up evaluation protocol for full-test-split evaluation, curated-base ablation, hyperparameter sensitivity, retrieval/RxNav baselines, schema adherence, safety stress testing, and edge-inference measurement. We further introduce a Kaggle Community Benchmark with four public smoke-test tasks for JSON medicine normalization, safety refusal, drug-field extraction, and Bengali medicine normalization. The released dataset, LoRA adapter, and benchmark are intended for research and terminology-normalization workflows only, not diagnosis, prescription, dosage, or treatment advice.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "5d5e6c4a-deb2-478a-b64f-5d4737a4fb59",
+        "title": "Fine-Tuning Strategies for Efficient Large Language Model Adaptation",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "4237e494-8fc5-4770-b2c2-5e66f08a6099",
+        "title": "When Thrombectomy Fails: Can We Predict Unsuccessful Recanalization Before the Procedure?",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "90f5a2e3-e134-455b-80f6-ff88f29fae7f",
+        "title": "Hydrophilicity dominates HOMO-LUMO gap in predicting proteinogenic amino-acid membership",
+        "abstract": "<title>Abstract</title>\n                <p>We tested whether a biosignature discriminator derived from biotic-versus-abiotic chemistry generalises to the more specific question of proteinogenic amino-acid membership. Abrosimov and Moosmann (2024) proposed a two-feature classifier combining the absolute HOMO-LUMO gap (\\|HLG\\|) with the partition coefficient XlogP and reported a quadrant (\\|HLG\\| &lt; 11.25 eV, XlogP &lt; 2) populated exclusively by biotic compounds in their 704-compound dataset. We re-tested this classifier with proteinogenic membership as the outcome rather than biotic-versus-abiotic membership, on an extended set of 715 compounds combining the Moosmann supplementary data, six codon-capture proteinogenic \\|HLG\\| values from Granold et al. (2018), and five additional proteinogenic values imputed by ridge regression. The discriminator's predictive performance on proteinogenic membership is dominated by XlogP. In the full dataset, single-feature XlogP reaches bootstrap median ROC-AUC 0.978 [95 percent CI 0.966–0.988], and adding \\|HLG\\| improves median ROC-AUC by only 0.002; the partial Spearman correlation between \\|HLG\\| and proteinogenic membership, conditional on XlogP, is − 0.058 [CI − 0.118, − 0.002]. The Moosmann threshold rule applied to proteinogenic membership has precision 3.3 percent and recall 40 percent against the proteinogenic outcome. A subset analysis restricted to the 125 Murchison meteorite non-canonical amino acids as the negative class — a chemically reasonable competitor set to the proteinogenic alphabet — recovers a measurable HLG signal: partial Spearman becomes − 0.232 [CI − 0.382, − 0.092], and \\|HLG\\| adds about 0.02 to ROC-AUC over XlogP alone. The biotic-versus-abiotic biosignature classifier therefore does not transfer directly to proteinogenic-membership prediction. The HLG signal that the classifier detects in the full Moosmann setting is diluted by secondary metabolites; once the negative class is restricted to chemically reasonable amino-acid competitors, \\|HLG\\| has a small but detectable residual contribution beyond XlogP. The analysis is observational; we report associations within the assembled dataset and do not claim mechanism.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "6fe78f8c-2064-42c3-a7d7-c34c4b7ba4b8",
+        "title": "Predicting Suspicious Movement in Crowds Using an Identity-Aware Transformer–GroupNet with Confidence Calibration",
+        "abstract": "<jats:p>Crowd surveillance in urban environments is becoming increasingly critical with the development of cities and the number of people who attend various events. Although the trajectory forecasting has been addressed in other literature, it has been applied to person re-identification and anomaly detection separately, but an uncertainty sensitive integrated scheme has not been applied to date, so it is not practical. This paper proposes the use of IAT-GroupNet, a generic-purpose architecture, comprised of identity-preserving Re-ID and embeddings, using a GNN-Transformer backbone and a post-hoc mechanism of confidence calibration. Re-ID module takes persistent identities of pedestrians in the overlap camera frames, and GNN is the proximity-based socialization at each time, and a many-head Transformer encoder takes in long-horizon motion. This is fixed with a temperature -scaled calibration layer which introduces a calibration error (ECE) of 0.046 at the ETHUCY benchmark. IAT-GroupNet has an error of 7.1 on the average displacement, 8.2 on the Final Displacement and 21 on identity related switches with the best-published baseline of 13.4, 12.8 and 44.7 respectively. A module level ablation will fix that there is a quantifiable contribution of each of the components. In addition to the raw accuracy, the system also offers the notification whenever the loitering occurs and the system deviates in the course by providing the calibrated confidence scores for real-time interpretation, which is a convenient tool in the real-time tracking of the masses-safety.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "4813bace-4be2-4d5c-a4a8-bf053ae432e9",
+        "title": "Rethinking Fundamental Disagreement Through Epistemic Power",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "cfef7f3f-aabf-4267-98fd-e489ee2962be",
+        "title": "Incorporating motor preparation time transforms micro-offline gains into micro-offline losses",
+        "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>During explicit sequence learning (ESL), micro-offline gains (MOGS) occur during brief rest periods. MOGS are calculated as the difference in keypresses-per-second (KPS) between the first sequence of one trial and the last sequence of the preceding trial. To date, all studies evaluating MOGS have calculated KPS from the motor execution time (MET) that occurs between keypresses, but this approach ignores potential contributions from motor preparation which occur prior to the first keypress. Given that ESL relies on both pre-movement motor planning and subsequent motor execution, we hypothesized that ignoring motor preparation time (MPT) neglects a critical component of skill acquisition, potentially misrepresenting the true magnitude of MOGS. To test this, we calculated MOGS with and without MPT in thirty adults who performed an ESL task. Our results show that including MPT flipped MOGS from positive to negative and significantly increased the positive correlation between early learning and a gold-standard ESL metric: the number of correct sequences performed. Our results suggest that MPT should be incorporated into MOGS calculations and that excluding it overestimates micro-offline learning.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "ccc3cf7e-0cd3-4321-babd-6824835b78b8",
+        "title": "Beta Uncertainty, Disagreement, and Mutual Fund Investor Learning",
+        "abstract": "<jats:p>This paper documents a negative relationship between beta uncertainty and the sensitivity of mutual fund flows to past performance. We interpret beta uncertainty as capturing disagreement among investors arising from heterogeneous prior beliefs about the benchmark used to evaluate managerial skill. Within a Bayesian learning framework, such disagreement increases noise in performance signals, weakens posterior belief updating, and limits investors' inference about skill from realized returns. Consistent with these predictions, we empirically show that higher beta uncertainty significantly lowers flow-performance sensitivity. This effect is stronger when investors' priors are more heterogeneous and is attributable to disagreement rather than ambiguity aversion. Learning from funds with lower beta uncertainty is more informative, which strengthens investors' responses to performance.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "12aae88d-b917-42b6-a6d8-fe17e433952a",
+        "title": "Spectral Stability Operator for Cascading Failures in Smart Grids under Multiscale Perturbations",
+        "abstract": "<jats:p>Cascading failures constitute one of the most critical mechanisms governing large-scale disruptions in modern power systems, where localized perturbations may propagate across network topologies and trigger systemic collapse. Existing approaches typically rely on graph-theoretic metrics, dynamical simulations, or probabilistic risk models, yet a unified operator-theoretic framework capable of quantifying the stability of evolving perturbations across multiple spatial and temporal scales remains largely absent. In this work, we introduce the Pellis Stability Operator, a novel multiscale operator framework designed to characterize, predict, and control cascading failure dynamics in smart-grid networks subjected to heterogeneous load perturbations. The proposed operator acts on a functional state space representing network stress distributions and encodes the propagation, amplification, attenuation, and redistribution of disturbances through an evolving spectral structure. By integrating graph topology, power-flow interactions, and multiscale perturbation dynamics into a single mathematical object, the framework establishes a rigorous bridge between network dynamics, operator theory, and stability analysis. A comprehensive theoretical formulation is developed in which cascading processes are represented as trajectories generated by operator semigroups. Spectral properties of the Pellis Stability Operator are shown to determine the transition between stable, metastable, and unstable operational regimes. Stability criteria are derived through eigenvalue localization, spectral gap analysis, and perturbation-theoretic arguments, yielding sufficient conditions for the suppression of large-scale cascading events. The framework further addresses observability, identifiability, and inverse reconstruction problems, enabling the estimation of latent instability modes from incomplete measurement data. To account for uncertainty and real-world operational variability, robustness properties are established under stochastic disturbances, parameter uncertainty, and structural network modifications. The theory additionally provides a mathematically consistent foundation for intervention design, where control actions are interpreted as operator modifications capable of shifting the network spectrum toward resilient configurations. Numerical implementation strategies and experimentally falsifiable predictions are proposed to facilitate validation on realistic smart-grid infrastructures. Beyond power systems, the proposed formulation naturally extends to a broad class of networked dynamical systems exhibiting multiscale propagation phenomena, including transportation networks, communication infrastructures, financial systems, and critical cyber-physical architectures. The Pellis Stability Operator therefore establishes a general mathematical paradigm for understanding the emergence, prediction, and mitigation of cascading failures in complex interconnected systems.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "563165d8-0dd9-48c6-a80c-074c0fa42289",
+        "title": "GoldBot: A Multi-Factor Safe-Haven Analyzer for Gold --Cross-Regime Evidence for Trend-Matching Rather Than Event Discrimination",
+        "abstract": "<jats:p>Gold's role as a safe-haven asset is one of the most robust stylized facts in empirical finance (Baur &amp;amp; McDermott, 2010; Baur &amp;amp; Lucey, 2010), yet systems built to operationalize this behavior in real time are rarely subjected to rigorous, cross-regime backtesting. We present GoldBot, a nine-factor, LLM-orchestrated system that classifies gold's safe-haven status (ON/OFF) and quantifies its Strength% via a transparent weighted-scoring architecture with retrieval-augmented context. We backtest GoldBot across four independently constructed samples spanning four structurally distinct macro-financial regimes: a stratified sample of 60 dates during a 2025-26 gold uptrend (Backtest 1), a set of 18 genuine macro/geopolitical events spanning both an uptrend and a subsequent downtrend within the same window (Backtest 2), 20 stratified dates during the 2020 COVID crash and recovery (Backtest 3), and 20 stratified dates during the 2008 global financial crisis (Backtest 4). Using McNemar's exact test throughout, we find GoldBot underperforms a naive always-safe-haven-ON baseline in three of four regimes-significantly so in the largest sample (Backtest 1: 35.0% vs. 66.7%, n=60, p=0.018)-and ties it exactly in the fourth (Backtest 3: 90.0% vs. 90.0%, n=20). Critically, decomposition reveals this is not evidence of skill: in every regime tested, GoldBot's apparent accuracy is fully explained by whether its prevailing directional bias in that period happens to align with the ambient price trend, not by discrimination between distinct real-world events. Across 18 genuinely distinct macro/geopolitical events in Backtest 2-spanning a war outbreak, a warending ceasefire, a historic 54-45 Fed chair confirmation vote, and a shock OPEC exit-GoldBot's Strength% output never left a 37-50% range (SD=4.2 points), indicating near-total insensitivity to event content within a normal-range macro regime. By contrast, in the 2020 and 2008 regimes, where underlying quantitative factors reached genuinely extreme values (negative real yields, VIX above 60), GoldBot's output did shift meaningfully, suggesting the model's quantitative factors retain some responsiveness to extreme readings even as its qualitative/geopolitical scoring remains substantially compressed. We argue this cross-regime evidence for trend-matching, rather than event discrimination, is a more precise and more damaging diagnosis than any single backtest could provide, and a necessary standard for evaluating this class of system. \n&lt;br&gt;\n&lt;br&gt;\n AI Disclosure: This paper was developed with the assistance of Claude (Anthropic), used for architecture design, statistical scripting, and manuscript drafting/editing. All experimental results are derived from the author's own code execution. The author reviewed, verified, and takes full responsibility for all content and conclusions.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "d9f0dae2-6210-406e-bae7-903454b7776d",
+        "title": "TAPS-Avatar: A Single-Stream Representation of Temporally Aligned Complete-Frame States for Lightweight Conversational Avatars",
+        "abstract": "<jats:p>We introduce a single-stream representation of temporally aligned complete-frame avatar states for lightweight conversational animation. Each state contains the complete rendered avatar frame rather than a local mouth crop. During offline preparation, generative video, interpolation and portrait-animation models establish a shared idle trajectory and derive several mouth-opening state trajectories whose frames remain temporally corresponding. The selected trajectories are spatially packed into one H.264 video. At runtime, the visual media timebase advances continuously while an independent audio-control timebase selects the visible mouth-opening state. Packing all state trajectories into one video reduces multiple independently scheduled media timebases to one, eliminating inter-state phase divergence by construction. Across 12 counterbalanced runs on the evaluation platform, median baseline-adjusted utilization deltas were 5.80 percentage points for the graphics engine and 2.21 percentage points for CPU, versus 7.14–37.55 and 4.20–5.55 percentage points, respectively, for three evaluated alternatives. Frame-time p95 remained comparable across systems (6–7 ms). Core preparation from a compatible portrait took a median 7.4 min across seven portraits, with sampled peak VRAM of approximately 13.8 GB. In an exploratory within-subject study (N=41), the proposed system received a median rating of 4/5 on all six animation dimensions. The representation therefore shifts avatar-specific computation offline while preserving continuous motion and low client workload, at the cost of restricted input compatibility and reduced motion flexibility.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "4cb40462-90d3-4e23-97ff-c808557c8969",
+        "title": "When Programs Vanish: The Unseen Consequences",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "a4985c48-309d-4c9c-9f5f-69af030a3f9a",
+        "title": "When Does the Pollution Premium Vanish: Evidence from a Profitability Reversal&amp;nbsp;",
+        "abstract": "<jats:p>&lt;p&gt;&lt;span&gt;Hsu et al. (2023)’s theoretical framework assumes that high-pollution firms have a higher exposure to climate policy uncertainty. We show that when environmental regulation becomes stringent enough to eliminate the profitability advantage of high-pollution firms, this monotonic mapping breaks down, thus the pollution premium vanishes. Exploiting China's new Environmental Protection Law (NEPL), which reversed the profitability&lt;/span&gt;&lt;span&gt;&amp;nbsp;advantage&lt;/span&gt;&lt;span&gt;&amp;nbsp;of high-&lt;/span&gt;&lt;span&gt;pollution over&lt;/span&gt;&lt;span&gt;&amp;nbsp;low-pollution firms, we document a significant pollution premium that exists before and disappears afterward. Consistent with our&lt;/span&gt;&lt;span&gt;&amp;nbsp;supplement&lt;/span&gt;&lt;span&gt;, the market's expected differential in risk exposure,&amp;nbsp;&lt;/span&gt;&lt;span&gt;revealed&lt;/span&gt;&lt;span&gt;&amp;nbsp;by abnormal returns in event windows, also disappears after the profitability reversal.&amp;nbsp;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "c0ee84e4-c577-49a7-ae9c-a7f5d9f04f24",
+        "title": "Matched–Mismatched Uncertainty Compensation in Dynamic SMC Using Optimal Fractional Loop-Transfer-Recovery Observer",
+        "abstract": "<jats:p>A new fractional dynamic sliding mode control (FD-SMC) framework is introduced to reduce chattering in the control of fractional-order chaotic systems. In this method, chattering is eliminated by placing a fractional integrator before the system control input. As a result, the augmented system has a higher dimension than the original system, meaning that additional states are introduced. Effective control therefore requires identifying or estimating these new states or the corresponding plant model. To address this issue, a robust optimal fractional loop-transfer-recovery observer (ROF-LTRO) is developed. Furthermore, the key advantage of sliding mode control (SMC)—its invariance to matched uncertainties—is often lost in many plants such as chaotic systems, because many of them contain mismatched uncertainties. To restore and extend the invariance property, multiple sliding surfaces combined with a virtual control input are employed. In addition, the proposed FD-SMC and ROF-LTRO do not rely on prior knowledge of uncertainty bounds, which is beneficial for practical implementation. Then, a two-stage design procedure based on two-surface definition is presented, and simulation results are provided for the extended fractional Duffing–Holmes chaotic system (EF-DHCS) under both matched and mismatched uncertainties.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "1115b1ec-1009-48ce-888b-040b76cafb94",
+        "title": "The Jevons Paradox in AI Infrastructure: Why Efficiency Gains Accelerate Compute Consumption",
+        "abstract": "<jats:p>The Jevons Paradox, first observed in 19thcentury coal economics, states that improvements in resource efficiency increase rather than decrease total resource consumption by stimulating demand. This paper argues the paradox applies directly to modern AI infrastructure. As AI models become cheaper to train and serve-through quantization, distillation, open-source releases, and API price reductionsenterprises deploy more models, run more inference, and consume more compute in aggregate. We present a taxonomy of four cases documenting this rebound effect in practice. We further argue that efficiency gains do not reduce total AI spend: they restructure it, transitioning costs from human labor to compute. The implications are significant for enterprise AI budgeting, cloud strategy, and AI governance policy.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "d6499e6f-dfcd-4337-8704-2362e30a38b8",
+        "title": "Best Observability-Self-Hosted-Fundamentals Braindumps for Success Exam",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "526d43e6-b990-4f65-9cad-ea7ea556ddc3",
+        "title": "A hydropathic asymmetry in the second codon position separates two otherwise matched transversions",
+        "abstract": "<title>Abstract</title>\n                <p>\n                  The transition/transversion ratio has summarized mutational input for six decades and underlies the quantitative evaluation of the code's error minimization. It sums the four transversion classes, discarding a distinction the code makes sharply. Two of the four, C &gt; A and T &gt; G, traverse the same edges of the codon graph in opposite directions and carry identical cost under every block-preserving assignment. The other two sit at opposite ends of the hydropathy axis the second codon position encodes: T &gt; A is the most expensive substitution there and C &gt; G the cheapest transversion. An exact identity places the difference in the squared distance between the hydropathic centroids of the two columns, and all 22 NCBI translation tables this model can represent preserve it.\n                  <bold>The separation is not a by-product of the code being good</bold>\n                  : anisotropy rises as total cost falls across randomized codes, but none of the twenty lowest-cost reaches the standard code's. Across spectra for 4,972 eukaryotic species, the ratio of the two free classes accounts for 63.5% of the variance in the code's advantage the standard summaries leave unexplained, and transfers to 68 species inferred by a different method, cutting prediction error by 25.0%.\n                  <bold>The axis also opposes transition bias.</bold>\n                  Both raise the code's advantage; on its rank among randomized alternatives they separate, and two groups of species matched to within 1.4% in advantage differ threefold in rank. A summary that sums transversions cannot represent what a lineage's mutational input costs the code.\n                </p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "f3ea9c43-6a17-4fa0-b155-d36f7e9d4354",
+        "title": "Crossing the ADC inflection points: what separates clinical success from failure",
+        "abstract": "<jats:p>“Drug development is not a race to be first; it is a race to win. History is full of examples where being first did not matter, but being right did.” Lauren Coyle, Launch Commissioning Editor, Bioconjugate Insights, speaks with Antoine Yver, Board Chair, Ona Therapeutics, with more than three and a half decades of experience shaping global cancer drug development. In this conversation, they explore what determines whether an ADC successfully crosses the critical threshold and how teams should rethink dose finding, toxicity, and what it truly takes to set a program up for long-term success in the clinic.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "d79f2195-f7ff-41bc-b706-e3e1c5e41892",
+        "title": "Ranking Marathon Difficulty from Large, Sparse Data: A Robust Latent-Factor Approach",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "c0830d08-3388-41e3-8d76-afa2e67b33fb",
+        "title": "Value, Risk, and Recoverability: An Interpretable Order-Level Prioritization Framework for Service Recovery in E-Commerce",
+        "abstract": "<jats:p>Customer prioritization in e-commerce remains dominated by value-based logics that allocate retention effort to the most profitable customers, even though risk-based targeting can be ineffective when intervention responsiveness is ignored. This study aims to develop and empirically test a Value–Risk–Recoverability (VRR) framework that prioritizes service-recovery effort under a fixed intervention budget. The framework draws its three axes from the synergy of three theoretical streams: customer-equity theory motivates the value axis, the churn and defection-management literature motivates calibrated dissatisfaction risk, and service-recovery theory—through the distinction between operational and structural causes of failure—motivates the recoverability axis, which operationalizes the intervention-responsiveness critique of risk-based targeting. The framework is instantiated on the public Brazilian marketplace dataset by Olist (91,954 customers; 93,663 delivered orders, 2016–2018) using unsupervised clustering for behavioral segmentation, calibrated gradient-boosting models to predict order-level dissatisfaction under a strictly temporal hold-out, and SHAP attribution to decompose predicted risk into operational and structural components. Results show that dissatisfaction becomes predictable mainly as fulfillment unfolds (out-of-sample AUC of 0.72 with in-fulfillment signals versus 0.61 at order time); that roughly 76% of predicted risk loads on operational, addressable factors; and that, at a 10% intervention budget, value-based targeting captures only about 30% of realized recoverable value against roughly 96% for risk-aware policies. The study contributes a theoretically grounded, interpretable, and reproducible prioritization logic for service recovery, together with an explicit account of the boundary conditions under which each axis carries decision-relevant information.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "36ecccc4-8e92-43a5-9536-10ee848003f9",
+        "title": "Rank-Gated and Sparse Low-Rank Adaptation for Efficient Fine-Tuning of Vision--Language Models",
+        "abstract": "<title>Abstract</title>\n                <p>Low-Rank Adaptation (LoRA) is a widely used parameter-efficient fine-tuning method for large language models (LLMs) and vision--language models (VLMs), but standard LoRA requires a fixed rank to be chosen before training and retains every rank component at deployment. We introduce \\emph{Rank-Gated LoRA} (RG-LoRA), a structured extension that places learnable gates on the latent rank components of a LoRA adapter. Starting from a maximum rank budget, RG-LoRA assigns an importance weight to each rank-one component and permits components to be physically removed by jointly pruning the corresponding row of the down-projection and column of the up-projection. We analyze parameter and LoRA-branch computational complexity, describe compatibility with row- and column-parallel linear layers, and contrast rank gating with deterministic feature sparsification and input-channel gating. We then evaluate an $r=8$ prototype on Qwen3-VL-8B-Instruct using ChartQA, TextVQA, and DocVQA. Dense RG-LoRA reaches 81.56\\% relaxed VQA accuracy on 3,000 examples versus 81.95\\% for rank-8 QLoRA, while reducing run-peak allocated inference memory from 12.45 to 11.41\\,GB in the measured runs. Post-training top-$k$ pruning remains quality-stable on a 1,000-example validation subset: retaining five of eight ranks obtains 81.26\\%, compared with 79.90\\% for the unpruned gated adapter and 80.21\\% for rank-8 QLoRA. However, the learned gates remain near their initialization ($\\sigma(2)\\approx0.88$), so the current experiment does not demonstrate learned sparsity, and pruning at $r=8$ produces no meaningful latency or VRAM reduction. These results validate the train--prune--evaluate mechanism and motivate the decisive next experiments: explicit sparsity regularization, held-out evaluation, matched fixed-rank controls, and larger initial ranks where adapter-side compute is non-negligible.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "f1dc282b-d94c-45f8-892a-3c9b23f46f2e",
+        "title": "Tracking Recovery: Temporally-Matched 3D Gaussian Splatting of Ecosystems after Prescribed Burns",
+        "abstract": "<jats:p>Land management and stewardship teams continue to lack the tools to\ncapture 3D spatiotemporal insights of the ecosystems they oversee. For\nwildfire management at the wildland-urban interface, teams face\nchallenges in capturing vegetation growth over time after a fuel\nreduction program and connecting seasonal changes to the vegetation\ndistribution across the treated area. Current approaches rely on\ntriangle meshes or point clouds generated from photogrammetry or LiDAR\nsurveys on drones or hiked traverses. However, the difficulties in\noptimizing these meshes lead to large triangles that inadequately\napproximate the bulk vegetation shape, and the point cloud data is often\ntoo sparse for local plant-scale understanding.\n    To address this gap, we extend recent machine learning-based computer\ngraphics techniques in 3D Gaussian Splatting (3DGS) to reconstruct\nscenes at the wildland-urban interface from handheld  imagery\nwith sufficient detail to identify species, capture individual leaves,\nrecover plant stature, and disambiguate overhanging plant individuals.\nWe develop a new method to match the 3DGS reconstruction of these scenes\nacross months, associating plant growth across seasons interactively in\n3D. To achieve the centimeter-level matching, we adapt the Umeyama algorithm and the iterative\nclosest point algorithm from point cloud maps to the 3DGS scene,\nleveraging the probabilistic interpretation of the 3D Gaussian data\nstructure and robustly handling visual and geometric changes associated\nwith vegetation phenology over time.\n    We have applied our method to recent pile burns at Stanford’s Jasper\nRidge ’Ootchamin ’Ooyakma Biological Preserve at monthly intervals. We\ndemonstrate differences in ecological response where some piles featured\nthe unexpected return of a rare and threatened bushmallow, and others\nremained more barren. This pile burn microcosm implicates the need for\nplant-level 3D spatiotemporal models to understand ecosystem recovery to\nfire mitigation practices.</jats:p>\n                <jats:p>\n                  Please visit the project page for the spatiotemporal alignment video and more information: \n                  <jats:ext-link xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"https://danineamati.github.io/burn-ecorecovery.github.io/\">https://danineamati.github.io/burn-ecorecovery.github.io/</jats:ext-link>\n                </jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "2f8c9163-e5f2-442d-a75b-9cf292dcc3b7",
+        "title": "A General Asymptotic Normality Theorem for Switching Degree Inference under Weak Dependence — Direction-Dependent Long-Run Variance Correction, Moving Block Bootstrap Consistency, and Preservation of Structural Invariance",
+        "abstract": "<jats:p>&lt;p&gt;&lt;span&gt;The inference theory for the Switching Degree established by Tang (2026ag) assumes independent and identically distributed noise. In this paper, we extend the Switching Degree inference to the weak-dependence setting under α-mixing noise and establish three main results. First, the weak-dependence asymptotic normality theorem (general case): the Switching Degree estimator remains √n-asymptotically normal, with its asymptotic variance jointly determined by the instantaneous variance σ² and the long-run variance σ²_LR,&lt;/span&gt;&lt;/p&gt;\n&lt;p&gt;&lt;span&gt;V_true = [ σ² + (σ²_LR − σ²) · (δᵀμ_z)² / ‖δ‖_Σ² ] / [ γ(1−γ) · ‖θ_ref‖_Σ² ],&lt;/span&gt;&lt;/p&gt;\n&lt;p&gt;&lt;span&gt;where δ = Δθ and μ_z = E[z]. When μ_z = 0 or δᵀμ_z = 0, this formula reduces to the asymptotic variance under independent noise, σ² / [γ(1−γ) · ‖θ_ref‖_Σ²], in which case weak dependence has no effect on the asymptotic variance of the Switching Degree estimator. Second, a precise statement of moving block bootstrap (MBB) consistency: we explicitly formulate conditions and conclusions for MBB consistency, while leaving the rigorous proof as open problem SMT-T36. Third, a structural invariance preservation theorem: the invariance of the Switching Degree under invertible Σ-isometries does not depend on the noise independence assumption. Numerical simulations confirm the necessity of the weak-dependence correction: confidence intervals that ignore weak dependence exhibit severely low coverage, with coverage dropping as low as 73%, while intervals based on the corrected variance or HAC standard errors improve substantially. In finite samples, all methods have coverage slightly below the nominal level (corrected theoretical intervals range from 0.865 to 0.925), attributable to normal approximation bias caused by the nonlinearity of the Switching Degree; this is posed as an open problem. Together with Tang (2026af, 2026ag, 2026ah, 2026ai, 2026aj), this paper completes the statistical inference foundation of Switch Measure Theory.&lt;/span&gt;&lt;/p&gt;\n&lt;p&gt;&lt;span&gt;Research Paradigm Statement: The core methodology, research direction, and final decisions were independently directed by the author. DeepSeek assisted with code implementation, data presentation, and text drafting. The author takes full academic responsibility for the final content.&lt;/span&gt;&lt;/p&gt;</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "20590239-3fb4-4432-a306-92dfdff75a41",
+        "title": "Tracking Recovery: Temporally-Matched 3D Gaussian Splatting of Ecosystems after Prescribed Burns",
+        "abstract": "<jats:p>Land management and stewardship teams continue to lack the tools to capture 3D spatiotemporal insights of the ecosystems they oversee. For wildfire management at the wildland-urban interface, teams face challenges in capturing vegetation growth over time after a fuel reduction program and connecting seasonal changes to the vegetation distribution across the treated area. Current approaches rely on triangle meshes or point clouds generated from photogrammetry or LiDAR surveys on drones or hiked traverses. However, the difficulties in optimizing these meshes lead to large triangles that inadequately approximate the bulk vegetation shape, and the point cloud data is often too sparse for local plant-scale understanding. To address this gap, we extend recent machine learning-based computer graphics techniques in 3D Gaussian Splatting (3DGS) to reconstruct scenes at the wildland-urban interface from handheld imagery with sufficient detail to identify species, capture individual leaves, recover plant stature, and disambiguate overhanging plant individuals. We develop a new method to match the 3DGS reconstruction of these scenes across months, associating plant growth across seasons interactively in 3D. To achieve the centimeter-level matching, we adapt the Umeyama algorithm and the iterative closest point algorithm from point cloud maps to the 3DGS scene, leveraging the probabilistic interpretation of the 3D Gaussian data structure and robustly handling visual and geometric changes associated with vegetation phenology over time. We have applied our method to recent pile burns at Stanford’s Jasper Ridge ’Ootchamin ’Ooyakma Biological Preserve at monthly intervals. We demonstrate differences in ecological response where some piles featured the unexpected return of a rare and threatened bushmallow, and others remained more barren. This pile burn microcosm implicates the need for plant-level 3D spatiotemporal models to understand ecosystem recovery to fire mitigation practices.</jats:p>\n                <jats:p>\n                  Please visit the project page for the spatiotemporal alignment video and more information: \n                  <jats:ext-link xmlns:xlink=\"http://www.w3.org/1999/xlink\" ext-link-type=\"uri\" xlink:href=\"https://danineamati.github.io/burn-ecorecovery.github.io/\">https://danineamati.github.io/burn-ecorecovery.github.io/</jats:ext-link>\n                </jats:p>\n                <jats:p>\n                  Please visit the Stanford Data Repository for the field data:\n                  <jats:ext-link xmlns:xlink=\"http://www.w3.org/1999/xlink\" ext-link-type=\"uri\" xlink:href=\"https://doi.org/10.25740/ws901xs0162\">https://doi.org/10.25740/ws901xs0162</jats:ext-link>\n                </jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "3269f9e6-fd42-4ca2-9f46-bb346b7cfd4b",
+        "title": "Seat Reversals and Candidate Status Changes under Biproportional Representation",
+        "abstract": "<title>Abstract</title>\n                <p>Biproportional representation improves aggregate party proportionality by constraining district-level allocations through canton-wide party entitlements. This article examines how those constraints affect candidate outcomes in a personalized list system. It distinguishes classic seat reversals from the broader set of party--district entitlement changes generated by biproportional allocation. When a party's district entitlement changes while candidate rankings remain fixed, the electoral threshold moves within the local list.\nThe article analyses the 2023 Zurich cantonal election through an exact mechanical counterfactual comparing the observed biproportional seat matrix with independent district-level Webster allocation. District magnitudes, party votes, the legal quorum, candidate votes, and candidate rankings are held constant. Fourteen of 188 party--district cells differ, representing seven seat transfers and fourteen candidate status changes. Seven of the 180 parliamentary seats, or 3.9 percent, would have had a different occupant. Two transfers produce discordant seat allocations in which a locally weaker party receives more seats than a stronger party. Biproportionality reduces the Gallagher index from 2.64 to 1.73 and the Loosemore--Hanby index from 4.81 to 2.55. Six transfers correct aggregate party-seat totals, while one reflects additional territorial redistribution. Vote gaps across the shifted candidate thresholds vary substantially, showing that mechanically equivalent status changes can cross either narrowly or clearly differentiated local rankings. The findings reveal a measurable trade-off between aggregate proportionality and local allocation continuity.\nJEL Classification: C63 , D71 , D72</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "bdf3f3d6-e74e-40f9-aafb-4b1adaaf4c5c",
+        "title": "Detection Token: Detecting adversarial examples for Vision Transformers with one additional token",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "0486bfda-4179-4fe7-9c08-3f870df37ec2",
+        "title": "Hypothetical Bias, Choice Consistency, and Procedural Invariance,across Choice Experiment Variations",
+        "abstract": "<jats:p>Discrete choice experiments are a commonly used method for eliciting consumer preferences. Nevertheless, they have limitations when it comes to observing demand for products that are frequently purchased in bulk. The discrete choice experiment framework also imposes strict substitution patterns between alternatives, which limits researchers’ ability to test potential complementarity between them. Open-ended choice experiments may overcome these limitations while lacking realism and potentially increasing hypothetical bias compared to discrete choice experiments. In this article, we introduce a mixed open-ended choice experiment that combines elements from the traditional discrete choice and open-ended choice experiment frameworks. This approach offers insights into participants’ preferences and willingness to pay, as well as into demanded quantities and potential complementarity of the choice alternatives. We compare the data obtained using open-ended and discrete choice experiment to the mixed open-ended choice experiment, to understand potential threads of the new method to external and internal validity. Our results suggest that the mixed open-ended choice experiment provides a middle ground between the other two approaches, presenting a tradeoff between richness of data, estimation challenges, hypothetical bias and choice consistency and is recommended for conducting experiments with goods purchased in quantities larger than one.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "606ff021-4cf4-4629-9a51-68a42e259394",
+        "title": "Reliability-Aware Sexism Detection: Combining DPO with Annotator Agreement and Token-Level Confidence Scoring",
+        "abstract": "<p>The detection of online sexism remains an open problem. Sexism detection is inherently subjective, yet most existing systems reduce multi-annotator labels to a single majority decision and treat all instances uniformly. This ignores two informative signals: annotator agreement and model uncertainty. We propose RA-DPO (Reliability-Aware Direct Preference Optimization), which integrates annotator agreement, model confidence, and a token-level uncertainty signal into a single reliability score. RA-DPO uses this score to select high-value preference pairs during training and to support inference-time abstention, which allows the model to trade coverage for accuracy. We evaluate RA-DPO on 6,920 multilingual posts from EXIST 2023, fine-tune OpenAI gpt-4o base via DPO, and validate on two open-weight 3B models (Llama, Qwen). Results show that training on the top 30% most reliable pairs matches full-data DPO which indicates that reliability-aware selection can reduce training cost without sacrificing performance. At inference, selective prediction reaches 96.2% accuracy at 50% coverage in the true-agreement setting and 88.7% in the deployable predicted-agreement setting, both exceeding the 85.3% no-agreement baseline. These results suggest that accounting for annotation uncertainty is beneficial for both efficient training and reliable deployment in subjective classification.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "b2025650-a9f2-436e-acf3-4d7f5e070f43",
+        "title": "Predicting Suspicious Movement in Crowds Using an Identity-Aware Transformer–GroupNet with Confidence Calibration",
+        "abstract": "<jats:p>Crowd surveillance in urban environments is becoming increasingly critical with the development of cities and the number of people who attend various events. Although the trajectory forecasting has been addressed in other literature, it has been applied to person re-identification and anomaly detection separately, but an uncertainty sensitive integrated scheme has not been applied to date, so it is not practical. This paper proposes the use of IAT-GroupNet, a generic-purpose architecture, comprised of identity-preserving Re-ID and embeddings, using a GNN-Transformer backbone and a post-hoc mechanism of confidence calibration. Re-ID module takes persistent identities of pedestrians in the overlap camera frames, and GNN is the proximity-based socialization at each time, and a many-head Transformer encoder takes in long-horizon motion. This is fixed with a temperature -scaled calibration layer which introduces a calibration error (ECE) of 0.046 at the ETHUCY benchmark. IAT-GroupNet has an error of 7.1 on the average displacement, 8.2 on the Final Displacement and 21 on identity related switches with the best-published baseline of 13.4, 12.8 and 44.7 respectively. A module level ablation will fix that there is a quantifiable contribution of each of the components. In addition to the raw accuracy, the system also offers the notification whenever the loitering occurs and the system deviates in the course by providing the calibrated confidence scores for real-time interpretation, which is a convenient tool in the real-time tracking of the masses-safety.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "5c97a214-1b73-4884-87a9-fdd21d972437",
+        "title": "Epistemic Systems in Action",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "bf7eab1e-816d-4cc9-95a6-3da211452f4c",
+        "title": "Physically Consistent Risk Calibration for Open-World Alarm Filtering in Distributed Optical Fiber Sensing",
+        "abstract": "<jats:p>Distributed optical fiber sensing (DOFS) based on phase-sensitive optical time-domain reflectometry (ϕ-OTDR) is increasingly used for perimeter and pipeline monitoring, yet most recognizers are evaluated as closed-set classifiers, whereas a deployed fiber also records nuisance sources and event types absent from training. In our experiments, a closed-set recognizer with 0.999 accuracy still gives a false-alarm rate (FAR) of 0.42–0.64 on simulated unknown nuisance classes, and a conformal threshold calibrated only on known negatives does not remove this failure. We therefore propose Physically Consistent Risk Calibration (PCRC), which combines a label-free physical-consistency gate computed from spatial compactness, common-mode ratio, and signal-to-noise ratio (SNR) with a conformal threshold for gate-passing negatives and a three-level alarm/review/discard decision. The guarantee is conditional: conformal calibration controls gate-passing negatives under exchangeability, and the gate removes only physically inadmissible nuisance windows. On three public distributed acoustic sensing (DAS) field datasets, the known-negative FAR follows the target level when calibration and test negatives are exchangeable, held-out threat coverage reaches 0.87 and 0.68 on the two multichannel corpora, and every physically admissible held-out nuisance passes the gate and requires recalibration from verified field negatives. In a controlled simulation whose unknown nuisance classes are constructed to be inadmissible, PCRC produces no observed automatic false alarms while retaining 0.998 known-threat recall.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "da2b0772-7d82-4dfa-8a96-805d6e3ec0f6",
+        "title": "ScaleCal: Scale-Aware Confidence Calibration for Small Language Models",
+        "abstract": "<title>Abstract</title>\n                <p>Small language models (0.5B--7B) on edge devices must know when to abstain. We present the first systematic cross-scale study of confidence-signal degradation: across eight models from three families and four benchmarks, cheap logit-based signals --- token probability and average log-likelihood -- saturate with growing overconfidence, while normalized entropy collapses to near-random discrimination at 1B and below; sampling consistency remains robust, its cost falling with scale. We formalize this in a signal-to-noise-ratio (SNR) theory -- an SNR--AUROC bridge (AUROC: area under the receiver operating characteristic curve) and a finite-sample conformal guarantee -- and build ScaleCal, a training-free framework that temperature-calibrates the cheap signal and escalates only uncertain queries to $k$-sample semantic consistency, with a conformal threshold fitted from 3-5 scalars. On models up to 3B, ScaleCal reduces expected calibration error (ECE) by 30--50% over the strongest baseline and raises failure-detection AUROC from near-random to 0.84--0.88, at a quarter of a 7B teacher's FLOPs.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "88478c71-73d6-4263-bbbc-5411f6f87867",
+        "title": "Trust on Trial: How AI Errors Reshape Human Confidence in Technology",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "a41a179e-974f-4ae8-a1d4-3c8360e5dcde",
+        "title": "Dissecting Machine Forecast Disagreement: Investor Disagreement versus Model Uncertainty",
+        "abstract": "<jats:p>Machine forecast disagreement (MFD) does not identify investor disagreement when investors face model uncertainty. We allow investors to entertain multiple forecasting models and use Bayesian model averaging to decompose forecast dispersion into disagreement across investors and model uncertainty within investors. Model uncertainty accounts for about 73% of total dispersion and is almost perfectly correlated with raw MFD. In cross-sectional return tests, model uncertainty strongly predicts lower returns, whereas investor disagreement does not. The negative return relation attributed to MFD therefore reflects model uncertainty rather than disagreement across investors, substantially changing its economic interpretation.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "c1713001-dfd5-436d-8848-cfea6a0b02cb",
+        "title": "Competence–Confidence Calibration and Risk Profiling Among Preclinical Nursing Students: A Cross-Sectional Study",
+        "abstract": "<jats:p>The transition from preclinical learning to clinical practice requires nursing students to possess adequate competence and self-confidence in performing clinical skills. Mismatch between competence and confidence may affect clinical readiness and patient safety. Objective: This study aimed to analyze the relationship between objective clinical competence and self-confidence among preclinical nursing students and evaluate competence-confidence calibration. Methods: A cross-sectional analytic study was conducted among 41 preclinical nursing students using total population sampling. Objective competence was measured using standardized preclinical assessment scores, while self-confidence was assessed using a validated competency-based questionnaire (Cronbach’s alpha = 0.80). Data were analyzed using descriptive statistics, Pearson correlation, simple linear regression, and z-score–based calibration analysis. Results: A significant moderate positive correlation was found between objective competence and self-confidence (r = 0.58; p &lt; 0.001). Objective competence significantly predicted self-confidence (R² = 0.34; p &lt; 0.001). Calibration analysis showed that 36.6% of students were well-calibrated, 34.1% were overconfident, and 29.3% were underconfident. Conclusion: Objective competence was significantly associated with self-confidence among preclinical nursing students, although competence-confidence mismatch remained common. Formative feedback and reflective learning are needed to improve clinical readiness.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "631b1dd0-0f22-4322-9a0b-6e2f11d895af",
+        "title": "QUAD: A Composite Risk Framework Integrating Uncertainty, Applicability Domain, and Model Disagreement for Reliable QSAR Predictions",
+        "abstract": "<jats:p>Quantitative structure-activity relationship (QSAR) models are widely used to predict molecular bioactivity; however, conventional global performance metrics provide limited insight into the reliability of individual predictions. To address this limitation, we introduce QUAD, a post-hoc framework that integrates three complementary indicators of prediction risk: ensemble-based model uncertainty, applicability domain (AD) risk, and model disagreement. QUAD enables molecule-level reliability assessment without modification of the underlying predictive model. The framework was evaluated on two Alzheimer's disease-relevant targets, β-site amyloid precursor protein cleaving enzyme 1 (BACE1) and glycogen synthase kinase-3β (GSK3β), using ECFP4 fingerprints and Random Forest regression with fixed external train-test splits. Baseline models demonstrated consistent generalizability, with test-set performance of R² = 0.638 (RMSE = 0.801, MAE = 0.577) for BACE1 (1,514 molecules) and R² = 0.692 (RMSE = 0.777, MAE = 0.564) for GSK3β (4,093 molecules), supported by cross-validated and external Q² metrics. Ensemble-based uncertainty exhibited a moderate association with absolute prediction error for BACE1 (Pearson r = 0.366) and a stronger relationship for GSK3β (r = 0.443), highlighting dataset-dependent reliability behavior. The composite QUAD reliability score reflected these patterns, showing conservative stratification for BACE1 (r = 0.310) and a clearer monotonic relationship with error for GSK3β (r = 0.439). These findings demonstrate that prediction reliability in QSAR modeling is inherently multifactorial and target-specific. Rather than optimizing a single uncertainty measure, QUAD integrates heterogeneous risk signals into a transparent reliability ranking that supports compound prioritization and risk-aware decision-making. Owing to its model-agnostic design and minimal computational overhead, QUAD can be readily incorporated into existing QSAR workflows, providing a practical framework for molecule-level reliability assessment in computational drug discovery.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "f5481545-80b8-4fcc-a1b6-26c4152c651c",
+        "title": "QUAD: A Composite Risk Framework Integrating Uncertainty, Applicability Domain, and Model Disagreement for Reliable QSAR Predictions",
+        "abstract": "<jats:p>Quantitative structure-activity relationship (QSAR) models are widely used to predict molecular bioactivity; however, conventional global performance metrics provide limited insight into the reliability of individual predictions. To address this limitation, we introduce QUAD, a post-hoc framework that integrates three complementary indicators of prediction risk: ensemble-based model uncertainty, applicability domain (AD) risk, and model disagreement. QUAD enables molecule-level reliability assessment without modification of the underlying predictive model. The framework was evaluated on two Alzheimer's disease-relevant targets, β-site amyloid precursor protein cleaving enzyme 1 (BACE1) and glycogen synthase kinase-3β (GSK3β), using ECFP4 fingerprints and Random Forest regression with fixed external train-test splits. Baseline models demonstrated consistent generalizability, with test-set performance of R² = 0.638 (RMSE = 0.801, MAE = 0.577) for BACE1 (1,514 molecules) and R² = 0.692 (RMSE = 0.777, MAE = 0.564) for GSK3β (4,093 molecules), supported by cross-validated and external Q² metrics. Ensemble-based uncertainty exhibited a moderate association with absolute prediction error for BACE1 (Pearson r = 0.366) and a stronger relationship for GSK3β (r = 0.443), highlighting dataset-dependent reliability behavior. The composite QUAD reliability score reflected these patterns, showing conservative stratification for BACE1 (r = 0.310) and a clearer monotonic relationship with error for GSK3β (r = 0.439). These findings demonstrate that prediction reliability in QSAR modeling is inherently multifactorial and target-specific. Rather than optimizing a single uncertainty measure, QUAD integrates heterogeneous risk signals into a transparent reliability ranking that supports compound prioritization and risk-aware decision-making. Owing to its model-agnostic design and minimal computational overhead, QUAD can be readily incorporated into existing QSAR workflows, providing a practical framework for molecule-level reliability assessment in computational drug discovery.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "c0a163a9-1f46-4f52-bd3b-95f4bc37cc04",
+        "title": "Cross-Granularity Ranking Disagreement for Uncertainty-Aware Image-Text Retrieval",
+        "abstract": "<title>Abstract</title>\n                <p>Image-text retrieval systems are commonly optimized for ranking accuracy but provide little indication of whether a returned list is trustworthy. Existing uncertainty-aware approaches typically represent each modality with a probability distribution, so their uncertainty is learned indirectly in the embedding space and may not reflect the error risk of the final ranking. We introduce Cross-granularity Ranking Uncertainty (CRU), a lightweight framework that estimates retrieval uncertainty directly from the candidate-ranking space. CRU{} constructs complementary global-semantic and local-detail matching distributions and decomposes query uncertainty into within-branch ranking ambiguity and cross-branch ranking disagreement. The resulting uncertainty controls a query-level dynamic fusion rule and is calibrated against retrieval correctness. Unlike sampling- or ensemble-based alternatives, CRU requires a single deterministic forward pass and supports efficient global retrieval followed by local re-ranking. Experiments on Flickr30K-1K, MS-COCO-1K, and MS-COCO-5K show rSum values of 520.4, 535.1, and 446.9, respectively. Relative to the strongest uncertainty baseline, CRU improves error-detection AUROC by 4.3--4.6 points and reduces AURC by 16.4--21.6%. These results demonstrate that ranking-space uncertainty improves retrieval accuracy, calibration, and selective prediction in a single deterministic pass.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "1d4d81a1-cf7c-4c08-9a1a-aa1e73f21544",
+        "title": "Adding Action Observation to Virtual Reality Training Improves Paretic Hand Recovery After Stroke",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "de82867f-26e9-4276-ba78-e0097fc1daf6",
+        "title": "Belief Disagreement, Instability, and Uncertainty under Stochastic Recall",
+        "abstract": "<jats:p>Using preregistered field studies, we show that even when individuals observe identical information, recall is highly heterogeneous across people and varies within the same person over time. Beliefs closely track recalled information and change even in the absence of new signals. Motivated by these findings, we develop a parsimonious model of stochastic recall in which agents store all observed signals but recall each past signal only probabilistically when forming beliefs, while updating optimally conditional on what they remember. This single friction generates cross-sectional disagreement, within-person belief instability, and heterogeneity in subjective uncertainty among ex ante identical individuals. The model yields sharp predictions for how disagreement, instability, and uncertainty vary with informational ambivalence, recall probability, and contextual cues. Large-scale preregistered experiments support these predictions, and survey evidence on macroeconomic and financial expectations is consistent with the model's implications. Our results identify stochastic recall as a foundational informational friction in expectation formation.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "fe976cf1-fe6d-4754-81fc-35e81f7176d7",
+        "title": "Climate-informed stress tests expose hidden high-risk ports in the global shipping network",
+        "abstract": "<title>Abstract</title>\n                <p>The global shipping network carries over 80% of global freight volumes, yet the systemic threat of multi-hazard climate risks to this critical infrastructure has not been quantified at the network level. Here, we integrate sea-level, sea-ice, and tropical cyclone data to construct the Global Maritime Shipping Climate Risk (GMSC-R) model, and introduce a natural attack strategy—a climate-informed stress test in which ports fail in descending order of climate vulnerability. We find that removing the most climate-vulnerable 66.7% of ports erases 96.4% (2017) and 79.0% (2021) of network efficiency, with the critical thresholds of degradation advancing substantially between the two years. Port climate risk concentrates in Asia and Europe; sea-level rise dominates the high-risk core zone (64.0% of ports in 2021, up from 57.5%), and the sea-ice-dominated share of this zone nearly doubled to 27.2%, signalling cumulative and diversifying threats. Against conventional topological attacks, our stress tests show that climate risk decouples from network centrality: Port Said overtakes Singapore, the most central hub, in the 2021 ranking, and a quarter of the hundred earliest-failing ports are invisible to centrality-guided screening. Our findings underscore the urgency of integrating multi-hazard climate risk into port planning and supply chain resilience.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "4cf2e557-4e05-466f-b190-137ef8d3d61d",
+        "title": "Uncertainty-aware weakly supervised temporal action localization with knowledge selection",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "e48a1383-7e96-4f40-899d-1b5d7e3f1bc8",
+        "title": "Micro-offline gains do not drive implicit motor sequence learning",
+        "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>Motor sequence performance improves during and between brief practice bouts (micro-online and offline gains). We compared both metrics across two groups: one exposed to an implicit motor sequence, and one not. Micro-online gains drove sequence-specific learning and positively correlated with overall skill. However, micro-offline gains were comparable between groups and did not track sequence-specific learning. We conclude that implicit motor sequence learning is driven by micro-online rather than micro-offline gains.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "6462fd3a-9f04-4d4e-8133-961c766ec54d",
+        "title": "Offline accuracy is not enough: closed-loop instability and stabilisation of a wall-sensor neural estimator in opposition control",
+        "abstract": "<title>Abstract</title>\n                <p>Opposition control reduces skin-friction drag by opposing the wall-normal velocity on a near-wall detection plane, but the detection-plane velocity it requires is not available from wall-mounted sensors. Wall data can reconstruct inner-flow quantities accurately when assessed offline on a fixed flow state, and we ask whether such a reconstructed field can instead serve as a live surrogate sensor inside the feedback loop. We train a recurrent estimator to infer the detection-plane velocity from the two wall-shear-stress components in opposition-controlled turbulence. Offline it performs extremely well, reaching a correlation of 0.99 and near-unity coherence across the energetic scales; yet the same estimator fails in closed loop, decorrelating from the true field within a few viscous time units as the control collapses. The failure is not one of accuracy but of distribution shift induced by the controller itself: small closed-loop errors carry the flow off the attractor represented in the training data, while unresolved high-wavenumber errors enter through the wall boundary condition and return as out-of-distribution inputs. Standard remedies such as low-pass filtering and exponential averaging only delay numerical breakdown while accelerating decorrelation. Stable wall-only control is recovered by imposing spectral consistency on the deployed actuation and retraining the estimator on its own closed-loop data, giving a controller that holds much of the drag reduction of ideal opposition control from wall quantities alone. The obstacle is not whether the near-wall flow can be reconstructed offline, but whether that reconstruction stays dynamically consistent when allowed to modify the flow it senses.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "e395d18f-9154-43e0-8686-9bd4d8114cf8",
+        "title": "Closed-loop offline policy improvement for eco-driving at signalized intersections via evaluation-trajectory recycling",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "0c72a837-f74f-4326-b3de-7c35ff5219aa",
+        "title": "Task-Conditioned Persona Attribution in Open-Weight Language Models",
+        "abstract": "<jats:p>Character prompts are the primary mechanism through which designers and practitioners exercise agency over the behavior of creative-AI assistants: Sudowrite and NovelCrafter ship writing personas by default, TavernAI and SillyTavern host thousands of community-authored character cards, Anthropic publishes Claude's character-training principles, and OpenAI's Model Spec assigns behavior through a chain of command. The premise of this design pattern is that a natural-language persona description will shape not only the assistant's diction and register, but also its aesthetic preferences, factual confidence, willingness to refuse, and handling of sensitive material. We ask whether this premise holds uniformly, or whether character-prompt effects are conditioned on the kind of output the task calls for. We run a controlled behavioral crossover on six open-weight instruction-tuned model families across four content axes: aesthetic critique, register and tone, factual verification, and safety. Character-prompt attribution moves response phrasing by +50.4 to +74.3 percentage points on aesthetic critique (strip contrasts-46.3 to-61.0, 95% bootstrap CIs excluding zero on all six families) and by comparable magnitudes on register (strip contrasts +23.2 to +56.1 on five of six families). The same intervention produces near-zero strip contrasts on factual verification and cannot be evaluated on safety, where the applicable judge codebook returns 68.5% absent labels because tool-invocation responses lack the verdictattribution structure the codebook operationalizes. Judge agreement follows the same pattern: highest on register (Cohen's κ 0.406 to 0.599), lower on aesthetic (0.176 to 0.370), and near-random on factual (0.108 to 0.256) and safety (0.166 to 0.208). We read these results as evidence that character-prompt attribution is a voice lever, not a judgment lever: the intervention reaches assistant outputs that carry a subjective verdict structure and does not reach outputs whose primary content is a truth-conditioned fact or a tool call. For creative-AI practice, the finding delimits what the character-prompt design pattern can and cannot achieve. We release the full spec grid, 24,750 generations, 74,250 judge labels, and a recompute harness reproducing every quantitative claim from raw artifacts. 2</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "4530812b-756f-452d-9c8b-8af36834e4f2",
+        "title": "Re: Continuous Versus Intermittent Loop Diuretics Step‐by‐Step Protocol in Acute Heart Failure (DIUR‐AHF): A Propensity‐Matched Analysis",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "b43cb3e6-0d27-47ab-bdb7-0214117c91da",
+        "title": "AUTOMATION OF TEST TASK GENERATION WITH A SPECIFIED DIFFICULTY LEVEL BASED ON NEURAL NETWORK MODELS",
+        "abstract": "<jats:p>This article presents a study of methods for automatically generating test items with a controlled level of complexity based on neural network models. The aim of the study is to comparatively analyze the effectiveness of various architectural approaches to generating multiple-choice questions and assessing their complexity using Bloom’s taxonomy. Using an experimental database including publicly available datasets, the potential of modern neural network approaches for automating the development of assessment materials in education is demonstrated. The results of computational experiments show that the two-stage Generator-Critic architecture using fine-tuned T5 and a RuBERT-based classifier achieves the best quality indicators (BLEU-4 = 34,2, ROUGE-L = 61,5 %, complexity classification accuracy = 92,8 %), but requires significant computational resources. The hybrid CNN-BiLSTM architecture for complexity classification demonstrates an optimal balance between quality (F1-score = 88,4 %) and speed (≈ 0.04 s per sample), making it preferable for integration into mass testing systems. Of particular scientific significance is the analysis of the «semantic drift effect»: when generating questions based on unfamiliar domain models, quality drops by 12-18 %, indicating the need for domain adaptation methods. Practical recommendations for integrating test generation systems into the educational process have been developed, including the use of expert validation of generated questions and explainable AI methods to increase the trust in automatically generated test materials. The practical significance of this research lies in the development of a methodology for selecting the optimal architecture based on available computing resources and the quality requirements for generated test items. Furthermore, the article substantiates the need for regular adaptation of models to new subject areas to reduce semantic drift and proposes an approach for expert post-validation of generated items. The obtained results form the basis for the development of adaptive test generation systems integrated into digital educational platforms.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "6c38032c-46e0-46bc-96f5-d3396d312615",
+        "title": "Uncertainty-Aware Text-Conditioned Diffusion for Robust Vibration Synthesis under Domain Shifts",
+        "abstract": "<jats:p>Recent advances in generative AI enable high-fidelity synthesis, but reliability under domain shifts and low-SNR conditions in engineering vibration remains underexplored. We present Uncertainty-Aware Text-to-Vibration Diffusion (U-T2V), a text-conditioned framework that models and calibrates uncertainty to deliver risk-aware vibration synthesis for predictive maintenance. Natural-language descriptions of machine configuration, operating regime, and fault semantics are encoded as global conditions for a heteroscedastic diffusion backbone that predicts both mean and variance, capturing data (aleatoric) uncertainty. Multi-sample inference (or lightweight ensembles) estimates model (epistemic) uncertainty, and a risk-aware sampler adapts the temperature schedule to suppress high-uncertainty trajectories. Post-hoc calibration (temperature scaling or Dirichlet-style calibration) aligns model confidence with empirical coverage, enabling calibrated prediction intervals for fault-relevant spectral primitives such as BPFI/BPFO bands. Evaluated on CWRU, XJTU-SY, and a lab-scale rig under controlled domain shifts in speed, load, and sensor placement, U-T2V matches or exceeds baseline fidelity (FVD, WS, SD) while markedly improving reliability—lower ECE and NLL, higher OOD-AUROC, and accurate coverage with compact intervals. In downstream diagnosis, uncertainty-filtered augmentation consistently improves robustness with limited labels. U-T2V advances calibrated, risk-aware generative vibration synthesis for trustworthy augmentation and simulation in condition monitoring.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "25b1ac5c-3a88-4e17-818d-b9a5ae6fd499",
+        "title": "Task-Conditioned Early Prediction of Navigation Failure in Information Architecture Evaluation",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "c4e57a2c-56c7-451a-96ff-650f2c3ab721",
+        "title": "Neuro-Symbolic Task Planning for Tabletop Manipulation under Perceptual Uncertainty",
+        "abstract": "<jats:p>Robotic manipulation in unstructured environments requires reliable symbolic reasoning from noisy perceptual input, yet existing neuro-symbolic systems treat perception as a deterministic oracle and cannot quantify or act on prediction uncertainty. We present a neuro-symbolic framework for tabletop manipulation that explicitly propagates uncertainty from visual perception to symbolic task planning. A hybrid Transformer-GNN architecture extracts probabilistic symbolic states (spatial predicates with calibrated confidence scores) from RGB-D observations, and an uncertainty-aware PDDL planner actively triggers information-gathering actions (look\\_closer, push\\_obstacle) when predicate confidence falls below a learned threshold. Evaluated on 10,047 PyBullet-simulated scenes (3--10 objects, Franka and UR5 platforms), the system achieves 94\\%/90\\%/88\\% task success on Simple Stack, Deep Stack, and Clear+Stack benchmarks (90.7\\% average), outperforming the strongest POMDP baseline by 10--14 percentage points while reducing planning time from 100+\\,ms to under 15\\,ms. A Markov Random Field analysis of predicate dependencies yields tighter uncertainty bounds than independence-based approaches, and a convergence theorem explicitly links calibration quality to planning guarantees---validated empirically within 17\\% of theoretical predictions. The framework provides interpretable, uncertainty-aware plans suitable for deployment on autonomous robotic systems operating under real-world perceptual conditions.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "df0d5b99-4f0a-4497-9acb-62e7ca720113",
+        "title": "Robust Task Offloading in Digital Twin-Enabled UAV-IoT Networks Under Spatial Uncertainty",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "09e47504-10c9-49f6-bfaf-323adc6305ab",
+        "title": "Catatonia recovery separates two intervention axes that constrain electroconvulsive therapy",
+        "abstract": "<p>Catatonia recovers through capacities returning in a fixed dependency order, and benzodiazepines and electroconvulsive therapy work without a known target. On an evidence-coupled bistable cascade over that order we take three quantities to be externally accessible: the root capacity, the coupling between capacities, and accumulated evidence. Here we show that evidence has no external port and the other two act on disjoint regions. While every capacity is below threshold, a maximum principle forbids non-negative diffusive coupling, on any graph and either direction, from crossing the switching surface, so acute conversion needs an excursion, whereas an additive excitatory drive converts on its own. Above one exact criterion, the prevailing threshold squared over four, propagation separates into immediate, metastable and confined. On the modelled branch coupling alone shifts the resting first stage, so a treatment effective in both states is predicted to have separable excursion and coupling components, identifiable in model coordinates.</p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "2cbca115-1738-484a-b82c-44d07f966ca2",
+        "title": "Hybrid-Cloud-Observability-Network-Monitoring Exam Dumps (2026) - SolarWinds Certification Success",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "e85e8673-34db-45e5-a218-9159ac910333",
+        "title": "Download Observability-Self-Hosted-Fundamentals PDF Questions to Boost Exam Success",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "962a7bba-ed26-4511-8110-4dec0b9ca9d9",
+        "title": "Hybrid-Cloud-Observability-Network-Monitoring Exam Questions Pdf 2026 - Fast Track Your Success",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "96c18142-2594-4377-b38c-7351640e19d4",
+        "title": "Interpretability Without Full Recoverability: Formal Identifiability, Synthetic Recovery, and Reportability of Withdrawal-Side Parameters in the Continuous Moral-Social World Model",
+        "abstract": "<jats:p>Mechanistically specified models are often treated as interpretable because each coefficient has an assigned role in the equations. That semantic assignment is necessary but not sufficient for inference: parameter interpretation also requires structural identifiability of the parameter-to-observation map and practical recovery under finite, noisy data. We formalize this distinction for the Continuous Moral-Social World Model (CMS-WM), a simulator with phenotype-state, world-state, and action-policy modules. The revised analysis makes the complete withdrawal-side policy explicit, defines the observation operator, proves exact softmax scaling and common-shift invariances, and evaluates effective withdrawal parameters in reproducible synthetic recovery experiments. In a principal batch of 30 ground-truth settings with 1,000 trials each, the ambiguity-linked coupling showed moderate rank recovery (Spearman rho = 0.52; median normalized absolute error = 0.19), whereas the friction-linked coupling was weak under correlated inputs (rho = 0.21; median error = 0.34). When friction was experimentally orthogonalized from ambiguity, friction recovery improved (rho = 0.68; median error = 0.087), demonstrating configuration-dependent rather than intrinsic interpretability. Pressure coupling and the withdrawal threshold remained insufficiently rank-recoverable in the principal design (rho = 0.37 and 0.30, respectively), despite substantial threshold activation. In contrast, out-of-sample action-regime prediction was stable: dominant-regime agreement was 100%, median predictive L1 distance was 0.0187, and median Jensen-Shannon divergence was 7.2 x 10^-5. These findings support a hierarchical reportability framework: regime-level behavior is reportable; the ambiguity-linked parameter is cautiously reportable; friction is design-conditional; and pressure coupling and threshold should not receive substantive mechanistic interpretation under the present observation model. The study is an internal synthetic verification of the model-observation pairing, not external validation of psychopathy or antisocial behavior.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "1a7aaf93-de3d-4f38-9129-47f4dbf305b8",
+        "title": "From Predictive State to Viable Action: Action Sufficiency, Safe Diagnosis, and the Operational Recoverability Bound",
+        "abstract": "<jats:p>A predictive state retains every distinction from history that can alter a declared future law. A living controller, clinician, robot, or certified AI system often needs a coarser object: enough information to choose an acceptable action. Let A_alpha(s) be the actions with success probability at least 1-alpha from state s. A deterministic code is action-sufficient if and only if every code cell has a nonempty common-action intersection. For finite, individually feasible state and action sets, minimum code size is exactly the chromatic number of the hypergraph of inclusion-minimal empty intersections, equivalently the minimum number of actions whose success sets cover all states. Pairwise conflicts give only a lower bound. This static selection result does not establish that the code is recursively updateable or is a sufficient internal state for a sequential controller. Recovery under partial observation adds diagnostic time, safety, and action availability. For two equiprobable hidden states with disjoint acceptable-action sets, the minimum probability of selecting an unacceptable action after a fixed, non-disturbing diagnostic is (1-TV(P_1,P_2))/2. A selection-error tolerance delta therefore requires TV(P_1,P_2) &amp;gt;= 1-2 delta. This is not in general a lower bound on biological failure; action outcome risks require separate accounting. We supply that distinction, a robust policy definition of operational recoverability, and finite reproducible checks. The contribution is a biological and experimental synthesis of predictive representations, state abstraction, set cover, viability, and safe diagnosis. Its empirical claim is that measured hidden-state distinctions can improve held-out action selection before a rescue window closes; no biological dataset or clinical efficacy result is established here.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "4482ede5-ddac-45f7-9a3d-9a782e4d8ebe",
+        "title": "Observability",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "16af92af-672d-4718-b24e-ffab9e5e0263",
+        "title": "Fine-Tuning Multimodal Large Language Models: From Parameter Updates to Data-Centric, Modality-Aware Adaptation",
+        "abstract": "<jats:p>Multimodal large language models (MLLMs) have moved from tightly coupled vision-language systems toward general-purpose models that ingest and reason over mixtures of images, video, audio, documents, and text. Fine-tuning is the main mechanism for converting broad pretrained competence into reliable behavior for a target domain, interaction pattern, or modality, yet the adaptation problem is substantially harder than text-only language-model fine-tuning. MLLMs contain heterogeneous components with different failure modes: modality encoders can lose pretrained invariances, modality connectors can bottleneck information, and the language backbone can absorb both useful domain knowledge and harmful task-specific shortcuts. This white paper surveys the design space of MLLM fine-tuning, synthesizing classical transfer learning, parameter-efficient fine-tuning, multimodal instruction tuning, preference optimization, continual adaptation, and systems efficiency. It advances a position that the unit of adaptation should not be treated as the model's parameter vector alone. Instead, effective fine-tuning should be organized around four coupled objects: the data distribution, the adaptation locus, the crossmodal interface, and the deployment constraint. We review full fine-tuning, adapters, prompt and prefix tuning, selective tuning, LoRA and its variants, quantized fine-tuning, projector-only updates, sparse expert routing, and hybrid strategies; then connect these methods to multimodal data construction, synthetic instruction generation, grounding and hallucination control, personalization, safety, and evaluation. We argue that the most promising future direction is modality-aware, sparsely activated, data-centric adaptation: train only the parameters that are causally relevant to the required capability, preserve pretrained structure wherever possible, explicitly supervise cross-modal grounding, and evaluate both task gains and retained generality. The paper concludes with practical recommendations and a research agenda for developing MLLMs that are adaptable without becoming brittle, expensive, or ungrounded.</jats:p>",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "042fd354-9edf-4516-a1e2-f66b71478e34",
+        "title": "Review of: \"LoLDU: Low-Rank Adaptation via Lower-Diag-Upper Decomposition for Parameter-Efficient Fine-Tuning\"",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "5e36b8ed-c050-4728-8070-998b5cd341b9",
+        "title": "Improving Viewpoint-Invariance and Temporal Consistency for Action Detection",
+        "abstract": "",
+        "publication_year": 2026
+      },
+      {
+        "paper_id": "c2abc49c-3d7a-403e-9389-9e33c0b58d77",
+        "title": "A Double-Edged Sword? The Benefits and Hidden Costs of next-gen LLIN-Based Malaria Prevention - RCT Evidence from Benin",
+        "abstract": "",
+        "publication_year": 2026
+      }
+    ],
+    "killed_idea_memory": [],
+    "required_output_path": "D:\\01_work\\AI科学家（auto_research）\\artifacts\\topic_discovery\\topic-generation-090185043371.json",
+    "candidate_fields": [
+      "title",
+      "current_belief",
+      "proposed_challenge",
+      "scientific_question",
+      "falsifiable_claim",
+      "why_now",
+      "input_signal_ids",
+      "literature_context_ids",
+      "reasoning_summary",
+      "expected_contribution_type",
+      "possible_target_venues",
+      "cheap_falsifier",
+      "main_risk"
+    ],
+    "constraints": [
+      "Do not copy examples or use static templates",
+      "Each question and claim must be coherent and falsifiable",
+      "Use only supplied signal and literature IDs",
+      "Write a JSON array with at least minimum_candidates records"
+    ]
+  }
+}
